@@ -15,7 +15,7 @@ class Api{
         this.base_url = config.production_server_url; //config.development_server_url;//config.production_server_url;
     };
 
-    async getLiveCells(query: CellQuery){
+    async getLiveCells(query: CellQuery | undefined){
         let res = await axios.get(`${this.base_url}/get_live_cells`, { 
             params:{
                 query: query

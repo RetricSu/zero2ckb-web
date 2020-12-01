@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Api from '../api/blockchain';
 
 const styles = {
@@ -8,12 +8,24 @@ const styles = {
 };
 
 function Blockchain(){
-    const cells_length: number = -1;
-    const api = new Api();
     
+    const [cells, setCells] = useState([]);
+
+    useEffect(() => {   
+        test();
+    }, []);
+    
+    async function test() {
+        const api = new Api();
+        const cells = await api.getLiveCells(undefined);
+        console.log(cells);
+        setCells(cells.map((cell:string, index:number) => <li key={index}>{JSON.stringify(cell)}</li>));
+    }
+
+
     return(
         <div style={styles.live_cells}>
-            cells: {cells_length}
+           {cells}
         </div>
     )
 }

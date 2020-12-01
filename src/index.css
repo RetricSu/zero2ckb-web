@@ -13,3 +13,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+strong {
+  color: '#3CC68A'
+}
+
+h1,h2,h3,h4,h5{
+  color: '#3CC68A'
+}
