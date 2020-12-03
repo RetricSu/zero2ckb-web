@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Api from "../api/blockchain";
 import type {
     QueryOption,
     Cell
 } from '../types/blockchain';
 import CodePiece from './widget/code';
+import FreshButton from './widget/fresh_button';
 
 export type Props = {
     query: QueryOption
@@ -15,7 +16,7 @@ const styles = {
   main: {
     textAlign: "left" as const,
   },
-  wallet_panel: {
+  cell_panel: {
     width: "600px",
     border: "1px solid white",
     float: "left" as const,
@@ -30,12 +31,11 @@ const styles = {
 
 export default function Cells(props: Props) {
   const [cells, setCells] = useState([]);
-
-  useEffect(() => {
-    queryCells();
-  }, []);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function queryCells() {
+    setIsLoading(true);
+    console.log(isLoading);
     const api = new Api();
     const length = props.length || 10;
     var myCells = await api.getLiveCells(props.query);
@@ -43,18 +43,24 @@ export default function Cells(props: Props) {
     setCells(
         myCells.map((cell: Cell, index: number) => {
         return (
-          <li key={index} style={styles.wallet_panel}>
+          <li key={index} style={styles.cell_panel}>
             <p>cell {index + 1} : </p>
             <CodePiece code={ JSON.stringify(cell.cell_output, null, 2) } />
           </li>
         );
       })
     );
+    setIsLoading(false);
   }
 
   return (
-    <div style={styles.main}>
-      {cells}
+    <div>
+      <p>
+          <FreshButton isLoading={isLoading} onClick={queryCells} text='刷新'></FreshButton>
+      </p>
+      <div style={styles.main}>
+        {cells}
+      </div>
       <p style={{clear: "both"}} />
     </div>
   );

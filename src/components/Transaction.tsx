@@ -1,12 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import Api from '../api/blockchain';
 import { QueryOption } from '../types/blockchain';
+import FreshButton from "./widget/fresh_button";
+import commonStyles from "./widget/common_style";
+import {
+    TransactionWithStatus
+} from "../types/blockchain";
+import CodePiece from './widget/code';
 
-const styles = {
+const styles = {...commonStyles, ...{
     list_panel: {
-        margin: '20px'
-    }
-};
+        margin: '20px',
+    },
+    tx_panel: {
+        width: "600px",
+        border: "1px solid white",
+        float: "left" as const,
+        marginRight: "20px",
+        padding: "10px",
+        listStyleType: "none",
+        overflow: "scroll",
+        fontSize: "10px",
+        display: "block",
+        textAlign: 'left' as const
+    },
+}};
 
 export type Props = {
     query: QueryOption,
@@ -16,22 +34,27 @@ export type Props = {
 export default function Transaction(props: Props){
     
     const [txs, setTxs] = useState([]);
-
-    useEffect(() => {   
-        fetchTransactions();
-    }, []);
+    const [isLoading, setIsLoading] = useState(false);
     
     async function fetchTransactions() {
+        setIsLoading(true);
         const api = new Api();
         const length = props.length || 10;
         var txs = await api.getTransactions(props.query);
         txs = txs.slice(0, length);
-        setTxs(txs.map((tx:string, index:number) => <li key={index}>{JSON.stringify(tx)}</li>));
+        setTxs(txs.map((tx:TransactionWithStatus, index:number) => <li key={index} style={styles.tx_panel}>
+            <CodePiece code={JSON.stringify(tx, null, 2)} />
+        </li>));
+        setIsLoading(false);
     }
 
     return(
         <div style={styles.list_panel}>
+            <p>
+               <FreshButton isLoading={isLoading} onClick={fetchTransactions} text='刷新'></FreshButton>
+            </p>
            {txs}
+           <p style={{clear: "both"}} />
         </div>
     )
 }
