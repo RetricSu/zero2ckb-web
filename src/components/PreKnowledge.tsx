@@ -1,47 +1,59 @@
 import React from 'react';
 import styles from './widget/common_style';
+import CodePiece from './widget/code';
 
-export default function(){
+const code = {
+    cell_structure: `
+                        Cell: {
+                            capacity: HexString
+                            lock: Script
+                            type: Script
+                            data: HexString
+                        } 
+                    `,
+    
+}
+
+export default function Preknowledge(){
     return(
         <div>
             <div style={styles.wide_card}>
-            <h1 style={styles.wide_card_title}> Pre-Knowledge </h1>
-            <blockquote>CKB 所做的一切创新都构建于比特币之上，它将 UTXO 结构泛化，使之可以存储任何类型的数据结构，同时引入了以 RISC-V 为基础的虚拟机 CKB-VM，
-                从而第一次将一台真正意义上的微型计算机嵌入到了区块链上。</blockquote>
-            <p>如果你暂时看不懂上面这段话，没关系，理解 CKB 的第一步，是抛开所有复杂的概念，只抓住这条链的本质：一切都是 Cell，以及 Cell 的转换而已。</p>
-        </div>
-        <hr/>
-        <div style={styles.content}>
-            <h3 style={styles.main_color}> 让我们以一种简化的方式来理解 CKB</h3>
-            <blockquote>
+            <h1 style={styles.wide_card_title}> 课前准备：理论知识 </h1>
+            <blockquote style={styles.blockquote}>
                 世上根本没有比特币，只有一个又一个的 UTXO。
                 <br/>
                 世上根本没有CKB, 只有一个又一个的 Cell。
             </blockquote>
+        </div>
+        <hr/>
+        <div style={styles.content}>
+            <h3 style={styles.main_color}> 让我们以一种简化的方式来理解 CKB</h3>
+            <p> 理解 CKB 的第一步，是抛开所有复杂的概念，只抓住这条链的本质：一切都是 Cell，以及 Cell 的转换而已。</p>
             <p>
-                CKB 的基本单元是 Cell，你可以感性地把Cell理解成像人体的细胞那样。<br/><br/>
-                一个个的 Cell 构成了整个 CKB 这条链的全局状态，我们在区块链上发起一笔交易改变了某个状态，
+                Cell 是 CKB 的基本单元，就像人体的细胞。一个个的 Cell 构成了整个 CKB 这条链的全局状态。
+                我们在区块链上发起一笔交易改变了某个状态，
                 无论这笔交易多么复杂，状态改变流程多么繁琐，
-                最终对 CKB 来说，都是这笔交易把某些 Cell 作为 input 消费掉，从而产生了一些新的 Cell 而已（output）。<br/><br/>
+                最终对 CKB 来说，都是这笔交易把某些 Cell 作为 input 消费掉，从而产生了一些新的 Cell 作为 output 而已。
                 这个过程跟比特币的 UTXO 是完全一样的。
             </p>
             <p>
-                被消费掉的 Cell 就是死去的 Dead Cell，未被消费的 Cell 是 live Cell。<br/><br/>
-                某一时刻所有的 live cell，共同组成了 CKB 这条链在这一时刻的全局状态。<br/><br/>
+                被消费掉的 Cell 就是死去的 Dead Cell，未被消费的 Cell 是 live Cell。
+                某一时刻所有的 live cell，共同组成了 CKB 这条链在这一时刻的全局状态。
                 所以这条链真的就像一个人一样，不停地经由交易去消费 Cell 和创造 Cell，
                 就像全身的细胞在更新换代、分裂生长。
             </p>
             <p>
-                跟 UTXO 不同的是，Cell 可以用来存储任意类型的数据。Cell 有一个字段名为 data，里面可以放 16 进制的无格式字符串进去。<br/><br/>
+                跟 UTXO 不同的是，Cell 可以用来存储任意类型的数据。Cell 有一个字段名为 data，里面可以放 16 进制的无格式字符串进去。
                 你往 data 上写入什么样的内容都可以，格式也是你自己定，只要你自己知道怎么解读这段字符串就好。<br/><br/>
-                比如，我可以往上面存一段话，也可以存一个日期，没有任何限制。<br/><br/>
+                比如，我可以往上面存一段话，也可以存一个日期，
                 甚至，你可以放一段二进制代码进去，而这段代码又可以被其他 Cell 引用，
-                经过虚拟机 CKB-VM 在链上运行。这其实就是 CKB 上所谓的智能合约，它的原理就是如此简单。
+                经过虚拟机 CKB-VM 在链上运行。<br/><br/>
+                这其实就是 CKB 上所谓的智能合约，它的原理就是如此简单。
             </p>
             <h4 style={styles.main_color}> 那么我们怎样才能拥有一个 Cell 呢？</h4>
             <p>
                 因为 Cell 是经过整条链共识得到的，所以 Cell 的存储空间必然是宝贵的，要拥有 Cell 必然需要成本。<br/><br/>
-                这就引出了 CKB 原生代币 CKByte 的作用了。<br/><br/>
+                这就引出了 CKB 原生代币的作用了。<br/><br/>
                 你可以把 Cell 当成一个一个的小盒子，可以拿来装东西，而这个盒子本身是通过代币创造出来的。<br/><br/>
                 你有多少币，你就可以有多大的盒子。<br/><br/>
                 根据系统的设定，1个 CKB 等于 1个 byte（字节）的空间。<br/><br/>
@@ -60,33 +72,22 @@ export default function(){
                 名字的由来（Common knowledge base）。
             </p>
             <h4 style={styles.main_color}>完整的 Cell 模型长这样：</h4>
+            <CodePiece code={code.cell_structure} />
+            <p>四个字段：</p>
             <p>
-                <pre>
+                <ul>
+                    <li>capacity: 16进制字符串，表示Cell的空间大小，同时也是这个 Cell 代表的原生代币的数量</li>
+                    <li>lock：脚本结构，本质相当于是一个锁，下文将详解</li>
+                    <li>type: 脚本结构，本质和lock一样，只是锁的用途不同，下文将详解</li>
+                    <li>data: 16进制字符串，可以在这个字段存放任何你想放入的数据和任何类型的数据</li>
+                </ul>
+            </p>
+            <p>Cell 的组成规则是，上面这四个字段所占用的空间，加起来要小于或等于 capacity 字段的数值大小。也就是说，
+                <pre style={styles.content}>
                     {`
-                        Cell: {
-                            capacity: HexString
-                            lock: Script
-                            type: Script
-                            data: HexString
-                        } 
+                        Cell.length >= capacity.length + lock.length + type.length + data.length
                     `}
                 </pre>
-                <p>四个字段：</p>
-                <p>
-                    <ul>
-                        <li>capacity: 16进制字符串，表示Cell的空间大小，同时也是这个 Cell 代表的原生代币的数量</li>
-                        <li>lock：脚本结构，本质相当于是一个锁，下文将详解</li>
-                        <li>type: 脚本结构，本质和lock一样，只是锁的用途不同，下文将详解</li>
-                        <li>data: 16进制字符串，可以在这个字段存放任何你想放入的数据和任何类型的数据</li>
-                    </ul>
-                </p>
-                <p>Cell 的组成规则是，上面这四个字段所占用的空间，加起来要小于或等于 capacity 字段的数值大小。也就是说，
-                    <pre style={styles.content}>
-                        {`
-                            Cell.length >= capacity.length + lock.length + type.length + data.length
-                        `}
-                    </pre>
-                </p>
             </p>
             <h4 style={styles.main_color}>怎么知道你的Cell属于你？</h4>
             <p>既然需要拥有原生代币才能拥有 Cell，那么我怎么知道链上的某一个 Cell 是属于你的呢？</p>

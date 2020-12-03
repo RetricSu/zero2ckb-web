@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './widget/common_style';
 import Form from './widget/form';
 
-export default function(){
+export default function Class1(){
     return(
         <div>
             <div style={styles.content}>

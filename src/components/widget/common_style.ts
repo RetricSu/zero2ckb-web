@@ -24,6 +24,13 @@ const styles = {
     wide_card_title: {
         color: '#3CC68A',
         textAlign: 'center' as const
+    },
+    blockquote: {
+        background: '#f9f9f9',
+        borderLeft: '10px solid #3CC68A',
+        margin: '1.5em 10px',
+        padding: '0.5em 10px',
+        color: 'black',
     }
 }
 
