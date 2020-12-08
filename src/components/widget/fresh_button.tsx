@@ -1,3 +1,9 @@
+/**** 
+ * improve: 
+ *  - [ ] every button instance of this componet  must create its own isLoading and setIsLoading, this is ugly and unacceptable.
+ *  - [ ] should provide css customize option for user
+ *  - [ ] try export this as a standalone button for re-use
+ */
 import React, {useState, useEffect, useRef} from "react";
 import {
     Button

@@ -32,6 +32,7 @@ const styles = {...commonStyles, ...{
 
 export type Props = {
     wallet_id?: number
+    onFetchWallets?: (wallets: Wallet[]) => void
 }
 
 export default function Wallets(props: Props){
@@ -52,10 +53,12 @@ export default function Wallets(props: Props){
                 <p>testnet: { wallet.testnet }   <CopyText text={wallet.testnet} icon={true} /></p>
                 <p>lock_arg: { wallet.lock_arg }   <CopyText text={wallet.lock_arg} icon={true} /></p>
                 <p>lock_hash: { wallet.lock_hash }   <CopyText text={wallet.lock_hash} icon={true} /></p>
-                <p>private_key: { wallet.password }   <CopyText text={wallet.password} icon={true} /></p>
+                <p>private_key: { wallet.private_key }   <CopyText text={wallet.private_key} icon={true} /></p>
             </li>
             )
         }) );
+        if(props.onFetchWallets)
+            props.onFetchWallets(myWallets);
     }
 
     return (

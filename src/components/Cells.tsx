@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Api from "../api/blockchain";
 import type {
     QueryOption,
@@ -9,7 +9,8 @@ import FreshButton from './widget/fresh_button';
 
 export type Props = {
     query: QueryOption
-    length?: number
+    length?: number,
+    render_dep?: any
 };
 
 const styles = {
@@ -33,6 +34,11 @@ export default function Cells(props: Props) {
   const [cells, setCells] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    if(props.render_dep)
+      queryCells();
+  }, [props.render_dep]);
+
   async function queryCells() {
     setIsLoading(true);
     console.log(isLoading);
@@ -45,7 +51,7 @@ export default function Cells(props: Props) {
         return (
           <li key={index} style={styles.cell_panel}>
             <p>cell {index + 1} : </p>
-            <CodePiece code={ JSON.stringify(cell.cell_output, null, 2) } />
+            <CodePiece code={ JSON.stringify(cell, null, 2) } />
           </li>
         );
       })

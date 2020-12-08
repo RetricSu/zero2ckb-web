@@ -1,11 +1,16 @@
-import React from 'react';
-import Cells from './Cells';
+import React, { useState } from 'react';
 import Wallets from './Wallets';
 import Transaction from './Transaction';
-import CodePiece from './widget/code';
+import ChainConfig from './ChainConfig';
+import WalletCells from './WalletCells';
 import styles from './widget/common_style';
+import type {
+    Wallet
+} from '../types/blockchain';
 
 export default function(){
+    const [wallets, setWallets] = useState<Wallet[]>([]);
+
     return(
         <div>
             <hr/>
@@ -31,16 +36,18 @@ export default function(){
                     <li>privateKey 是钱包的私钥，你不应该像我这样把它暴露出来。</li>
                 </ul>
             </div>
-            <Wallets></Wallets>
+            <Wallets onFetchWallets={setWallets}></Wallets>
             <hr/>
             <div>
-                <p></p>
-                <p>这是钱包对应的 live cell：</p>
-                <Cells query={{order:"desc", lock: {hash_type:'type', code_hash: '0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8', args: '0x43d509d97f26007a285f39241cffcd411157196c'}}}></Cells>
+                <WalletCells wallets={wallets} wallet_lock={{hash_type:'type', code_hash: '0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8', args: '0x43d509d97f26007a285f39241cffcd411157196c'}}></WalletCells>
             </div>
             <div>
                 <p>这是钱包对应的交易: </p>
                 <Transaction query={{lock: {hash_type:'type', code_hash: '0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8', args: '0x43d509d97f26007a285f39241cffcd411157196c'}}}></Transaction>
+            </div>
+            <div>
+                <p>这是测试链的配置信息：</p>
+                <ChainConfig />
             </div>
         </div>
     )

@@ -1,4 +1,5 @@
 import React from 'react';
+import Notify from './widget/notify';
 import BeforeWeGetStarted from './BeforeWeGetStarted';
 import PreKnowledge from './PreKnowledge';
 import ShowChainInfo from './ShowChainInfo';
@@ -13,6 +14,7 @@ function Learn() {
   
   return (
     <div style={styles.page}>
+        <Notify />
         <BeforeWeGetStarted />
         <PreKnowledge />
         <ShowChainInfo />

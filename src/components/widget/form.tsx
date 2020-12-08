@@ -1,66 +1,42 @@
-import React, {useState, useEffect} from "react";
-import CodePiece from './code';
+import React, {useState, useEffect, useRef} from "react";
+import CodePiece, { CodePieceType } from './code';
+import FreshButton from './fresh_button';
 
 const styles = {
     form_box: {
         border: '1px solid white',
-        padding: '20px'
+        padding: '20px',
+        overflow: 'scroll'
     }
 }
 
-export default function Form(){
+export type Props = {
+    form_template: string
+    btn_text?: string
+    onSubmit?: (form_content: string) => void
+}
 
-    const [input, setInput] = useState();
-
-    const raw_tx_template = `{
-        version: "0x0",
-        cell_deps: [
-          {
-            out_point: {
-              tx_hash:
-                "...",
-              index: "...",
-            },
-            dep_type: "dep_group",
-          },
-        ],
-        header_deps: [],
-        inputs: [
-          {
-            since: "0x0",
-            previous_output: {
-              tx_hash:
-                "...",
-              index: "...",
-            },
-          },
-        ],
-        outputs: [
-          {
-            capacity: "...",
-            lock: {
-              code_hash:
-                "...",
-              hash_type: "...",
-              args: "...",
-            },
-          },
-        ],
-        outputs_data: ["..."]
-};`
+export default function Form(props: Props){
+    const [isLoading, setIsLoading] = useState(false);
+    const ref = useRef<CodePieceType>(null);
     
-    const handleChange = function(){
-
-    }
-
     const handleSubmit = function(){
-
+        setIsLoading(true);
+        console.log('here we go');
+        console.log(ref.current)
+        if(ref.current){
+            const data = ref.current.getContent();
+            if(props.onSubmit){
+                props.onSubmit(data);
+            }
+        }
+        setIsLoading(false);
     }
 
     return(
-      <form onSubmit={handleSubmit} style={styles.form_box}>
-        <CodePiece code={raw_tx_template} isContentEditable={true}></CodePiece>
-        <input type="submit" value="Submit" />
-      </form>
+      <div style={styles.form_box}>
+        <CodePiece code={props.form_template} isContentEditable={true} ref={ref}></CodePiece>
+        <FreshButton isLoading={isLoading} text={props.btn_text || '提交'} onClick={handleSubmit} />
+      </div>
     )
 }

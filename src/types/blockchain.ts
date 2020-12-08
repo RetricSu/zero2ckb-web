@@ -5,6 +5,7 @@ export type Wallet = {
     lock_hash: string
     keystore: string
     password: string
+    private_key: string
 }
   
 export type QueryOption = {
@@ -166,4 +167,10 @@ export interface CellCollector {
 export interface CellProvider {
   uri?: string;
   collector(queryOptions: QueryOptions): CellCollector;
+}
+
+export interface Message {
+  index: number;
+  message: HexString;
+  lock: Script;
 }
