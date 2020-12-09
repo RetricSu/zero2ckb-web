@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
-import FreshButton from './widget/fresh_button';
-import Api from '../api/blockchain';
-import { notify } from './widget/notify';
+import FreshButton from '../../../widget/fresh_button';
+import Api from '../../../../api/blockchain';
+import { notify } from '../../../widget/notify';
 
 const styles = {
     input: {
@@ -27,7 +27,8 @@ export default function Signer(){
         if(sig.status === "ok")
             setSignature(sig.data);
         else notify(sig.data);
-            setIsLoading(false);
+        
+        setIsLoading(false);
     }
 
     return(

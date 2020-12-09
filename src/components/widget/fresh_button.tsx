@@ -1,19 +1,16 @@
 /**** 
  * improve: 
- *  - [ ] every button instance of this componet  must create its own isLoading and setIsLoading, this is ugly and unacceptable.
+ *  - [x] every button instance of this componet  must create its own isLoading and setIsLoading, this is ugly and unacceptable.
  *  - [ ] should provide css customize option for user
  *  - [ ] try export this as a standalone button for re-use
  */
 import React, {useState, useEffect, useRef} from "react";
-import {
-    Button
-} from "@material-ui/core";
 import commonStyle from "./common_style";
 import { useSpring, animated } from "react-spring";
 import "./button.css";
 
 export type Props = {
-    isLoading: boolean
+    isLoading?: boolean
     text: string
     onClick: () => void
 }
@@ -47,15 +44,27 @@ const Loader = () => <div style={styles.loader} />;
 
 export default function FreshButton(props: Props){
 
+    const isLoadingMissed = props.isLoading === undefined;
+
     const [showLoader, setShowLoader] = useState(false);
+    const [isLoading, setIsLoading] = useState( isLoadingMissed ? false : props.isLoading);
+
+    const extendedOnClick = async () => {
+      if(isLoadingMissed)setIsLoading(true);
+      await props.onClick();
+      if(isLoadingMissed)setIsLoading(false);
+    }
 
     useEffect(() => {
-        if (props.isLoading) {
+        if(props.isLoading !== undefined)
+          setIsLoading(props.isLoading);
+
+        if (isLoading) {
           setShowLoader(true);
         }
     
         // Show loader a bits longer to avoid loading flash
-        if (!props.isLoading && showLoader) {
+        if (!isLoading && showLoader) {
           const timeout = setTimeout(() => {
             setShowLoader(false);
           }, 400);
@@ -64,7 +73,7 @@ export default function FreshButton(props: Props){
             clearTimeout(timeout);
           };
         }
-      }, [props.isLoading, showLoader]);
+      }, [props.isLoading, isLoading, showLoader]);
   
     // Hooks used to fade in/out the loader or the button contents
     const fadeOutProps = useSpring({ opacity: showLoader ? 1 : 0 });
@@ -72,7 +81,7 @@ export default function FreshButton(props: Props){
 
     return(
         <div>
-            <button style={styles.btn} onClick={props.onClick} >
+            <button style={styles.btn} onClick={extendedOnClick} >
             {showLoader ? (
                   <animated.div style={fadeOutProps}>
                     <Loader />

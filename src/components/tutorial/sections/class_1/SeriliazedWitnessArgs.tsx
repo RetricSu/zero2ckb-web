@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import { notify } from './widget/notify';
-import Api from '../api/blockchain';
-import Form from './widget/form';
+import { notify } from '../../../widget/notify';
+import Api from '../../../../api/blockchain';
+import Form from '../../../widget/form';
 
 export default function SeriliazedWitnessArgs(){
     const [witness, setWitness] = useState('');

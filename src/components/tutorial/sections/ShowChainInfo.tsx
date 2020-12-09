@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import Wallets from './Wallets';
-import Transaction from './Transaction';
-import ChainConfig from './ChainConfig';
-import WalletCells from './WalletCells';
-import styles from './widget/common_style';
+import Wallets from './common/Wallets';
+import WalletTxs from './show_chain_info/WalletTransaction';
+import ChainConfig from './show_chain_info/ChainConfig';
+import WalletCells from './show_chain_info/WalletCells';
+import NewBlocks from './show_chain_info/new_blocks';
+import styles from '../../widget/common_style';
 import type {
     Wallet
-} from '../types/blockchain';
+} from '../../../types/blockchain';
 
 export default function(){
     const [wallets, setWallets] = useState<Wallet[]>([]);
@@ -26,6 +27,8 @@ export default function(){
             </div>
             <hr/>
             <div style={styles.content}>
+                <NewBlocks></NewBlocks>
+                
                 <p>这里有 3 个钱包。
                     其中，钱包 1 是测试链的矿工地址。
                     测试链只有一个矿工。</p>
@@ -39,11 +42,7 @@ export default function(){
             <Wallets onFetchWallets={setWallets}></Wallets>
             <hr/>
             <div>
-                <WalletCells wallets={wallets} wallet_lock={{hash_type:'type', code_hash: '0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8', args: '0x43d509d97f26007a285f39241cffcd411157196c'}}></WalletCells>
-            </div>
-            <div>
-                <p>这是钱包对应的交易: </p>
-                <Transaction query={{lock: {hash_type:'type', code_hash: '0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8', args: '0x43d509d97f26007a285f39241cffcd411157196c'}}}></Transaction>
+                <WalletCells wallets={wallets}></WalletCells>
             </div>
             <div>
                 <p>这是测试链的配置信息：</p>

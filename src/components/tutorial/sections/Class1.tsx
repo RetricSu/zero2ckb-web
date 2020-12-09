@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import styles from './widget/common_style';
-import Form from './widget/form';
-import Hex2Dec from './widget/hex2decimal';
-import {notify} from './widget/notify';
-import CodePiece from './widget/code';
-import ToSignMessage from './FetchToSignMessage';
-import ToTxHash from './ToTxHash';
-import Signer from './Signer';
-import SendTx from './SendTx';
-import SeriliazedWitnessArgs from './SeriliazedWitnessArgs';
+import styles from '../../widget/common_style';
+import Form from '../../widget/form';
+import Hex2Dec from '../../toolbox/tools/hex2decimal';
+import {notify} from '../../widget/notify';
+import CodePiece from '../../widget/code';
+import ToSignMessage from './class_1/FetchToSignMessage';
+import ToTxHash from './class_1/ToTxHash';
+import Signer from './class_1/Signer';
+import SendTx from './class_1/SendTx';
+import SeriliazedWitnessArgs from './class_1/SeriliazedWitnessArgs';
 
 import type {
   Transaction,
   RawTransaction
-} from '../types/blockchain'
+} from '../../../types/blockchain'
 
 export default function Class1(){
 

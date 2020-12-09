@@ -1,22 +1,20 @@
 const styles = {
     page: {
-        minWidth: '500px',
-        width: '70%',
-        margin: '0 auto',
+        maxWidth: '700px',
+        margin: 'atuo',
         textAlign: 'center' as const
     },
     content: {
+        width: '100%',
         marginTop: '20px',
-        width: '500px',
-        margin: '0 auto',
         textAlign: 'left' as const
     },
     main_color: {
         color: '#3CC68A'
     },
     wide_card: {
-        paddingLeft: '400px',
-        paddingRight: '400px',
+        paddingLeft: '40px',
+        paddingRight: '40px',
         paddingTop: '20px',
         paddingBottom: '20px',
         textAlign: 'left' as const

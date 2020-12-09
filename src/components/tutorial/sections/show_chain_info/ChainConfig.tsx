@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Api from '../api/blockchain';
-import CodePiece from './widget/code';
+import Api from '../../../../api/blockchain';
+import CodePiece from '../../../widget/code';
 
 const styles = {
     config_panel: {

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Api from '../api/blockchain';
+import Api from '../../../../api/blockchain';
 import type {
     Wallet
-} from '../types/blockchain';
-import commonStyles from './widget/common_style';
-import CopyText from './widget/copy_text';
+} from '../../../../types/blockchain';
+import commonStyles from '../../../widget/common_style';
+import CopyText from '../../../widget/copy_text';
 
 const styles = {...commonStyles, ...{
     wallets: {

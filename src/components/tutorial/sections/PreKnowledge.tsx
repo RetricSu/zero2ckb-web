@@ -1,55 +1,64 @@
 import React from 'react';
-import styles from './widget/common_style';
-import CodePiece from './widget/code';
+import styles from '../../widget/common_style';
+import CodePiece from '../../widget/code';
 
 const code = {
+    /** 
+     * be careful with the following white space before each line start 
+     * which will also display on html. Meaning that it should be place excatly
+     * where it should be. 
+     * 
+     * todo:
+     *  of course this method is ugly. should improve the code wrapper later on.
+    */
     cell_structure: `
-                        Cell: {
-                            capacity: HexString
-                            lock: Script
-                            type: Script
-                            data: HexString
-                        } 
+        Cell: {
+            capacity: HexString
+            lock: Script
+            type: Script
+            data: HexString
+        } 
                     `,
     outpoint_structure: `
-                            OutPoint: {
-                                tx_hash: 所属交易的哈希值（属于哪一笔交易）
-                                index: 所属交易输出的序号（属于第几个输出）
-                            }
+        OutPoint: {
+            tx_hash: 所属交易的哈希值（属于哪一笔交易）
+            index: 所属交易输出的序号（属于第几个输出）
+        }
                         `,
     script_structure: `
-                        Script: {
-                            code_hash: HexString
-                            args: HexString
-                            hash_type: either 'data' or 'type'
-                        }
+        Script: {
+            code_hash: HexString
+            args: HexString
+            hash_type: either 'data' or 'type'
+        }
                     `,
     cell_space_rule: `
-                        cell 总占用空间 = capacity 
-                                      >= 4个字段的长度之和
+        cell 总占用空间 = capacity 
+                      >= 4个字段的长度之和
                     `,
-    tx_space_rule: `capacity(input cell) > capacity(output cell)`,
+    tx_space_rule: `
+        capacity(input cell) > capacity(output cell)
+                    `,
     
     systemlock_deadlock_example: `
-                        SECP256K1: {
-                            code_hash: 0x00000000000000000000..
-                            args: 0x
-                            hash_type..
-                        }
+        SECP256K1: {
+            code_hash: 0x00000000000000000000..
+            args: 0x
+            hash_type..
+        }
                     `,
     tx_define: `
-                    tx: input -> output
+        tx: input -> output
                 `,
     input_output_define: `
-
-                            input:
-                                some cell...
-                            ｜
-                            ｜
-                            ｜
-                            \\/
-                            output:
-                                some new cell...
+        input:
+            some cell...
+        ｜
+        ｜
+        ｜
+        \\/
+        output:
+            some new cell...
                         `,
     
 }

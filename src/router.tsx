@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from './components/home/Home';
-import Learn from './components/Learn';
+import Learn from './components/tutorial/Learn';
 
 
 export default function MyRouter() {

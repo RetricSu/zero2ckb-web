@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Api from "../api/blockchain";
+import Api from "../../../../api/blockchain";
 import type {
     QueryOption,
     Cell
-} from '../types/blockchain';
-import CodePiece from './widget/code';
-import FreshButton from './widget/fresh_button';
+} from '../../../../types/blockchain';
+import CodePiece from '../../../widget/code';
+import FreshButton from '../../../widget/fresh_button';
 
 export type Props = {
     query: QueryOption

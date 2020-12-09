@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import FreshButton from './widget/fresh_button';
-import { notify } from './widget/notify';
-import Api from '../api/blockchain';
+import FreshButton from '../../../widget/fresh_button';
+import { notify } from '../../../widget/notify';
+import Api from '../../../../api/blockchain';
 
 import type {
     Transaction
-} from '../types/blockchain';
+} from '../../../../types/blockchain';
 
 export type Props = {
     tx: Transaction | undefined

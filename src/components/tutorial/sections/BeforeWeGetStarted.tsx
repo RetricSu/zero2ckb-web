@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './widget/common_style';
+import styles from '../../widget/common_style';
 
 export default function BeforeWeGetStarted(){
     return(

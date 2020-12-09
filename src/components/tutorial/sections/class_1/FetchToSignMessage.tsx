@@ -5,10 +5,10 @@ import {
     RawTransaction,
     Cell,
     Message
-} from '../types/blockchain';
-import FreshButton from './widget/fresh_button';
-import Api from '../api/blockchain';
-import {notify} from './widget/notify';
+} from '../../../../types/blockchain';
+import FreshButton from '../../../widget/fresh_button';
+import Api from '../../../../api/blockchain';
+import {notify} from '../../../widget/notify';
 
 export type Props = {
     raw_tx: RawTransaction | undefined,

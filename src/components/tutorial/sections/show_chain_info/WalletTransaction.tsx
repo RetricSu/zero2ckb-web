@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Api from '../api/blockchain';
-import { QueryOption } from '../types/blockchain';
-import FreshButton from "./widget/fresh_button";
-import commonStyles from "./widget/common_style";
+import Api from '../../../../api/blockchain';
+import { QueryOption } from '../../../../types/blockchain';
+import FreshButton from "../../../widget/fresh_button";
+import commonStyles from "../../../widget/common_style";
 import {
     TransactionWithStatus
-} from "../types/blockchain";
-import CodePiece from './widget/code';
+} from "../../../../types/blockchain";
+import CodePiece from '../../../widget/code';
 
 const styles = {...commonStyles, ...{
     list_panel: {
@@ -28,10 +28,11 @@ const styles = {...commonStyles, ...{
 
 export type Props = {
     query: QueryOption,
+    render_dep?: any,
     length?: number
 }
 
-export default function Transaction(props: Props){
+export default function WalletTransaction(props: Props){
     
     const [txs, setTxs] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -47,6 +48,11 @@ export default function Transaction(props: Props){
         </li>));
         setIsLoading(false);
     }
+
+    useEffect(()=>{
+        if(props.render_dep)
+            fetchTransactions();
+    }, [props.render_dep])
 
     return(
         <div style={styles.list_panel}>

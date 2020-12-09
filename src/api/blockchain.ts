@@ -17,6 +17,16 @@ class Api{
         this.base_url = config.production_server_url; //config.development_server_url;//config.production_server_url;
     };
 
+
+    async getNewBlocks(limit=10){
+        let res = await axios.get(`${this.base_url}/get_new_blocks`, { 
+            params:{
+                limit: limit
+            }
+        });
+        return res.data;
+    };
+
     async getLiveCells(query: QueryOption){
         let res = await axios.get(`${this.base_url}/get_live_cells`, { 
             params:{
