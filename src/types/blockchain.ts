@@ -7,6 +7,13 @@ export type Wallet = {
     password: string
     private_key: string
 }
+
+export type Block = {
+    header: Header
+    proposals: []
+    transactions: Transaction[]
+    uncles: []
+}
   
 export type QueryOption = {
     lock?: {

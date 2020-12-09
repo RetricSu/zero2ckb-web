@@ -70,7 +70,7 @@ export default function Preknowledge(){
             <h1 style={styles.wide_card_title}> 第一步：理论知识 </h1>
             <blockquote style={styles.blockquote}>
                 世上根本没有比特币，只有一个又一个的 UTXO。
-                <br/>
+                <br/><br/>
                 世上根本没有CKB, 只有一个又一个的 Cell。
             </blockquote>
         </div>

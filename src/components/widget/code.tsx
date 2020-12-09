@@ -1,8 +1,10 @@
 import React, {Ref, useImperativeHandle, useRef, forwardRef, useState}  from "react";
 
 const styles = {
-    no_outline:{
-        outline: '0px solid transparent'
+    code_box:{
+        outline: '0px solid transparent',
+        overflow: 'scroll',
+        border: '1px solid white'
     }
 }
 
@@ -26,7 +28,7 @@ const CodePeice = forwardRef((prop: CodeProp, ref: Ref<CodePieceType>) => {
 
     return (
         <div>
-            <pre ref={preRef} contentEditable={prop.isContentEditable?'true':'false'} onInput={getContent} style={styles.no_outline} >
+            <pre ref={preRef} contentEditable={prop.isContentEditable?'true':'false'} onInput={getContent} style={styles.code_box} >
                 { typeof prop.code === 'string' &&
                     prop.code
                 }

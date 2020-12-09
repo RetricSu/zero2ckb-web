@@ -18,16 +18,16 @@ export default function(){
             <div style={styles.wide_card}>
                 <h1 style={styles.wide_card_title}>第二步：动手实践</h1>
                 <blockquote style={styles.blockquote}>
-                    我们在云端运行了一条测试链，
-                    <br/> 
+                    我们在云端运行了一条测试链， 
                     并预先生成了一些账户地址，供你玩耍。
-                    <br/>
+                    <br/><br/>
                     你可以在下面看到这条测试链的一些信息。
                 </blockquote>
             </div>
             <hr/>
+            <NewBlocks></NewBlocks>
+            <div style={styles.clear_path}></div>
             <div style={styles.content}>
-                <NewBlocks></NewBlocks>
                 
                 <p>这里有 3 个钱包。
                     其中，钱包 1 是测试链的矿工地址。

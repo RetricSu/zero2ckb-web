@@ -13,10 +13,7 @@ const styles = {
         color: '#3CC68A'
     },
     wide_card: {
-        paddingLeft: '40px',
-        paddingRight: '40px',
-        paddingTop: '20px',
-        paddingBottom: '20px',
+        padding: '10px',
         textAlign: 'left' as const
     },
     wide_card_title: {
@@ -27,8 +24,19 @@ const styles = {
         background: '#f9f9f9',
         borderLeft: '10px solid #3CC68A',
         margin: '1.5em 10px',
-        padding: '0.5em 10px',
+        padding: '1em 2em',
         color: 'black',
+    },
+    clear_path: {
+        clear: 'both' as const
+    },
+    li: {
+        listStyleType: 'none',
+        marginLeft: '0'
+    },
+    ul: {
+        listStyleType: 'none',
+        paddingLeft: '0'
     }
 }
 
