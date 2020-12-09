@@ -7,6 +7,12 @@ export type Props = {
     icon?: boolean
 }
 
+const styles = {
+    pointer: {
+        cursor: 'pointer'
+    }
+}
+
 export default function CopyText(props: Props){
     
     const clip_button = useRef(null);
@@ -28,7 +34,7 @@ export default function CopyText(props: Props){
     }
 
     return(
-        <span ref={clip_button} onClick={copyText}>
+        <span ref={clip_button} onClick={copyText} style={styles.pointer}>
             {placeholder} {props.icon && icon_element}
         </span>
     )
