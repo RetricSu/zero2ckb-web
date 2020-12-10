@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../../widget/common_style';
 import CodePiece from '../../widget/code';
+import CellConcept from '../../widget/floating_cell/cell_concept';
 
 const code = {
     /** 
@@ -85,12 +86,16 @@ export default function Preknowledge(){
                 最终对 CKB 来说，都是这笔交易把某些 Cell 作为 input 消费掉，从而产生了一些新的 Cell 作为 output 而已。
                 这个过程跟比特币的 UTXO 是完全一样的。
             </p>
+            
             <p>
                 被消费掉的 Cell 就是死去的 Dead Cell，未被消费的 Cell 是 live Cell。
                 某一时刻所有的 live cell，共同组成了 CKB 这条链在这一时刻的全局状态。
                 所以这条链真的就像一个人一样，不停地经由交易去消费 Cell 和创造 Cell，
                 就像全身的细胞在更新换代、分裂生长。
             </p>
+
+            <CellConcept></CellConcept>
+            
             <p>
                 跟 UTXO 不同的是，Cell 可以用来存储任意类型的数据。Cell 有一个字段名为 data，里面可以放 16 进制的无格式字符串进去。
                 你往 data 上写入什么样的内容都可以，格式也是你自己定，只要你自己知道怎么解读这段字符串就好。<br/><br/>

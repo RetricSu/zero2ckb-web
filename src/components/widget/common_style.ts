@@ -37,6 +37,23 @@ const styles = {
     ul: {
         listStyleType: 'none',
         paddingLeft: '0'
+    },
+    status_bar: {
+        width: '100%',
+        padding: '5px',
+        margin: '10px 0px',
+        clear: 'both' as const,
+        justifyContent: 'center' as const,
+    },
+    status_bar_title: {
+        float: 'left' as const,
+        fontSize: '16px',
+        fontWeight: 'bolder' as const
+    },
+    status_bar_btn: {
+        float: 'right' as const,
+        textAlign: 'center' as const,
+        marginRight: '20px'
     }
 }
 

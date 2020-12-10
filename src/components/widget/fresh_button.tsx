@@ -17,7 +17,7 @@ export type Props = {
 
 const styles = {...commonStyle, ...{
     loader: {
-        border: '4px solid rgba(255, 255, 255, 0.2)',
+        border: '4px solid rgba(60, 198, 138, 0.2)',
         borderLeft: '4px solid',
         animation: 'load 1s infinite linear',
         borderRadius: '50%',
@@ -25,11 +25,14 @@ const styles = {...commonStyle, ...{
         height: '25px'
     },
     btn: {
-        padding: '1rem 2rem',
-        fontSize: '16px',
-        color: '#ffffff',
+        padding: '0.5rem 1rem',
+        fontSize: '12px',
+        color: 'white',
         borderRadius: '6px',
-        backgroundColor: '#2080df'
+        border: '1px solid ' + commonStyle.main_color.color,
+        outline:'none',
+        backgroundColor: 'rgb(255,255,255, 0)',
+        cursor: 'pointer'
     },
     btndiv: {
         display: 'flex',
@@ -37,6 +40,16 @@ const styles = {...commonStyle, ...{
         alignItems: 'center',
         width: '100%',
         height: '100%'
+    },
+    btn_hover: {
+        padding: '0.5rem 1rem',
+        fontSize: '12px',
+        color: 'white',
+        borderRadius: '6px',
+        border: '1px solid ' + commonStyle.main_color.color,
+        outline:'none',
+        backgroundColor: commonStyle.main_color.color,
+        cursor: 'pointer'
     }
 }}
 
@@ -48,6 +61,7 @@ export default function FreshButton(props: Props){
 
     const [showLoader, setShowLoader] = useState(false);
     const [isLoading, setIsLoading] = useState( isLoadingMissed ? false : props.isLoading);
+    const [isHover, setIsHover] = useState(false);
 
     const extendedOnClick = async () => {
       if(isLoadingMissed)setIsLoading(true);
@@ -79,17 +93,19 @@ export default function FreshButton(props: Props){
     const fadeOutProps = useSpring({ opacity: showLoader ? 1 : 0 });
     const fadeInProps = useSpring({ opacity: showLoader ? 0 : 1 });
 
+    const toogleHover = () => {
+        setIsHover(!isHover);
+    }
+
     return(
-        <div>
-            <button style={styles.btn} onClick={extendedOnClick} >
-            {showLoader ? (
-                  <animated.div style={fadeOutProps}>
-                    <Loader />
-                  </animated.div>
-                ) : (
-                  <animated.div style={fadeInProps}>{props.text}</animated.div>
-            )}
-            </button>
-        </div>
+      <button style={ isHover ? styles.btn_hover : styles.btn } onClick={extendedOnClick} onMouseEnter={toogleHover} onMouseLeave={toogleHover}  >
+      {showLoader ? (
+            <animated.div style={fadeOutProps}>
+              <Loader />
+            </animated.div>
+          ) : (
+            <animated.div style={fadeInProps}>{props.text}</animated.div>
+      )}
+      </button>
     )
 }

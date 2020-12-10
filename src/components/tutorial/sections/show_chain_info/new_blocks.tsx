@@ -26,11 +26,19 @@ export default function NewBlocks (){
         setIsLoading(false);
     }
 
+    const status_bar = (
+        <div style={common_styles.status_bar}>
+            <span style={common_styles.status_bar_title}>Blocks Area</span>
+            <span style={common_styles.status_bar_btn}>
+                <FreshButton isLoading={isLoading} text={'刷新'} onClick={fetchNewBlocks} ></FreshButton>
+            </span>
+        </div>
+    );
+
     return(
         <div style={common_styles.clear_path}>
-            <FreshButton isLoading={isLoading} text={'刷新'} onClick={fetchNewBlocks} ></FreshButton>
             <div style={common_styles.clear_path}>
-                Blocks Area:
+                {status_bar}
                 <Blocks blocks={blocks}></Blocks>
             </div>
         </div>

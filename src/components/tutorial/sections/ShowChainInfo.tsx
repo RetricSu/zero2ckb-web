@@ -25,7 +25,9 @@ export default function(){
                 </blockquote>
             </div>
             <hr/>
+            
             <NewBlocks></NewBlocks>
+
             <div style={styles.clear_path}></div>
             <div style={styles.content}>
                 
@@ -39,8 +41,9 @@ export default function(){
                     <li>privateKey 是钱包的私钥，你不应该像我这样把它暴露出来。</li>
                 </ul>
             </div>
+
             <Wallets onFetchWallets={setWallets}></Wallets>
-            <hr/>
+
             <div>
                 <WalletCells wallets={wallets}></WalletCells>
             </div>

@@ -30,10 +30,10 @@ export default function WalletCells( props: Props ){
     }, [props.wallets]);
 
     const [selectedWallet, setSelectedWallet] = useState<string>();
-    const options = wallets.map((w) => {
+    const options = wallets.map((w, index) => {
         return {
             value: w.lock_arg,
-            label: w.lock_arg
+            label: '钱包' + (index + 1) + ': ' + w.lock_arg
         }
     });
 

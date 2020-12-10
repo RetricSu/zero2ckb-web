@@ -6,7 +6,8 @@ import type {
 import commonStyles from '../../../widget/common_style';
 import CopyText from '../../../widget/copy_text';
 import CodePiece from '../../../widget/code';
-import { Typography } from "@material-ui/core";
+import { Typography, Container } from "@material-ui/core";
+
 
 const wallet_arcii = `
 ___________________________________
@@ -27,15 +28,27 @@ const wallet_arcii_2 = `
 |          |
 +----------+
                        `
+const wallet_bottom = `
++                               +
++-------------------------------+
+`
+const wallet_top= `
++-------------------------------+
++                               +
+`
 
 const styles = {...commonStyles, ...{
+    wallet_section: {
+        border: '1px solid',
+        marginTop: '2em',
+        marginBottom: '2em'
+    },
     wallets: {
         marginTop: '20px',
         marginBottom: '20px',
     },
     wallet_panel: {
         maxWidth: '300px',
-        border: '1px dotted white',
         float: 'left' as const,
         marginRight: '20px',
         padding: '10px',
@@ -43,15 +56,65 @@ const styles = {...commonStyles, ...{
         overflow: 'hidden',
         fontSize: '10px',
         display: 'block',
-        textAlign: 'left' as const,
+        textAlign: 'center' as const,
         marginBottom: '5px'
     },
     alert_text: {
         color:'red', 
+        fontSize: '12px',
         textAlign: 'center' as const
+    },
+    wallet_info: {
+        textAlign: 'center' as const
+    },
+    wallet_info_text: {
+        fontSize: '12px'
     }
   }
 };
+
+export type WalletInfoProps = {
+    wallet: Wallet
+}
+
+export function WalletInfo(props: WalletInfoProps){
+    const { wallet } = props;
+    const [isShowing, setIsShowing] = useState(false);
+
+    const toggle = () => {
+        setIsShowing(!isShowing);
+    }
+
+    const info = () => {
+        if(isShowing){
+            return (
+                <div style={styles.wallet_info}>
+                    <CodePiece custom_style={{border:'0px', marginTop:'0px', marginBottom:'0px'}} code={wallet_top}></CodePiece>
+                    <div style={styles.wallet_info_text}>
+                        <p><strong style={styles.main_color}>mainet: &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</strong>
+                            { wallet.mainnet.slice(0, 8) }..{ wallet.mainnet.slice(wallet.mainnet.length-5) }   <CopyText text={wallet.mainnet} icon={true} /></p>
+                        <p><strong style={styles.main_color}>testnet: &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</strong>
+                            { wallet.testnet.slice(0, 8) }..{ wallet.testnet.slice(wallet.testnet.length-5) }   <CopyText text={wallet.testnet} icon={true} /></p>
+                        <p><strong style={styles.main_color}>lock_arg: &#160;&#160;&#160;&#160;&#160;</strong>
+                            { wallet.lock_arg.slice(0, 8) }..{ wallet.lock_arg.slice(wallet.lock_arg.length-5) }   <CopyText text={wallet.lock_arg} icon={true} /></p>
+                        <p><strong style={styles.main_color}>private_key: </strong>
+                            { wallet.private_key.slice(0, 8) }..{ wallet.private_key.slice(wallet.private_key.length-5) }   <CopyText text={wallet.private_key} icon={true} /></p>
+                    </div>
+                    <CodePiece custom_style={{border:'0px', marginTop:'0px', marginBottom:'0px'}} code={wallet_bottom}></CodePiece>
+                </div>
+            )
+        }else{
+            return(
+                <CodePiece custom_style={{border:'0px', marginTop:'0px'}} code={wallet_arcii_2}></CodePiece>
+            )
+        }
+    }
+    return(
+        <div onMouseEnter={toggle} onMouseLeave={toggle}>
+            { info() }
+        </div>
+    )
+}
 
 export type Props = {
     wallet_id?: number
@@ -60,31 +123,19 @@ export type Props = {
 
 export default function Wallets(props: Props){
     const [wallets, setWallets] = useState([]);
-    const [isDisplay, setIsDisplay] = useState('None');
 
     useEffect(() => {   
         fetchWallets();
     }, []);
-
-    const showWalletInfo = (wallet: Wallet) => {
-        //console.log(wallet);
-        setIsDisplay('block');
-    }
     
     async function fetchWallets() {
         const api = new Api();
         const myWallets = await api.getWallets();
         setWallets( myWallets.map((wallet:Wallet, index:number) => {
             return(
-            <li key={index} style={styles.wallet_panel} onMouseOver={() => showWalletInfo(wallet)}>
-                <div style={{display: isDisplay }}>
-                    <Typography style={styles.main_color}> 钱包 {index + 1} : </Typography>
-                    <Typography>mainet: { wallet.mainnet.slice(0, 8) }..   <CopyText text={wallet.mainnet} icon={true} /></Typography>
-                    <Typography>testnet: { wallet.testnet.slice(0, 8) }..   <CopyText text={wallet.testnet} icon={true} /></Typography>
-                    <Typography>lock_arg: { wallet.lock_arg.slice(0, 8) }..   <CopyText text={wallet.lock_arg} icon={true} /></Typography>
-                    <Typography>private_key: { wallet.private_key.slice(0, 8) }..   <CopyText text={wallet.private_key} icon={true} /></Typography>
-                </div>
-                <CodePiece custom_style={{border:'0px', marginTop:'0px'}} code={wallet_arcii_2}></CodePiece>
+            <li key={index} style={styles.wallet_panel}>
+                <Typography style={styles.main_color}> 钱包 {index + 1} </Typography>
+                <WalletInfo wallet={wallet}></WalletInfo>
             </li>
             )
         }) );
@@ -93,7 +144,7 @@ export default function Wallets(props: Props){
     }
 
     return (
-        <div>
+        <Container style={styles.wallet_section}>
             <div style={styles.wallets}>
                 { props.wallet_id ?
                     wallets[props.wallet_id-1] : wallets
@@ -103,10 +154,12 @@ export default function Wallets(props: Props){
             <br/>
             <div style={styles.content}>
                  <p style={styles.alert_text}> 
-                    为了教学方便，我们把地址的私钥全部导出了，所以千万不要在正式场合下使用这几个钱包，
-                    否则你的钱可能会丢失、或被盗。
+                 ☠️ 请勿在正式场合下使用这些钱包 <br/><br/>
+                    任何存入这些钱包的数字资产，
+                    都有可能会丢失、或被盗。<br/><br/>
+                    你不应该在任何情况下公开私钥。
                 </p>
             </div>
-        </div>
+        </Container>
     )
 }
