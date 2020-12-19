@@ -15,7 +15,7 @@ export default function(){
     return(
         <div>
             <hr/>
-            <div style={styles.wide_card}>
+            <div style={styles.wide_card} id="handson">
                 <h1 style={styles.wide_card_title}>第二步：动手实践</h1>
                 <blockquote style={styles.blockquote}>
                     亲自上手摸摸CKB这条链，

@@ -4,7 +4,7 @@ import FreshButton from './fresh_button';
 
 const styles = {
     form_box: {
-        border: '1px solid white',
+        border: '1px solid gray',
         padding: '20px',
         overflow: 'scroll'
     },

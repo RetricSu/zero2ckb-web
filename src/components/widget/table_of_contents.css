@@ -3,6 +3,15 @@ html {
 	scroll-behavior: smooth;
 }
 
+@media screen and (max-width: 678px){
+	.main-nav-container{
+		display: none;
+	}
+	nav{
+	  display: none;
+	}
+  }
+
 .main-nav-container{
     position: fixed;
     left: 0.5rem;
@@ -45,3 +54,4 @@ nav {
 .section-nav a:focus {
 	color: #3CC68A;
 }
+

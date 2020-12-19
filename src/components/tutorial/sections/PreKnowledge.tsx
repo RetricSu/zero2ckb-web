@@ -70,7 +70,7 @@ const code = {
  */
 export default function Preknowledge(){
     return(
-        <div>
+        <div id="preknowledge">
             <div style={styles.wide_card}>
             <h1 style={styles.wide_card_title}> 第一步：理论知识 </h1>
             <blockquote style={styles.blockquote}>

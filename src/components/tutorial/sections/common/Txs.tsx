@@ -5,7 +5,9 @@ import Tx from './Tx';
 const styles = {
     panel: {
         padding: '0',
-        margin: '0'
+        margin: '0',
+        width: '100%',
+        overflowX: 'hidden' as const
     }
 }
 

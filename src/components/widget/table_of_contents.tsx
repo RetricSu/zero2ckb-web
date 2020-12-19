@@ -47,7 +47,7 @@ export default function TableOfContents(){
                             <li><a href="#endpoints--city-config">课间休息</a></li>
 		        		</ul>
 		        	</li>
-		        	<li><a href="#links">第二步：动手实践</a>
+		        	<li><a href="#handson">第二步：动手实践</a>
                         <ul>
                             <li><a href="#expanders">观察一条链</a></li>
 		        			<li><a href="#howtoownacell">发送一笔交易</a>
