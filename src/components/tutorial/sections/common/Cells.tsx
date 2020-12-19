@@ -1,21 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import Api from "../../../../api/blockchain";
 import type {
     QueryOption,
     Cell
 } from '../../../../types/blockchain';
-import CodePiece from '../../../widget/code';
+import SingleCell from './Cell';
 import FreshButton from '../../../widget/fresh_button';
 
 export type Props = {
     query: QueryOption
     length?: number,
-    render_dep?: any
+    render_dep?: any,
+    custom_style?: {
+      btn_style?: CSSProperties
+      layout_style?: CSSProperties
+    },
+    text?: {
+      title?: string
+      btn_text?: string
+    }
 };
 
 const styles = {
   main: {
-    textAlign: "left" as const,
+    textAlign: "center" as const,
+    border: '1px solid white',
+    clear: 'both' as const,
   },
   cell_panel: {
     width: "600px",
@@ -28,11 +38,15 @@ const styles = {
     fontSize: "10px",
     display: "block",
   },
+  
 };
 
 export default function Cells(props: Props) {
   const [cells, setCells] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const btn_style = props.custom_style?.btn_style;
+  const layout_style = props.custom_style?.layout_style;
 
   useEffect(() => {
     if(props.render_dep)
@@ -47,26 +61,18 @@ export default function Cells(props: Props) {
     var myCells = await api.getLiveCells(props.query);
     myCells = myCells.slice(0, length);
     setCells(
-        myCells.map((cell: Cell, index: number) => {
-        return (
-          <li key={index} style={styles.cell_panel}>
-            <p>cell {index + 1} : </p>
-            <CodePiece code={ JSON.stringify(cell, null, 2) } />
-          </li>
-        );
-      })
+        myCells.map((cell: Cell, index: number) => <SingleCell cell={cell} key_id={index} /> )
     );
     setIsLoading(false);
   }
 
   return (
-    <div>
-      <p>
-          <FreshButton isLoading={isLoading} onClick={queryCells} text='刷新'></FreshButton>
-      </p>
-      <div style={styles.main}>
-        {cells}
-      </div>
+    <div style={ layout_style != undefined ? {...styles.main, ...layout_style} : styles.main}>
+      <p> {props.text?.title} </p>
+      <FreshButton custom_style={ btn_style != undefined ? btn_style : {}} isLoading={isLoading} onClick={queryCells} text={props.text?.btn_text || ''}></FreshButton>
+      <ul>
+          {cells}
+      </ul>
       <p style={{clear: "both"}} />
     </div>
   );

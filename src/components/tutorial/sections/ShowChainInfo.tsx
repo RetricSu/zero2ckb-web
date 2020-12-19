@@ -47,7 +47,7 @@ export default function(){
                 <p>你可以看到，钱包里包含四条信息，其具体的含义如下：</p>
                 <ul>
                     <li>mainnet，表示钱包的主网地址。</li>
-                    <li>testnet 表示测试网地址，在这里我们只会用到 testnet。</li>
+                    <li>testnet，表示测试网地址，本次教程我们只会用到 testnet。</li>
                     <li>lock_arg，是钱包对应的公钥哈希的前20位，你可以简单把它理解成公钥的指纹。</li>
                     <li>private_key，是钱包的私钥，你不应该像我这样把它暴露出来。</li>
                 </ul>

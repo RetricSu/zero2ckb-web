@@ -54,7 +54,26 @@ const styles = {
         float: 'right' as const,
         textAlign: 'center' as const,
         marginRight: '20px'
-    }
+    },
+    modal: {
+      maxWidth: '700px',
+      maxHeight: '80%',
+      overflowY: 'scroll' as const,
+      padding: '20px',
+      height: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: '0 auto'
+    },
+    paper: {
+      backgroundColor: 'gray',
+      border: '2px solid #000',
+      boxShadow: '10px',
+      padding: '10px',
+      width: '100%',
+      outline: 'none'
+    },
 }
 
 export default styles;
