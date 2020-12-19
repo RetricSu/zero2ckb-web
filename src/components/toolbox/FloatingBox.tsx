@@ -1,0 +1,126 @@
+import React, { useState } from 'react';
+import './style.css';
+import commonStyle from '../widget/common_style';
+import QueryCell from './tools/queryCell';
+import QueryTx from './tools/queryTx';
+import Hex2Decimal from './tools/hex2decimal';
+import Wallets from '../tutorial/sections/common/Wallets';
+
+const styles = {...commonStyle, ...{
+    root: {
+        position: 'fixed' as const,
+        right: '0px',
+        top: '20%'
+    },
+    hr: {
+        backgroundColor: commonStyle.main_color.color, 
+        height: '1px', 
+        border: '0', 
+    },
+    tool_panel: {
+        textAlign: 'left' as const,
+        overflowY: 'scroll' as const,
+    },
+    close_btn: {
+        position: 'absolute' as const,
+        top: '0',
+        width: '100%',
+        textAlign: 'right' as const,
+        fontSize: '10px',
+        marginBottom: '30px',
+        background: commonStyle.main_color.color,
+        outline: 'none',
+        border: '0',
+    }
+}}
+
+/** 
+ * todo: add clickable effect on close btn
+ */
+export default function FloatingBox(){
+
+    const [isQueryCellOpen, setIsQueryCellOpen] = useState(false);
+    const [isQueryTxOpen, setIsQueryTxOpen] = useState(false);
+    const [isWalletsOpen, setIsWalletsOpen] = useState(false);
+    const [isCaculatorOpen, setIsCaculatorOpen] = useState(false);
+
+    const [isOpen, setIsOpen] = useState(true);
+
+    const openQueryCell = () => {
+        setIsQueryCellOpen(true);
+        setIsOpen(false);
+    };
+
+    const openQueryTx = () => {
+        setIsQueryTxOpen(true);
+        setIsOpen(false);
+    };
+
+    const openWallets = () => {
+        setIsWalletsOpen(true);
+        setIsOpen(false);
+    };
+
+    const openCaculator = () => {
+        setIsCaculatorOpen(true);
+        setIsOpen(false);
+    };
+
+    const hanlderClose = () => {
+        setIsCaculatorOpen(false);
+        setIsQueryTxOpen(false);
+        setIsWalletsOpen(false);
+        setIsQueryCellOpen(false);
+        setIsOpen(true);
+    }
+
+    return(
+        <div style={styles.root}>
+            <input type="checkbox" name="" id="side-menu-switch" style={{visibility: 'hidden'}}></input>
+            <div className="side-menu">
+                <div style={{display: isOpen ? 'block' : 'none' }}>
+                    <div>
+                        <h3 style={styles.main_color}>CKB-ToolBox</h3>
+                        <hr style={styles.hr} />
+                    </div>
+                    <ul className="nav">
+                        <li>
+                            <a onClick={openQueryCell}><span className="fa">🔎</span>&#160;  查找 Cell</a>
+                        </li>
+                        <li>
+                            <a onClick={openQueryTx}><span className="fa">🔎</span>&#160;  查找交易</a>
+                        </li>
+                        <li>
+                            <a onClick={openWallets}><span className="fa">💰</span>&#160;  查看钱包</a>
+                        </li>
+                        <li>
+                            <a onClick={openCaculator}><span className="fa">📱</span>&#160;  16进制转换10进制</a>
+                        </li>
+                    </ul>
+                </div>
+                <div style={styles.tool_panel}>
+                    <button style={{...styles.close_btn, ...{display: !isOpen ? 'block' : 'none' }}} onClick={hanlderClose}>❌</button>
+                    <div style={{marginTop: '30px'}}>
+                        <div style={{display: isQueryCellOpen ? 'block' : 'none' }}>
+                            <QueryCell />
+                        </div>
+                        <div style={{display: isQueryTxOpen ? 'block' : 'none' }}>
+                            <QueryTx />
+                        </div>
+                        <div style={{display: isWalletsOpen ? 'block' : 'none' }}>
+                            <Wallets custom_style={{border: '0'}} />
+                        </div>
+                        <div style={{display: isCaculatorOpen ? 'block' : 'none' }}>
+                            <Hex2Decimal custom_style={{border:'0'}} />
+                        </div>
+                    </div>
+                </div>
+                <label htmlFor="side-menu-switch">
+                    <div className="tool-icon">
+                    🧰
+                    </div>
+                </label>
+            </div>
+        </div>
+    )
+}

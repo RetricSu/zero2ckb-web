@@ -1,0 +1,170 @@
+        
+
+        .side-menu {
+            z-index: 30;
+            position: relative;
+            width: 300px;
+            min-height: 300px;
+            max-height: 100%;
+            box-sizing: border-box;
+            background-color: black;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(102%);
+            transition: .3s;
+        }
+
+        .side-menu li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            width: 100%;
+        }
+
+        .side-menu ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .side-menu form {
+            display: flex;
+            margin: 0 10px 50px;
+            border-radius: 100px;
+            border: 1px solid #fff;
+        }
+        
+        .side-menu form input,
+        .side-menu form button {
+            border: none;
+            background-color: transparent;
+            color: #fff;
+            padding: 5px 10px;
+        }
+        
+        .side-menu form input::placeholder {
+            color: #fff;
+        }
+        
+        .side-menu form button {
+            width: 50px;
+            border-left: 2px solid #fff;
+            cursor: pointer;
+        }
+
+        .side-menu form button:hover {
+            transform: scaleY(-1);
+        }
+
+        .side-menu form input:focus,
+        .side-menu form button:focus {
+            outline: none;
+        }
+        
+        .side-menu label {
+            position: absolute;
+            width: 100px;
+            height: 80px;
+            background-color: #000;
+            color: #fff;
+            left: -100px;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            line-height: 80px;
+            text-align: center;
+            font-size: 3rem;
+            border-radius: 20px 0px 0px 20px;
+        }
+
+        .side-menu label:hover {
+            box-shadow: 0px 1px 1px #3CC68A;
+        }
+        
+        #side-menu-switch {
+            position: absolute;
+            opacity: 0;
+            z-index: 1;
+        }
+        
+        #side-menu-switch:checked+.side-menu {
+            transform: translateX(0);
+        }
+        
+        #side-menu-switch:checked+.side-menu label .tool-icon {
+            transform: rotate(90deg);
+        }
+        /*選單*/
+        
+        .nav a {
+            display: block;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            position: relative;
+            font-family: 'Noto Sans TC', sans-serif;
+            cursor: pointer;
+        }
+        
+        .nav li {
+            position: relative;
+        }
+        
+        .nav li+li>a::before {
+            content: '';
+            position: absolute;
+            border-bottom: 1px solid #fff;
+            right: 10px;
+            right: 10px;
+            top: 0;
+        }
+        
+        .nav a .fa {
+            margin-right: -1.1em;
+            transform: rotateY(0deg);
+            opacity: 0;
+            transition: .3s;
+        }
+        
+        .nav li:hover .fa {
+            margin-right: 0;
+            opacity: 1;
+            transform: rotateY(360deg);
+        }
+        
+        .nav li:hover>a {
+            background: #3CC68A;
+            color: black;
+        }
+        
+        .nav ul {
+            z-index: 2;
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            text-align: left;
+            right: 60%;
+            width: 350px;
+            top: 20%;
+            background-color: rgba(255, 255, 255, .2);
+            box-shadow: 5px 0 10px hsla(240, 40%, 15%, .6);
+            transition: .3s;
+        }
+        
+        .nav ul:hover {
+            background-color: rgba(255, 255, 255, .5);
+        }
+        
+        .nav li:hover>ul {
+            pointer-events: auto;
+            opacity: 1;
+            right: 80%;
+        }
+        
+        .nav ul li:hover>ul {
+            right: 95%;
+        }
+        
+        .nav ul ul li:hover>ul {
+            right: 35%;
+        }

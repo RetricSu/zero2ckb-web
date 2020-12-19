@@ -6,6 +6,7 @@
 import React, { useState, useRef } from 'react';
 import FreshButton from '../../widget/fresh_button';
 import common_style from '../../widget/common_style'; 
+import { CSSProperties } from '@material-ui/core/styles/withStyles';
 
 const styles = {
     caculator_box: {
@@ -32,7 +33,13 @@ const styles = {
     }
 }
 
-export default function Hex2Dec(){
+export type Hex2DecProps = {
+    custom_style?: CSSProperties
+}
+
+export default function Hex2Dec(props: Hex2DecProps){
+
+    const { custom_style } = props;
 
     const ref = useRef<HTMLInputElement>(null);
     const [isReversed, setIsReversed] = useState(false);
@@ -63,7 +70,7 @@ export default function Hex2Dec(){
     }
 
     return(
-        <div style={styles.caculator_box}>
+        <div style={ custom_style != undefined ? {...styles.caculator_box, ...custom_style} : styles.caculator_box}>
             <p>Convert {isReversed?'Decimal':'Hex'} to {isReversed?'Hex':'Decimal'} </p>
             <input ref={ref} type="text" style={styles.input} placeholder={isReversed?'十进制':'十六进制，以 0x 开头'} />
             <p>

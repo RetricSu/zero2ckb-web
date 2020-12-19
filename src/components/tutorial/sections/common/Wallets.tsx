@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, CSSProperties } from 'react';
 import Api from '../../../../api/blockchain';
 import type {
     Wallet
@@ -118,10 +118,14 @@ export function WalletInfo(props: WalletInfoProps){
 
 export type Props = {
     wallet_id?: number
+    custom_style?: CSSProperties
     onFetchWallets?: (wallets: Wallet[]) => void
 }
 
 export default function Wallets(props: Props){
+
+    const { custom_style } = props;
+
     const [wallets, setWallets] = useState([]);
 
     useEffect(() => {   
@@ -144,7 +148,7 @@ export default function Wallets(props: Props){
     }
 
     return (
-        <Container style={styles.wallet_section}>
+        <Container style={ custom_style != undefined ? {...styles.wallet_section, ...custom_style} : styles.wallet_section}>
             <div style={styles.wallets}>
                 { props.wallet_id ?
                     wallets[props.wallet_id-1] : wallets
