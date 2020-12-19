@@ -27,10 +27,11 @@ class Api{
         return res.data;
     };
 
-    async getLiveCells(query: QueryOption){
+    async getLiveCells(query: QueryOption, limit:number = 10){
         let res = await axios.get(`${this.base_url}/get_live_cells`, { 
             params:{
-                query: query
+                query: query,
+                limit: limit
             }
         });
         return res.data;
@@ -41,10 +42,11 @@ class Api{
         return res.data;
     };
 
-    async getTransactions(query: QueryOption){
-        let res = await axios.get(`${this.base_url}/get_tx`, { 
+    async getTransactions(query: QueryOption, limit:number = 10){
+        let res = await axios.get(`${this.base_url}/get_txs`, { 
             params:{
-                query: query
+                query: query,
+                limit: limit
             }
         });
         return res.data;

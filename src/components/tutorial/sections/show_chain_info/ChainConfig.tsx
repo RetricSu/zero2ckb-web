@@ -3,6 +3,9 @@ import Api from '../../../../api/blockchain';
 import CodePiece from '../../../widget/code';
 
 const styles = {
+    root: {
+        textAlign: 'center' as const,
+    },
     config_panel: {
         textAlign: 'left' as const,
         margin: '0 auto',
@@ -27,8 +30,11 @@ export default function ChainConfig(){
     }
 
     return(
-        <div style={styles.config_panel}>
-            <CodePiece code={JSON.stringify(config, null, 2)} />
+        <div style={styles.root}>
+            <h4>测试链的配置信息</h4>
+            <div style={styles.config_panel}>
+                <CodePiece custom_style={{border:'0'}} code={JSON.stringify(config, null, 2)} />
+            </div>
         </div>
     )
 }

@@ -71,12 +71,11 @@ export default function WalletCells( props: Props ){
             }}}  length={12} render_dep={selectedWallet} text={{title:'钱包对应的 live cell', btn_text:''}} custom_style={{btn_style: styles.hidden_btn}} ></Cells>
 
             <div>
-                <p>这是钱包对应的交易: </p>
                 <WalletTxs query={{lock: {
                     code_hash: '0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8',
                     args: selectedWallet || '',
                     hash_type: 'type'
-                }}} render_dep={selectedWallet}></WalletTxs>
+                }}} render_dep={selectedWallet} text={{title:'钱包对应的交易', btn_text:''}} custom_style={{btn_style: styles.hidden_btn}} ></WalletTxs>
             </div>
         </div>
     )

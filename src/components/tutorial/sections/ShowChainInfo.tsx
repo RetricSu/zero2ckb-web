@@ -73,9 +73,16 @@ export default function(){
                     目前测试链只有一个矿工。
                 </p>
             </div>
-            <div>
-                <p>这是测试链的配置信息：</p>
+            <hr/>
+            <div style={styles.content}>
+                <p>最后，我们还需要知道最后一个东西是这条测试链的配置。</p>
                 <ChainConfig />
+                <p>每条CKB的测试链都会预先在创世区块上部署几个系统内置的智能合约，上面的配置信息显示了3个系统合约的具体信息。</p>
+                <ul>
+                    <li>SECP256K1_BLAKE160：是系统默认使用的 Cell 的 lock 锁合约，用来保护 Cell 的所有权</li>
+                    <li>SECP256K1_BLAKE160_MULTISIG：用于多签 lock 锁的合约</li>
+                    <li>DAO：NervosDAO 合约，暂时可以不用管</li>
+                </ul>
             </div>
         </div>
     )

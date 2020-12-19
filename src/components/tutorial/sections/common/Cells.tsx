@@ -58,8 +58,7 @@ export default function Cells(props: Props) {
     console.log(isLoading);
     const api = new Api();
     const length = props.length || 10;
-    var myCells = await api.getLiveCells(props.query);
-    myCells = myCells.slice(0, length);
+    var myCells = await api.getLiveCells(props.query, length);
     setCells(
         myCells.map((cell: Cell, index: number) => <SingleCell cell={cell} key_id={index} /> )
     );
@@ -68,7 +67,7 @@ export default function Cells(props: Props) {
 
   return (
     <div style={ layout_style != undefined ? {...styles.main, ...layout_style} : styles.main}>
-      <p> {props.text?.title} </p>
+      <h4>{props.text?.title}</h4>
       <FreshButton custom_style={ btn_style != undefined ? btn_style : {}} isLoading={isLoading} onClick={queryCells} text={props.text?.btn_text || ''}></FreshButton>
       <ul>
           {cells}

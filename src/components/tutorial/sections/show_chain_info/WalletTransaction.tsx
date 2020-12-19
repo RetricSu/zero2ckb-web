@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, CSSProperties } from 'react';
 import Api from '../../../../api/blockchain';
 import { QueryOption } from '../../../../types/blockchain';
 import FreshButton from "../../../widget/fresh_button";
 import commonStyles from "../../../widget/common_style";
-import {
-    TransactionWithStatus
-} from "../../../../types/blockchain";
-import CodePiece from '../../../widget/code';
+import Txs from '../common/Txs';
 
 const styles = {...commonStyles, ...{
     list_panel: {
-        margin: '20px',
+        textAlign: 'center' as const,
+        border: '1px solid white',
     },
     tx_panel: {
         width: "600px",
@@ -29,7 +27,15 @@ const styles = {...commonStyles, ...{
 export type Props = {
     query: QueryOption,
     render_dep?: any,
-    length?: number
+    length?: number,
+    text?: {
+        title?: string
+        btn_text?: string
+    }
+    custom_style?: {
+        btn_style?: CSSProperties
+        layout_style?: CSSProperties
+    }
 }
 
 export default function WalletTransaction(props: Props){
@@ -41,11 +47,8 @@ export default function WalletTransaction(props: Props){
         setIsLoading(true);
         const api = new Api();
         const length = props.length || 10;
-        var txs = await api.getTransactions(props.query);
-        txs = txs.slice(0, length);
-        setTxs(txs.map((tx:TransactionWithStatus, index:number) => <li key={index} style={styles.tx_panel}>
-            <CodePiece code={JSON.stringify(tx, null, 2)} />
-        </li>));
+        var txs = await api.getTransactions(props.query, length);
+        setTxs(txs);
         setIsLoading(false);
     }
 
@@ -54,12 +57,16 @@ export default function WalletTransaction(props: Props){
             fetchTransactions();
     }, [props.render_dep])
 
+    const btn_style = props.custom_style?.btn_style;
+    const layout_style = props.custom_style?.layout_style;
+    const title = props.text?.title;
+    const btn_text = props.text?.btn_text;
+
     return(
-        <div style={styles.list_panel}>
-            <p>
-               <FreshButton isLoading={isLoading} onClick={fetchTransactions} text='刷新'></FreshButton>
-            </p>
-           {txs}
+        <div style={ layout_style !== undefined ? {...styles.list_panel, ...layout_style} : styles.list_panel}>
+            <h4>{title}</h4>
+            <FreshButton custom_style={btn_style !== undefined ? btn_style : {}} isLoading={isLoading} onClick={fetchTransactions} text={btn_text || ''}></FreshButton>
+           <Txs txs={txs} />
            <p style={{clear: "both"}} />
         </div>
     )

@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import type {
-    Transaction
+    Transaction,
+    TransactionWithStatus
 } from '../../../../types/blockchain';
 import { Modal, Backdrop, Fade } from '@material-ui/core';
 import CodePiece from '../../../widget/code';
 
 export type TxProps = {
     tx: Transaction
+    key_id?: number | string
 }
 
 const styles = {
     box_content_link: {
-        textDecoration: 'underline',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        listStyleType: 'none',
+        marginLeft: '0',
+        marginBottom: '10px',
+        padding: '5px'
     },
     modal: {
       maxWidth: '700px',
@@ -36,7 +41,7 @@ const styles = {
 }
 
 export default function ShowTxInfo (props: TxProps) {
-    const { tx } = props;
+    const { tx, key_id } = props;
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
@@ -48,8 +53,8 @@ export default function ShowTxInfo (props: TxProps) {
     };
     
     return (
-        <li style={styles.box_content_link} key={tx.hash} onClick={handleOpen}>
-                        { tx.hash?.slice(0,16) }.. 
+        <li key={ key_id != undefined ? key_id : tx.hash } style={styles.box_content_link} onClick={handleOpen}>
+                        { tx.hash }
                 <Modal
                   open={open}
                   onClose={handleClose}

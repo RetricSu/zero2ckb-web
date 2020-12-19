@@ -74,6 +74,13 @@ const styles = {
       width: '100%',
       outline: 'none'
     },
+    hidden_btn: {
+      width:'100%', 
+      border:'0', 
+      backgroundColor: 'rgb(0,0,0, 0)',
+      height: '0',
+      cursor: 'auto'
+    }
 }
 
 export default styles;
