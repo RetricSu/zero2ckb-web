@@ -1,50 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Container } from '@material-ui/core';
 import type {
-    Block,
-    Transaction
+    Block
 } from '../../../../types/blockchain';
-import Utils from '../../../../utils/index';
 import common_style from '../../../widget/common_style';
-
-const styles = {
-    ...common_style, ...{
-        box: {
-            maxWidth: '200px',
-            maxHeight: '200px',
-            border: '1px solid white',
-            margin: '0.5em',
-            float: 'left' as const,
-            display: 'box',
-            textAlign: 'left' as const
-        },
-        box_header: {
-            width: '100%',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis' as const,
-            whiteSpace: 'nowrap' as const
-        },
-        box_header_title: {
-            fontSize: '15px',
-            fontWeight: 'bolder' as const,
-            color: common_style.main_color.color.toString(),
-            marginTop: '10px',
-            marginBottom: '10px'
-        },
-        box_header_sub_title: {
-            fontSize: '12px',
-            margin: '0'
-        },
-        box_content: {
-            width: '100%',
-            overflow: 'scroll'
-        },
-        box_content_link: {
-            textDecoration: 'underline',
-            cursor: 'pointer'
-        }
-    }
-}
+import BlockBox from './Block';
 
 export type Props = {
     blocks: Block[]
@@ -57,41 +16,11 @@ function Blocks(props: Props){
     useEffect( () => {
         setBlocks(props.blocks);
     }, [props.blocks]);
-
-    const showTxInfo = (tx: Transaction) => {
-        alert(JSON.stringify(tx, null, 2));
-    }
-
     
-    function show_tx_list(transactions: Transaction[]) {
-        const jsx = transactions.map( (tx: Transaction) => 
-            <li style={styles.box_content_link} key={tx.hash} onClick={() => { showTxInfo(tx); }}>
-                { tx.hash } 
-            </li>
-        );
-        return jsx;
-    }
-    
-    const blocks_box = blocks.map((block: Block) => 
-        <div>
-            <Container style={styles.box} key={block.header.hash}>
-                <div style={styles.box_header}>
-                    <div style={styles.box_header_title}> {block.header.number.toUpperCase()} </div>
-                    <p style={styles.box_header_sub_title}> {block.header.hash} </p>
-                    <p style={styles.box_header_sub_title}> {Utils.convertTimestamp( BigInt(block.header.timestamp).toString(10) )} </p>
-                </div>
-                <hr/>
-                <p style={styles.box_header_sub_title}>交易：{block.transactions.length} 条</p>
-                <div style={styles.box_content}>
-                    <ul style={styles.ul}>
-                        { show_tx_list(block.transactions) }
-                    </ul>
-                </div>
-            </Container>
-        </div>
-    );
+    const blocks_box = blocks.map( (block: Block) => <BlockBox block={block} /> );
+
     return(
-        <div style={styles.clear_path}>
+        <div style={common_style.clear_path}>
             {blocks_box}
         </div>
     )

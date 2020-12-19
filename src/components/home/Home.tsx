@@ -6,7 +6,7 @@ function Home() {
     <div className="App">
       <header className="App-header">
         <p>
-          Learn CKB by Hand
+          Learn CKB from Scratch
         </p>
         <a
           className="App-link"

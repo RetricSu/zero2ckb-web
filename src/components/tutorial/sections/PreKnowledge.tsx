@@ -64,6 +64,10 @@ const code = {
     
 }
 
+
+/***  
+ * todo: add some drawing image to better explained the datatype
+ */
 export default function Preknowledge(){
     return(
         <div>

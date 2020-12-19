@@ -6,6 +6,17 @@ const convertTimestamp = (ts: string | number) => {
     }
 }
 
+const hex2dec =  (num: string) => {
+    return BigInt(num).toString(10);
+}
+
+const dec2hex = (num: string) => {
+    return BigInt(num).toString(16);
+}
+
+
 export default {
-    convertTimestamp: convertTimestamp
+    convertTimestamp: convertTimestamp,
+    hex2dec: hex2dec,
+    dec2hex: dec2hex,
 }

@@ -4,11 +4,31 @@
 */
 
 import React, { useState, useRef } from 'react';
+import FreshButton from '../../widget/fresh_button';
+import common_style from '../../widget/common_style'; 
 
 const styles = {
     caculator_box: {
         border: '1px solid white',
         padding: '20px'
+    },
+    input: {
+        outline: common_style.main_color.color,
+        padding: '10px',
+        background: 'white',
+        width: '90%',
+        borderRadius: '3px',
+        border: '1px solid white',
+        fontSize: '16px'
+    },
+    btn: {
+        marginRight: '5px'
+    },
+    result: {
+        border: '1px solid white',
+        padding: '10px',
+        fontSize: '16px',
+        width: '90%',
     }
 }
 
@@ -44,14 +64,16 @@ export default function Hex2Dec(){
 
     return(
         <div style={styles.caculator_box}>
-            <span>
-                <p>Convert  <input ref={ref} type="text"/> {isReversed?'Decimal':'Hex'} to {isReversed?'Hex':'Decimal'} -- <button onClick={reverse}>对调</button></p>
-                <p>=》 result: {result} </p>
-                <p>
-                  <button onClick={isReversed?dec2hex:hex2dec}>转换</button>
-                </p>
-            </span>
-            
+            <p>Convert {isReversed?'Decimal':'Hex'} to {isReversed?'Hex':'Decimal'} </p>
+            <input ref={ref} type="text" style={styles.input} placeholder={isReversed?'十进制':'十六进制，以 0x 开头'} />
+            <p>
+                <FreshButton onClick={ isReversed ? dec2hex : hex2dec } text={'转换'} />
+                &#160;
+                <FreshButton onClick={ reverse } text={'对调'} />
+            </p>
+            <div style={styles.result}>
+               结果： {result}
+            </div>
         </div>
     )
 }

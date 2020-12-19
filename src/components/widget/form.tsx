@@ -7,6 +7,12 @@ const styles = {
         border: '1px solid white',
         padding: '20px',
         overflow: 'scroll'
+    },
+    input_area: {
+        border: '0px',
+        background: 'white',
+        color: 'black',
+        padding: '10px'
     }
 }
 
@@ -22,8 +28,6 @@ export default function Form(props: Props){
     
     const handleSubmit = function(){
         setIsLoading(true);
-        console.log('here we go');
-        console.log(ref.current)
         if(ref.current){
             const data = ref.current.getContent();
             if(props.onSubmit){
@@ -35,7 +39,7 @@ export default function Form(props: Props){
 
     return(
       <div style={styles.form_box}>
-        <CodePiece code={props.form_template} isContentEditable={true} ref={ref}></CodePiece>
+        <CodePiece code={props.form_template} isContentEditable={true} ref={ref} custom_style={styles.input_area}></CodePiece>
         <FreshButton isLoading={isLoading} text={props.btn_text || '提交'} onClick={handleSubmit} />
       </div>
     )

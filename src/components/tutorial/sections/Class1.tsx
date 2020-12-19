@@ -25,10 +25,10 @@ export default function Class1(){
         {
           out_point: {
             tx_hash:
-              "0xace5ea83c478bb866edf122ff862085789158f5cbff155b7bb5f13058555b708",
-            index: "0x0",
+              "0x",
+            index: "0x",
           },
-          dep_type: "dep_group",
+          dep_type: "dep_group or code", 
         },
       ],
       header_deps: [],
@@ -37,19 +37,19 @@ export default function Class1(){
           since: "0x0",
           previous_output: {
             tx_hash:
-              "0xc9d87fb5433d3655bdccea8a16386c202aeb72c2dcda4ad3528e8336deed3dcb",
-            index: "0x0",
+              "0x",
+            index: "0x",
           },
         },
       ],
       outputs: [
         {
-          capacity: "0x124762461389",
+          capacity: "0x",
           lock: {
             code_hash:
-              "0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8",
-            hash_type: "type",
-            args: "0x43d509d97f26007a285f39241cffcd411157196c",
+              "0x",
+            hash_type: "type or data",
+            args: "0x",
           },
         },
       ],

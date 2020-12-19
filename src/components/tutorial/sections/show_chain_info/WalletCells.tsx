@@ -22,6 +22,9 @@ const styles = {
     }
 }
 
+/**
+ * todo: add balance here. 
+ */
 export default function WalletCells( props: Props ){
     const [wallets, setWallets] = useState<Wallet[]>([]);
 
