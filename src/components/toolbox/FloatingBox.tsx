@@ -5,6 +5,7 @@ import QueryCell from './tools/queryCell';
 import QueryTx from './tools/queryTx';
 import Hex2Decimal from './tools/hex2decimal';
 import Wallets from '../tutorial/sections/common/Wallets';
+import ChainConfig from '../tutorial/sections/show_chain_info/ChainConfig';
 import Logo from '../widget/logo_svg';
 
 const styles = {...commonStyle, ...{
@@ -43,6 +44,7 @@ export default function FloatingBox(){
     const [isQueryCellOpen, setIsQueryCellOpen] = useState(false);
     const [isQueryTxOpen, setIsQueryTxOpen] = useState(false);
     const [isWalletsOpen, setIsWalletsOpen] = useState(false);
+    const [isConfigOpen, setIsConfigOpen] = useState(false);
     const [isCaculatorOpen, setIsCaculatorOpen] = useState(false);
 
     const [isOpen, setIsOpen] = useState(true);
@@ -62,6 +64,11 @@ export default function FloatingBox(){
         setIsOpen(false);
     };
 
+    const openConfig = () => {
+        setIsConfigOpen(true);
+        setIsOpen(false);
+    };
+
     const openCaculator = () => {
         setIsCaculatorOpen(true);
         setIsOpen(false);
@@ -71,6 +78,7 @@ export default function FloatingBox(){
         setIsCaculatorOpen(false);
         setIsQueryTxOpen(false);
         setIsWalletsOpen(false);
+        setIsConfigOpen(false);
         setIsQueryCellOpen(false);
         setIsOpen(true);
     }
@@ -95,6 +103,9 @@ export default function FloatingBox(){
                             <a onClick={openWallets}><span className="fa">💰</span>&#160;  查看钱包</a>
                         </li>
                         <li>
+                            <a onClick={openConfig}><span className="fa">⚙️</span>&#160;  查看链配置</a>
+                        </li>
+                        <li>
                             <a onClick={openCaculator}><span className="fa">📱</span>&#160;  16进制转换10进制</a>
                         </li>
                     </ul>
@@ -110,6 +121,9 @@ export default function FloatingBox(){
                         </div>
                         <div style={{display: isWalletsOpen ? 'block' : 'none' }}>
                             <Wallets custom_style={{border: '0'}} />
+                        </div>
+                        <div style={{display: isConfigOpen ? 'block' : 'none' }}>
+                            <ChainConfig custom_style={{border:'0'}}/>
                         </div>
                         <div style={{display: isCaculatorOpen ? 'block' : 'none' }}>
                             <Hex2Decimal custom_style={{border:'0'}} />
