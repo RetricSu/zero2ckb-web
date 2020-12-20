@@ -92,8 +92,19 @@
         }
         
         #side-menu-switch:checked+.side-menu label .tool-icon {
-            transform: rotate(90deg);
+            animation: spin 0.3s;
         }
+
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(720deg);
+          }
+        }
+
+
         /*選單*/
         
         .nav a {

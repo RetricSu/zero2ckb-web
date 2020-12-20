@@ -5,6 +5,7 @@ import QueryCell from './tools/queryCell';
 import QueryTx from './tools/queryTx';
 import Hex2Decimal from './tools/hex2decimal';
 import Wallets from '../tutorial/sections/common/Wallets';
+import Logo from '../widget/logo_svg';
 
 const styles = {...commonStyle, ...{
     root: {
@@ -117,7 +118,7 @@ export default function FloatingBox(){
                 </div>
                 <label htmlFor="side-menu-switch">
                     <div className="tool-icon">
-                    🧰
+                        <Logo />
                     </div>
                 </label>
             </div>
