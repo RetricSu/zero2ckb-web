@@ -4,7 +4,8 @@ import type {
     Transaction,
     QueryOption, 
     RawTransaction, 
-    WitnessArgs
+    WitnessArgs,
+    HexString
 } from '../types/blockchain';
 
 axios.defaults.withCredentials = true;
@@ -41,6 +42,15 @@ class Api{
         let res = await axios.get(`${this.base_url}/wallets`);
         return res.data;
     };
+
+    async getBalance(lock_args: HexString){
+        let res = await axios.get(`${this.base_url}/get_balance`, { 
+            params:{
+                lock_args: lock_args
+            }
+        });
+        return res.data;
+    }
 
     async getTransactions(query: QueryOption, limit:number = 10){
         let res = await axios.get(`${this.base_url}/get_txs`, { 

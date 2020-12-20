@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Cells from '../common/Cells';
 import WalletTxs from './WalletTransaction';
+import Balance from './Balance';
 import type {
     Wallet
 } from '../../../../types/blockchain'
@@ -76,6 +77,10 @@ export default function WalletCells( props: Props ){
                     args: selectedWallet || '',
                     hash_type: 'type'
                 }}} render_dep={selectedWallet} text={{title:'钱包对应的交易', btn_text:''}} custom_style={{btn_style: styles.hidden_btn}} ></WalletTxs>
+            </div>
+
+            <div>
+                <Balance lock_args={selectedWallet || ''} render_dep={selectedWallet} text={{title:'钱包余额', btn_text:''}} custom_style={{btn_style: styles.hidden_btn}} />
             </div>
         </div>
     )
