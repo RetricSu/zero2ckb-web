@@ -30,6 +30,8 @@ const styles = {
         padding: '10px',
         fontSize: '16px',
         width: '90%',
+        height: '100%',
+        overflowWrap: 'anywhere' as const,
     }
 }
 
@@ -52,7 +54,7 @@ export default function Hex2Dec(props: Hex2DecProps){
     const hex2dec = () => {
         if(ref.current){
             const hex_data = ref.current.value;
-            setResult( BigInt(hex_data).toString(10) );
+            setResult( ''+BigInt(hex_data).toString(10) );
         }else{
             console.log('something went wrong..');
         }
