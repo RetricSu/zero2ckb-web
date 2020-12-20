@@ -27,37 +27,37 @@
             list-style: none;
         }
         
-        .side-menu form {
+        .side-menu .form {
             display: flex;
             margin: 0 10px 50px;
             border-radius: 100px;
             border: 1px solid #fff;
         }
         
-        .side-menu form input,
-        .side-menu form button {
+        .side-menu .form input,
+        .side-menu .form button {
             border: none;
             background-color: transparent;
             color: #fff;
             padding: 5px 10px;
         }
         
-        .side-menu form input::placeholder {
+        .side-menu .form input::placeholder {
             color: #fff;
         }
         
-        .side-menu form button {
+        .side-menu .form button {
             width: 50px;
             border-left: 2px solid #fff;
             cursor: pointer;
         }
 
-        .side-menu form button:hover {
+        .side-menu .form button:hover {
             transform: scaleY(-1);
         }
 
-        .side-menu form input:focus,
-        .side-menu form button:focus {
+        .side-menu .form input:focus,
+        .side-menu .form button:focus {
             outline: none;
         }
         

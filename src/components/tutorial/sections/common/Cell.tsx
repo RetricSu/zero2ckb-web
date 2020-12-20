@@ -3,6 +3,8 @@ import { Cell } from '../../../../types/blockchain';
 import commonStyle from '../../../widget/common_style';
 import { Modal, Backdrop, Fade } from '@material-ui/core';
 import CodePiece from '../../../widget/code';
+import { useDrag, DragSourceMonitor } from 'react-dnd';
+import {ItemTypes} from './ItemTypes';
 
 const styles = {...commonStyle, ...{
         cell_panel: {
@@ -43,6 +45,7 @@ export type SingleCellProps = {
 
 export default function SingleCell (props: SingleCellProps){
     const { cell, key_id } = props;
+    const [isHidden, setIsHidden] = useState(false);
     const [isHover, setIsHover] = useState(false);
     const hovering = () => {setIsHover(true);}
     const unhover = () => {setIsHover(false);}
@@ -57,8 +60,27 @@ export default function SingleCell (props: SingleCellProps){
       setOpen(!open);
     };
 
+    /*** 
+     * make cell dragable
+    */
+    const [{ isDragging }, drag] = useDrag({
+      item: {cell, type: ItemTypes.CELL},
+      end: (item, monitor: DragSourceMonitor) => {
+        const dropResult = monitor.getDropResult()
+        if (item && dropResult) {
+          console.log(`You dropped ${item.cell.cell_output.capacity} into ${dropResult.name}!`);
+          setIsHidden(dropResult.isOriginHidden);
+        }
+      },
+      collect: (monitor) => ({
+        isDragging: monitor.isDragging(),
+      }),
+    })
+    const opacity = isDragging ? 0.4 : 1;
+    const display = isHidden ? 'none' : 'inline-block';
+
     return(
-        <li key={ key_id === undefined ? cell.block_hash : key_id} style={styles.cell_panel} onMouseEnter={hovering} onMouseLeave={unhover} onClick={handleOpen} >
+        <li key={ key_id === undefined ? cell.block_hash : key_id} style={{...styles.cell_panel, opacity, display}} onMouseEnter={hovering} onMouseLeave={unhover} onClick={handleOpen} ref={drag}>
             <div style={ isHover ? {...styles.ball, ...styles.ball_hover} : styles.ball }>
                 <div style={styles.cell_content}>
                     capacity <br/><br/>

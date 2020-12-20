@@ -6,6 +6,8 @@ import type {
     Wallet
 } from '../../../../types/blockchain'
 import Select, { ActionMeta, OptionTypeBase, ValueType } from 'react-select';
+import Drag2Json from '../common/DragCellToInputJson';
+import Drag2Ball from '../common/DragCellToInputBall';
 
 
 export type Props = {
@@ -60,6 +62,8 @@ export default function WalletCells( props: Props ){
 
     return(
         <div>
+            <Drag2Json />
+            <Drag2Ball />
             <p>请选择钱包</p>
             <div style={styles.selection_area}>
                 <Select options={options} onChange={handlerSelectWallet} />

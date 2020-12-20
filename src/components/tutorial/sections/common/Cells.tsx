@@ -7,6 +7,7 @@ import type {
 import SingleCell from './Cell';
 import FreshButton from '../../../widget/fresh_button';
 
+
 export type Props = {
     query: QueryOption
     length?: number,
@@ -69,9 +70,9 @@ export default function Cells(props: Props) {
     <div style={ layout_style != undefined ? {...styles.main, ...layout_style} : styles.main}>
       <h4>{props.text?.title}</h4>
       <FreshButton custom_style={ btn_style != undefined ? btn_style : {}} isLoading={isLoading} onClick={queryCells} text={props.text?.btn_text || ''}></FreshButton>
-      <ul>
-          {cells}
-      </ul>
+        <ul>
+            {cells}
+        </ul>
       <p style={{clear: "both"}} />
     </div>
   );

@@ -13,24 +13,29 @@ import ToolBox from '../toolbox/FloatingBox';
 import { Container } from '@material-ui/core';
 import styles from '../widget/common_style';
 
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+
 function Learn() {
   return (
     <Container maxWidth="md" style={styles.page}>
-      <TableOfContents />
-      <ToolBox />
-      <Notify />
-      <BeforeWeGetStarted />
-      <PreKnowledge />
-      <ShowChainInfo />
-      <Class1 />
-      <br/><br/>
-      <br/><br/>
-      <br/><br/>
-      <p>更多课程</p>
-      <hr/>
-      <Class2 />
-      <Class3 />
-      <Class4 />
+      <DndProvider backend={HTML5Backend}>
+        <TableOfContents />
+        <ToolBox />
+        <Notify />
+        <BeforeWeGetStarted />
+        <PreKnowledge />
+        <ShowChainInfo />
+        <Class1 />
+        <br/><br/>
+        <br/><br/>
+        <br/><br/>
+        <p>更多课程</p>
+        <hr/>
+        <Class2 />
+        <Class3 />
+        <Class4 />
+      </DndProvider>
     </Container>
   );
 }

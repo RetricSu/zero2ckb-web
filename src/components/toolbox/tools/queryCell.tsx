@@ -34,10 +34,10 @@ export default function QueryCell(){
     return(
         <div>
             <div>
-                <form style={styles.search_bar}>
+                <div className="form" style={styles.search_bar}>
                     <input style={styles.input} ref={ref} type="text" placeholder="query cell" />
                     <button onClick={startQuery}> 🔍 </button>
-                </form>
+                </div>
             </div>
             <hr/>
             <div>
