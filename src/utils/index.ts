@@ -1,3 +1,5 @@
+import JSBI from 'jsbi';
+
 const convertTimestamp = (ts: string | number) => {
     if(typeof ts === 'string'){
         return new Date(parseInt(ts)).toLocaleTimeString();
@@ -12,6 +14,17 @@ const hex2dec =  (num: string) => {
 
 const dec2hex = (num: string) => {
     return BigInt(num).toString(16);
+}
+
+const shannon2CKB = (num: number | string | BigInt) => {
+    // return BigInt(num).toString(10).substring(0, BigInt(num).toString(10).length-7) 
+    //        + '.' + 
+    //        BigInt(num).toString(10).substring(BigInt(num).toString(10).length-7);
+    return JSBI.divide(JSBI.BigInt(num), JSBI.BigInt(10000000)).toString(10);
+}
+
+const CKB2shannon = (num: number | string | BigInt) => {
+    return BigInt(num).toString(10) + '0000000';
 }
 
 // notice: the order of key-value pair in Object
@@ -31,5 +44,7 @@ export default {
     convertTimestamp: convertTimestamp,
     hex2dec: hex2dec,
     dec2hex: dec2hex,
+    shannon2CKB: shannon2CKB,
+    CKB2shannon: CKB2shannon,
     isObjectInArray: isObjectInArray
 }

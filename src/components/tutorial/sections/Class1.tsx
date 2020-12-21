@@ -9,6 +9,8 @@ import ToTxHash from './class_1/ToTxHash';
 import Signer from './class_1/Signer';
 import SendTx from './class_1/SendTx';
 import SeriliazedWitnessArgs from './class_1/SeriliazedWitnessArgs';
+import TxConstructor from './common/TxConstructor';
+import DragCellToInputJson from './common/DragCellToInputJson';
 
 import type {
   Transaction,
@@ -110,6 +112,12 @@ export default function Class1(){
         <div>
             <div style={styles.content}>
                 <h3 style={styles.main_color}>发送一笔交易</h3>
+
+                <DragCellToInputJson />
+                <TxConstructor />
+
+
+
                 <p>发送一笔最基础的转账交易，流程是这样：</p>
                 <ul>
                     <li>1、拼接交易的内容</li>

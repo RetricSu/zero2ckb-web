@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import { Cell } from '../../../../types/blockchain';
 import commonStyle from '../../../widget/common_style';
 import { Modal, Backdrop, Fade } from '@material-ui/core';
@@ -39,8 +39,9 @@ const styles = {...commonStyle, ...{
 }
 
 export type SingleCellProps = {
-    cell: Cell,
+    cell: Cell
     key_id?: string | number
+    custom_style?: CSSProperties
 }
 
 export default function SingleCell (props: SingleCellProps){
@@ -80,7 +81,7 @@ export default function SingleCell (props: SingleCellProps){
     const display = isHidden ? 'none' : 'inline-block';
 
     return(
-        <li key={ key_id === undefined ? cell.block_hash : key_id} style={{...styles.cell_panel, opacity, display}} onMouseEnter={hovering} onMouseLeave={unhover} onClick={handleOpen} ref={drag}>
+        <li key={ key_id === undefined ? cell.block_hash : key_id} style={{...{...styles.cell_panel, opacity, display}, ...props.custom_style}} onMouseEnter={hovering} onMouseLeave={unhover} onClick={handleOpen} ref={drag}>
             <div style={ isHover ? {...styles.ball, ...styles.ball_hover} : styles.ball }>
                 <div style={styles.cell_content}>
                     capacity <br/><br/>

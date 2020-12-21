@@ -1,3 +1,4 @@
+import { Divider } from '@material-ui/core';
 import React, { useRef, useState } from 'react';
 import { QueryOption } from '../../../types/blockchain';
 import Txs from '../../tutorial/sections/show_chain_info/WalletTransaction';
@@ -34,10 +35,10 @@ export default function QueryTx(){
     return(
         <div>
             <div>
-                <form style={styles.search_bar}>
+                <div className="form" style={styles.search_bar}>
                     <input style={styles.input} ref={ref} type="text" placeholder="query cell" />
                     <button onClick={startQuery}> 🔍 </button>
-                </form>
+                </div>
             </div>
             <hr/>
             <div>

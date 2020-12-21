@@ -14,6 +14,7 @@
     "@types/react-router-dom": "^5.1.6",
     "@types/react-select": "^3.0.27",
     "axios": "^0.21.0",
+    "jsbi": "^3.1.4",
     "rc-tween-one": "^2.7.3",
     "react": "^17.0.1",
     "react-dnd": "^11.1.3",

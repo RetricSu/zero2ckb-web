@@ -9,9 +9,7 @@ import utils from '../../../../utils/index';
 
 const styles = {...commonStyle, ...{
     drop_place: {
-        width: '100%',
-        minHeight: '300px',
-        maxHeight: '400px',
+        height: '200px',
         border: '1px solid gray',
         textAlign: 'left' as const,
         padding: '0 10px',
@@ -60,6 +58,11 @@ export type Props = {
         cell_deps: CellDep[],
         inputs: Input[]
     ) => JSX.Element
+    onCallbackData?: (
+        cells: Cell[],
+        cell_deps: CellDep[],
+        inputs: Input[]
+    ) => void
 }
 
 export default function DragCellToInput(props: Props){
@@ -174,6 +177,9 @@ export default function DragCellToInput(props: Props){
     return(
         <div ref={drop} style={{...styles.drop_place, border}}>
             {props.onDropShowing(cells, cell_deps, inputs)}
+            { props.onCallbackData && 
+                props.onCallbackData(cells, cell_deps, inputs)
+            }
         </div>
     )
 }
