@@ -177,9 +177,6 @@ export default function DragCellToInput(props: Props){
     return(
         <div ref={drop} style={{...styles.drop_place, border}}>
             {props.onDropShowing(cells, cell_deps, inputs)}
-            { props.onCallbackData && 
-                props.onCallbackData(cells, cell_deps, inputs)
-            }
         </div>
     )
 }

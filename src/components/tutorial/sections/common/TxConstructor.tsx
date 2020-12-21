@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import commonStyle from '../../../widget/common_style';
 import { Grid } from '@material-ui/core';
 import DragCell2InputBall from './DragCellToInputBall';
@@ -30,35 +30,12 @@ const styles = {...commonStyle, ...{
 
 export default function TxConstructor(){
     const [json_tx, setJsonTx] = useState<string>('');
-    
     const [input_cells, setInputCells] = useState<Cell[]>([]);
 
     const generateJSON = () => {
-        let c: Cell = {
-            cell_output: {
-                capacity: '0xffffffffffffff',
-                lock: {
-                    code_hash: '',
-                    hash_type: 'type',
-                    args: '',
-                },
-            },
-            data: '0x'
-        }
-        setInputCells([c]);
+        
     }
 
-    const data: Cell[] = [{
-        cell_output: {
-            capacity: '0xffffffffffffff',
-            lock: {
-                code_hash: '',
-                hash_type: 'type',
-                args: '',
-            },
-        },
-        data: '0x'
-    }]
 
     const handlerInputCellChange = (cells: Cell[], cell_deps: CellDep[], inputs: Input[]) => {
         setInputCells(cells.map(cell=>cell));
@@ -67,12 +44,11 @@ export default function TxConstructor(){
 
     return(
         <div>
-            {input_cells.length}
             <Grid container spacing={1}>
                 <Grid item xs={5}>
                     <div style={styles.input_box}>
                         <h4>{'Input'.toUpperCase()}</h4>
-                        <DragCell2InputBall  />
+                        <DragCell2InputBall get_contents={handlerInputCellChange}/>
                     </div>
                 </Grid>
                 <Grid item xs={2} style={styles.covert_label}>
@@ -82,7 +58,7 @@ export default function TxConstructor(){
                 <Grid item xs={5}>
                     <div style={styles.output_box}>
                         <h4>{'Output'.toUpperCase()}</h4>
-                        
+                        <OutputCreator input_cells={input_cells} />
                     </div>
                 </Grid>
             </Grid>
@@ -101,6 +77,3 @@ export default function TxConstructor(){
         </div>
     )
 }
-/** 
- * <OutputCreator input_cells={input_cells} />
-*/
