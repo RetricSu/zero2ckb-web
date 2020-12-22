@@ -172,7 +172,7 @@ export default function DragCellToInputBall(props: Props){
 
     return(
         <div ref={drop} style={{...styles.drop_place, border}}>
-            {cells.map( (cell: Cell, index: number) => <SingleCell cell={cell} key_id={index} custom_style={{margin: '0'}} /> )}
+            {cells.map( (cell: Cell, index: number) => <SingleCell cell={cell} key_id={index} isDraggable={false} custom_style={{margin: '0'}} /> )}
         </div>
     )
 }
