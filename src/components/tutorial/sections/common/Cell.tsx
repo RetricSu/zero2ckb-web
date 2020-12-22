@@ -15,6 +15,7 @@ const styles = {...commonStyle, ...{
             marginRight: '10px',
             marginBottom: '10px',
             padding: '10px',
+            borderRadius: '100%',
         },
         ball: {
             width: '100%',
@@ -81,8 +82,8 @@ export default function SingleCell (props: SingleCellProps){
     const display = isHidden ? 'none' : 'inline-block';
 
     return(
-        <li key={ key_id === undefined ? cell.block_hash : key_id} style={{...{...styles.cell_panel, opacity, display}, ...props.custom_style}} onMouseEnter={hovering} onMouseLeave={unhover} onClick={handleOpen} ref={drag}>
-            <div style={ isHover ? {...styles.ball, ...styles.ball_hover} : styles.ball }>
+        <li key={ key_id === undefined ? cell.block_hash : key_id} style={{...{...styles.cell_panel, opacity, display}, ...props.custom_style}} onMouseEnter={hovering} onMouseLeave={unhover} onClick={handleOpen}>
+            <div style={ isHover ? {...styles.ball, ...styles.ball_hover} : styles.ball } ref={drag}>
                 <div style={styles.cell_content}>
                     capacity <br/><br/>
                     {cell.cell_output.capacity}
@@ -97,10 +98,6 @@ export default function SingleCell (props: SingleCellProps){
                   aria-describedby="simple-modal-description"
                   style={styles.modal}
                   closeAfterTransition
-                  BackdropComponent={Backdrop}
-                  BackdropProps={{
-                    timeout: 500,
-                  }}
                 >
                   <Fade in={open}>
                     <div style={styles.paper}>

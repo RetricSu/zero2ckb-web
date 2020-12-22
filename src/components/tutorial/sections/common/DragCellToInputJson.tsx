@@ -8,7 +8,7 @@ export default function DragCellToInputJson(){
     const generateInputJson = (cells: Cell[], cell_deps: CellDep[], inputs: Input[]) => {
         const data = {
             cell_deps: cell_deps,
-            inputs: inputs
+            inputs: inputs,
         }
         return <CodePeice custom_style={{border:'0'}} code={JSON.stringify(data, null, 2)} />
     }

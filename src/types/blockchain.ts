@@ -181,3 +181,38 @@ export interface Message {
   message: HexString;
   lock: Script;
 }
+
+export type ChainConfig = {
+  PREFIX: string
+  SCRIPTS: {
+      SECP256K1_BLAKE160: {
+          CODE_HASH: string
+          HASH_TYPE: 'type' | 'data'
+          TX_HASH: string
+          INDEX: string
+          DEP_TYPE: 'dep_group' | 'code'
+          SHORT_ID: number
+      },
+      SECP256K1_BLAKE160_MULTISIG: {
+          CODE_HASH: string
+          HASH_TYPE: 'type' | 'data'
+          TX_HASH: string
+          INDEX: string
+          DEP_TYPE: 'dep_group' | 'code'
+          SHORT_ID: number
+      },
+      DAO: {
+          CODE_HASH: string
+          HASH_TYPE: 'type' | 'data'
+          TX_HASH: string
+          INDEX: string
+          DEP_TYPE: 'dep_group' | 'code'
+          SHORT_ID: number
+      }
+  }
+}
+
+export type TxOutput = {
+  outputs: Output[]
+  outputs_data: HexString[]
+}

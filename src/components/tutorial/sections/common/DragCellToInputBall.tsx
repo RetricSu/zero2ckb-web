@@ -12,7 +12,6 @@ const styles = {...commonStyle, ...{
         height: '200px',
         border: '1px solid gray',
         textAlign: 'left' as const,
-        padding: '0 10px',
         overflowY: 'scroll' as const,
     }
 }};
