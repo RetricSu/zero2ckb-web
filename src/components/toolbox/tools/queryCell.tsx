@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { QueryOption } from '../../../types/blockchain';
 import Cells from '../../tutorial/sections/common/Cells';
 import commonStyle from '../../widget/common_style';

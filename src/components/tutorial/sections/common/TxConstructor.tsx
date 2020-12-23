@@ -60,6 +60,9 @@ export default function TxConstructor(){
 
     return(
         <div>
+            <div style={{textAlign:'center'}}>
+                <h1>交易构造器</h1>
+            </div>
             <Grid container spacing={1}>
                 <Grid item xs={5}>
                     <div style={styles.input_box}>

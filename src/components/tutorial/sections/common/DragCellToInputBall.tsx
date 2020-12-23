@@ -13,6 +13,16 @@ const styles = {...commonStyle, ...{
         border: '1px solid gray',
         textAlign: 'left' as const,
         overflowY: 'scroll' as const,
+    },
+    header: {
+        height:'20%',
+        fontSize: '16px',
+        textAlign: 'center' as const,
+        borderBottom: '1px solid gray',
+    },
+    hint_text: {
+        marginTop: '10px',
+        display: 'inline-block' as const,
     }
 }};
 
@@ -169,9 +179,13 @@ export default function DragCellToInputBall(props: Props){
     
     const isActive = canDrop && isOver;
     const border = isActive ? '1px solid ' + commonStyle.main_color.color : '1px solid gray';
-
+    const color = isActive ? commonStyle.main_color.color : 'white';
+    const borderBottom = isActive ? '1px solid ' + commonStyle.main_color.color : '1px solid gray';
     return(
         <div ref={drop} style={{...styles.drop_place, border}}>
+            <div style={{...styles.header, color, borderBottom}}>
+                <span style={styles.hint_text}>Drag Cell here</span>
+            </div>
             {cells.map( (cell: Cell, index: number) => <SingleCell cell={cell} key_id={index} isDraggable={false} custom_style={{margin: '0'}} /> )}
         </div>
     )
