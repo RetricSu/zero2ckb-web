@@ -80,6 +80,17 @@ const styles = {
       backgroundColor: 'rgb(0,0,0, 0)',
       height: '0',
       cursor: 'auto'
+    },
+    single_line_code: {
+        background: 'white',
+        color: 'gray',
+        padding: '2px',
+        borderRadius: '5px',
+    },
+    explain_text: {
+        fontSize: '14px',
+        color: 'gray',
+        margin: '20px',
     }
 }
 

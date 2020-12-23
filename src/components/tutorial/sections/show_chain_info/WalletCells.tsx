@@ -60,9 +60,8 @@ export default function WalletCells( props: Props ){
 
     return(
         <div>
-            <p>请选择钱包</p>
             <div style={styles.selection_area}>
-                <Select options={options} onChange={handlerSelectWallet} />
+                <Select placeholder="请选择钱包" options={options} onChange={handlerSelectWallet} />
             </div>
             <br/>
             <Cells query={{lock: {

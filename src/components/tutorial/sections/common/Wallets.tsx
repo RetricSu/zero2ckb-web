@@ -149,6 +149,11 @@ export default function Wallets(props: Props){
 
     return (
         <Container style={ custom_style != undefined ? {...styles.wallet_section, ...custom_style} : styles.wallet_section}>
+            <div style={styles.content}>
+                 <p style={styles.alert_text}> 
+                 ☠️ &#160; 仅作为演示用途，请勿在正式场合或主网下使用这些钱包 
+                </p>
+            </div>
             <div style={styles.wallets}>
                 { props.wallet_id ?
                     wallets[props.wallet_id-1] : wallets
@@ -156,14 +161,6 @@ export default function Wallets(props: Props){
             </div>
             <p style={{clear: "both"}} />
             <br/>
-            <div style={styles.content}>
-                 <p style={styles.alert_text}> 
-                 ☠️ 请勿在正式场合下使用这些钱包 <br/><br/>
-                    任何存入这些钱包的数字资产，
-                    都有可能会丢失、或被盗。<br/><br/>
-                    你不应该在任何情况下公开私钥。
-                </p>
-            </div>
         </Container>
     )
 }
