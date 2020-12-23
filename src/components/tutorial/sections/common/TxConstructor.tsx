@@ -61,12 +61,11 @@ export default function TxConstructor(){
     return(
         <div>
             <div style={{textAlign:'center'}}>
-                <h1>交易构造器</h1>
             </div>
             <Grid container spacing={1}>
                 <Grid item xs={5}>
                     <div style={styles.input_box}>
-                        <h4>{'Input'.toUpperCase()}</h4>
+                        <h4>{'Input'.toUpperCase()} 输入</h4>
                         <DragCell2InputBall get_contents={handleInputCellChange}/>
                     </div>
                 </Grid>
@@ -76,14 +75,14 @@ export default function TxConstructor(){
                 </Grid>
                 <Grid item xs={5}>
                     <div style={styles.output_box}>
-                        <h4>{'Output'.toUpperCase()}</h4>
+                        <h4>{'Output'.toUpperCase()} 输出</h4>
                         <OutputCreator input_cells={input_cells} get_tx_output={handleOutputChange} />
                     </div>
                 </Grid>
             </Grid>
             <Grid container spacing={1}>
                 <Grid item xs={12}>
-                    <FreshButton text={'生成JSON'} onClick={generateJSON} custom_style={{width:'100%', fontSize: '20px', marginTop: '10px'}} />
+                    <FreshButton text={'生成一笔交易'} onClick={generateJSON} custom_style={{width:'100%', fontSize: '20px', marginTop: '10px'}} />
                 </Grid>
             </Grid>
             <Grid container spacing={1}>

@@ -9,6 +9,20 @@ import {
 import FreshButton from '../../../widget/fresh_button';
 import Api from '../../../../api/blockchain';
 import {notify} from '../../../widget/notify';
+import commonStyle from '../../../widget/common_style';
+
+const styles = {...commonStyle, ...{
+    root: {
+        width: '100%',
+        padding: '10px 0px',
+    },
+    result: {
+        padding: '10px',
+        border: '1px solid gray',
+        marginTop: '5px',
+        overflowWrap: 'break-word' as const,
+    }
+}};
 
 export type Props = {
     raw_tx: RawTransaction | undefined,
@@ -36,13 +50,11 @@ export default function FetchToSignMessage(props: Props){
         setIsLoading(false);
     }
     return(
-        <div>
-            <p>this will show the message generated to sign.</p>
-            <p>click the button below to start.</p>
-            <FreshButton isLoading={isLoading} text={'generate message'} onClick={generateMessage}></FreshButton>
-            <p>
-                the message to be signed: {message}
-            </p>
+        <div style={styles.root}>
+            <FreshButton isLoading={isLoading} text={'生成 message'} onClick={generateMessage} custom_style={{width:'100%', fontSize: '16px'}} />
+            <div style={styles.result}>
+                <p>{message}</p>
+            </div>
         </div>
     )
 }

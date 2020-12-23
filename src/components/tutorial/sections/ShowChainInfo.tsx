@@ -91,7 +91,7 @@ export default function(){
                     <p>每条CKB链都会预先在创世块部署几个系统内置的智能合约，上面显示了3个系统合约的具体信息。</p>
                     <ul>
                         <li>SECP256K1_BLAKE160：是系统默认使用的 Cell 的 lock 锁的合约，用来保护 Cell 的所有权</li>
-                        <li>SECP256K1_BLAKE160_MULTISIG：是第一个的多签版本</li>
+                        <li>SECP256K1_BLAKE160_MULTISIG：是 SECP256K1_BLAKE160 的多签版本</li>
                         <li>DAO：NervosDAO 合约，暂时可以不用管</li>
                     </ul>
                 </div>

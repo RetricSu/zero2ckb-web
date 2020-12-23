@@ -19,6 +19,7 @@ const styles = {
 export type Props = {
     form_template: string
     btn_text?: string
+    title_text?: string
     onSubmit?: (form_content: string) => void
 }
 
@@ -38,9 +39,12 @@ export default function Form(props: Props){
     }
 
     return(
-      <div style={styles.form_box}>
-        <CodePiece code={props.form_template} isContentEditable={true} ref={ref} custom_style={styles.input_area}></CodePiece>
-        <FreshButton isLoading={isLoading} text={props.btn_text || '提交'} onClick={handleSubmit} />
+      <div>
+        <h4 style={{textAlign:'center'}}> {props.title_text} </h4>
+        <div style={styles.form_box}>
+            <CodePiece code={props.form_template} isContentEditable={true} ref={ref} custom_style={styles.input_area}></CodePiece>
+            <FreshButton isLoading={isLoading} text={props.btn_text || '提交'} onClick={handleSubmit} />
+        </div>
       </div>
     )
 }

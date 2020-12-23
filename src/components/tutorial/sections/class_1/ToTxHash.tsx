@@ -7,9 +7,15 @@ import FreshButton from '../../../widget/fresh_button';
 import { notify } from '../../../widget/notify';
 
 const styles = {
-    result: {
+    root: {
         width: '100%',
-        padding: '10px'
+        padding: '10px 0px',
+    },
+    result: {
+        padding: '10px',
+        border: '1px solid gray',
+        marginTop: '5px',
+        overflowWrap: 'break-word' as const,
     }
 }
 
@@ -36,10 +42,10 @@ export default function ToTxHash(props: Props){
     }
 
     return(
-        <div style={styles.result}>
-            <FreshButton text={'生成交易的哈希'} onClick={generateTxHash} />
-            <div >
-                结果：{hash}
+        <div style={styles.root}>
+            <FreshButton text={'生成 tx_hash'} onClick={generateTxHash} custom_style={{width:'100%', fontSize: '16px'}}/>
+            <div style={styles.result}>
+                <p>{hash}</p>
             </div>
         </div>
     )

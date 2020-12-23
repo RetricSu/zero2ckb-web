@@ -2,10 +2,23 @@ import React, {useState} from 'react';
 import FreshButton from '../../../widget/fresh_button';
 import { notify } from '../../../widget/notify';
 import Api from '../../../../api/blockchain';
-
+import commonStyle from '../../../widget/common_style';
 import type {
     Transaction
 } from '../../../../types/blockchain';
+
+const styles = {...commonStyle, ...{
+    root: {
+        width: '100%',
+        padding: '10px 0px',
+    },
+    result: {
+        padding: '10px',
+        border: '1px solid gray',
+        marginTop: '5px',
+        overflowWrap: 'break-word' as const,
+    }
+}}
 
 export type Props = {
     tx: Transaction | undefined
@@ -34,9 +47,11 @@ export default function SendTx(props: Props){
     }
 
     return(
-        <div>
-            <FreshButton isLoading={isLoading} text={'发送交易上链'} onClick={sendTx} ></FreshButton>
-            <p> tx_hash: {tx_hash}</p>
+        <div style={styles.root}>
+            <FreshButton isLoading={isLoading} text={'发送交易'} onClick={sendTx} custom_style={{width:'100%', fontSize: '16px'}}></FreshButton>
+            <div style={styles.result}>
+                <p>tx_hash: {tx_hash} </p>
+            </div>
         </div>
     )
 }
