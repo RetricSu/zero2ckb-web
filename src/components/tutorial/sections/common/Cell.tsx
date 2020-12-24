@@ -99,6 +99,7 @@ export default function SingleCell (props: SingleCellProps){
                   aria-describedby="simple-modal-description"
                   style={styles.modal}
                   closeAfterTransition
+                  disableBackdropClick={true}
                 >
                   <Fade in={open}>
                     <div style={styles.paper}>

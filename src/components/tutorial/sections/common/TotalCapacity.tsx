@@ -4,7 +4,6 @@ import commonStyle from '../../../widget/common_style';
 import FreshButton from '../../../widget/fresh_button';
 import SingleCell from './Cell';
 import utils from '../../../../utils/index';
-import JSBI from 'jsbi';
 import { Modal, Fade } from '@material-ui/core';
 import EditOutputCells from './EditOutputCells';
 
@@ -56,6 +55,7 @@ const styles = {...commonStyle, ...{
 export type TotalCapacityProps = {
     cells: Cell[]
     get_tx_output?: (txo: TxOutput) => void
+    onClearCall?: boolean
 }
 
 const caculateCellCapacity = (cells: Cell[]) => {
@@ -67,9 +67,10 @@ const caculateCellCapacity = (cells: Cell[]) => {
 }
 
 export default function TotalCapacity (props: TotalCapacityProps) {
-    const {cells, get_tx_output} = props;
+    const {cells, get_tx_output, onClearCall} = props;
     const [capacity, setCapacity] = useState('0x0');
     const [fee, setFee] = useState('0');
+    const [mycells, setMycells] = useState<Cell[]>([]);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleModalOpen = () => {
@@ -79,10 +80,7 @@ export default function TotalCapacity (props: TotalCapacityProps) {
         setIsModalOpen(false);
     };
 
-    const [mycells, setMycells] = useState<Cell[]>([]);
-
     const updateMyCells = (cells: Cell[]) => {
-        console.log(cells);
         setMycells(cells);
     }
     
@@ -106,6 +104,8 @@ export default function TotalCapacity (props: TotalCapacityProps) {
         if(cells.length !== 0){
             default_one_cell(cells);
             updateCapacity(cells);
+        }else{
+            updateCapacity(cells); //update the capacity when calling clear from parent componet
         }
     }, [cells]);
 
@@ -117,9 +117,13 @@ export default function TotalCapacity (props: TotalCapacityProps) {
         }
     }, [mycells]);
 
+    useEffect(() => {
+        if(onClearCall)
+            setMycells([]);
+    }, [onClearCall]);
+
     const updateCapacity = async (cells: Cell[]) => {
         let sum = caculateCellCapacity(cells);
-        console.log(sum);
         await setCapacity(sum);
     }
 
@@ -144,7 +148,6 @@ export default function TotalCapacity (props: TotalCapacityProps) {
     const caculate_fee = () => {
         let sum = caculateCellCapacity(mycells);
         const fee = ( BigInt(capacity) - BigInt(sum) ).toString(16);
-        console.log(capacity, sum, fee);
         return utils.shannon2CKB( utils.hex2dec('0x' +  fee ) );
     }
 
@@ -174,12 +177,12 @@ export default function TotalCapacity (props: TotalCapacityProps) {
                   aria-describedby="simple-modal-description"
                   style={styles.modal}
                   closeAfterTransition
+                  disableBackdropClick={true}
                 >
                   <Fade in={isModalOpen}>
                     <div style={styles.paper}>
-                      <EditOutputCells get_distribute_cells={updateMyCells} capacity={capacity} />
+                      <EditOutputCells get_distribute_cells={updateMyCells} capacity={capacity} trigger_modal_close={handleModalClose} />
                       <div style={{clear: 'both' as const,}}></div>
-                      <button onClick={handleModalClose}>close</button>
                     </div>
                   </Fade>
             </Modal>

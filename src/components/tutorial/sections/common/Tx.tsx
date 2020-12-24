@@ -62,6 +62,7 @@ export default function ShowTxInfo (props: TxProps) {
                   aria-describedby="simple-modal-description"
                   style={styles.modal}
                   closeAfterTransition
+                  disableBackdropClick={true}
                   BackdropComponent={Backdrop}
                   BackdropProps={{
                     timeout: 500,

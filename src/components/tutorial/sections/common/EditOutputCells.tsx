@@ -13,16 +13,18 @@ const styles = {...commonStyle, ...{
     op_panel: {
         width: '100%',
         clear: 'both' as const,
+        paddingTop: '5px',
     },
     edit_cell: {
         width: '250px',
-        height: '168px',
+        height: '178px',
         border: '1px solid white',
         overflow: 'scroll' as const,
         float: 'left' as const,
         marginRight: '5px',
         fontSize: '13px',
-        marginBottom: '5px'
+        marginBottom: '5px',
+        padding: '5px',
     },
     final_cell: {
         width: '108px',
@@ -36,12 +38,40 @@ const styles = {...commonStyle, ...{
         fontSize: '10px',
         alignItems: 'center' as const,
         float: 'left' as const,
+        margin: '5px',
+    },
+    final_cell_content: {
+        margin: '30% auto',
+    },
+    rigth_btn: {
+        float: 'right' as const
+    },
+    input_wrap: {
+        padding: '2px 5px',
+        marginBottom: '10px',
+        display: 'block',
+        background: 'white',
     },
     input: {
         width: '100%',
+        outline: 'none',
+        fontSize: '14px',
+        border: '0',
         overflowX: 'scroll' as const,
         verticalAlign: 'text-bottom',
-    }
+    },
+    edit_cell_save_btn: {
+        width: '100%',
+
+    },
+    edit_cell_label: {
+        margin: '2px 0'
+    },
+    edit_cell_header: {
+        marginBottom: '5px',
+        height: '30px',
+        borderBottom: '1px solid',
+    },
 }}
 
 export type SimpleCellJson = {
@@ -86,26 +116,42 @@ const PlainCell = (props: PlainCellProps) => {
 
     const display = isHidden ? 'none' : 'inline-block';
 
+    const hideDisableInput = {display: 'none'};
+
     return(
         <div>
             <div style={{...styles.edit_cell, display}}>
-                <h3>capacity: </h3>
-                <TextField onChange={(e)=>{setCapacity(e.currentTarget.value)}} style={styles.input} id="standard-basic" type="number"/>
+                <div style={styles.edit_cell_label}>capacity: </div>
+                <span style={styles.input_wrap}>
+                    <input onChange={(e)=>{setCapacity(e.currentTarget.value)}} style={styles.input} type="number" placeholder="10 进制，单位：CKB" />
+                </span>
+                
+                <div style={styles.edit_cell_label}>lock-args: </div>
+                <span style={{...styles.input_wrap, ...hideDisableInput}}>
+                    <input style={styles.input} value={'code_hash: '+config?.SCRIPTS.SECP256K1_BLAKE160.CODE_HASH} disabled/>
+                </span>
+                <span style={styles.input_wrap}>
+                    <input onChange={(e)=>{setArgs(e.currentTarget.value)}} style={styles.input} type="text" placeholder="16 进制，以 0x 开头" />
+                </span>
+                <span style={{...styles.input_wrap, ...hideDisableInput}}>
+                    <input style={styles.input} value={'hash_type: ' + config?.SCRIPTS.SECP256K1_BLAKE160.HASH_TYPE} disabled />
+                </span>
+
                 <hr/>
-                <h3>lock: </h3>
-                <TextField style={styles.input} id="standard-basic" label="code_hash" value={config?.SCRIPTS.SECP256K1_BLAKE160.CODE_HASH} disabled/>
-                <TextField onChange={(e)=>{setArgs(e.currentTarget.value)}} style={styles.input} id="standard-basic" label="args" type="text" />
-                <TextField style={styles.input} id="standard-basic" label="hash_type" value={config?.SCRIPTS.SECP256K1_BLAKE160.HASH_TYPE} disabled />
-                <hr/>
-                <h3>data:</h3>
-                <TextField onChange={(e)=>setData(e.currentTarget.value)} style={styles.input} id="standard-basic" value={data} disabled />
+                <div style={{...styles.input_wrap, ...hideDisableInput}}>data: </div>
+                <span style={{...styles.input_wrap, ...hideDisableInput}}>
+                    <input style={styles.input} value={config?.SCRIPTS.SECP256K1_BLAKE160.CODE_HASH} disabled/>
+                </span>
+                
                 <p>
-                    <button onClick={save_cell}>save</button> <button>cancel</button>
+                    <button style={styles.edit_cell_save_btn} onClick={save_cell}>确定</button>
                 </p>
             </div>
             <div style={{...styles.final_cell, ...{display: isFinalCellOpen ? 'inline-block':'none'}}}>
-                capacity <br/><br/>
-                {final_cell?.capacity}
+                <div style={styles.final_cell_content}>
+                    capacity <br/><br/>
+                    {final_cell?.capacity}
+                </div>
             </div>
         </div>
     )
@@ -114,10 +160,11 @@ const PlainCell = (props: PlainCellProps) => {
 export type EditOutputCellsProps = {
     capacity: string
     get_distribute_cells?: (cells: Cell[]) => void
+    trigger_modal_close?: () => void
 }
 
 export default function EditOutputCells(props: EditOutputCellsProps){
-    const { capacity, get_distribute_cells } = props;
+    const { capacity, get_distribute_cells, trigger_modal_close } = props;
     const [config, setConfig] = useState<ChainConfig>();
     const [new_cells, setNewCells] = useState<SimpleCellJson[]>([]);
     const [final_cells, setFinalCells] = useState<SimpleCellJson[]>([]);
@@ -161,7 +208,10 @@ export default function EditOutputCells(props: EditOutputCellsProps){
                     }
                 })
             );
-        }
+        };
+
+        if(trigger_modal_close)
+            trigger_modal_close();
 
     }
 
@@ -171,8 +221,13 @@ export default function EditOutputCells(props: EditOutputCellsProps){
 
     return(
         <div style={styles.root}>
-            <div>total capacity: { utils.shannon2CKB(utils.hex2dec(capacity)) } CKB </div>
-            <button onClick={add_cell}>add</button> <button onClick={apply}>apply</button>
+            <div style={styles.edit_cell_header}>
+                Total Capacity: { utils.shannon2CKB(utils.hex2dec(capacity)) } CKB 
+                <span style={styles.rigth_btn}>
+                    <button onClick={add_cell}> + 加一个新 Cell</button> <button onClick={apply}>保存退出</button>
+                </span>
+            </div>
+    
             <div style={styles.op_panel}>
                 {new_cells.map((cell: SimpleCellJson) => {
                     return (
@@ -181,10 +236,6 @@ export default function EditOutputCells(props: EditOutputCellsProps){
                 })}
             </div>
             <div style={{clear:'both'}}></div>
-            <hr/>
-            <div>
-                {final_cells.length}
-            </div>
         </div>
     )
 }

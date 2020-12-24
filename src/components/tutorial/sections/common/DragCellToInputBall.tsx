@@ -63,11 +63,12 @@ export type ChainConfig = {
 
 export type Props = {
     get_contents?: (cells: Cell[], cell_deps: CellDep[], inputs: Input[]) => void
+    onClearCall?: boolean
 }
 
 export default function DragCellToInputBall(props: Props){
 
-    const {get_contents} = props;
+    const {get_contents, onClearCall} = props;
 
     const [config, setConfig] = useState<ChainConfig>();
 
@@ -167,11 +168,22 @@ export default function DragCellToInputBall(props: Props){
         return 'un-recognize cell dep';
     }
 
+    const clear = () => {
+        setCells([]);
+        setCellDeps([]);
+        setInputs([]);
+    }
+
     async function fetchChainConfig() {
         const api = new Api();
         var config: ChainConfig = await api.getChainConfig();
         setConfig(config);
     }
+
+    useEffect(()=>{
+        if(onClearCall)
+            clear();
+    }, [onClearCall]);
 
     useEffect(()=>{
         fetchChainConfig();
@@ -184,7 +196,7 @@ export default function DragCellToInputBall(props: Props){
     return(
         <div ref={drop} style={{...styles.drop_place, border}}>
             <div style={{...styles.header, color, borderBottom}}>
-                <span style={styles.hint_text}>Drag Cell here</span>
+                <span style={styles.hint_text}>把 Cell 拖进这里</span>
             </div>
             {cells.map( (cell: Cell, index: number) => <SingleCell cell={cell} key_id={index} isDraggable={false} custom_style={{margin: '0'}} /> )}
         </div>

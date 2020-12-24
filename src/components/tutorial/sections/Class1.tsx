@@ -157,7 +157,8 @@ export default function Class1(){
                   <p>除了inputs，还有一个字段叫 <code style={styles.single_line_code}>cell_deps</code>，它是一笔交易中需要依赖的 cell，
                   也是以 outpoint 这种索引结果出现的。</p>
 
-                  <p>需要依赖的 cell 是什么呢？比如在普通的转账交易中，lock 锁需要用到固定的加密算法 SECP256K1_BLAKE160，也就是系统内置的一个智能合约，
+                  <p>什么是需要依赖的 cell 呢？<br/><br/>
+                    比如在普通的转账交易中，lock 锁需要用到固定的加密算法 SECP256K1_BLAKE160，也就是系统内置的一个智能合约，
                     这个加密算法的代码存放在某个 cell 中，就需要在 cell_deps 中引用进来，
                     这样 CKB-VM 虚拟机才能知道从哪里载入代码进行运算。</p>
                   <p>通过测试链的配置信息，我们很容易找到交易中依赖的系统合约在 cell_deps 中需要传入的参数。</p>

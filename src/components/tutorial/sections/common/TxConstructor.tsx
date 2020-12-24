@@ -35,6 +35,8 @@ export default function TxConstructor(){
     const [tx_output, setTxOutput] = useState<TxOutput>();
     const [raw_tx, setRawTx] = useState<RawTransaction>();
 
+    const [isClear, setIsClear] = useState(false);
+
     const generateJSON = () => {
         const data: RawTransaction = {...{
             version: "0x0",
@@ -45,6 +47,17 @@ export default function TxConstructor(){
             outputs_data: [],
         }, ...tx_output};
         setRawTx(data);
+    }
+
+    const clearAll = () => {
+        setIsClear(true);
+        setInputCells([]);
+        setTxOutput({outputs:[],outputs_data:[]});
+        setRawTx(undefined);
+
+        setTimeout(() => {
+            setIsClear(false);
+        }, 1000);
     }
 
 
@@ -66,7 +79,7 @@ export default function TxConstructor(){
                 <Grid item xs={5}>
                     <div style={styles.input_box}>
                         <h4>{'Input'.toUpperCase()} 输入</h4>
-                        <DragCell2InputBall get_contents={handleInputCellChange}/>
+                        <DragCell2InputBall get_contents={handleInputCellChange} onClearCall={isClear} />
                     </div>
                 </Grid>
                 <Grid item xs={2} style={styles.covert_label}>
@@ -76,13 +89,16 @@ export default function TxConstructor(){
                 <Grid item xs={5}>
                     <div style={styles.output_box}>
                         <h4>{'Output'.toUpperCase()} 输出</h4>
-                        <OutputCreator input_cells={input_cells} get_tx_output={handleOutputChange} />
+                        <OutputCreator onClearCall={isClear} input_cells={input_cells} get_tx_output={handleOutputChange} />
                     </div>
                 </Grid>
             </Grid>
             <Grid container spacing={1}>
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                     <FreshButton text={'生成一笔交易'} onClick={generateJSON} custom_style={{width:'100%', fontSize: '20px', marginTop: '10px'}} />
+                </Grid>
+                <Grid item xs={6}>
+                    <FreshButton text={'清空'} onClick={clearAll} custom_style={{width:'100%', fontSize: '20px', marginTop: '10px'}} />
                 </Grid>
             </Grid>
             <Grid container spacing={1}>
