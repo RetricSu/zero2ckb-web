@@ -4,6 +4,7 @@ import Api from '../../../../api/blockchain';
 import { Cell, ChainConfig } from '../../../../types/blockchain';
 import commonStyle from '../../../widget/common_style';
 import utils from '../../../../utils/index';
+import { notify } from '../../../widget/notify';
 
 const styles = {...commonStyle, ...{
     root: {
@@ -83,11 +84,12 @@ export type SimpleCellJson = {
 export type PlainCellProps = {
     cell: SimpleCellJson
     config: ChainConfig | undefined
+    total_capacity: string //10进制
     get_final_cell?: (final_cell: SimpleCellJson | undefined) => void;
 }
 
 const PlainCell = (props: PlainCellProps) => {
-    const { cell, config, get_final_cell } = props;
+    const { cell, config, get_final_cell, total_capacity } = props;
     const [isHidden, setIsHidden] = useState(false);
     const [final_cell, setFinalCell] = useState<SimpleCellJson>();
     const [isFinalCellOpen, setIsFinalCellOpen] = useState(false);
@@ -114,6 +116,14 @@ const PlainCell = (props: PlainCellProps) => {
         }
     }
 
+    const handleCapacityChange = (value: string) => {
+        if(BigInt(value) < BigInt(total_capacity)){
+            setCapacity(value);
+        }else{
+            notify("capacity 不能大于"+BigInt(total_capacity).toString(10));
+        }
+    }
+
     const display = isHidden ? 'none' : 'inline-block';
 
     const hideDisableInput = {display: 'none'};
@@ -123,7 +133,7 @@ const PlainCell = (props: PlainCellProps) => {
             <div style={{...styles.edit_cell, display}}>
                 <div style={styles.edit_cell_label}>capacity: </div>
                 <span style={styles.input_wrap}>
-                    <input onChange={(e)=>{setCapacity(e.currentTarget.value)}} style={styles.input} type="number" placeholder="10 进制，单位：CKB" />
+                    <input onChange={(e)=>{handleCapacityChange(e.currentTarget.value)}} max={Number(total_capacity)} style={styles.input} type="number" placeholder="10 进制，单位：CKB" />
                 </span>
                 
                 <div style={styles.edit_cell_label}>lock-args: </div>
@@ -186,8 +196,16 @@ export default function EditOutputCells(props: EditOutputCellsProps){
 
     const onSaveCell = (cell: SimpleCellJson | undefined) => {
         if(cell){
-            setFinalCells([...final_cells, cell]);
-            console.log(cell);
+            let sum = 0;
+            for( let fc of final_cells){
+                sum = sum + Number(fc.capacity);
+            }
+            sum = sum + Number(cell.capacity);
+            if(sum < Number(utils.shannon2CKB(utils.hex2dec(capacity)))){
+                setFinalCells([...final_cells, cell]);
+            }else{
+                notify("capacity 需要小于 input 总和！tx_fee 不能为空！");
+            }
         }
     }
 
@@ -231,7 +249,7 @@ export default function EditOutputCells(props: EditOutputCellsProps){
             <div style={styles.op_panel}>
                 {new_cells.map((cell: SimpleCellJson) => {
                     return (
-                        <PlainCell cell={cell} config={config} get_final_cell={onSaveCell}/>
+                        <PlainCell total_capacity={utils.shannon2CKB(utils.hex2dec(capacity))} cell={cell} config={config} get_final_cell={onSaveCell}/>
                     )
                 })}
             </div>
