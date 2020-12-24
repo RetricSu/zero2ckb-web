@@ -20,6 +20,7 @@ import type {
 } from '../../../types/blockchain'
 import Cells from './common/Cells';
 import Api from '../../../api/blockchain';
+import CompleteTxWithWitness from './class_1/CompleteTxWithWitness';
 
 export default function Class1(){
 
@@ -266,10 +267,15 @@ export default function Class1(){
                 { JSON.stringify(raw_tx) &&
                     <Form form_template={ eval('`' + JSON.stringify(raw_tx).substring(1, JSON.stringify(raw_tx).length-1) + '`')} onSubmit={onCompleteTxSubmit} btn_text={'保存'}></Form>
                 }
+
                 <h4 style={styles.main_color}>最后一步，把交易发送到链上</h4>
                 <p>好了，现在我们终于可以开始发交易了！</p>
                 <SendTx tx={complete_tx}></SendTx>
-                <p>注意看下，成功发上交易后查询下是不是有这个新的cell出来，然后对比下这个tx_hash 和之前生成的那个是不是一样的？</p>
+                <p>注意看下，交易成功上链后返回的 tx_hash，是不是和之前事先生成的那个 tx_hash 一模一样？</p>
+                <p>CKB 的确定性诚不欺我。</p>
+                <p>现在，你可以查看钱包 2 的 live cell，看看刚才我们发送的交易是不是真的在链上了。</p>
+                <p>最后恭喜你，成功完成了第一小节的内容～</p>
+                <p>接下来，我们将会学习如何发送一笔<span style={styles.main_color}>多签</span>的转账交易。</p>
             </div>
         </div>
     )

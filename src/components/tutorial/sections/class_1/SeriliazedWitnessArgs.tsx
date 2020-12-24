@@ -34,14 +34,13 @@ export default function SeriliazedWitnessArgs(){
     const [witness, setWitness] = useState('');
     const lock_ref = useRef<HTMLInputElement>(null);
 
-    const witnessArgs: string = JSON.stringify({
-        lock: lock_ref.current?.value
-    });
-
     const seriliazed_witness = async () => {
+        const witnessArgs: string = JSON.stringify({
+            lock: lock_ref.current?.value
+        });
         const api = new Api();
         const res = await api.getSeriliazedWitness(witnessArgs);
-        if(res.status == 'ok'){
+        if(res.status === 'ok'){
             setWitness(res.data);
         }
         else{

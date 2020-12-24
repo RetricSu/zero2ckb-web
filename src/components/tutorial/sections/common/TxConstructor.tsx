@@ -7,6 +7,7 @@ import FreshButton from '../../../widget/fresh_button';
 import CodePiece from '../../../widget/code';
 import { Cell, Input, CellDep, RawTransaction, TxOutput } from '../../../../types/blockchain';
 import NeonText from '../../../widget/neon_text';
+import CopyText from '../../../widget/copy_text';
 
 const styles = {...commonStyle, ...{
     root: {
@@ -122,6 +123,7 @@ export default function TxConstructor(){
             <Grid container spacing={1}>
                 <Grid item xs={12}>
                     <div style={styles.json_result}>
+                        <p style={{textAlign:'right'}}> <CopyText text={JSON.stringify(raw_tx, null, 2)} icon={true}/> </p>
                         <CodePiece code={raw_tx || ''} custom_style={{border: '0'}} />
                     </div> 
                 </Grid>

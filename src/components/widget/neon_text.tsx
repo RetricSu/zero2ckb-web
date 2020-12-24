@@ -13,6 +13,8 @@ export type NeonTextProps = {
 export default function NeonText(props: NeonTextProps){
     const { text, custom_style } = props;
 
+    if(text.length < 4) throw new Error("text.length should > 4");
+
     const brand_style = custom_style?.brand_style ? custom_style.brand_style : {};
     const text_style = custom_style?.text_style ? custom_style.text_style : {};
 
