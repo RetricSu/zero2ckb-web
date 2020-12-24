@@ -6,8 +6,12 @@ import OutputCreator from './OutputCreator';
 import FreshButton from '../../../widget/fresh_button';
 import CodePiece from '../../../widget/code';
 import { Cell, Input, CellDep, RawTransaction, TxOutput } from '../../../../types/blockchain';
+import NeonText from '../../../widget/neon_text';
 
 const styles = {...commonStyle, ...{
+    root: {
+        marginTop: '1em',
+    },
     input_box: {
         textAlign: 'center' as const,
     },
@@ -25,6 +29,17 @@ const styles = {...commonStyle, ...{
         minHeight: '200px',
         border: '1px solid gray',
         marginTop: '10px',
+    },
+    subtitle: {
+        width: '100%',
+    },
+    neon_text_style: {
+        brand_style: {
+            width: 'fit-content' as const,
+            margin: '0 auto',
+            padding: '5px',
+            borderBottom: '0',
+        }
     }
 }};
 
@@ -72,13 +87,14 @@ export default function TxConstructor(){
     }
 
     return(
-        <div>
-            <div style={{textAlign:'center'}}>
-            </div>
+        <div style={styles.root}>
+            <div style={{textAlign:'center'}}> </div>
             <Grid container spacing={1}>
                 <Grid item xs={5}>
                     <div style={styles.input_box}>
-                        <h4>{'Input'.toUpperCase()} 输入</h4>
+                        <div style={styles.subtitle}>
+                        <NeonText text={'input'.toUpperCase()} custom_style={styles.neon_text_style}/>
+                        </div>
                         <DragCell2InputBall get_contents={handleInputCellChange} onClearCall={isClear} makeOriginCellHidden={false} />
                     </div>
                 </Grid>
@@ -88,7 +104,9 @@ export default function TxConstructor(){
                 </Grid>
                 <Grid item xs={5}>
                     <div style={styles.output_box}>
-                        <h4>{'Output'.toUpperCase()} 输出</h4>
+                        <div style={styles.subtitle}>
+                            <NeonText text={'output'.toUpperCase()} custom_style={styles.neon_text_style}/>
+                        </div>
                         <OutputCreator onClearCall={isClear} input_cells={input_cells} get_tx_output={handleOutputChange} />
                     </div>
                 </Grid>
