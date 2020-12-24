@@ -56,13 +56,15 @@ export default function Cells(props: Props) {
 
   async function queryCells() {
     setIsLoading(true);
-    console.log(isLoading);
-    const api = new Api();
-    const length = props.length || 10;
-    var myCells = await api.getLiveCells(props.query, length);
-    setCells(
-        myCells.map((cell: Cell, index: number) => <SingleCell cell={cell} key_id={index} /> )
-    );
+    if(props.query.lock || props.query.type){
+      console.log(props.query);
+      const api = new Api();
+      const length = props.length || 10;
+      var myCells = await api.getLiveCells(props.query, length);
+      setCells(
+          myCells.map((cell: Cell, index: number) => <SingleCell cell={cell} key_id={index} /> )
+      );
+    }
     setIsLoading(false);
   }
 

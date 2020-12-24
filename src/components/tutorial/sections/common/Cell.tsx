@@ -94,9 +94,8 @@ export default function SingleCell (props: SingleCellProps){
 
             <Modal
                   open={open}
-                  onClose={handleClose}
-                  aria-labelledby="simple-modal-title"
-                  aria-describedby="simple-modal-description"
+                  aria-labelledby={'simple-modal-title' + cell.block_hash}
+                  aria-describedby={'simple-modal-description' + cell.block_hash}
                   style={styles.modal}
                   closeAfterTransition
                   disableBackdropClick={true}

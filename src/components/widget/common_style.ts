@@ -91,7 +91,7 @@ const styles = {
         fontSize: '14px',
         color: 'gray',
         margin: '20px',
-    }
+    },
 }
 
 export default styles;

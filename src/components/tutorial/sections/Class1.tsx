@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../../widget/common_style';
 import Form from '../../widget/form';
 import {notify} from '../../widget/notify';
@@ -13,11 +13,18 @@ import DragCellToInputJson from './common/DragCellToInputJson';
 
 import type {
   Transaction,
-  RawTransaction
+  RawTransaction,
+  Wallet,
+  ChainConfig,
+  QueryOption
 } from '../../../types/blockchain'
 import Cells from './common/Cells';
+import Api from '../../../api/blockchain';
 
 export default function Class1(){
+
+    const default_wallet_number = 0; //number 1 wallet, the miner's wallet
+    const [default_lock_query_option, setDefaultLockQueryOption] = useState<QueryOption>({});
 
     const [raw_tx, setRawTx] = useState<RawTransaction>();
     const [complete_tx, setCompleteTx] = useState<Transaction>();
@@ -108,6 +115,22 @@ export default function Class1(){
         notify('tx 已成功保存！');
     }
 
+    const fetchChainMinInfor = async () => {
+        const api = new Api();
+        const myWallets: Wallet[] = await api.getWallets();
+        const cc: ChainConfig = await api.getChainConfig();
+        setDefaultLockQueryOption({
+          lock: {
+            code_hash: cc.SCRIPTS.SECP256K1_BLAKE160.CODE_HASH,
+            args: myWallets[default_wallet_number].lock_arg,
+            hash_type: cc.SCRIPTS.SECP256K1_BLAKE160.HASH_TYPE === 'type' ? 'type':'data'
+        }});
+    }
+
+    useEffect(()=>{
+      fetchChainMinInfor();
+    }, []);
+
     return(
         <div>
             <div style={styles.content}>
@@ -140,11 +163,9 @@ export default function Class1(){
                 <h4 style={styles.main_color}>交易的 INPUT</h4>
                 <p>下面是钱包 1 的 4 个 live cell，直接把 cell 拖到下面的框中，看看自动生成的 input 是什么样子的。</p>
 
-                <Cells query={{lock: {
-                code_hash: '0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8',
-                args: '0x43d509d97f26007a285f39241cffcd411157196c',
-                hash_type: 'type'
-                }}}  length={4} text={{title:'', btn_text:'Fetch Cell'}} custom_style={{layout_style:{border:'1px solid gray'}}} ></Cells>
+                <Cells query={default_lock_query_option} render_dep={default_lock_query_option}  
+                length={4} text={{title:'', btn_text:'Fetch Cell'}} 
+                custom_style={{layout_style:{border:'1px solid gray'}}} ></Cells>
 
                 <DragCellToInputJson />
 
@@ -175,11 +196,8 @@ export default function Class1(){
                   <p>设置完成后，点击“生成交易”的按钮，就可以看到这笔交易的 JSON 是什么样子了。</p>
                 </div>
 
-                <Cells query={{lock: {
-                code_hash: '0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8',
-                args: '0x43d509d97f26007a285f39241cffcd411157196c',
-                hash_type: 'type'
-                }}}  length={4} text={{title:'', btn_text:'Fetch Cell'}} custom_style={{layout_style:{border:'1px solid gray'}}}></Cells>
+                <Cells query={default_lock_query_option} render_dep={default_lock_query_option} length={4} text={{title:'', btn_text:'Fetch Cell'}} 
+                custom_style={{layout_style:{border:'1px solid gray'}}}></Cells>
 
                 <TxConstructor />
                 

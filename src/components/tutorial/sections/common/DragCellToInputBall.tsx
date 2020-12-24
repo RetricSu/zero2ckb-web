@@ -64,11 +64,12 @@ export type ChainConfig = {
 export type Props = {
     get_contents?: (cells: Cell[], cell_deps: CellDep[], inputs: Input[]) => void
     onClearCall?: boolean
+    makeOriginCellHidden?: boolean
 }
 
 export default function DragCellToInputBall(props: Props){
 
-    const {get_contents, onClearCall} = props;
+    const {get_contents, onClearCall, makeOriginCellHidden} = props;
 
     const [config, setConfig] = useState<ChainConfig>();
 
@@ -82,7 +83,8 @@ export default function DragCellToInputBall(props: Props){
       drop(item: DragItem, monitor) {
         try {
             prepareJsonData(item.cell);
-            return { name: 'tx-input(json)', isOriginHidden: true};
+            const isOriginHidden = makeOriginCellHidden !== undefined ? makeOriginCellHidden : true; // default mode is hidden origin after success drag.
+            return { name: 'tx-input(json)', isOriginHidden: isOriginHidden};
         } catch (error) {
             alert(error);
             return { name: 'tx-input(json)', isOriginHidden: false};
@@ -96,10 +98,18 @@ export default function DragCellToInputBall(props: Props){
 
     const prepareJsonData = (cell: Cell) => {
         if(cell.out_point){
-            inputs.push({
+            const input_cell = {
                 previous_output: cell.out_point,
                 since: '0x0'
-            })
+            };
+            if( !utils.isObjectInArray(input_cell, inputs) ){
+                inputs.push(input_cell);
+
+                //make canva display the same cell
+                cells.push(cell);
+            }else{
+                throw new Error("cell already exits!");
+            }
         }else{
             // todo: should try another way to get outpoint. 
             throw new Error("failed to add input cell! can not find outpoint.");
@@ -110,8 +120,6 @@ export default function DragCellToInputBall(props: Props){
             if(!utils.isObjectInArray(recognize_dep, cell_deps))
                 cell_deps.push(recognize_dep);
         }
-
-        cells.push(cell);
 
         if(get_contents){
             get_contents(cells, cell_deps, inputs);

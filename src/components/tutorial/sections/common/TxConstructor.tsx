@@ -79,7 +79,7 @@ export default function TxConstructor(){
                 <Grid item xs={5}>
                     <div style={styles.input_box}>
                         <h4>{'Input'.toUpperCase()} 输入</h4>
-                        <DragCell2InputBall get_contents={handleInputCellChange} onClearCall={isClear} />
+                        <DragCell2InputBall get_contents={handleInputCellChange} onClearCall={isClear} makeOriginCellHidden={false} />
                     </div>
                 </Grid>
                 <Grid item xs={2} style={styles.covert_label}>
