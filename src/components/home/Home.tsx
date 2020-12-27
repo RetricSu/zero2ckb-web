@@ -22,7 +22,7 @@ function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Let's rock!
+          Let's Rock!
         </a>
       </header>
     </div>
