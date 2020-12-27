@@ -18,7 +18,7 @@ export default function TableOfContents(){
             });
         
             // Track all sections that have an `id` applied
-            document.querySelectorAll('section[id]').forEach((section) => {
+            document.querySelectorAll('[id]').forEach((section) => {
                 observer.observe(section);
             });
             
@@ -26,41 +26,51 @@ export default function TableOfContents(){
     }
 
     useEffect(()=>{
-        //observe();
+        observe();
     }, [])
 
     return(
         <div className="main-nav-container">
             <nav className="section-nav">
 		        <ol>
-		        	<li><a href="#beforewegetstarted">Before We Get Started</a></li>
+		        	<li><a href="#before-we-get-started">Before We Get Started</a></li>
 		        	<li><a href="#preknowledge">第一步：理论知识</a>
 		        		<ul>
-		        			<li><a href="#ckbconcept">让我们以一种简化的方式来理解CKB</a></li>
-		        			<li><a href="#howtoownacell">怎样才能拥有一个 Cell</a></li>
-		        			<li><a href="#endpoints--city-detail">怎么知道你的Cell属于你？</a></li>
-		        			<li><a href="#endpoints--city-config">课间休息</a></li>
-		        			<li><a href="#endpoints--city-spots-overview">真正的代码藏在哪里？</a></li>
-		        			<li><a href="#endpoints--city-spot-detail">锁的代码如果丢了怎么办？</a></li>
-		        			<li><a href="#endpoints--city-icons-overview">交易就是销毁一些盒子，再创造一些盒子</a></li>
-		        			<li><a href="#endpoints--city-icon-detail">type 锁的作用</a></li>
-                            <li><a href="#endpoints--city-config">课间休息</a></li>
+		        			<li><a href="#ckb-concept">理解CKB</a></li>
+		        			<li><a href="#how-to-own-a-cell">怎样才能拥有一个 Cell</a></li>
+		        			<li><a href="#how-to-know-cell-is-yours">怎么知道你的Cell属于你？</a></li>
+		        			<li><a href="#break1">课间休息</a></li>
+		        			<li><a href="#where-is-the-real-code">真正的代码藏在哪里？</a></li>
+		        			<li><a href="#what-if-the-code-is-lost">锁的代码如果丢了怎么办？</a></li>
+		        			<li><a href="#what-is-tx">交易就是销毁一些盒子，再创造一些盒子</a></li>
+		        			<li><a href="#the-function-of-type-lock">type 锁的作用</a></li>
+                            <li><a href="#break2">课间休息</a></li>
 		        		</ul>
 		        	</li>
-		        	<li><a href="#handson">第二步：动手实践</a>
+		        	<li><a href="#hands-on">第二步：动手实践</a>
                         <ul>
-                            <li><a href="#expanders">观察一条链</a></li>
-		        			<li><a href="#howtoownacell">发送一笔交易</a>
+                            <li><a href="#watch-a-chain">观察一条链</a></li>
+		        			<li><a href="#how-to-send-a-tx">发送一笔交易</a>
                                 <ul>
-                                    <li><a href="#endpoints--city-detail">拼接一个最简单的转账交易</a></li>
-		        			        <li><a href="#endpoints--city-config">对交易进行签名</a></li>
-		        			        <li><a href="#endpoints--city-spots-overview">把交易签名放回到交易中</a></li>
-		        			        <li><a href="#endpoints--city-spot-detail">把交易发送到链上</a></li>
+                                    <li><a href="#tx-input">交易的 INPUT</a></li>
+		        			        <li><a href="#tx-output">交易的 OUTPUT</a></li>
+		        			        <li><a href="#sign-a-tx">对交易进行签名</a></li>
+                                    <li><a href="#construct-a-tx">构造交易</a></li>
+                                    <ul>
+                                        <li><a href="#fill-the-tx-form">将交易补充完整</a></li>
+                                        <li><a href="#generate-tx-hash">生成交易哈希</a></li>
+                                        <li><a href="#generate-message">生成待签名的 message</a></li>
+                                        <li><a href="#start-signing">开始签名</a></li>
+                                        <li><a href="#put-sign-back">把签名放回到交易中</a></li>
+                                        <li><a href="#send-tx">发送交易</a></li>
+                                    </ul>
                                 </ul>
                             </li>
+                            <li><a href="#how-to-send-a-mutisig-tx">发送一笔多签交易</a></li>
+                            <li><a href="#how-to-deploy-contract">部署一个合约</a></li>
+                            <li><a href="#how-to-deploy-upgradable-contract">部署一个可升级的合约</a></li>
 		        		</ul>
                     </li>
-		        	<li><a href="#filters">Filters</a></li>
 		        </ol>
 	        </nav>
         </div>

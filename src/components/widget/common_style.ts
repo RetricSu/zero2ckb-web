@@ -106,6 +106,14 @@ const styles = {
         overflowX: 'scroll' as const,
         verticalAlign: 'text-bottom',
     },
+    describe_img_wrapper: {
+        maxWidth: '400px',
+        margin: '0 auto',
+    },
+    describe_img: {
+        width: '100%',
+        height: '100%',
+    }
 }
 
 export default styles;

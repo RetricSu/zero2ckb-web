@@ -15,10 +15,10 @@ export default function(){
     return(
         <div>
             <hr/>
-            <div style={styles.wide_card} id="handson">
+            <div style={styles.wide_card} id="hands-on">
                 <h1 style={styles.wide_card_title}>第二步：动手实践</h1>
                 <blockquote style={styles.blockquote}>
-                    亲自上手摸摸CKB这条链，
+                    亲自上手摸摸 CKB 这条链，
                     <br/><br/>
                     才能更好体会到前面的理论知识。
                 </blockquote>
@@ -33,7 +33,8 @@ export default function(){
                     试试点击下面的按钮，查看这条链最新的区块。
                 </p>
             </div>
-
+            
+            <div id="watch-a-chain">
             <NewBlocks></NewBlocks>
 
             <div style={styles.content}>
@@ -102,6 +103,7 @@ export default function(){
                 <p>
                     接下来，我们将开始构建并发送第一笔交易！
                 </p>
+                </div>
             </div>
         </div>
     )

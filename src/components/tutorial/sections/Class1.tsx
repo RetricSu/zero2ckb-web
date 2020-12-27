@@ -133,7 +133,7 @@ export default function Class1(){
     }, []);
 
     return(
-        <div>
+        <div id="how-to-send-a-tx">
             <div style={styles.content}>
                 <h3 style={styles.main_color}>发送一笔交易</h3>
                 <p>在开始之前，让我们在黑板上再次重写一遍：</p>
@@ -147,7 +147,7 @@ export default function Class1(){
                 <p>在 CKB 这种体系下，其实我们人肉组成了一个 layer2 网络。</p>
                 <div style={styles.explain_text}>
                   <p>想象现在你有一位朋友住在亚马逊丛林里，他独自生活，身边只有一台离线的电脑，没有网络，与世隔绝。</p>
-                  <p>某天下午他打猎归来，突然想起来还欠你一点钱，因为心生愧疚，他打开电脑，想转给你 1 万个 CKB 还债。</p>
+                  <p>某天下午他打猎归来，突然想起来还欠你一点钱，他打开电脑，想转给你 1 万个 CKB 还债。</p>
                   <p>尽管没有网络，他还是把转账交易的内容写在了一张纸上，然后在电脑里输入自己的私钥，计算出了这笔转账相应的签名，最后把签名也附在了纸上。</p>
                   <p>过了半个月，当有信差来访时，他托人把这张纸邮寄到中国，又过了半个月，信纸终于送到了你的手上。</p>
                   <p>你看着信纸，交易确实指明创造 1 万 CKB 的 cell 给你，于是你通过网络把这笔交易提交到了 CKB 主网上。
@@ -161,11 +161,11 @@ export default function Class1(){
 
                 <p>我们将使用 JSON 格式来手动拼接交易。</p>
                 
-                <h4 style={styles.main_color}>交易的 INPUT</h4>
+                <h4 id="tx-input" style={styles.main_color}>交易的 INPUT</h4>
                 <p>下面是钱包 1 的 4 个 live cell，直接把 cell 拖到下面的框中，看看自动生成的 input 是什么样子的。</p>
 
                 <Cells query={default_lock_query_option} render_dep={default_lock_query_option}  
-                length={4} text={{title:'', btn_text:'Fetch Cell'}} 
+                length={4} text={{title:'钱包 1 的 Cell', btn_text:'Fetch'}} 
                 custom_style={{layout_style:{border:'1px solid gray'}}} ></Cells>
 
                 <DragCellToInputJson />
@@ -183,10 +183,10 @@ export default function Class1(){
                     比如在普通的转账交易中，lock 锁需要用到固定的加密算法 SECP256K1_BLAKE160，也就是系统内置的一个智能合约，
                     这个加密算法的代码存放在某个 cell 中，就需要在 cell_deps 中引用进来，
                     这样 CKB-VM 虚拟机才能知道从哪里载入代码进行运算。</p>
-                  <p>通过测试链的配置信息，我们很容易找到交易中依赖的系统合约在 cell_deps 中需要传入的参数。</p>
+                  <p>通过测试链的配置信息，我们很容易找到 cell_deps 中需要传入的参数。</p>
                 </div>
                 
-                <h4 style={styles.main_color}>交易的 OUTPUT</h4>
+                <h4 id="tx-output" style={styles.main_color}>交易的 OUTPUT</h4>
                 <p>接下来我们再使用另一个工具，看看生成的output、以及一笔完整的交易长什么样子。</p>
                 
                 <div style={styles.explain_text}>
@@ -197,7 +197,8 @@ export default function Class1(){
                   <p>设置完成后，点击“生成交易”的按钮，就可以看到这笔交易的 JSON 是什么样子了。</p>
                 </div>
 
-                <Cells query={default_lock_query_option} render_dep={default_lock_query_option} length={4} text={{title:'', btn_text:'Fetch Cell'}} 
+                <Cells query={default_lock_query_option} render_dep={default_lock_query_option} length={4} 
+                text={{title:'钱包 1 的 Cell', btn_text:'Fetch'}} 
                 custom_style={{layout_style:{border:'1px solid gray'}}}></Cells>
 
                 <TxConstructor />
@@ -213,21 +214,24 @@ export default function Class1(){
                   </p>
                 </div>
 
-                <h4 style={styles.main_color}>对交易进行签名</h4>
+                <h4 id="sign-a-tx" style={styles.main_color}>对交易进行签名</h4>
                 <p>一笔转账拼好之后，需要用相应的私钥，对这笔交易进行签名，表明我们确实是 cell 的主人，有权对这些 cell 执行操作。</p>
                 <p>签名将被放入一个新的名为 witnesses 的字段中，作为交易的证明。</p>
+                <br/><br/><br/>
+                <hr/>
+                <div id="construct-a-tx"></div>
                 <p>现在，把下面白框中的空白交易填满。<br/><br/>
-                  你可以使用上面可视化的交易构造器自动生成 JSON 然后复制到白框中，也可以把它当作一次练习，自己用手动的方式填写一笔转账交易。<br/><br/>
-                  采用手动填写，你可能需要用到查找钱包对应的 live Cell、查看链配置信息(用来填写 cell_deps)、16 进制与 10 进制互相转换这些功能，它们在右手边的工具箱中都可以找到。<br/><br/>
+                  把它当作一次练习，自己用手动的方式填写一笔转账交易。<br/><br/>
+                  你可能需要用到查找钱包对应的 live Cell、查看链配置信息(用来填写 cell_deps)、16 进制与 10 进制互相转换这些功能，它们在右手边的工具箱中都可以找到。<br/><br/>
                   点击右边 👉 Nervos 的 logo，即可打开工具箱。</p>
-
+                <div id="fill-the-tx-form"></div>
                 <Form form_template={raw_tx_template} onSubmit={onRawTxSubmit} btn_text={'保存'} title_text={'将下面的交易补充完成'}></Form>
 
                 <p>填写完成后，点击保存按钮。</p>
 
                 <p>好了，到这里你已经手动把交易全部填好了。</p>
                 <p>这时我们已经可以为这笔交易生成一个独一无二的哈希了，也就是 tx_hash 已经可以提前确定出来。</p>
-                <p>点击下面的按钮，试试生成生成交易的哈希。</p>
+                <p id="generate-tx-hash">点击下面的按钮，试试生成生成交易的哈希。</p>
 
                 <ToTxHash raw_tx={raw_tx}></ToTxHash>
 
@@ -242,19 +246,21 @@ export default function Class1(){
                     }
                 } custom_style={{padding: '5px'}} />
                 <p>
-                    其中，lock 字段是放入 lock 锁需要验证的签名。在我们现在要使用的普通转账交易中，就是 SECP256K1_BLAKE160 算法需要验证的签名。
+                    其中，lock 字段是放入 lock 锁需要验证的签名。在我们现在要使用的普通转账交易中，
+                    就是 SECP256K1_BLAKE160 算法需要验证的签名。
                     所以我们将会在 witness.lock 这里放入签名。
                 </p>
                 <p>
-                    witness是一个数组，所以可以放入多个证明。当进行 P2PKH 类型的签名时，需要在第一个位置放入签名，同时其他的位置则放入用户自己的witness。
+                    witness是一个数组，所以可以放入多个证明。
+                    我们需要在第一个位置放入 P2PKH 的签名，同时其他的位置则放入用户自己的 witness。
                 </p>
-                <p>为了完成签名，我们首先需要让这笔交易生成一个待签名的 message。</p>
+                <p id="generate-message">为了完成签名，我们首先需要让这笔交易生成一个待签名的 message。</p>
                 
                 <ToSignMessage raw_tx={raw_tx} witnessArgs={[{lock:''}]}></ToSignMessage>
 
                 <h4 style={styles.main_color}>开始签名</h4>
 
-                <p>有了 message，以及钱包里的私钥，我们就可以计算出签名了。</p>
+                <p id="start-signing">有了 message，以及钱包里的私钥，我们就可以计算出签名了。</p>
 
                 <Signer></Signer>
 
@@ -262,14 +268,13 @@ export default function Class1(){
                 <p>把生成的签名填入下面的输入框中，点击按钮，以 witnessArgs 的形式做一遍序列化：</p>
                 <SeriliazedWitnessArgs></SeriliazedWitnessArgs>
 
-                <p>现在我们可以完善原本的交易了，把序列化好的签名放进 witnesses 字段里：</p>
+                <p id="put-sign-back" >现在我们可以完善原本的交易了，把序列化好的签名放进 witnesses 字段里：</p>
 
                 { JSON.stringify(raw_tx) &&
                     <Form form_template={ eval('`' + JSON.stringify(raw_tx).substring(1, JSON.stringify(raw_tx).length-1) + '`')} onSubmit={onCompleteTxSubmit} btn_text={'保存'}></Form>
                 }
 
-                <h4 style={styles.main_color}>最后一步，把交易发送到链上</h4>
-                <p>好了，现在我们终于可以开始发交易了！</p>
+                <h4 id="send-tx" style={styles.main_color}>最后一步，把交易发送到链上</h4>
                 <SendTx tx={complete_tx}></SendTx>
                 <p>注意看下，交易成功上链后返回的 tx_hash，是不是和之前事先生成的那个 tx_hash 一模一样？</p>
                 <p>CKB 的确定性诚不欺我。</p>

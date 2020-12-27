@@ -21,14 +21,13 @@ const styles = {
     },
     modal: {
       maxWidth: '700px',
-      maxHeight: '80%',
       overflowY: 'scroll' as const,
       padding: '20px',
-      height: '100%',
+      height: '90%',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      margin: '0 auto'
+      margin: '2em auto'
     },
     paper: {
       backgroundColor: 'gray',

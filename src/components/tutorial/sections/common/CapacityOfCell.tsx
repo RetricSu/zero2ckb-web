@@ -11,6 +11,9 @@ const styles = {...commonStyle, ...{
             width: '100%',
             clear: 'both' as const,
             textAlign: 'center' as const,
+            margin: '2em 0',
+            border: '1px solid gray',
+            padding: '10px',
         },
         cell_panel: {
             width: '108px',
@@ -50,10 +53,12 @@ export type CapacityOfCellProps = {
     custom_style?: CSSProperties
 }
 
+// todo: make input only accept chinese word or caculate the english text as well.
+
 export default function CapacityOfCell (props: CapacityOfCellProps){
     const { cell } = props;
     const [myCell, setMyCell] = useState<Cell>(cell);
-    const [totalbyteLength, setTotalByteLength] = useState('0');
+    const [totalbyteLength, setTotalByteLength] = useState('61');
 
     const [isHover, setIsHover] = useState(false);
     const hovering = () => {setIsHover(true);}
@@ -105,20 +110,17 @@ export default function CapacityOfCell (props: CapacityOfCellProps){
         return result;
     }
 
-    useEffect(()=>{
-        //getByteLengthOfCell();
-    }, [myCell]);
+    // useEffect(()=>{
+    //     getByteLengthOfCell();
+    // }, [myCell]);
 
     const isCapacityEnouge = BigInt(utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))) > BigInt(totalbyteLength) ? 
-        `capacity: ${utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))} > 实际占用空间：${totalbyteLength}, ✅`
+        `capacity: ${myCell.cell_output.capacity} = ${utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))} > 实际占用空间：${totalbyteLength}, ✅`
         :  
-        `capacity: ${utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))} < 实际占用空间：${totalbyteLength}, ❌`;
+        `capacity: ${myCell.cell_output.capacity} = ${utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))} < 实际占用空间：${totalbyteLength}, ❌`;
 
     return(
         <div style={styles.root}>
-            <div style={{textAlign:'left', marginBottom: '10px', marginTop: '10px'}}>
-                下面是一个小例子，输入汉字作为 Cell 的 data，可以查看 Cell 的空间变化。如果实际占用空间超过了 capacity 的值，Cell 就被认为是不合法的 Cell。
-            </div>
             <div style={styles.input_wrap}>
                 <input onChange={(e)=>{handleInputChange(e.currentTarget.value)}} placeholder="data：输入汉字.." type="text" style={styles.input}/>
             </div>

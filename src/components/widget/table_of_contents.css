@@ -15,7 +15,6 @@ html {
 
 /* 2. Make nav sticky */
 nav {
-	position: sticky;
 	top: 2rem;
 	align-self: start;
 }

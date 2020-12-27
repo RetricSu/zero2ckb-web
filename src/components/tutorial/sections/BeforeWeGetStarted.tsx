@@ -3,7 +3,7 @@ import styles from '../../widget/common_style';
 
 export default function BeforeWeGetStarted(){
     return(
-        <div id="beforewegetstarted">
+        <div id="before-we-get-started">
             <h1>Before We Get Started</h1>
             <hr/>
             <div style={styles.content}>

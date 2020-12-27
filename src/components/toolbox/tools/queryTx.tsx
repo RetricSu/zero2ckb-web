@@ -36,7 +36,7 @@ export default function QueryTx(){
         <div>
             <div>
                 <div className="form" style={styles.search_bar}>
-                    <input style={styles.input} ref={ref} type="text" placeholder="query cell" />
+                    <input style={styles.input} ref={ref} type="text" placeholder="lock_args.." />
                     <button onClick={startQuery}> 🔍 </button>
                 </div>
             </div>

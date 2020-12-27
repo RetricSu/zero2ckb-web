@@ -3,7 +3,7 @@ import styles from '../../widget/common_style';
 
 export default function(){
     return(
-        <div>
+        <div id="how-to-send-a-mutisig-tx">
             <div style={styles.content}>
                 <h3 style={styles.main_color}>发送多签交易</h3>
                 <p>敬请期待。</p>
