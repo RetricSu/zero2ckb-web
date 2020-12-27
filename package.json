@@ -14,6 +14,7 @@
     "@types/react-router-dom": "^5.1.6",
     "@types/react-select": "^3.0.27",
     "axios": "^0.21.0",
+    "express": "^4.17.1",
     "jsbi": "^3.1.4",
     "rc-tween-one": "^2.7.3",
     "react": "^17.0.1",
@@ -33,7 +34,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "serve": "serve -s build"
+    "serve": "serve -s build",
+    "static-deploy": "yarn build && pm2 serve build 9111 --spa",
+    "deploy": "node server.js"
   },
   "eslintConfig": {
     "extends": [
