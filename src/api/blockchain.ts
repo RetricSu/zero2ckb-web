@@ -5,7 +5,8 @@ import type {
     QueryOption, 
     RawTransaction, 
     WitnessArgs,
-    HexString
+    HexString,
+    Cell
 } from '../types/blockchain';
 
 axios.defaults.withCredentials = true;
@@ -109,6 +110,15 @@ class Api{
         let res = await axios.get(`${this.base_url}/get_seriliazed_witness`, { 
             params:{
                 witnessArgs: witnessArgs
+            }
+        });
+        return res.data;
+    }
+
+    async getMinimalCellCapacity(cell: Cell){
+        let res = await axios.get(`${this.base_url}/get_minimal_cell_capacity`, { 
+            params:{
+                cell: cell
             }
         });
         return res.data;

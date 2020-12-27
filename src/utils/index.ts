@@ -20,7 +20,7 @@ const shannon2CKB = (num: number | string | BigInt) => {
     // return BigInt(num).toString(10).substring(0, BigInt(num).toString(10).length-7) 
     //        + '.' + 
     //        BigInt(num).toString(10).substring(BigInt(num).toString(10).length-7);
-    return JSBI.divide(JSBI.BigInt(num), JSBI.BigInt(10000000)).toString(10);
+    return JSBI.divide(JSBI.BigInt(num), JSBI.BigInt(100000000)).toString(10);
 }
 
 const CKB2shannon = (num: number | string | BigInt) => {

@@ -47,20 +47,6 @@ const styles = {...commonStyle, ...{
     rigth_btn: {
         float: 'right' as const
     },
-    input_wrap: {
-        padding: '2px 5px',
-        marginBottom: '10px',
-        display: 'block',
-        background: 'white',
-    },
-    input: {
-        width: '100%',
-        outline: 'none',
-        fontSize: '14px',
-        border: '0',
-        overflowX: 'scroll' as const,
-        verticalAlign: 'text-bottom',
-    },
     edit_cell_save_btn: {
         width: '100%',
 

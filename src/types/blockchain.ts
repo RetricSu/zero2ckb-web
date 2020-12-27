@@ -216,3 +216,10 @@ export type TxOutput = {
   outputs: Output[]
   outputs_data: HexString[]
 }
+
+export type SimpleCell = {
+    capacity: HexString;
+    lock: Script;
+    type?: Script;
+    data: HexString;
+}

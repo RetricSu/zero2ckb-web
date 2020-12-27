@@ -92,6 +92,20 @@ const styles = {
         color: 'gray',
         margin: '20px',
     },
+    input_wrap: {
+        padding: '2px 5px',
+        marginBottom: '10px',
+        display: 'block',
+        background: 'white',
+    },
+    input: {
+        width: '100%',
+        outline: 'none',
+        fontSize: '14px',
+        border: '0',
+        overflowX: 'scroll' as const,
+        verticalAlign: 'text-bottom',
+    },
 }
 
 export default styles;

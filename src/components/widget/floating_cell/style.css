@@ -1,7 +1,11 @@
-.linked-animate-demo-wrapper {
+  .floating-cell-root{
+    margin: 3em 0;
+  }
+
+  .linked-animate-demo-wrapper {
     overflow: hidden;
     height: 500px;
-    background: url('https://cutewallpaper.org/21/space-wallpaper-4k-1920x1080/Black-Space-Wallpapers-HD-Wallpaper-Cave.jpg');
+    background: url('./space-bg.jpg');
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover;

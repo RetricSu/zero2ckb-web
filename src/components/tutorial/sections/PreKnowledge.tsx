@@ -2,6 +2,8 @@ import React from 'react';
 import styles from '../../widget/common_style';
 import CodePiece from '../../widget/code';
 import CellConcept from '../../widget/floating_cell/cell_concept';
+import CapacityOfCell from '../../tutorial/sections/common/CapacityOfCell';
+import { Cell } from '../../../types/blockchain';
 
 const code = {
     /** 
@@ -69,6 +71,20 @@ const code = {
  * todo: add some drawing image to better explained the datatype
  */
 export default function Preknowledge(){
+
+    const simpleCell: Cell = {
+        cell_output: {
+          capacity: "0x1dcd65000",
+          lock: {
+            args: "0x36c329ed630d6ce750712a477543672adab57f4c",
+            code_hash:
+              "0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8",
+            hash_type: "type",
+          }
+        },
+        data: "0x"
+    }
+
     return(
         <div id="preknowledge">
             <div style={styles.wide_card}>
@@ -140,6 +156,9 @@ export default function Preknowledge(){
             </ul>
             <p>关于 Cell 你需要记住的最重要的一条规则是，上面这四个字段所占用的空间，加起来要小于或等于 capacity 的数值。也就是说，</p>
             <CodePiece code={code.cell_space_rule} />
+
+            <CapacityOfCell cell={simpleCell}/>
+
             <h4 style={styles.main_color}>怎么知道你的Cell属于你？</h4>
             <p>既然需要拥有原生代币才能拥有 Cell，那么我们怎么知道链上的某一个 Cell 是属于你的呢？</p>
             <p>还记得上面介绍的 lock 和 type 吗？</p>

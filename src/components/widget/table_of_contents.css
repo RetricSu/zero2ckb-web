@@ -3,24 +3,14 @@ html {
 	scroll-behavior: smooth;
 }
 
-@media screen and (max-width: 678px){
-	.main-nav-container{
-		display: none;
-	}
-	nav{
-	  display: none;
-	}
-  }
-
 .main-nav-container{
     position: fixed;
-    left: 0.5rem;
-    top: 1rem;
     text-align: left;
-    display: grid;
-	grid-template-columns: 1fr 15em;
-	max-width: 70em;
 	margin: 0 auto;
+	float: left;
+	left: 0;
+	max-width: 30%;
+	margin-bottom: 2em;
 }
 
 /* 2. Make nav sticky */
@@ -30,6 +20,24 @@ nav {
 	align-self: start;
 }
 
+@media screen and (max-width: 1300px){
+	.contentbadder{
+		height: 500px;
+	}
+	.main-nav-container{
+		position: relative;
+		float: none;
+		max-width: 100%;
+		left: 0;
+		margin-bottom: 2em;
+	}
+	nav{
+		position: relative;
+		background-color: gray;
+		margin-bottom: 2em;
+	}
+  }
+
 /* 3. ScrollSpy active styles (see JS tab for activation) */
 .section-nav li.active > a {
 	color: #3CC68A;
@@ -38,8 +46,7 @@ nav {
 
 /* Sidebar Navigation */
 .section-nav {
-	padding-left: 0;
-	border-left: 1px solid #3CC68A;
+	padding-right: 0;
 }
 
 .section-nav a {
