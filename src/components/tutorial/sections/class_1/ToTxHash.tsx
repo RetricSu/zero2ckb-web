@@ -37,7 +37,7 @@ export default function ToTxHash(props: Props){
                 notify(res.data);
             }
         }else{
-            notify('raw transaction is undefined');
+            notify('raw transaction is undefined. 请补充完上面的交易表格，然后点击保存按钮。');
         }
     }
 

@@ -4,6 +4,7 @@ import { QueryOption } from '../../../../types/blockchain';
 import FreshButton from "../../../widget/fresh_button";
 import commonStyles from "../../../widget/common_style";
 import Txs from '../common/Txs';
+import {notify} from '../../../widget/notify';
 
 const styles = {...commonStyles, ...{
     list_panel: {
@@ -47,9 +48,15 @@ export default function WalletTransaction(props: Props){
         setIsLoading(true);
         const api = new Api();
         const length = props.length || 10;
-        var txs = await api.getTransactions(props.query, length);
-        setTxs(txs);
-        setIsLoading(false);
+        var result = await api.getTransactions(props.query, length);
+        if(result.status == 'ok'){
+            const txs = result.data;
+            setTxs(txs);
+            setIsLoading(false);
+        }else{
+            notify(JSON.stringify(result.data));
+            setIsLoading(false);
+        }
     }
 
     useEffect(()=>{
