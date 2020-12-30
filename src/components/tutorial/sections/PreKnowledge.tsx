@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../../widget/common_style';
 import CodePiece from '../../widget/code';
 import CellConcept from '../../widget/floating_cell/cell_concept';
 import CapacityOfCell from '../../tutorial/sections/common/CapacityOfCell';
-import { Cell } from '../../../types/blockchain';
+import { Cell, ChainConfig } from '../../../types/blockchain';
+import Api from '../../../api/blockchain';
 
 const code = {
     /** 
@@ -72,18 +73,31 @@ const code = {
  */
 export default function Preknowledge(){
 
+    const [code_hash, setCodeHash] = useState('');
+    const [hash_type, setHashType] = useState('');
+
     const simpleCell: Cell = {
         cell_output: {
           capacity: "0x1dcd65000",
           lock: {
             args: "0x36c329ed630d6ce750712a477543672adab57f4c",
-            code_hash:
-              "0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8",
-            hash_type: "type",
+            code_hash: code_hash,
+            hash_type: hash_type == "type" ? "type":"data",
           }
         },
         data: "0x"
     }
+    
+    async function fetchChainConfig() {
+        const api = new Api();
+        var config: ChainConfig = await api.getChainConfig();
+        await setCodeHash(config.SCRIPTS.SECP256K1_BLAKE160.CODE_HASH);
+        await setHashType(config.SCRIPTS.SECP256K1_BLAKE160.HASH_TYPE);
+    }
+
+    useEffect(() => {
+        fetchChainConfig();
+    }, []);
 
     return(
         <div id="preknowledge">
@@ -167,7 +181,10 @@ export default function Preknowledge(){
                 下面是一个小例子，输入汉字作为 Cell 的 data，可以查看 Cell 的空间变化。<br/><br/>
                 如果实际占用空间超过了 capacity 的值，Cell 就被认为是不合法的 Cell。
             </p>
-            <CapacityOfCell cell={simpleCell}/>
+
+            {code_hash && hash_type &&
+                <CapacityOfCell cell={simpleCell}/>
+            }
 
             <h4 id="how-to-know-cell-is-yours" style={styles.main_color}>怎么知道你的Cell属于你？</h4>
             <p>既然需要拥有原生代币才能拥有 Cell，那么我们怎么知道链上的某一个 Cell 是属于你的呢？</p>

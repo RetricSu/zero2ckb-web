@@ -28,9 +28,17 @@ const CodePeice = forwardRef((prop: CodeProp, ref: Ref<CodePieceType>) => {
 
     useImperativeHandle(ref, () => ({ getContent }));
 
+    const onPasteClean = (e: React.ClipboardEvent<HTMLPreElement>) => {
+        e.preventDefault(); // cancel paste
+        const text = e.clipboardData?.getData('text/plain');
+        console.log(text);
+        document.execCommand("insertHTML", false, text); // paste manually
+    }
+
     return (
         <div>
-            <pre ref={preRef} contentEditable={prop.isContentEditable?'true':'false'} onInput={getContent} style={styles.code_box} >
+            <pre ref={preRef} contentEditable={prop.isContentEditable?'true':'false'} 
+                onInput={getContent} style={styles.code_box} onPaste={(e) => onPasteClean(e)}>
                 { typeof prop.code === 'string' &&
                     prop.code
                 }

@@ -118,7 +118,7 @@ export default function CapacityOfCell (props: CapacityOfCellProps){
         `capacity: ${myCell.cell_output.capacity} = ${utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))} < 实际占用空间：${totalbyteLength}, ❌`;
 
     return(
-        <div style={styles.root}>
+        <div key={cell.cell_output.lock.args} style={styles.root}>
             <div style={styles.input_wrap}>
                 <input onChange={(e)=>{handleInputChange(e.currentTarget.value)}} placeholder="data：输入汉字.." type="text" style={styles.input}/>
             </div>

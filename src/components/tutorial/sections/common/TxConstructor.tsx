@@ -61,6 +61,7 @@ export default function TxConstructor(){
             inputs: input_cell_inputs,
             outputs: [],
             outputs_data: [],
+            witnesses: ["0x"],
         }, ...tx_output};
         setRawTx(data);
     }
@@ -123,7 +124,6 @@ export default function TxConstructor(){
             <Grid container spacing={1}>
                 <Grid item xs={12}>
                     <div style={styles.json_result}>
-                        <p style={{textAlign:'right'}}> <CopyText text={JSON.stringify(raw_tx, null, 2)} icon={true}/> </p>
                         <CodePiece code={raw_tx || ''} custom_style={{border: '0'}} />
                     </div> 
                 </Grid>
