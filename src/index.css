@@ -43,8 +43,6 @@ pre {
   scrollbar-width: none;  /* Firefox */
 }
 
-
-
 /* but show scrollbar when hover for Chrome, Safari and Opera */
 div:hover::-webkit-scrollbar {
     display: block;
@@ -83,6 +81,6 @@ pre::-webkit-scrollbar-corner {
 }
     
 /* but show scrollbar when hover for IE, Edge and Firefox */
-
+/* todo: make up for ie\edge\firefox */
 
 
