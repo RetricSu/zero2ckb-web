@@ -17,7 +17,6 @@ const styles = {
         listStyleType: 'none',
         marginLeft: '0',
         marginBottom: '10px',
-        padding: '5px'
     },
     modal: {
       maxWidth: '700px',

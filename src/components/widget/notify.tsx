@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function NotifyPlace(){
     return(
         <div>
-            <ToastContainer />
+            <ToastContainer style={{ width: "100%" }} />
         </div>
     )
 }

@@ -50,7 +50,7 @@ div:hover::-webkit-scrollbar {
     height: 3px;
 }
 div:hover::-webkit-scrollbar-thumb {
-    background: gray;
+    background: white;
 }
 div::-webkit-scrollbar-thumb:hover {
     background: #3CC68A;
@@ -68,7 +68,7 @@ pre:hover::-webkit-scrollbar {
     height: 3px;
 }
 pre:hover::-webkit-scrollbar-thumb {
-    background: gray;
+    background: white;
 }
 pre::-webkit-scrollbar-thumb:hover {
   background: #3CC68A;

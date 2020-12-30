@@ -54,7 +54,7 @@ const styles = {
         },
         box_content: {
             width: '100%',
-            overflow: 'scroll'
+            overflow: 'hidden'
         },
         box_content_link: {
             textDecoration: 'underline',
