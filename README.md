@@ -10,9 +10,9 @@
 ## tiny bug fix
 
 - [x] make scroll bar style hidden
-- [ ] fix toolbar bug
 - [x] make chain-config style left not center
 - [ ] add balance function
 - [ ] replace the hardcode config info(like lock code_hash) in components
-- [ ] notify style
 - [ ] chain config setting
+- [ ] notify style
+- [ ] fix toolbar bug
