@@ -22,6 +22,9 @@ h1,h2,h3,h4,h5{
   color: '#3CC68A'
 }
 
+
+/* below is the customize scroll bar sytle  */
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 div::-webkit-scrollbar {
   display: none;
