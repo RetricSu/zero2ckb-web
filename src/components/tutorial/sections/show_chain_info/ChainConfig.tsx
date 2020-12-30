@@ -10,8 +10,7 @@ const styles = {
     config_panel: {
         textAlign: 'left' as const,
         margin: '0 auto',
-        paddingLeft: '20%',
-        paddingRight: '20%',
+        padding: '0 10px',
         border: '1px solid gray'
     }
 }
