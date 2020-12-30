@@ -21,3 +21,65 @@ strong {
 h1,h2,h3,h4,h5{
   color: '#3CC68A'
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+div::-webkit-scrollbar {
+  display: none;
+}
+pre::-webkit-scrollbar {
+  display: none;
+}
+  
+/* Hide scrollbar for IE, Edge and Firefox */
+div {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+pre {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
+
+/* but show scrollbar when hover for Chrome, Safari and Opera */
+div:hover::-webkit-scrollbar {
+    display: block;
+    width: 3px;
+    height: 3px;
+}
+div:hover::-webkit-scrollbar-thumb {
+    background: gray;
+}
+div::-webkit-scrollbar-thumb:hover {
+    background: #3CC68A;
+}
+div::-webkit-scrollbar-button {
+  background: gray;
+}
+div::-webkit-scrollbar-corner {
+  background: rgba(0,0,0,0);
+}
+
+pre:hover::-webkit-scrollbar {
+    display: block;
+    width: 3px;
+    height: 3px;
+}
+pre:hover::-webkit-scrollbar-thumb {
+    background: gray;
+}
+pre::-webkit-scrollbar-thumb:hover {
+  background: #3CC68A;
+}
+pre::-webkit-scrollbar-button {
+  background: gray;
+}
+pre::-webkit-scrollbar-corner {
+  background: rgba(0,0,0,0);
+}
+    
+/* but show scrollbar when hover for IE, Edge and Firefox */
+
+
+

@@ -30,8 +30,6 @@ const styles = {...commonStyle, ...{
             borderRadius: '100%',
             border: '1px solid ' + commonStyle.main_color.color,
             textAlign: 'center' as const,
-            overflowY: 'scroll' as const,
-            overflowX: 'hidden' as const,
             justifyContent: 'center' as const,
             fontSize: '10px',
             alignItems: 'center' as const,
