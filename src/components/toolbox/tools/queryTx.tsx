@@ -18,16 +18,23 @@ const styles = {...commonStyle, ...{
     }
 }};
 
-export default function QueryTx(){
+export type QueryTxProps = {
+    code_hash?: string
+    hash_type?: 'type' | 'data'
+}
+
+export default function QueryTx(props: QueryTxProps){
+    const {code_hash, hash_type} = props;
+
     const ref = useRef<HTMLInputElement>(null);
     const [query, setQuery] = useState<QueryOption>();
 
     const startQuery = () => {
         setQuery({
             lock: {
-                code_hash: '0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8',
+                code_hash: code_hash || '0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8',
                 args: ref.current?.value || '',
-                hash_type: 'type',
+                hash_type: hash_type || 'type',
             }
         })
     }

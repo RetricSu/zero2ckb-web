@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.css';
 import commonStyle from '../widget/common_style';
 import QueryCell from './tools/queryCell';
@@ -7,6 +7,8 @@ import Hex2Decimal from './tools/hex2decimal';
 import Wallets from '../tutorial/sections/common/Wallets';
 import ChainConfig from '../tutorial/sections/show_chain_info/ChainConfig';
 import Logo from '../widget/logo_svg';
+import Api from '../../api/blockchain';
+import type { ChainConfig as typeChainConfig } from '../../types/blockchain';
 
 const styles = {...commonStyle, ...{
     root: {
@@ -40,6 +42,21 @@ const styles = {...commonStyle, ...{
  * todo: add clickable effect on close btn
  */
 export default function FloatingBox(){
+
+    const [code_hash, setCodeHash] = useState('');
+    const [hash_type, setHashType] = useState('');
+
+    async function fetchChainConfig() {
+        const api = new Api();
+        var config: typeChainConfig = await api.getChainConfig();
+        await setCodeHash(config.SCRIPTS.SECP256K1_BLAKE160.CODE_HASH);
+        await setHashType(config.SCRIPTS.SECP256K1_BLAKE160.HASH_TYPE);
+    }
+
+    useEffect(()=>{
+        fetchChainConfig();
+    }, [])
+
 
     const [isQueryCellOpen, setIsQueryCellOpen] = useState(false);
     const [isQueryTxOpen, setIsQueryTxOpen] = useState(false);
@@ -114,7 +131,7 @@ export default function FloatingBox(){
                     <button style={{...styles.close_btn, ...{display: !isOpen ? 'block' : 'none' }}} onClick={hanlderClose}>❌</button>
                     <div style={{marginTop: '30px'}}>
                         <div style={{display: isQueryCellOpen ? 'block' : 'none' }}>
-                            <QueryCell />
+                            <QueryCell code_hash={code_hash} hash_type={hash_type == 'type' ? 'type' : 'data'} />
                         </div>
                         <div style={{display: isQueryTxOpen ? 'block' : 'none' }}>
                             <QueryTx />
