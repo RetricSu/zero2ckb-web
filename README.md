@@ -14,7 +14,7 @@
 - [x] replace the hardcode config info(like lock code_hash) in components
 - [x] chain config setting
 - [x] error return code tips when interact in class 1
-- [ ] capacity not right bug
+- [x] capacity not right bug
 - [ ] refine the article
 - [ ] add balance function
 - [ ] notify style

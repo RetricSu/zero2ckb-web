@@ -7,6 +7,7 @@ import React, { useState, useRef } from 'react';
 import FreshButton from '../../widget/fresh_button';
 import common_style from '../../widget/common_style'; 
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
+import {notify} from '../../widget/notify';
 
 const styles = {
     caculator_box: {
@@ -54,19 +55,30 @@ export default function Hex2Dec(props: Hex2DecProps){
     const hex2dec = () => {
         if(ref.current){
             const hex_data = ref.current.value;
-            setResult( ''+BigInt(hex_data).toString(10) );
+            if(hex_data.slice(0,2) !== "0x"){
+                notify('16进制数字需要以0x开头！');
+                return;
+            }
+            try {
+                setResult( ''+BigInt(hex_data).toString(10) );
+            } catch (error) {
+                notify(error.message);
+            }
         }else{
-            console.log('something went wrong..');
+            notify('something went wrong..');
         }
     }
 
     const dec2hex = () => {
         if(ref.current){
             const dec_data = ref.current.value;
-            console.log(dec_data);
-            setResult( '0x' + BigInt(dec_data).toString(16) );
+            try {
+                setResult( '0x' + BigInt(dec_data).toString(16) );
+            } catch (error) {
+                notify(error.message);
+            }
         }else{
-            console.log('something went wrong..');
+            notify('something went wrong..');
         }
         
     }
