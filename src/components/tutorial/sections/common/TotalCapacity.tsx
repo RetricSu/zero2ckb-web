@@ -147,8 +147,13 @@ export default function TotalCapacity (props: TotalCapacityProps) {
 
     const caculate_fee = () => {
         let sum = caculateCellCapacity(mycells);
-        const fee = ( BigInt(capacity) - BigInt(sum) ).toString(16);
+        const fee = (BigInt(utils.hex2dec(capacity)) - BigInt(utils.hex2dec(sum))).toString(16);
+        //const fee = ( BigInt(capacity.slice(2)) - BigInt(sum.slice(2)) ).toString(16);
+        console.log(capacity, sum, fee);
         return utils.shannon2CKB( utils.hex2dec('0x' +  fee ) );
+        // 200988,3542,3722 
+        // 20000,0000,0000
+        // 18098835423722
     }
 
     const isFeeOk = BigInt(fee) > BigInt('0') ? true : false;

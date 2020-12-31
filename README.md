@@ -15,6 +15,7 @@
 - [x] chain config setting
 - [x] error return code tips when interact in class 1
 - [ ] capacity not right bug
+- [ ] refine the article
 - [ ] add balance function
 - [ ] notify style
 - [ ] fix toolbar bug

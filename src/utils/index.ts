@@ -24,7 +24,7 @@ const shannon2CKB = (num: number | string | BigInt) => {
 }
 
 const CKB2shannon = (num: number | string | BigInt) => {
-    return BigInt(num).toString(10) + '0000000';
+    return BigInt(num).toString(10) + '00000000';
 }
 
 // notice: the order of key-value pair in Object
