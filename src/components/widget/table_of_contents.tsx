@@ -38,11 +38,11 @@ export default function TableOfContents(){
 		        		<ul>
 		        			<li><a href="#ckb-concept">理解CKB</a></li>
 		        			<li><a href="#how-to-own-a-cell">怎样才能拥有一个 Cell</a></li>
-		        			<li><a href="#how-to-know-cell-is-yours">怎么知道你的Cell属于你？</a></li>
+		        			<li><a href="#how-to-know-cell-is-yours">怎么知道你的 Cell 属于你？</a></li>
 		        			<li><a href="#break1">课间休息</a></li>
 		        			<li><a href="#where-is-the-real-code">真正的代码藏在哪里？</a></li>
 		        			<li><a href="#what-if-the-code-is-lost">锁的代码如果丢了怎么办？</a></li>
-		        			<li><a href="#what-is-tx">交易就是销毁一些盒子，再创造一些盒子</a></li>
+		        			<li><a href="#what-is-tx">交易是什么</a></li>
 		        			<li><a href="#the-function-of-type-lock">type 锁的作用</a></li>
                             <li><a href="#break2">课间休息</a></li>
 		        		</ul>

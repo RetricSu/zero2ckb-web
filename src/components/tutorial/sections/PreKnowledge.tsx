@@ -5,6 +5,7 @@ import CellConcept from '../../widget/floating_cell/cell_concept';
 import CapacityOfCell from '../../tutorial/sections/common/CapacityOfCell';
 import { Cell, ChainConfig } from '../../../types/blockchain';
 import Api from '../../../api/blockchain';
+//import { data as cell_as_box_png } from '../../../resource/cell-as-box.json';
 
 const code = {
     /** 
@@ -45,8 +46,8 @@ const code = {
                     `,
     
     systemlock_deadlock_example: `
-        SECP256K1: {
-            code_hash: 0x00000000000000000000..
+        SECP256K1's lock: {
+            code_hash: 0x0000000000000000000000000000000000000000000000000000000000000000
             args: 0x
             hash_type..
         }
@@ -131,7 +132,7 @@ export default function Preknowledge(){
             
             <p>
                 跟 UTXO 不同的是，Cell 可以用来存储任意类型的数据。Cell 有一个字段名为 data，里面可以放入 16 进制的无格式字符串。
-                你往 data 上写入什么样的内容都可以，格式也是你自己定，只要你自己知道怎么解读这段字符串就行。<br/><br/>
+                这意味着，你往 data 上写入什么样的内容都可以，格式也是你自己定，只要你自己知道怎么解读这段字符串就行。<br/><br/>
                 比如，我可以往上面存一个哈希，存一段文字，也可以存一个日期，
                 甚至，你可以放一段二进制代码进去，而这段代码又可以被其他 Cell 引用，
                 经过虚拟机 CKB-VM 在链上运行。<br/><br/>
@@ -148,7 +149,7 @@ export default function Preknowledge(){
                 一个盒子还可以细分成多个盒子，只要总的盒子空间，跟你持有的代币总量相等就行。
             </p>
             <div style={styles.describe_img_wrapper}>
-                <img style={styles.describe_img} src="https://i.redd.it/k5mjhyewkxdz.jpg" alt="box-image"/>
+                <img style={styles.describe_img} src="https://img2.pngio.com/box-container-cube-delivery-open-package-icon-box-drawing-png-512_512.png" alt="box-image"/>
             </div>
             <p>
                 根据系统的设定，1个 CKB 等于 1个 byte（字节）的空间。<br/><br/>
@@ -169,17 +170,17 @@ export default function Preknowledge(){
             <p>四个字段具体含义如下：</p>
             <ul>
                 <li><strong style={styles.main_color}>capacity：</strong>是一个16进制的字符串，表示 Cell 的空间大小，同时也是这个 Cell 代表的原生代币的数量</li>
-                <li><strong style={styles.main_color}>lock：</strong>是一个脚本结构，本质相当于是一把锁，下文将详解</li>
-                <li><strong style={styles.main_color}>type: </strong>是一个脚本结构，本质和 lock 一样，只是锁的用途不同，下文将详解</li>
+                <li><strong style={styles.main_color}>lock：</strong>是一个脚本，本质相当于是一把锁，下文将详解</li>
+                <li><strong style={styles.main_color}>type: </strong>是一个脚本，和 lock 一样，只是锁的用途不同，下文将详解</li>
                 <li><strong style={styles.main_color}>data: </strong>是一个16进制的字符串，可以在这里存放任何类型的数据</li>
             </ul>
-            <p>关于 Cell，你需要记住的最重要的一条规则是，上面这四个字段所占用的空间，加起来要小于或等于 capacity 的数值。</p>
+            <p>关于 Cell，你需要记住的最重要的一条规则是，上面这四个字段所占用的空间，加起来要小于或等于 capacity 的值。</p>
             <p>也就是说，</p>
             <CodePiece code={code.cell_space_rule} />
 
             <p>
                 下面是一个小例子，输入汉字作为 Cell 的 data，可以查看 Cell 的空间变化。<br/><br/>
-                如果实际占用空间超过了 capacity 的值，Cell 就被认为是不合法的 Cell。
+                如果 data 的变化导致实际占用空间超过了 capacity 的值，Cell 就会被认为是不合法的 Cell。
             </p>
 
             {code_hash && hash_type &&
@@ -274,7 +275,7 @@ export default function Preknowledge(){
                 这样使用了这把锁的 Cell 岂不是永远无法再解锁了？</p>
             <p> 没错。理论上，存放锁代码的 Cell 应该随着这条链的寿命一样永远存在下去。不应该有人能动这个 Cell。所以如果你去查的话，
                 其实可以看到，CKB 所有内建的锁脚本，所依赖的 dep cell
-                本身是任何人无法动的，因为我们在这些 dep cell 上的 lock 字段（也就是放锁代码的 cell 本身的锁）都设置了 0x0000 的数值，
+                本身是任何人无法再操作的，因为我们在这些 dep cell 上的 lock 字段（也就是放锁代码的 cell 本身的锁）都设置了 0x0000.. 的数值，
                 这意味着没有人能再解锁这些 Cell，代码也就将一直存在下去：
             </p>
             <CodePiece code={code.systemlock_deadlock_example}/>
@@ -285,13 +286,13 @@ export default function Preknowledge(){
                 这是CKB的另一个灵活之处。
             </p>
             <p>我们上面讲的这些锁的例子，都是 Cell 里的 lock 字段的锁。</p>
-            <p>实际上一个 cell 盒子，可以放两把锁，除了默认的 lock 锁，还有一把可选的 type 锁。
+            <p> 但一个 cell 盒子除了默认的 lock 锁，还有一把可选的 type 锁。
                 这两把锁的本质是一样的，只不过因为用途的不同，所以取了不同的名字。</p>
             <p> lock 锁通常用来保护盒子的所有权，type 锁则用来保证 Cell 在交易过程中遵循某些数据变换规则。</p>
             <p>
                 要搞懂这句话的意思，我们需要开始介绍 CKB 中的一笔交易到底是怎么回事了。
             </p>
-            <h4 id="what-is-tx" style={styles.main_color}>交易就是销毁一些盒子，再创造一些盒子</h4>
+            <h4 id="what-is-tx" style={styles.main_color}>交易就是销毁一些 Cell，再创造一些 Cell</h4>
             <p>
                 CKB 中的一笔交易，掐去不太紧要的细节，本质上就是这样：
             </p>

@@ -136,6 +136,7 @@ export default function Class1(){
         <div id="how-to-send-a-tx">
             <div style={styles.content}>
                 <h3 style={styles.main_color}>发送一笔交易</h3>
+                <p>我们将在本节内容学会并亲自动手完成一笔最基础的转账交易。</p>
                 <p>在开始之前，让我们在黑板上再次重写一遍：</p>
                 <blockquote style={styles.blockquote}>
                   一笔CKB的交易，无非是消费一些已有的 live cell，去创造出另一些新的 live cell。
@@ -150,7 +151,7 @@ export default function Class1(){
                   <p>某天下午他打猎归来，突然想起来还欠你一点钱，他打开电脑，想转给你 1 万个 CKB 还债。</p>
                   <p>尽管没有网络，他还是把转账交易的内容写在了一张纸上，然后在电脑里输入自己的私钥，计算出了这笔转账相应的签名，最后把签名也附在了纸上。</p>
                   <p>过了半个月，当有信差来访时，他托人把这张纸邮寄到中国，又过了半个月，信纸终于送到了你的手上。</p>
-                  <p>你看着信纸，交易确实指明创造 1 万 CKB 的 cell 给你，于是你通过网络把这笔交易提交到了 CKB 主网上。
+                  <p>你看着信纸，交易确实指明创造 1 万 CKB 的 cell 给你，你决定把这笔交易提交到 CKB 主网上。
                     主网验证附上的签名有效，于是交易完成，你的账户里多了一万个CKB，债务两清了。</p>
                   <p>你和亚马逊丛林的朋友共同组成了一个包含 2 个节点的 layer2 网络，虽然这个网络的吞吐量只有 1 笔交易/每月。</p>
                 </div>
@@ -172,7 +173,7 @@ export default function Class1(){
 
                 <div style={styles.explain_text}> 
                   <p>你可能看到了，input 中的 cell 是以 <code style={styles.single_line_code}>previous_output</code> 的形式出现的，
-                  传入的是 tx_hash 和 index 组成的 outpoint，相当于是对 cell 的一个索引，或者像 cell 的一个指针，通过 outpoint 我们找到指定的 cell。</p>
+                  传入的是 tx_hash 和 index 组成的 outpoint，相当于是对 cell 的一个索引，或者像 cell 的一个指针，通过 outpoint 我们找到想要消费的 cell。</p>
 
                   <p>inputs 中还有一个字段叫 <code style={styles.single_line_code}>since</code>，它是用来控制时间的，我们暂且不必管它。 </p>
 
@@ -183,7 +184,7 @@ export default function Class1(){
                     比如在普通的转账交易中，lock 锁需要用到固定的加密算法 SECP256K1_BLAKE160，也就是系统内置的一个智能合约，
                     这个加密算法的代码存放在某个 cell 中，就需要在 cell_deps 中引用进来，
                     这样 CKB-VM 虚拟机才能知道从哪里载入代码进行运算。</p>
-                  <p>通过测试链的配置信息，我们很容易找到 cell_deps 中需要传入的参数。</p>
+                  <p>通过上文测试链的配置信息，我们很容易找到 cell_deps 中需要传入的参数。</p>
                 </div>
                 
                 <h4 id="tx-output" style={styles.main_color}>交易的 OUTPUT</h4>
@@ -192,8 +193,8 @@ export default function Class1(){
                 <div style={styles.explain_text}>
                   <p>同样，把钱包 1 的 cell 拖到 input 中。</p>
                   <p>output 方框内将马上自动生成一个相同大小的新 cell。</p>
-                  <p>点击output中的设置按钮，可以对新生成的 cell 进行重新分配，包括生成几个 cell、设置每个新 cell 的大小，设置每个 cell 的解锁地址，等等。</p>
-                  <p>output中设置的cell总大小必须小于input中的cell，差值即为矿工手续费。</p>
+                  <p>点击 output 中的设置按钮，可以对新生成的 cell 进行重新分配，包括生成几个 cell、设置每个新 cell 的大小，设置每个 cell 的解锁地址，等等。</p>
+                  <p>output 占用的 capacity 空间必须小于 input，二者的差值即为矿工能挣到的手续费。</p>
                   <p>设置完成后，点击“生成交易”的按钮，就可以看到这笔交易的 JSON 是什么样子了。</p>
                 </div>
 
@@ -217,6 +218,7 @@ export default function Class1(){
                 <h4 id="sign-a-tx" style={styles.main_color}>对交易进行签名</h4>
                 <p>一笔转账拼好之后，需要用相应的私钥，对这笔交易进行签名，表明我们确实是 cell 的主人，有权对这些 cell 执行操作。</p>
                 <p>签名将被放入一个新的名为 witnesses 的字段中，作为交易的证明。</p>
+                <p>到这里你已经完整了解了一笔交易的过程，我们马上开始动手发交易。</p>
                 <br/><br/><br/>
                 <hr/>
                 <div id="construct-a-tx"></div>
@@ -240,9 +242,9 @@ export default function Class1(){
                     但因为现在我们在尝试的是系统内建的转账交易，这种交易互相约定会在 witness 中放入这样一个结构：</p>
                 <CodePiece code={
                     {
-                        lock: 'Script',
-                        input_type: 'Script',
-                        output_type: 'Script',
+                        lock: '证明',
+                        input_type: '证明',
+                        output_type: '证明',
                     }
                 } custom_style={{padding: '5px'}} />
                 <p>

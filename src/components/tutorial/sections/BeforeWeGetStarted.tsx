@@ -27,7 +27,6 @@ export default function BeforeWeGetStarted(){
                 </strong>
                 <p> 一切都将在本页面中，以一种纯手工的、远程的、与云端测试链互动的方式完成。</p>
                 <p> 所以你需要具备的唯一要求是：保持往下阅读的耐心，以及对 CKB 的好奇心:D</p>
-                <p> 我们希望把这个教程做成 CKB 开发者 on-boarding 的第一站。如果你在学习本教程的过程中有任何建议或想法，欢迎邮件：retric@cryptape.com 反馈。</p>
                 <p> 那么废话不多说，让我们在 CKB 上开始这一次有趣的冒险之旅吧！</p>
             </div>
             <hr/>

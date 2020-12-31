@@ -107,12 +107,13 @@ const styles = {
         verticalAlign: 'text-bottom',
     },
     describe_img_wrapper: {
-        maxWidth: '400px',
+        maxWidth: '200px',
         margin: '0 auto',
     },
     describe_img: {
         width: '100%',
         height: '100%',
+        background: 'gray',
     }
 }
 

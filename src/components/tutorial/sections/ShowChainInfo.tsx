@@ -77,8 +77,8 @@ export default function(){
                     </p>
 
                     <p> 现在，钱包 1 是云端这一条测试链默认的矿工地址。<br/><br/>
-                        也就是说，钱包 1 将源源不断收到来自挖矿所获得的出块奖励。所以你会看到钱包 1 的余额在不断增长。<br/><br/>
-                        目前测试链只有一个矿工。
+                        也就是说，钱包 1 将源源不断收到来自挖矿所获得的出块奖励。所以你会看到钱包 1 查找出来的 live Cell 是最多的。钱包 2 和钱包 3 只有很少、甚至还没有 live cell。<br/><br/>
+                        目前，测试链只有一个矿工。
                     </p>
                 </div>
             </div>
@@ -88,8 +88,8 @@ export default function(){
                 <ChainConfig />
                 <div style={styles.explain_text}>
                     <p><code style={styles.single_line_code}>prefix：ckt</code> 表明这条链是测试链，而不是主网。</p>
-                    <p><code style={styles.single_line_code}>scripts</code> 里代表的则是链内置的智能合约。</p>
-                    <p>每条CKB链都会预先在创世块部署几个系统内置的智能合约，上面显示了3个系统合约的具体信息。</p>
+                    <p><code style={styles.single_line_code}>scripts</code> 里代表的则是链内置的智能合约，也就是 type 和 lock 可以利用的系统内置的一些锁。</p>
+                    <p>每条 CKB 链都会预先在创世块部署几个系统内置的智能合约，上面显示了3个系统合约的具体信息。</p>
                     <ul>
                         <li>SECP256K1_BLAKE160：是系统默认使用的 Cell 的 lock 锁的合约，用来保护 Cell 的所有权</li>
                         <li>SECP256K1_BLAKE160_MULTISIG：是 SECP256K1_BLAKE160 的多签版本</li>

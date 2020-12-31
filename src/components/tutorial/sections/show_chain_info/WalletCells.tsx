@@ -77,10 +77,18 @@ export default function WalletCells( props: Props ){
                     hash_type: 'type'
                 }}} render_dep={selectedWallet} text={{title:'钱包对应的交易', btn_text:''}} custom_style={{btn_style: styles.hidden_btn}} ></WalletTxs>
             </div>
-
-            <div>
-                <Balance lock_args={selectedWallet || ''} render_dep={selectedWallet} text={{title:'钱包余额', btn_text:''}} custom_style={{btn_style: styles.hidden_btn}} />
-            </div>
+           
+            
         </div>
     )
 }
+
+
+/**    
+ * 
+ * 
+ * 
+ *          <div>
+                <Balance lock_args={selectedWallet || ''} render_dep={selectedWallet} text={{title:'钱包余额', btn_text:''}} custom_style={{btn_style: styles.hidden_btn}} />
+            </div>
+*/
