@@ -26,7 +26,7 @@ const styles = {...commonStyle, ...{
 
 export type Props = {
     raw_tx: RawTransaction | undefined,
-    witnessArgs: WitnessArgs[],
+    witnesses?: HexString[],
 }
 
 export default function FetchToSignMessage(props: Props){
@@ -34,9 +34,11 @@ export default function FetchToSignMessage(props: Props){
     const [message, setMessage] = useState('');
     const generateMessage = async () => {
         setIsLoading(true);
+        //const raw_tx = JSON.parse(JSON.stringify(eval("(" + props.raw_tx + ")")));
+        //console.log(raw_tx);
         if(props.raw_tx){
             const api = new Api();
-            const result = await api.getToSignMessage(props.raw_tx, props.witnessArgs);
+            const result = await api.getToSignMessage(props.raw_tx, props.witnesses ? props.witnesses: Array(props.raw_tx.inputs?.length).fill('0x'));
             console.log(result, typeof result);
             if(result.status === "ok"){
                 const msgs = result.data.map( (m: Message) => <li>{m.message}</li>);

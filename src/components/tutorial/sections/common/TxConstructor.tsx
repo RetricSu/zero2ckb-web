@@ -61,7 +61,7 @@ export default function TxConstructor(){
             inputs: input_cell_inputs,
             outputs: [],
             outputs_data: [],
-            witnesses: ["0x"],
+            witnesses: Array(input_cell_inputs.length).fill('0x'),
         }, ...tx_output};
         setRawTx(data);
     }

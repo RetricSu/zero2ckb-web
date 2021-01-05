@@ -66,6 +66,19 @@ export default function Class1(){
       outputs_data: ["0x"],
       witnesses: ["0x"]
 }`;
+
+    const prepareDefaultWitnessFromRawTx = () => {
+        const witnesses = [];
+        if(raw_tx?.inputs){
+          for(let i=0;i<raw_tx?.inputs.length;i++){
+            witnesses.push({
+              lock: ''
+            });
+          } 
+        }
+        return witnesses;
+    }
+
     /*
     const raw_tx_template = `{
         version: "0x0",
@@ -258,7 +271,7 @@ export default function Class1(){
                 </p>
                 <p id="generate-message">为了完成签名，我们首先需要让这笔交易生成一个待签名的 message。</p>
                 
-                <ToSignMessage raw_tx={raw_tx} witnessArgs={[{lock:''}]}></ToSignMessage>
+                <ToSignMessage raw_tx={raw_tx} />
 
                 <h4 style={styles.main_color}>开始签名</h4>
 

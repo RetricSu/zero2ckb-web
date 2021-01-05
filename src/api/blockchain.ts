@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from '../config/constant.json';
+import utils from '../utils/index';
 import type {
     Transaction,
     QueryOption, 
@@ -16,7 +17,8 @@ class Api{
     base_url: string;
 
     constructor(){
-        this.base_url = config.production_server_url; //config.development_server_url;//config.production_server_url;
+        
+        this.base_url = utils.get_env_mode() === 'development' ? config.development_server_url : config.production_server_url;
     };
 
 

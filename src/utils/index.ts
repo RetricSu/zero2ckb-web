@@ -1,4 +1,5 @@
 import JSBI from 'jsbi';
+import { mode } from '../config/constant.json';
 
 const convertTimestamp = (ts: string | number) => {
     if(typeof ts === 'string'){
@@ -39,6 +40,10 @@ const isObjectInArray = (item: object, arr: object[]) => {
    return false;
 }
 
+const get_env_mode = () => {
+    //todo: maybe auto test using os === 'ubuntu' or something.
+    return mode === 'development' ? 'development' : 'production';
+}
 
 export default {
     convertTimestamp: convertTimestamp,
@@ -46,5 +51,6 @@ export default {
     dec2hex: dec2hex,
     shannon2CKB: shannon2CKB,
     CKB2shannon: CKB2shannon,
-    isObjectInArray: isObjectInArray
+    isObjectInArray: isObjectInArray,
+    get_env_mode: get_env_mode
 }
