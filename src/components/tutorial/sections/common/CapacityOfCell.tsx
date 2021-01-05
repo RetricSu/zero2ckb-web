@@ -117,13 +117,18 @@ export default function CapacityOfCell (props: CapacityOfCellProps){
         :  
         `capacity: ${myCell.cell_output.capacity} = ${utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))} < 实际占用空间：${totalbyteLength}, ❌`;
 
+    const ballStatusStyle = BigInt(utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))) > BigInt(totalbyteLength) ? 
+        {}
+        :
+        {border: '1px solid red'};
+
     return(
         <div key={cell.cell_output.lock.args} style={styles.root}>
             <div style={styles.input_wrap}>
                 <input onChange={(e)=>{handleInputChange(e.currentTarget.value)}} placeholder="data：输入汉字.." type="text" style={styles.input}/>
             </div>
             <div style={{...styles.cell_panel, ...props.custom_style}} onMouseEnter={hovering} onMouseLeave={unhover}>          
-                <div style={ isHover ? {...styles.ball, ...styles.ball_hover} : styles.ball } >
+                <div style={ isHover ? {...styles.ball, ...styles.ball_hover, ...ballStatusStyle} : {...styles.ball, ...ballStatusStyle} } >
                     <div style={styles.cell_content}>
                         占用空间 <br/><br/>
                         {totalbyteLength} Bytes
