@@ -52,7 +52,7 @@ export default function ShowTxInfo (props: TxProps) {
     
     return (
         <li key={ key_id != undefined ? key_id : tx.hash } style={styles.box_content_link} onClick={handleOpen}>
-                        { tx.hash }
+                     { tx.hash?.slice(0, 12) }..
                 <Modal
                   open={open}
                   onClose={handleClose}

@@ -291,9 +291,6 @@ export default function Class1(){
 
                 <h4 id="send-tx" style={styles.main_color}>最后一步，把交易发送到链上</h4>
                 <SendTx tx={complete_tx}></SendTx>
-                <p>注意看下，交易成功上链后返回的 tx_hash，是不是和之前事先生成的那个 tx_hash 一模一样？</p>
-                <p>CKB 的确定性诚不欺我。</p>
-                <p>现在，你可以查看钱包 2 的 live cell，看看刚才我们发送的交易是不是真的在链上了。</p>
                 <p>最后恭喜你，成功完成了第一小节的内容～</p>
                 <p>接下来，我们将会学习如何发送一笔<span style={styles.main_color}>多签</span>的转账交易。</p>
             </div>

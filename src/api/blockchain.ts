@@ -31,6 +31,16 @@ class Api{
         return res.data;
     };
 
+    async getBlockByTxHash(tx_hash: HexString){
+        console.log('tx hash:', tx_hash);
+        let res = await axios.get(`${this.base_url}/get_block_by_tx_hash`, {
+            params:{
+                tx_hash: tx_hash
+            }
+        });
+        return res.data;
+    }
+
     async getLiveCells(query: QueryOption, limit:number = 10){
         let res = await axios.get(`${this.base_url}/get_live_cells`, { 
             params:{

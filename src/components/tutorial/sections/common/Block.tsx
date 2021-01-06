@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import { Container } from '@material-ui/core';
 import Utils from '../../../../utils/index';
 import common_style from '../../../widget/common_style';
@@ -10,6 +10,7 @@ import ShowTxInfo from './Tx';
 
 export type BlockProps = {
     block: Block
+    custom_style?: CSSProperties
 } 
 
 const styles = {
@@ -75,16 +76,18 @@ export default function BlockBox(props: BlockProps) {
         setIsHover(false);
     };
 
-    const { block } = props;
+    const { block, custom_style } = props;
     
     function show_tx_list(transactions: Transaction[]) {
-        const jsx = transactions.map( (tx: Transaction) => <ShowTxInfo tx={tx} />);
+        const jsx = transactions.map( (tx: Transaction, index: number) => <ShowTxInfo tx={tx} key_id={index} />);
         return jsx;
     }
 
+    const box_style = isHover ? styles.hover_box : styles.box;
+
     return(
         <div>
-            <Container style={ isHover ? styles.hover_box : styles.box } key={block.header.hash} onMouseEnter={hovering} onMouseLeave={unhover}>
+            <Container style={custom_style ? {...box_style, ...custom_style} : box_style} key={block.header.hash} onMouseEnter={hovering} onMouseLeave={unhover}>
                 <div style={styles.box_header}>
                     <div style={styles.box_header_title}> 区块：#{ Utils.hex2dec( block.header.number )} </div>
                     <p style={styles.box_header_sub_title}>哈希：{block.header.hash.slice(0,12)}.. </p>
