@@ -10,6 +10,7 @@ import SendTx from './class_1/SendTx';
 import SeriliazedWitnessArgs from './class_1/SeriliazedWitnessArgs';
 import TxConstructor from './common/TxConstructor';
 import DragCellToInputJson from './common/DragCellToInputJson';
+import { ValidateTransaction, ValidateRawTransaction } from '../../../utils/validator';
 
 import type {
   Transaction,
@@ -34,11 +35,10 @@ export default function Class1(){
       cell_deps: [
         {
           out_point: {
-            tx_hash:
-              "0x",
-            index: "0x",
+            tx_hash: "将此处补充完整",
+            index: "将此处补充完整",
           },
-          dep_type: "dep_group or code", 
+          dep_type: "将此处补充完整", 
         },
       ],
       header_deps: [],
@@ -46,20 +46,18 @@ export default function Class1(){
         {
           since: "0x0",
           previous_output: {
-            tx_hash:
-              "0x",
-            index: "0x",
+            tx_hash: "将此处补充完整",
+            index: "将此处补充完整",
           },
         },
       ],
       outputs: [
         {
-          capacity: "0x",
+          capacity: "将此处补充完整",
           lock: {
-            code_hash:
-              "0x",
-            hash_type: "type or data",
-            args: "0x",
+            code_hash: "将此处补充完整",
+            hash_type: "将此处补充完整",
+            args: "将此处补充完整",
           },
         },
       ],
@@ -118,15 +116,33 @@ export default function Class1(){
 }`
     */
     const onRawTxSubmit = (content: string) => {
-        const raw_tx_content = JSON.parse(JSON.stringify(content));
-        setRawTx(raw_tx_content);
-        notify('raw_tx 已成功保存！')
+      try {
+        const raw_tx_content: RawTransaction = JSON.parse(JSON.stringify(eval("(" + content + ")")));
+        try {
+          ValidateTransaction(raw_tx_content);
+          setRawTx(raw_tx_content);
+          notify('raw_tx 已成功保存！');
+        } catch (error) {
+          notify(error.message);
+        }
+      } catch (error) {
+        notify('非法字符：'+ error.message);
+      }
     }
 
     const onCompleteTxSubmit = (content: string) => {
-        const tx_content = JSON.parse(JSON.stringify(content));
-        setCompleteTx(tx_content);
-        notify('tx 已成功保存！');
+        try {
+          const tx_content: Transaction = JSON.parse(JSON.stringify(eval("(" + content + ")")));
+          try {
+            ValidateTransaction(tx_content);
+            setCompleteTx(tx_content);
+            notify('tx 已成功保存！');
+          } catch (error) {
+            notify(error.message);
+          }
+        } catch (error) {
+          notify('非法字符：'+ error.message);
+        }
     }
 
     const fetchChainMinInfor = async () => {
@@ -286,7 +302,7 @@ export default function Class1(){
                 <p id="put-sign-back" >现在我们可以完善原本的交易了，把序列化好的签名放进 witnesses 字段里：</p>
 
                 { JSON.stringify(raw_tx) &&
-                    <Form form_template={ eval('`' + JSON.stringify(raw_tx).substring(1, JSON.stringify(raw_tx).length-1) + '`')} onSubmit={onCompleteTxSubmit} btn_text={'保存'}></Form>
+                    <Form form_template={ JSON.stringify(raw_tx, null, 2)} onSubmit={onCompleteTxSubmit} btn_text={'保存'}></Form>
                 }
 
                 <h4 id="send-tx" style={styles.main_color}>最后一步，把交易发送到链上</h4>

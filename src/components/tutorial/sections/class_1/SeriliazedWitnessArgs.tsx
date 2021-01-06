@@ -35,9 +35,9 @@ export default function SeriliazedWitnessArgs(){
     const lock_ref = useRef<HTMLInputElement>(null);
 
     const seriliazed_witness = async () => {
-        const witnessArgs: string = JSON.stringify({
+        const witnessArgs = {
             lock: lock_ref.current?.value
-        });
+        };
         const api = new Api();
         const res = await api.getSeriliazedWitness(witnessArgs);
         if(res.status === 'ok'){

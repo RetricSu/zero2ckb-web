@@ -15,8 +15,8 @@
 - [x] chain config setting
 - [x] error return code tips when interact in class 1
 - [x] capacity not right bug
-- [ ] eval sercurity
-- [ ] form to create tx
+- [x] eval sercurity
+- [x] form to create tx
 - [ ] refine the article -- add ref
 - [ ] firework
 - [ ] nignx setting balance

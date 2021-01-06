@@ -118,7 +118,7 @@ class Api{
         return res.data; 
     }
 
-    async getSeriliazedWitness(witnessArgs: string){
+    async getSeriliazedWitness(witnessArgs: WitnessArgs){
         let res = await axios.get(`${this.base_url}/get_seriliazed_witness`, { 
             params:{
                 witnessArgs: witnessArgs
