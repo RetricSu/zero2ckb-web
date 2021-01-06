@@ -30,7 +30,7 @@ export default function CopyText(props: Props){
         const boolean = document.execCommand('copy');
         document.body.removeChild(el);
         const message = boolean ? '复制成功 √' : '复制失败 x';
-        notify(message);
+        notify(message, 'success');
     }
 
     return(

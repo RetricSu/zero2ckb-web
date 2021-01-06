@@ -121,7 +121,7 @@ export default function Class1(){
         try {
           ValidateTransaction(raw_tx_content);
           setRawTx(raw_tx_content);
-          notify('raw_tx 已成功保存！');
+          notify('raw_tx 已成功保存！', 'success');
         } catch (error) {
           notify(error.message);
         }
@@ -136,7 +136,7 @@ export default function Class1(){
           try {
             ValidateTransaction(tx_content);
             setCompleteTx(tx_content);
-            notify('tx 已成功保存！');
+            notify('tx 已成功保存！', 'success');
           } catch (error) {
             notify(error.message);
           }
