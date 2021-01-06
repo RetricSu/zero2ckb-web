@@ -1,5 +1,5 @@
 {
     "development_server_url": "http://localhost:5000",
     "production_server_url": "https://api.asdfvaswe23.xyz",
-    "mode": "development"
+    "mode": "production"
 }
