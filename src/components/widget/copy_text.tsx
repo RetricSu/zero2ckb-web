@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { notify } from './notify';
 
 export type Props = {
-    text: string
+    text: string | object
     suffix?: string
     icon?: boolean
 }
@@ -24,7 +24,7 @@ export default function CopyText(props: Props){
         const el = document.createElement('input');
         el.setAttribute('type', 'text');
         el.setAttribute('style', 'position:absolute;left:-9999px;');
-        el.setAttribute('value', props.text);
+        el.setAttribute('value', typeof props.text === 'string' ? props.text : JSON.stringify(props.text, null, 2));
         document.body.appendChild(el);
         el.select();
         const boolean = document.execCommand('copy');
