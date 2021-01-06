@@ -57,6 +57,8 @@ div::-webkit-scrollbar-thumb:hover {
 }
 div::-webkit-scrollbar-button {
   background: gray;
+  width: 0;
+  height: 0;
 }
 div::-webkit-scrollbar-corner {
   background: rgba(0,0,0,0);
@@ -75,6 +77,8 @@ pre::-webkit-scrollbar-thumb:hover {
 }
 pre::-webkit-scrollbar-button {
   background: gray;
+  width: 0;
+  height: 0;
 }
 pre::-webkit-scrollbar-corner {
   background: rgba(0,0,0,0);

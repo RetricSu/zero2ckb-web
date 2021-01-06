@@ -89,7 +89,7 @@ export function WalletInfo(props: WalletInfoProps){
         if(isShowing){
             return (
                 <div style={styles.wallet_info}>
-                    <CodePiece custom_style={{border:'0px', marginTop:'0px', marginBottom:'0px'}} code={wallet_top}></CodePiece>
+                    <CodePiece custom_style={{border:'0px', marginTop:'0px', marginBottom:'0px', overflow: 'hidden'}} code={wallet_top}></CodePiece>
                     <div style={styles.wallet_info_text}>
                         <p><strong style={styles.main_color}>mainet: &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</strong>
                             { wallet.mainnet.slice(0, 8) }..{ wallet.mainnet.slice(wallet.mainnet.length-5) }   <CopyText text={wallet.mainnet} icon={true} /></p>
@@ -100,7 +100,7 @@ export function WalletInfo(props: WalletInfoProps){
                         <p><strong style={styles.main_color}>private_key: </strong>
                             { wallet.private_key.slice(0, 8) }..{ wallet.private_key.slice(wallet.private_key.length-5) }   <CopyText text={wallet.private_key} icon={true} /></p>
                     </div>
-                    <CodePiece custom_style={{border:'0px', marginTop:'0px', marginBottom:'0px'}} code={wallet_bottom}></CodePiece>
+                    <CodePiece custom_style={{border:'0px', marginTop:'0px', marginBottom:'0px', overflow: 'hidden'}} code={wallet_bottom}></CodePiece>
                 </div>
             )
         }else{
