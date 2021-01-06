@@ -17,5 +17,5 @@
 - [x] capacity not right bug
 - [ ] refine the article
 - [ ] add/hide balance function
-- [ ] notify style
+- [ ] notify style: add different msg type
 - [ ] fix toolbar bug

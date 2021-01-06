@@ -30,6 +30,7 @@ export default function ToTxHash(props: Props){
         const api = new Api();
         if(props.raw_tx){
             const res = await api.generateTxHash(props.raw_tx);
+            console.log(res);
             if(res.status == 'ok'){
                 setHash(res.data);
             }
