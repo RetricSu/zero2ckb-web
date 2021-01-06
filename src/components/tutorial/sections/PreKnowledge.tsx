@@ -177,10 +177,14 @@ export default function Preknowledge(){
             <p>关于 Cell，你需要记住的最重要的一条规则是，上面这四个字段所占用的空间，加起来要小于或等于 capacity 的值。</p>
             <p>也就是说，</p>
             <CodePiece code={code.cell_space_rule} />
-
             <p>
-                下面是一个小例子，输入汉字作为 Cell 的 data，可以查看 Cell 的空间变化。<br/><br/>
-                如果 data 的变化导致实际占用空间超过了 capacity 的值，Cell 就会被认为是不合法的 Cell。
+                为了更好的理解这点，让我们来看一个具体的例子。
+            </p>
+            <p>
+                下面是一个小实验，输入汉字作为 Cell 的 data，可以查看 Cell 实时的空间变化。
+                点击 Cell，还可以看到 Cell 具体的内容，以及每个字段实际占据的空间大小。<br/><br/>
+                我们设定该 Cell 的 capacity 值为 0x1dcd65000，也就是 80 Bytes 大小。
+                如果 data 的变化，导致实际占用空间超过了 capacity 的值，那么 Cell 就会被认为是不合法的 Cell。
             </p>
 
             {code_hash && hash_type &&

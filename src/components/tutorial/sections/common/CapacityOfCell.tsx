@@ -5,6 +5,7 @@ import CodePiece from '../../../widget/code';
 import Api from '../../../../api/blockchain';
 import {notify} from '../../../widget/notify';
 import utils from '../../../../utils/index';
+import { Modal, Fade } from '@material-ui/core';
 
 const styles = {...commonStyle, ...{
         root: {
@@ -16,8 +17,8 @@ const styles = {...commonStyle, ...{
             padding: '10px',
         },
         cell_panel: {
-            width: '108px',
-            height: '108px',
+            width: '208px',
+            height: '208px',
             listStyle: 'none',
             margin: '0 auto',
             marginBottom: '10px',
@@ -31,17 +32,26 @@ const styles = {...commonStyle, ...{
             border: '1px solid ' + commonStyle.main_color.color,
             textAlign: 'center' as const,
             justifyContent: 'center' as const,
-            fontSize: '10px',
+            fontSize: '14px',
             alignItems: 'center' as const,
+            overflow: 'hidden' as const,
         },
         ball_hover: {
-            background: 'gray'
+            background: 'gray',
+            cursor: 'pointer',
         },
         cell_content: {
-            margin: '30% auto',
+            margin: '20% auto',
+            overflowWrap: 'break-word' as const,
         },
         space_result: {
             textAlign: 'left' as const,
+        },
+        hr: {
+            display: 'block', 
+            height: '1px',
+            border: '0', 
+            borderTop: '1px solid '+commonStyle.main_color.color,
         }
     }
 }
@@ -57,6 +67,16 @@ export default function CapacityOfCell (props: CapacityOfCellProps){
     const { cell } = props;
     const [myCell, setMyCell] = useState<Cell>(cell);
     const [totalbyteLength, setTotalByteLength] = useState('61');
+
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => {
+        setOpen(!open);
+    }
+
+    const handleClose = () => {
+      setOpen(!open);
+    };
 
     const [isHover, setIsHover] = useState(false);
     const hovering = () => {setIsHover(true);}
@@ -122,27 +142,50 @@ export default function CapacityOfCell (props: CapacityOfCellProps){
         :
         {border: '1px solid red'};
 
+    const hrStatusStyle = BigInt(utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))) > BigInt(totalbyteLength) ? 
+        styles.hr
+        :
+        {...styles.hr, ...{ borderTop: '1px solid red'}};
+
     return(
         <div key={cell.cell_output.lock.args} style={styles.root}>
             <div style={styles.input_wrap}>
                 <input onChange={(e)=>{handleInputChange(e.currentTarget.value)}} placeholder="data：输入汉字.." type="text" style={styles.input}/>
             </div>
-            <div style={{...styles.cell_panel, ...props.custom_style}} onMouseEnter={hovering} onMouseLeave={unhover}>          
+            <div style={{...styles.cell_panel, ...props.custom_style}} onMouseEnter={hovering} onMouseLeave={unhover} onClick={handleOpen}>          
                 <div style={ isHover ? {...styles.ball, ...styles.ball_hover, ...ballStatusStyle} : {...styles.ball, ...ballStatusStyle} } >
                     <div style={styles.cell_content}>
                         占用空间 <br/><br/>
-                        {totalbyteLength} Bytes
+                        {totalbyteLength} Bytes <br/><br/>
+                        <hr style={hrStatusStyle} />
+                        {myCell.data}
                     </div>
                 </div>
             </div>
             <div style={styles.space_result}>
-                Cell 的内容：
-                <CodePiece code={ JSON.stringify(myCell, null, 2) } custom_style={{padding: '5px', border:'1px solid gray'}}/>
-                每个字段占用空间大小：
-                <CodePiece code={JSON.stringify({...{total: totalbyteLength + ' Bytes'}, ...getCellPropertyByteLength()}, null, 2)} custom_style={{padding: '5px', border:'1px solid gray'}}/>
                 Cell 容量是否足够：
                 <CodePiece code={ isCapacityEnouge } custom_style={{padding: '5px', border:'1px solid gray'}}/>
             </div>
+
+
+            <Modal
+                  open={open}
+                  aria-labelledby={'simple-modal-title' + cell.block_hash}
+                  aria-describedby={'simple-modal-description' + cell.block_hash}
+                  style={styles.modal}
+                  closeAfterTransition
+                  disableBackdropClick={true}
+                >
+                  <Fade in={open}>
+                    <div style={styles.paper}>
+                      Cell 的内容：
+                      <CodePiece code={ JSON.stringify(myCell, null, 2) } custom_style={{padding: '5px', border:'1px solid gray'}}/>
+                      每个字段占用空间大小：
+                      <CodePiece code={JSON.stringify({...{total: totalbyteLength + ' Bytes'}, ...getCellPropertyByteLength()}, null, 2)} custom_style={{padding: '5px', border:'1px solid gray'}}/>
+                      <button onClick={handleClose}>close</button>
+                    </div>
+                  </Fade>
+            </Modal>
         </div>
     )
 }
