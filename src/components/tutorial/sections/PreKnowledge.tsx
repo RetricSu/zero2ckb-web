@@ -131,7 +131,7 @@ export default function Preknowledge(){
             <CellConcept></CellConcept>
             
             <p>
-                跟 UTXO 不同的是，Cell 可以用来存储任意类型的数据。Cell 有一个字段名为 data，里面可以放入 16 进制的无格式字符串。
+                跟 UTXO 不同的是，Cell 可以用来存储任意类型的数据。Cell 有一个字段名为 data，里面可以放入无格式的字符串。
                 这意味着，你往 data 上写入什么样的内容都可以，格式也是你自己定，只要你自己知道怎么解读这段字符串就行。<br/><br/>
                 比如，我可以往上面存一个哈希，存一段文字，也可以存一个日期，
                 甚至，你可以放一段二进制代码进去，而这段代码又可以被其他 Cell 引用，
@@ -158,7 +158,7 @@ export default function Preknowledge(){
             </p>
             <p>
                 盒子(Cell)有了空间之后可以拿来放数据，这些数据的大小要小于整个盒子的大小，因为盒子还有一些其他的组成部分，它们也需要占用一定的空间。<br/><br/>
-                按一个汉字占2个字节来算，如果你有 100 CKB，那么你大概可以往这个 Cell 上存不到 50 个汉字的内容上去。<br/><br/>
+                按一个汉字占2个字节（GBK编码）来算，如果你有 100 CKB，那么你大概可以往这个 Cell 上存不到 50 个汉字的内容上去。<br/><br/>
                 《红楼梦》总共约为 78 万字，所以你大概需要 156 万个 CKB 原生代币才能把整部书上传到链上。<br/><br/>
                 由此我们可以发现，链上的 Cell 空间真的是非常宝贵的存在。<br/><br/>
                 CKB 通过这种只在链上存储共识的设计，也是为了鼓励大家把真正有价值的、有必要经过共识的数据上传到链上。这些数据相当于整个人类共同拥有的知识库。实际上这也是 CKB 
@@ -169,10 +169,10 @@ export default function Preknowledge(){
             <CodePiece code={code.cell_structure} />
             <p>四个字段具体含义如下：</p>
             <ul>
-                <li><strong style={styles.main_color}>capacity：</strong>是一个16进制的字符串，表示 Cell 的空间大小，同时也是这个 Cell 代表的原生代币的数量</li>
+                <li><strong style={styles.main_color}>capacity：</strong>表示 Cell 的空间大小，同时也是这个 Cell 代表的原生代币的数量，我们通常会选择用 16 进制来表示</li>
                 <li><strong style={styles.main_color}>lock：</strong>是一个脚本，本质相当于是一把锁，下文将详解</li>
                 <li><strong style={styles.main_color}>type: </strong>是一个脚本，和 lock 一样，只是锁的用途不同，下文将详解</li>
-                <li><strong style={styles.main_color}>data: </strong>是一个16进制的字符串，可以在这里存放任何类型的数据</li>
+                <li><strong style={styles.main_color}>data: </strong>是一个无格式字符串，可以在这里存放任何类型的数据</li>
             </ul>
             <p>关于 Cell，你需要记住的最重要的一条规则是，上面这四个字段所占用的空间，加起来要小于或等于 capacity 的值。</p>
             <p>也就是说，</p>
@@ -209,7 +209,7 @@ export default function Preknowledge(){
                 输入参数和我们提交的一些证明（比如对交易的签名），来判断锁能否被解开。
                 如果能解开，就证明我们对 Cell 拥有所有权和控制权。
             </p>
-            <p>锁是一种 Script 的脚本结构，它长这个样子：</p>
+            <p>锁是一种脚本结构（Script），它长这个样子：</p>
             <CodePiece code={code.script_structure} />
             <p>在三个字段中，让我们先忽略 hash_type 留给后面再讲：</p>
             <ul>
@@ -217,7 +217,7 @@ export default function Preknowledge(){
                 <li><strong style={styles.main_color}>args: </strong> 表示要往这段代码传入的参数</li>
             </ul>
             <p> code_hash 与 args 合起来组成了一把完整的“锁”：我们通过 code_hash 字段找到要执行的代码在哪里，然后往这段代码里传入参数 args，
-                随后这段程序就会被虚拟机 CKB-VM 执行，如果执行成功，将返回 0，表示这个锁能被顺利解开，如果执行不成功，返回其他数值，则表示这个锁无法解开。
+                随后这段程序就会被虚拟机 CKB-VM 执行（这个过程可能还会读取一些额外的参数，比如交易附带的证明），如果执行成功，将返回 0，表示这个锁能被顺利解开，如果执行不成功，返回其他数值，则表示这个锁无法解开。
             </p>
             <p>
                 运用这个原理，CKB 判断 一个 Cell 属于谁，就是判断谁能解开这个 Cell 附带的 lock 锁。这跟比特币的原理是一样的。<br/><br/>
@@ -227,8 +227,8 @@ export default function Preknowledge(){
                 这样加密算法输入公钥和签名，就能判断这笔交易是不是由对应的私钥发起的，
                 从而也就能判断背后是不是这个 Cell 真正的主人在操作。
             </p>
-            <p>反过来说，如果你创造的 Cell 没有加任何的锁（也就是说 lock 和 type 字段都为空），
-                那么这意味着，任何人都可以解锁这个 Cell。也就是说，你的钱任何人都能花掉！这是非常危险的。所以，千万要记住，给盒子加把锁。</p>
+            <p>反过来说，如果你创造的 Cell 没有加任何“有效”的锁，
+                那么这意味着，任何人都可以解锁这个 Cell。也就是说，你的钱任何人都能花掉！这是非常危险的。所以，锁对 Cell 来说真的非常重要。</p>
             
             <h3 id="break1" style={styles.main_color}>课间休息</h3>
             <p>好了你已经成功读到了这里，让我们回顾下目前掌握的新知识：</p>
@@ -244,7 +244,7 @@ export default function Preknowledge(){
         <div style={styles.content}>
             <h3 id="where-is-the-real-code" style={styles.main_color}>真正的代码藏在哪里？</h3>
             <p>我们已经知道，可以使用 Cell 的 lock 和 type 字段给盒子上锁，来帮我们保护这个盒子的所有权和控制权。</p>
-            <p>锁是一种 Script 的脚本结构，这个结构长这样：</p>
+            <p>锁是一种脚本结构，这个结构长这样：</p>
             <CodePiece code={code.script_structure}></CodePiece>
             <p> 你应该注意到了，code_hash 里放的并不是真正的代码，而是代码的哈希，相当于这段代码的一个索引。我们通过这个索引，可以找到锁真正使用的代码。
                 那么这段所谓真正的代码，又是放在哪里的呢？</p>
@@ -290,11 +290,11 @@ export default function Preknowledge(){
                 这是CKB的另一个灵活之处。
             </p>
             <p>我们上面讲的这些锁的例子，都是 Cell 里的 lock 字段的锁。</p>
-            <p> 但一个 cell 盒子除了默认的 lock 锁，还有一把可选的 type 锁。
+            <p> 但一个 cell 除了默认的 lock 锁，还有一把可选的 type 锁。
                 这两把锁的本质是一样的，只不过因为用途的不同，所以取了不同的名字。</p>
             <p> lock 锁通常用来保护盒子的所有权，type 锁则用来保证 Cell 在交易过程中遵循某些数据变换规则。</p>
             <p>
-                要搞懂这句话的意思，我们需要开始介绍 CKB 中的一笔交易到底是怎么回事了。
+                要搞懂上面这句话的意思，我们需要开始介绍 CKB 中的一笔交易到底是怎么回事了。
             </p>
             <h4 id="what-is-tx" style={styles.main_color}>交易就是销毁一些 Cell，再创造一些 Cell</h4>
             <p>

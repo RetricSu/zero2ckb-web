@@ -15,7 +15,13 @@
 - [x] chain config setting
 - [x] error return code tips when interact in class 1
 - [x] capacity not right bug
-- [ ] refine the article
+- [ ] eval sercurity
+- [ ] form to create tx
+- [ ] refine the article -- add ref
+- [ ] firework
+- [ ] nignx setting balance
+
+
 - [ ] add/hide balance function
 - [ ] notify style: add different msg type
 - [ ] fix toolbar bug
