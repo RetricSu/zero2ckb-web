@@ -26,12 +26,10 @@ const styles = {...commonStyle, ...{
         overflowY: 'scroll' as const,
     },
     close_btn: {
-        position: 'absolute' as const,
         top: '0',
         width: '100%',
         textAlign: 'right' as const,
-        fontSize: '10px',
-        marginBottom: '30px',
+        fontSize: '15px',
         background: commonStyle.main_color.color,
         outline: 'none',
         border: '0',
