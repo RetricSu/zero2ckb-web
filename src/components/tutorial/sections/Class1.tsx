@@ -266,9 +266,11 @@ export default function Class1(){
 
                 <ToTxHash raw_tx={raw_tx}></ToTxHash>
 
-                <p> 尽管这笔交易已经可以提前生成 tx_hash，但它现在仍然是一笔 raw_tx。raw_tx 跟 tx 最大的不同是，tx 会在 witnessness 字段中放入交易的签名。<br/><br/>
-                    事实上，你可以在witness里放入任何你需要的参数或者证明。
-                    但因为现在我们在尝试的是系统内建的转账交易，这种交易互相约定会在 witness 中放入这样一个结构：</p>
+                <p> 尽管这笔交易已经可以提前生成 tx_hash，但它现在仍然是一笔 raw_tx。raw_tx 跟 tx 最大的不同是，
+                  tx 会在 witnesses 字段中放入交易的签名。<br/><br/>
+                    事实上，你可以在 witnesses 里放入任何你需要的参数或者证明。而且因为它是一个数组，还可以放入多个证明。
+                    但因为现在我们在尝试的是系统内建的转账交易，
+                    这种交易互相约定会在每一组 witnesses 的第一个位置，放入这样一个结构：</p>
                 <CodePiece code={
                     {
                         lock: '证明',
@@ -277,15 +279,18 @@ export default function Class1(){
                     }
                 } custom_style={{padding: '5px'}} />
                 <p>
-                    其中，lock 字段是放入 lock 锁需要验证的签名。在我们现在要使用的普通转账交易中，
-                    就是 SECP256K1_BLAKE160 算法需要验证的签名。
-                    所以我们将会在 witness.lock 这里放入签名。
+                    这一个结构被称为 WitnessArgs。不同的锁会从 WitnessArgs 不同的字段中读取自己需要的签名。
+                    其中，lock 字段是 input 使用到的 lock 锁需要验证的签名。
+                    在我们现在要实验的普通转账交易中，就是 SECP256K1_BLAKE160 算法需要验证的签名。<br/><br/>
+                    input_type 和 output_type 则是 input 和 output 中 type 锁需要验证的签名，暂时不必管它。
                 </p>
-                <p>
-                    witness是一个数组，所以可以放入多个证明。
-                    我们需要在第一个位置放入 P2PKH 的签名，同时其他的位置则放入用户自己的 witness。
+                <p style={styles.explain_text}>
+                    签名是一个比较繁琐的过程。更详细的技术细节在这里：
+                    <a href="https://github.com/nervosnetwork/ckb-system-scripts/wiki/How-to-sign-transaction" target="_blank">
+                      How to sign transaction
+                    </a>
                 </p>
-                <p id="generate-message">为了完成签名，我们首先需要让这笔交易生成一个待签名的 message。</p>
+                <p id="generate-message">现在，为了完成签名，让我们首先为这笔交易生成一个待签名的 message。</p>
                 
                 <ToSignMessage raw_tx={raw_tx} />
 

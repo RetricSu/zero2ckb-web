@@ -17,11 +17,11 @@
 - [x] capacity not right bug
 - [x] eval sercurity
 - [x] form to create tx
-- [ ] refine the article -- add ref
+- [x] notify style: add different msg type
+- [x] refine the article -- add ref
 - [ ] firework
 - [ ] nignx setting balance
 
 
 - [ ] add/hide balance function
-- [ ] notify style: add different msg type
 - [ ] fix toolbar bug

@@ -12,6 +12,9 @@ const styles = {
     main_color: {
         color: '#3CC68A'
     },
+    background_color: {
+        color: '#282c34'
+    },
     wide_card: {
         padding: '10px',
         textAlign: 'left' as const
@@ -107,13 +110,17 @@ const styles = {
         verticalAlign: 'text-bottom',
     },
     describe_img_wrapper: {
-        maxWidth: '200px',
-        margin: '0 auto',
+        maxWidth: '100px',
+        margin: '40px auto',
     },
     describe_img: {
         width: '100%',
         height: '100%',
-        background: 'gray',
+        background: '#282c34',
+    },
+    describe_img_footnote: {
+        textAlign: 'center' as const,
+        fontSize: '11px',
     }
 }
 

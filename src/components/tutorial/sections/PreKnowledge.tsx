@@ -5,7 +5,8 @@ import CellConcept from '../../widget/floating_cell/cell_concept';
 import CapacityOfCell from '../../tutorial/sections/common/CapacityOfCell';
 import { Cell, ChainConfig } from '../../../types/blockchain';
 import Api from '../../../api/blockchain';
-//import { data as cell_as_box_png } from '../../../resource/cell-as-box.json';
+import cell_as_box_concept from '../../../resource/open-box.png';
+import lock_concept from '../../../resource/lock-box.png';
 
 const code = {
     /** 
@@ -149,7 +150,8 @@ export default function Preknowledge(){
                 一个盒子还可以细分成多个盒子，只要总的盒子空间，跟你持有的代币总量相等就行。
             </p>
             <div style={styles.describe_img_wrapper}>
-                <img style={styles.describe_img} src="https://img2.pngio.com/box-container-cube-delivery-open-package-icon-box-drawing-png-512_512.png" alt="box-image"/>
+                <img style={styles.describe_img} src={cell_as_box_concept} alt="box-image"/>
+                <p style={styles.describe_img_footnote}>by Freepik</p>
             </div>
             <p>
                 根据系统的设定，1个 CKB 等于 1个 byte（字节）的空间。<br/><br/>
@@ -174,6 +176,10 @@ export default function Preknowledge(){
                 <li><strong style={styles.main_color}>type: </strong>是一个脚本，和 lock 一样，只是锁的用途不同，下文将详解</li>
                 <li><strong style={styles.main_color}>data: </strong>是一个无格式字符串，可以在这里存放任何类型的数据</li>
             </ul>
+            <p style={styles.explain_text}>更详细的数据结构介绍可以参考这里：
+                <a target="_blank" href="https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0019-data-structures/0019-data-structures.md#Cell">
+                Cell data structure</a>
+            </p>
             <p>关于 Cell，你需要记住的最重要的一条规则是，上面这四个字段所占用的空间，加起来要小于或等于 capacity 的值。</p>
             <p>也就是说，</p>
             <CodePiece code={code.cell_space_rule} />
@@ -197,12 +203,14 @@ export default function Preknowledge(){
             
             <p>
                 如果说 Cell 是一个盒子，那么 lock 和 type 就相当于盒子上挂着的两把锁。
-                其中，lock 是默认配上的锁，type 则是一把可选的锁。
             </p>
 
             <div style={styles.describe_img_wrapper}>
-                <img style={styles.describe_img} src="https://i.pinimg.com/originals/7b/31/fa/7b31faa6a82eae21f311159fcca4c854.jpg" alt="box-image"/>
+                <img style={styles.describe_img} src={lock_concept} alt="box-image"/>
+                <p style={styles.describe_img_footnote}>by Pixel perfect</p>
             </div>
+
+            <p>其中，lock 是默认配上的锁，type 则是一把可选的锁。</p>
             
             <p>
                 这种锁本质上是一段代码程序和一些参数。当我们试图去消费一个 Cell 的时候，这把锁会自动运行，
@@ -216,6 +224,10 @@ export default function Preknowledge(){
                 <li><strong style={styles.main_color}>code_hash:</strong> 表示一段代码的哈希</li>
                 <li><strong style={styles.main_color}>args: </strong> 表示要往这段代码传入的参数</li>
             </ul>
+            <p style={styles.explain_text}>更详细的数据结构介绍可以参考这里：
+                <a target="_blank" href="https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0019-data-structures/0019-data-structures.md#Script">
+                Script data structure</a>
+            </p>
             <p> code_hash 与 args 合起来组成了一把完整的“锁”：我们通过 code_hash 字段找到要执行的代码在哪里，然后往这段代码里传入参数 args，
                 随后这段程序就会被虚拟机 CKB-VM 执行（这个过程可能还会读取一些额外的参数，比如交易附带的证明），如果执行成功，将返回 0，表示这个锁能被顺利解开，如果执行不成功，返回其他数值，则表示这个锁无法解开。
             </p>
