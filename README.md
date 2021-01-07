@@ -19,7 +19,7 @@
 - [x] form to create tx
 - [x] notify style: add different msg type
 - [x] refine the article -- add ref
-- [ ] firework
+- [x] firework
 - [ ] nignx setting balance
 
 

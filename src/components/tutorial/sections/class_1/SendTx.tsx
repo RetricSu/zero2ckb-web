@@ -37,12 +37,10 @@ export type Props = {
 }
 
 export default function SendTx(props: Props){
-    const [isLoading, setIsLoading] = useState(false);
     const [tx_hash, setTxHash] = useState('');
     const [block, setBlock] = useState<Block>();
     
     const sendTx = async () => {
-        setIsLoading(true);
         const api = new Api();
         if(props.tx){
             const res = await api.sendTx(props.tx);
@@ -56,7 +54,6 @@ export default function SendTx(props: Props){
         }else{
             notify('tx is undefined. 请补充完上面的交易表格，然后点击保存按钮。');
         }
-        setIsLoading(false);
     }
 
     const fetchBlock = async () => {
@@ -78,7 +75,7 @@ export default function SendTx(props: Props){
 
     return(
         <div style={styles.root}>
-            <FreshButton isLoading={isLoading} text={'发送交易'} onClick={sendTx} custom_style={{width:'100%', fontSize: '16px'}}></FreshButton>
+            <FreshButton text={'发送交易'} onClick={sendTx} custom_style={{width:'100%', fontSize: '16px'}}></FreshButton>
             <div style={styles.result}>
                 <p>tx_hash: {tx_hash} </p>
             </div>
