@@ -314,6 +314,8 @@ export default function Class1(){
                 <SendTx tx={complete_tx}></SendTx>
                 <p>最后恭喜你，成功完成了第一小节的内容～</p>
                 <p>接下来，我们将会学习如何发送一笔<span style={styles.main_color}>多签</span>的转账交易。</p>
+
+                
             </div>
         </div>
     )

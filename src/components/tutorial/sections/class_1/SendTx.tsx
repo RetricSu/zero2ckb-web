@@ -8,6 +8,8 @@ import type {
     Transaction
 } from '../../../../types/blockchain';
 import BlockBox from '../common/Block';
+import Firework from '../../../widget/fireworks/firework';
+import PopFirework from '../../../widget/fireworks/animate';
 
 const styles = {...commonStyle, ...{
     root: {
@@ -38,21 +40,21 @@ export default function SendTx(props: Props){
     const [isLoading, setIsLoading] = useState(false);
     const [tx_hash, setTxHash] = useState('');
     const [block, setBlock] = useState<Block>();
-
+    
     const sendTx = async () => {
         setIsLoading(true);
         const api = new Api();
         if(props.tx){
             const res = await api.sendTx(props.tx);
-            console.log(res);
             if(res.status == 'ok'){
                 setTxHash(res.data);
+                PopFirework();
             }
             else{
                 notify(res.data);
             }
         }else{
-            notify('transaction is undefined. 请补充完上面的交易表格，然后点击保存按钮。');
+            notify('tx is undefined. 请补充完上面的交易表格，然后点击保存按钮。');
         }
         setIsLoading(false);
     }
@@ -85,6 +87,7 @@ export default function SendTx(props: Props){
                 <p>CKB 的确定性诚不欺我。</p>
                 <p>现在，你可以通过下面的按钮，看看刚才我们发送的交易是不是真的在链上了。如果提示 <span style={styles.single_line_code}>tx_status: pending</span> , 则表明交易还在pending，稍后重试就可以了。</p>
             </div>
+            
             <FreshButton text={'查看打包了该交易的区块'} onClick={fetchBlock} custom_style={{width:'100%', fontSize: '16px'}}></FreshButton>
             <div style={styles.block_panel}>
                 <p>
@@ -93,6 +96,7 @@ export default function SendTx(props: Props){
                     }
                 </p>
             </div>
+            <Firework />
         </div>
     )
 }
