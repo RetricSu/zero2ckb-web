@@ -1,5 +1,5 @@
 {
     "development_server_url": "http://localhost:5000",
-    "production_server_url": "https://api.asdfvaswe23.xyz",
+    "production_server_url": "https://api.zero2ckb.ckbapp.dev",
     "mode": "production"
 }
