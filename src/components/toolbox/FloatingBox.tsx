@@ -7,6 +7,7 @@ import Hex2Decimal from './tools/hex2decimal';
 import Wallets from '../tutorial/sections/common/Wallets';
 import ChainConfig from '../tutorial/sections/show_chain_info/ChainConfig';
 import Logo from '../widget/logo_svg';
+import NewLogo from '../../resource/nervos-token-logo-white.jpg';
 import Api from '../../api/blockchain';
 import type { ChainConfig as typeChainConfig } from '../../types/blockchain';
 
@@ -147,7 +148,7 @@ export default function FloatingBox(){
                 </div>
                 <label htmlFor="side-menu-switch">
                     <div className="tool-icon">
-                        <Logo />
+                        <img src={NewLogo} style={{width: '50px', height: '50px'}} />
                     </div>
                 </label>
             </div>
