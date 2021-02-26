@@ -9,6 +9,7 @@ import Class3 from './sections/Class3';
 import Class4 from './sections/Class4';
 import TableOfContents from '../widget/table_of_contents';
 import ToolBox from '../toolbox/FloatingBox';
+import AlertMessager from '../widget/alert_messager';
 
 import { Container, Grid } from '@material-ui/core';
 import styles from '../widget/common_style';
@@ -20,6 +21,9 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 function Learn() {
   return (
     <Grid container spacing={1}>
+        <Grid item xs={12}>
+          <AlertMessager msg='Note: the chain used in this tutorial will be reset at every monday mid-night 1 am.' display={true}/>
+        </Grid>
         <Grid item xs={12}>
           <Container maxWidth="md" style={styles.page}>
             <DndProvider backend={HTML5Backend}>
