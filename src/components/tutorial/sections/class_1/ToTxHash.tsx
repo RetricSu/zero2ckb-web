@@ -44,6 +44,9 @@ export default function ToTxHash(props: Props){
 
     return(
         <div style={styles.root}>
+            <div style={styles.result}>
+                <p>tx: {JSON.stringify(props.raw_tx, null, 2)}</p>
+            </div>
             <FreshButton text={'生成 tx_hash'} onClick={generateTxHash} custom_style={{width:'100%', fontSize: '16px'}}/>
             <div style={styles.result}>
                 <p>{hash}</p>
