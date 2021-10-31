@@ -109,6 +109,15 @@ class Api{
         return res.data; 
     }
 
+    async generateSerializeTx(raw_tx: RawTransaction){
+        let res = await axios.get(`${this.base_url}/get_serialize_tx`, { 
+            params:{
+                raw_tx: raw_tx
+            }
+        });
+        return res.data; 
+    }
+
     async sendTx(tx: Transaction){
         let res = await axios.get(`${this.base_url}/send_tx`, { 
             params:{

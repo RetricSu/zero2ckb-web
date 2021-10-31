@@ -5,6 +5,7 @@ import {
 } from '../../../../types/blockchain';
 import FreshButton from '../../../widget/fresh_button';
 import { notify } from '../../../widget/notify';
+import CodePiece from '../../../widget/code';
 
 const styles = {
     root: {
@@ -25,8 +26,27 @@ export type Props = {
 
 export default function ToTxHash(props: Props){
     const [hash, setHash] = useState('');
+    const [serializeTx, setSerializeTx] = useState('');
+
+    const generateSerializeTx = async () => {
+        const api = new Api();
+        if(props.raw_tx){
+            const res = await api.generateSerializeTx(props.raw_tx);
+            console.log(res);
+            if(res.status == 'ok'){
+                setSerializeTx(res.data);
+            }
+            else{
+                notify(res.data);
+            }
+        }else{
+            notify('raw transaction is undefined. 请补充完上面的交易表格，然后点击保存按钮。');
+        }
+    }
 
     const generateTxHash = async () => {
+        await generateSerializeTx();
+
         const api = new Api();
         if(props.raw_tx){
             const res = await api.generateTxHash(props.raw_tx);
@@ -45,11 +65,12 @@ export default function ToTxHash(props: Props){
     return(
         <div style={styles.root}>
             <div style={styles.result}>
-                <p>tx: {JSON.stringify(props.raw_tx, null, 2)}</p>
+                the serialized Transaction before hash function:
+                <CodePiece code={serializeTx || ''} custom_style={{border: '0'}} />
             </div>
             <FreshButton text={'生成 tx_hash'} onClick={generateTxHash} custom_style={{width:'100%', fontSize: '16px'}}/>
             <div style={styles.result}>
-                <p>{hash}</p>
+                <p>tx_hash: {hash}</p>
             </div>
         </div>
     )
