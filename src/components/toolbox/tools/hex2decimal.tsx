@@ -61,7 +61,7 @@ export default function Hex2Dec(props: Hex2DecProps){
             }
             try {
                 setResult( ''+BigInt(hex_data).toString(10) );
-            } catch (error) {
+            } catch (error: any) {
                 notify(error.message);
             }
         }else{
@@ -74,7 +74,7 @@ export default function Hex2Dec(props: Hex2DecProps){
             const dec_data = ref.current.value;
             try {
                 setResult( '0x' + BigInt(dec_data).toString(16) );
-            } catch (error) {
+            } catch (error: any) {
                 notify(error.message);
             }
         }else{

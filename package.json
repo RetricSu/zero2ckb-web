@@ -1,5 +1,5 @@
 {
-  "name": "zero2ckb-web3",
+  "name": "zero2ckb-web",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,18 +15,21 @@
     "@types/react-select": "^3.0.27",
     "axios": "^0.21.0",
     "express": "^4.17.1",
+    "i18next": "^21.6.13",
+    "i18next-browser-languagedetector": "^6.1.3",
     "jsbi": "^3.1.4",
     "rc-tween-one": "^2.7.3",
     "react": "^17.0.1",
     "react-dnd": "^11.1.3",
     "react-dnd-html5-backend": "^11.1.3",
     "react-dom": "^17.0.1",
+    "react-i18next": "^11.15.5",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-select": "^3.1.1",
     "react-spring": "^8.0.27",
     "react-toastify": "^6.1.0",
-    "typescript": "^4.0.3",
+    "typescript": "^4.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

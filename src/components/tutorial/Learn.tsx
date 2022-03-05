@@ -17,8 +17,16 @@ import styles from '../widget/common_style';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
+import { useTranslation } from 'react-i18next';
 
 function Learn() {
+  const { t, i18n } = useTranslation();
+
+  const lngs: any = {
+    en: { nativeName: 'English' },
+    zh: { nativeName: 'Chinese' }
+  };
+
   return (
     <Grid container spacing={1}>
         <Grid item xs={12}>
@@ -27,17 +35,24 @@ function Learn() {
         <Grid item xs={12}>
           <Container maxWidth="md" style={styles.page}>
             <DndProvider backend={HTML5Backend}>
-              <TableOfContents />
+              <TableOfContents t={t} />
               <ToolBox />
               <Notify />
-              <BeforeWeGetStarted />
-              <PreKnowledge />
-              <ShowChainInfo />
-              <Class1 />
+              <BeforeWeGetStarted t={t} />
+              <PreKnowledge t={t} />
+              <ShowChainInfo t={t}/>
+              <Class1 t={t} />
               <br/><br/>
               <br/><br/>
               <br/><br/>
-              <p>更多课程</p>
+              <div>
+                {Object.keys(lngs).map((lng) => (
+                  <button key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>
+                    {lngs[lng].nativeName}
+                  </button>
+                ))}
+              </div>
+              <p>{t("tutorial.common.context.moreClass")}</p>
               <hr/>
               <Class2 />
               <Class3 />

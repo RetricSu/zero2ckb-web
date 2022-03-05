@@ -85,7 +85,7 @@ export default function DragCellToInputBall(props: Props){
             prepareJsonData(item.cell);
             const isOriginHidden = makeOriginCellHidden !== undefined ? makeOriginCellHidden : true; // default mode is hidden origin after success drag.
             return { name: 'tx-input(json)', isOriginHidden: isOriginHidden};
-        } catch (error) {
+        } catch (error: any) {
             alert(error);
             return { name: 'tx-input(json)', isOriginHidden: false};
         }

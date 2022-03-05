@@ -24,7 +24,7 @@ const shannon2CKB = (num: number | string | BigInt) => {
     return JSBI.divide(JSBI.BigInt(num), JSBI.BigInt(100000000)).toString(10);
 }
 
-const CKB2shannon = (num: number | string | BigInt) => {
+const CKB2shannon = (num: number | string | bigint) => {
     return BigInt(num).toString(10) + '00000000';
 }
 
