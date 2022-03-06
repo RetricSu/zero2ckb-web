@@ -1,5 +1,5 @@
-import TweenOne from 'rc-tween-one';
-import React from 'react';
+import TweenOne from "rc-tween-one";
+import React from "react";
 
 class GridLayout {
   constructor(rect, width, height) {
@@ -28,11 +28,10 @@ class GridLayout {
       }
     }
     return gridArray;
-  }
+  };
 
-  hasCollisions = t => (
-    this.getCells(t).some(e => e.some(v => this.collides(t, v)))
-  )
+  hasCollisions = (t) =>
+    this.getCells(t).some((e) => e.some((v) => this.collides(t, v)));
 
   collides = (t, a) => {
     if (t === a) {
@@ -42,13 +41,13 @@ class GridLayout {
     const i = t.y - a.y;
     const r = t.radius + a.radius;
     return n * n + i * i < r * r;
-  }
+  };
 
   add = (value) => {
     this.getCells(value).forEach((item) => {
       item.push(value);
     });
-  }
+  };
 }
 
 const getPointPos = (width, height, length) => {
@@ -60,9 +59,13 @@ const getPointPos = (width, height, length) => {
     let radius;
     let pos;
     let j = 0;
-    for(let j =0; j< num; j+=1) {
+    for (let j = 0; j < num; j += 1) {
       radius = radiusArray[Math.floor(Math.random() * radiusArray.length)];
-      pos = { x: Math.random() * (width - radius * 2) + radius, y: Math.random() * (height - radius * 2) + radius, radius };
+      pos = {
+        x: Math.random() * (width - radius * 2) + radius,
+        y: Math.random() * (height - radius * 2) + radius,
+        radius,
+      };
       if (!grid.hasCollisions(pos)) {
         break;
       }
@@ -73,18 +76,20 @@ const getPointPos = (width, height, length) => {
   return posArray;
 };
 
-const getDistance = (t, a) => (Math.sqrt((t.x - a.x) * (t.x - a.x) + (t.y - a.y) * (t.y - a.y)));
+const getDistance = (t, a) =>
+  Math.sqrt((t.x - a.x) * (t.x - a.x) + (t.y - a.y) * (t.y - a.y));
 
 class Point extends React.PureComponent {
   render() {
-    const { tx, ty, x, y, opacity, backgroundColor, radius, ...props } = this.props;
+    const { tx, ty, x, y, opacity, backgroundColor, radius, ...props } =
+      this.props;
     //const capacity = '0x'+Math.random().toString('16').slice(2,8).toUpperCase();
     let transform;
     let zIndex = 0;
-    let animation = { 
-      y: (Math.random() * 2 - 1) * 50 || 50, 
-      duration: 3000, 
-      delay:Math.random() * 1000,
+    let animation = {
+      y: (Math.random() * 2 - 1) * 50 || 50,
+      duration: 3000,
+      delay: Math.random() * 1000,
       yoyo: true,
       repeat: -1,
     };
@@ -92,7 +97,9 @@ class Point extends React.PureComponent {
       if (tx !== x && ty !== y) {
         const distance = getDistance({ x, y }, { x: tx, y: ty });
         const g = Math.sqrt(2000000 / (0.1 * distance * distance));
-        transform = `translate(${g * (x - tx) / distance}px, ${g * (y - ty) / distance}px)`;
+        transform = `translate(${(g * (x - tx)) / distance}px, ${
+          (g * (y - ty)) / distance
+        }px)`;
       } else if (tx === x && ty === y) {
         transform = `scale(${80 / radius})`;
         animation = { y: 0, yoyo: false, repeat: 0, duration: 300 };
@@ -112,11 +119,10 @@ class Point extends React.PureComponent {
         }}
         {...props}
       >
-        
         <TweenOne
           animation={animation}
           style={{
-            backgroundColor
+            backgroundColor,
           }}
           className={`${this.props.className}-child`}
         >
@@ -124,33 +130,31 @@ class Point extends React.PureComponent {
             <div className={`${this.props.className}-child-content-title`}>
               Cell
             </div>
-            <hr/>
+            <hr />
             <div className={`${this.props.className}-child-content-data`}>
               01010101010100010101001010101001000001010101001010010100001010101011111001011010110011001010011111010000110011010111010010110
             </div>
           </div>
         </TweenOne>
-        
       </div>
-
     );
   }
 }
 
 class LinkedAnimate extends React.Component {
   static defaultProps = {
-    className: 'linked-animate-demo',
+    className: "linked-animate-demo",
   };
 
-  num = 50;// 点的个数
+  num = 50; // 点的个数
 
   constructor(props) {
     super(props);
     this.state = {
-      data: getPointPos(1280, 600, this.num).map(item => ({
+      data: getPointPos(1280, 600, this.num).map((item) => ({
         ...item,
         //opacity: Math.random() * 0.2 + 0.05,
-        backgroundColor: `rgb(255,255, 255, 0.0)`,//`rgb(${Math.round(Math.random() * 95 + 160)},255,255)`,
+        backgroundColor: `rgb(255,255, 255, 0.0)`, //`rgb(${Math.round(Math.random() * 95 + 160)},255,255)`,
       })),
       tx: 0,
       ty: 0,
@@ -161,15 +165,23 @@ class LinkedAnimate extends React.Component {
     const cX = e.clientX;
     const cY = e.clientY;
     const boxRect = this.box.getBoundingClientRect();
-    const pos = this.state.data.map((item) => {
-      const { x, y, radius } = item;
-      return { x, y, distance: getDistance({ x: cX - boxRect.x, y: cY - boxRect.y }, { x, y }) - radius };
-    }).reduce((a, b) => {
-      if (!a.distance || a.distance > b.distance) {
-        return b;
-      }
-      return a;
-    });
+    const pos = this.state.data
+      .map((item) => {
+        const { x, y, radius } = item;
+        return {
+          x,
+          y,
+          distance:
+            getDistance({ x: cX - boxRect.x, y: cY - boxRect.y }, { x, y }) -
+            radius,
+        };
+      })
+      .reduce((a, b) => {
+        if (!a.distance || a.distance > b.distance) {
+          return b;
+        }
+        return a;
+      });
     if (pos.distance < 60) {
       this.setState({
         tx: pos.x,
@@ -178,14 +190,14 @@ class LinkedAnimate extends React.Component {
     } else {
       this.onMouseLeave();
     }
-  }
+  };
 
   onMouseLeave = () => {
     this.setState({
       tx: 0,
       ty: 0,
     });
-  }
+  };
 
   render() {
     const { className } = this.props;
@@ -194,12 +206,20 @@ class LinkedAnimate extends React.Component {
       <div className={`${className}-wrapper`}>
         <div
           className={`${className}-box`}
-          ref={(c) => { this.box = c; }}
+          ref={(c) => {
+            this.box = c;
+          }}
           onMouseMove={this.onMouseMove}
           onMouseLeave={this.onMouseLeave}
         >
           {data.map((item, i) => (
-            <Point {...item} tx={tx} ty={ty} key={i.toString()} className={`${className}-block`} />
+            <Point
+              {...item}
+              tx={tx}
+              ty={ty}
+              key={i.toString()}
+              className={`${className}-block`}
+            />
           ))}
         </div>
       </div>

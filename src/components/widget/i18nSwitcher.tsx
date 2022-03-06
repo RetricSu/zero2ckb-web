@@ -7,8 +7,8 @@ const styles = {
     fontSize: "14px",
     color: "white",
     textAlign: "center" as const,
-  }
-}
+  },
+};
 
 export interface I18nSwitcherProps {
   i18n: any;
@@ -33,7 +33,8 @@ export default function I18nSwitcher(props: I18nSwitcherProps) {
 
   return (
     <div style={styles.root}>
-      Choose Languages: {Object.keys(langs).map((lng) => (
+      Choose Languages:{" "}
+      {Object.keys(langs).map((lng) => (
         <button
           key={lng}
           style={{

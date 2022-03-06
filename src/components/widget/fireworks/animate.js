@@ -1,6 +1,6 @@
 // code from: https://codepen.io/goingtogogo/pen/abvPKjN
 
-export default function pop(){
+export default function pop() {
   for (let i = 0; i < 50; i++) {
     createParticle();
   }
@@ -9,7 +9,7 @@ export default function pop(){
 function createParticle() {
   const x = window.innerWidth / 2;
   const y = window.innerHeight / 2;
-  
+
   const particle = document.createElement("particle");
   document.body.appendChild(particle);
 
