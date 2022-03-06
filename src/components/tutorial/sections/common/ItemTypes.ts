@@ -1,4 +1,3 @@
 export const ItemTypes = {
-    CELL: 'cell',
-}
-  
+  CELL: "cell",
+};

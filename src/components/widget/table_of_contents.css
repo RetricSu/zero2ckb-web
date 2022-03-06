@@ -1,63 +1,62 @@
 /* 1. Enable smooth scrolling */
 html {
-	scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
-.main-nav-container{
-    position: fixed;
-    text-align: left;
-	margin: 0 auto;
-	float: left;
-	left: 0;
-	max-width: 30%;
-	margin-bottom: 2em;
+.main-nav-container {
+  position: fixed;
+  text-align: left;
+  margin: 0 auto;
+  float: left;
+  left: 0;
+  max-width: 30%;
+  margin-bottom: 2em;
 }
 
 /* 2. Make nav sticky */
 nav {
-	top: 2rem;
-	align-self: start;
+  top: 2rem;
+  align-self: start;
 }
 
-@media screen and (max-width: 1300px){
-	.contentbadder{
-		height: 500px;
-	}
-	.main-nav-container{
-		position: relative;
-		float: none;
-		max-width: 100%;
-		left: 0;
-		margin-bottom: 2em;
-	}
-	nav{
-		position: relative;
-		background-color: gray;
-		margin-bottom: 2em;
-	}
+@media screen and (max-width: 1300px) {
+  .contentbadder {
+    height: 500px;
   }
+  .main-nav-container {
+    position: relative;
+    float: none;
+    max-width: 100%;
+    left: 0;
+    margin-bottom: 2em;
+  }
+  nav {
+    position: relative;
+    background-color: gray;
+    margin-bottom: 2em;
+  }
+}
 
 /* 3. ScrollSpy active styles (see JS tab for activation) */
 .section-nav li.active > a {
-	color: #3CC68A;
-	font-weight: 500;
+  color: #3cc68a;
+  font-weight: 500;
 }
 
 /* Sidebar Navigation */
 .section-nav {
-	padding-right: 0;
+  padding-right: 0;
 }
 
 .section-nav a {
-	text-decoration: none;
-	display: block;
-	padding: .125rem 0;
-	color: white;
-	transition: all 50ms ease-in-out; /* 💡 This small transition makes setting of the active state smooth */
+  text-decoration: none;
+  display: block;
+  padding: 0.125rem 0;
+  color: white;
+  transition: all 50ms ease-in-out; /* 💡 This small transition makes setting of the active state smooth */
 }
 
 .section-nav a:hover,
 .section-nav a:focus {
-	color: #3CC68A;
+  color: #3cc68a;
 }
-

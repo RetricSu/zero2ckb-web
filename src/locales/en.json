@@ -8,6 +8,8 @@
       "fetchCellOfWallet1": "fetch",
       "decimalInputPlaceHolder": "decimal number，unit：CKB",
       "hexInputPlaceHolder": "hex number，start with 0x",
+      "txSaveSuccessAlertMsg": "tx save successfully!",
+      "illegalTokenAlertMsg": "illegal token：",
       "tableOfContents": {
         "theoreticalKnowledgeMinimized": {
           "title": "Theoretical Knowledge Minimized",

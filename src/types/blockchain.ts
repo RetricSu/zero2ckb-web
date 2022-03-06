@@ -1,37 +1,37 @@
 export type Wallet = {
-    mainnet: string
-    testnet: string
-    lock_arg: string
-    lock_hash: string
-    keystore: string
-    password: string
-    private_key: string
-}
+  mainnet: string;
+  testnet: string;
+  lock_arg: string;
+  lock_hash: string;
+  keystore: string;
+  password: string;
+  private_key: string;
+};
 
 export type Block = {
-    header: Header
-    proposals: []
-    transactions: Transaction[]
-    uncles: []
-}
-  
+  header: Header;
+  proposals: [];
+  transactions: Transaction[];
+  uncles: [];
+};
+
 export type QueryOption = {
-    lock?: {
-        code_hash: string
-        hash_type: 'type' | 'data'
-        args: string
-    },
-    type?: {
-        code_hash: string
-        hash_type: 'type' | 'data'
-        args: string
-    },
-    argsLen?: number, // default option is -1
-    fromBlock?: string, // "0x" + 2440000n.toString(16)
-    toBlock?: string, // "0x" + 2441000n.toString(16)
-    order?: "desc" | "asc", // default option is "asc" order by block
-    skip?: number,
-}
+  lock?: {
+    code_hash: string;
+    hash_type: "type" | "data";
+    args: string;
+  };
+  type?: {
+    code_hash: string;
+    hash_type: "type" | "data";
+    args: string;
+  };
+  argsLen?: number; // default option is -1
+  fromBlock?: string; // "0x" + 2440000n.toString(16)
+  toBlock?: string; // "0x" + 2441000n.toString(16)
+  order?: "desc" | "asc"; // default option is "asc" order by block
+  skip?: number;
+};
 
 /**
  * HexString represents string starts with "0x" and followed by even number(including empty) of [0-9a-fA-F] characters.
@@ -183,43 +183,43 @@ export interface Message {
 }
 
 export type ChainConfig = {
-  PREFIX: string
+  PREFIX: string;
   SCRIPTS: {
-      SECP256K1_BLAKE160: {
-          CODE_HASH: string
-          HASH_TYPE: 'type' | 'data'
-          TX_HASH: string
-          INDEX: string
-          DEP_TYPE: 'dep_group' | 'code'
-          SHORT_ID: number
-      },
-      SECP256K1_BLAKE160_MULTISIG: {
-          CODE_HASH: string
-          HASH_TYPE: 'type' | 'data'
-          TX_HASH: string
-          INDEX: string
-          DEP_TYPE: 'dep_group' | 'code'
-          SHORT_ID: number
-      },
-      DAO: {
-          CODE_HASH: string
-          HASH_TYPE: 'type' | 'data'
-          TX_HASH: string
-          INDEX: string
-          DEP_TYPE: 'dep_group' | 'code'
-          SHORT_ID: number
-      }
-  }
-}
+    SECP256K1_BLAKE160: {
+      CODE_HASH: string;
+      HASH_TYPE: "type" | "data";
+      TX_HASH: string;
+      INDEX: string;
+      DEP_TYPE: "dep_group" | "code";
+      SHORT_ID: number;
+    };
+    SECP256K1_BLAKE160_MULTISIG: {
+      CODE_HASH: string;
+      HASH_TYPE: "type" | "data";
+      TX_HASH: string;
+      INDEX: string;
+      DEP_TYPE: "dep_group" | "code";
+      SHORT_ID: number;
+    };
+    DAO: {
+      CODE_HASH: string;
+      HASH_TYPE: "type" | "data";
+      TX_HASH: string;
+      INDEX: string;
+      DEP_TYPE: "dep_group" | "code";
+      SHORT_ID: number;
+    };
+  };
+};
 
 export type TxOutput = {
-  outputs: Output[]
-  outputs_data: HexString[]
-}
+  outputs: Output[];
+  outputs_data: HexString[];
+};
 
 export type SimpleCell = {
-    capacity: HexString;
-    lock: Script;
-    type?: Script;
-    data: HexString;
-}
+  capacity: HexString;
+  lock: Script;
+  type?: Script;
+  data: HexString;
+};

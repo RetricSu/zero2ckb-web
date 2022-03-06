@@ -5,12 +5,12 @@ import enTrans from "./locales/en.json";
 import zhTrans from "./locales/zh.json";
 
 const resources = {
-	en: {
-	  translation: enTrans
-	},
-	zh: {
-	  translation: zhTrans
-	} 
+  en: {
+    translation: enTrans,
+  },
+  zh: {
+    translation: zhTrans,
+  },
 };
 
 i18n

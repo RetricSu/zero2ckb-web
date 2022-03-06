@@ -1,15 +1,13 @@
-import React from 'react';
-import './style.css';
+import React from "react";
+import "./style.css";
 
 export type FireWorkProps = {
-    message?: string
-    time?: number //unit: seconds
-}
+  message?: string;
+  time?: number; //unit: seconds
+};
 
 //todo: complete with text msg
 
-export default function FireWork(props: FireWorkProps){
-    return(
-        <div></div>
-    )
+export default function FireWork(props: FireWorkProps) {
+  return <div></div>;
 }

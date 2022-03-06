@@ -25,7 +25,7 @@
 }
 
 .App-link {
-  color: #3CC68A;
+  color: #3cc68a;
 }
 
 @keyframes App-logo-spin {
@@ -37,12 +37,12 @@
   }
 }
 
-.arcii-art{
+.arcii-art {
   white-space: pre;
-  display: inline-block; 
+  display: inline-block;
   font-family: "Lucida Console", Monaco, monospace;
   letter-spacing: -0.2em;
   line-height: 0.8em;
-  text-shadow: 0 0 5px rgba(100,100,100,0.5);
+  text-shadow: 0 0 5px rgba(100, 100, 100, 0.5);
   font-size: 12px;
 }

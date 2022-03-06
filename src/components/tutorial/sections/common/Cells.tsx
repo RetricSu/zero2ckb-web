@@ -1,33 +1,29 @@
 import React, { CSSProperties, useEffect, useState } from "react";
 import Api from "../../../../api/blockchain";
-import type {
-    QueryOption,
-    Cell
-} from '../../../../types/blockchain';
-import SingleCell from './Cell';
-import FreshButton from '../../../widget/fresh_button';
+import type { QueryOption, Cell } from "../../../../types/blockchain";
+import SingleCell from "./Cell";
+import FreshButton from "../../../widget/fresh_button";
 import { I18nComponentsProps } from "../../../../types/i18n";
 
-
 export interface Props extends I18nComponentsProps {
-    query: QueryOption
-    length?: number,
-    render_dep?: any,
-    custom_style?: {
-      btn_style?: CSSProperties
-      layout_style?: CSSProperties
-    },
-    text?: {
-      title?: string
-      btn_text?: string
-    }
-};
+  query: QueryOption;
+  length?: number;
+  render_dep?: any;
+  custom_style?: {
+    btn_style?: CSSProperties;
+    layout_style?: CSSProperties;
+  };
+  text?: {
+    title?: string;
+    btn_text?: string;
+  };
+}
 
 const styles = {
   main: {
     textAlign: "center" as const,
-    border: '1px solid white',
-    clear: 'both' as const,
+    border: "1px solid white",
+    clear: "both" as const,
   },
   cell_panel: {
     width: "600px",
@@ -40,11 +36,10 @@ const styles = {
     fontSize: "10px",
     display: "block",
   },
-  
 };
 
 export default function Cells(props: Props) {
-  const {t} = props;
+  const { t } = props;
   const [cells, setCells] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -52,32 +47,41 @@ export default function Cells(props: Props) {
   const layout_style = props.custom_style?.layout_style;
 
   useEffect(() => {
-    if(props.render_dep)
-      queryCells();
+    if (props.render_dep) queryCells();
   }, [props.render_dep]);
 
   async function queryCells() {
     setIsLoading(true);
-    if(props.query.lock || props.query.type){
-      //console.log(props.query);
+    if (props.query.lock || props.query.type) {
       const api = new Api();
       const length = props.length || 10;
       var myCells = await api.getLiveCells(props.query, length);
       setCells(
-          myCells.map((cell: Cell, index: number) => <SingleCell t={t} cell={cell} key_id={index} /> )
+        myCells.map((cell: Cell, index: number) => (
+          <SingleCell t={t} cell={cell} key_id={index} />
+        ))
       );
     }
     setIsLoading(false);
   }
 
   return (
-    <div style={ layout_style != undefined ? {...styles.main, ...layout_style} : styles.main}>
+    <div
+      style={
+        layout_style != undefined
+          ? { ...styles.main, ...layout_style }
+          : styles.main
+      }
+    >
       <h4>{props.text?.title}</h4>
-      <FreshButton custom_style={ btn_style != undefined ? btn_style : {}} isLoading={isLoading} onClick={queryCells} text={props.text?.btn_text || ''}></FreshButton>
-        <ul>
-            {cells}
-        </ul>
-      <p style={{clear: "both"}} />
+      <FreshButton
+        custom_style={btn_style != undefined ? btn_style : {}}
+        isLoading={isLoading}
+        onClick={queryCells}
+        text={props.text?.btn_text || ""}
+      ></FreshButton>
+      <ul>{cells}</ul>
+      <p style={{ clear: "both" }} />
     </div>
   );
 }

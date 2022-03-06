@@ -8,6 +8,8 @@
       "fetchCellOfWallet1": "刷新",
       "decimalInputPlaceHolder": "10 进制，单位：CKB",
       "hexInputPlaceHolder": "16 进制，以 0x 开头",
+      "txSaveSuccessAlertMsg": "tx 已成功保存！",
+      "illegalTokenAlertMsg": "非法字符：",
       "tableOfContents": {
         "theoreticalKnowledgeMinimized": {
           "title": "第一步：理论知识",
