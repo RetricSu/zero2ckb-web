@@ -8,6 +8,7 @@ import CodePiece from '../../../widget/code';
 import { Cell, Input, CellDep, RawTransaction, TxOutput } from '../../../../types/blockchain';
 import NeonText from '../../../widget/neon_text';
 import CopyText from '../../../widget/copy_text';
+import { I18nComponentsProps } from '../../../../types/i18n';
 
 const styles = {...commonStyle, ...{
     root: {
@@ -44,7 +45,8 @@ const styles = {...commonStyle, ...{
     }
 }};
 
-export default function TxConstructor(){
+export default function TxConstructor(props: I18nComponentsProps){
+    const {t} = props;
     const [input_cells, setInputCells] = useState<Cell[]>([]);
     const [input_cell_deps, setInputCellDeps] = useState<CellDep[]>([]);
     const [input_cell_inputs, setInputCellInputs] = useState<Input[]>([]);
@@ -97,7 +99,7 @@ export default function TxConstructor(){
                         <div style={styles.subtitle}>
                         <NeonText text={'input'.toUpperCase()} custom_style={styles.neon_text_style}/>
                         </div>
-                        <DragCell2InputBall get_contents={handleInputCellChange} onClearCall={isClear} makeOriginCellHidden={false} />
+                        <DragCell2InputBall t={t} get_contents={handleInputCellChange} onClearCall={isClear} makeOriginCellHidden={false} />
                     </div>
                 </Grid>
                 <Grid item xs={2} style={styles.covert_label}>
@@ -109,16 +111,16 @@ export default function TxConstructor(){
                         <div style={styles.subtitle}>
                             <NeonText text={'output'.toUpperCase()} custom_style={styles.neon_text_style}/>
                         </div>
-                        <OutputCreator onClearCall={isClear} input_cells={input_cells} get_tx_output={handleOutputChange} />
+                        <OutputCreator t={t} onClearCall={isClear} input_cells={input_cells} get_tx_output={handleOutputChange} />
                     </div>
                 </Grid>
             </Grid>
             <Grid container spacing={1}>
                 <Grid item xs={6}>
-                    <FreshButton text={'生成一笔交易'} onClick={generateJSON} custom_style={{width:'100%', fontSize: '20px', marginTop: '10px'}} />
+                    <FreshButton text={t("tutorial.widget.txConstructor.btnTextGen")} onClick={generateJSON} custom_style={{width:'100%', fontSize: '20px', marginTop: '10px'}} />
                 </Grid>
                 <Grid item xs={6}>
-                    <FreshButton text={'清空'} onClick={clearAll} custom_style={{width:'100%', fontSize: '20px', marginTop: '10px'}} />
+                    <FreshButton text={t("tutorial.widget.txConstructor.btnTextClear")} onClick={clearAll} custom_style={{width:'100%', fontSize: '20px', marginTop: '10px'}} />
                 </Grid>
             </Grid>
             <Grid container spacing={1}>

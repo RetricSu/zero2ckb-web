@@ -8,6 +8,7 @@ import FreshButton from '../../widget/fresh_button';
 import common_style from '../../widget/common_style'; 
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import {notify} from '../../widget/notify';
+import { I18nComponentsProps } from '../../../types/i18n';
 
 const styles = {
     caculator_box: {
@@ -36,13 +37,13 @@ const styles = {
     }
 }
 
-export type Hex2DecProps = {
+export interface Hex2DecProps extends I18nComponentsProps {
     custom_style?: CSSProperties
 }
 
 export default function Hex2Dec(props: Hex2DecProps){
 
-    const { custom_style } = props;
+    const { t, custom_style } = props;
 
     const ref = useRef<HTMLInputElement>(null);
     const [isReversed, setIsReversed] = useState(false);
@@ -56,7 +57,7 @@ export default function Hex2Dec(props: Hex2DecProps){
         if(ref.current){
             const hex_data = ref.current.value;
             if(hex_data.slice(0,2) !== "0x"){
-                notify('16进制数字需要以0x开头！');
+                notify(t("tutorial.widget.toolBox.hexToDecimal.hexNumberAlertMsg"));
                 return;
             }
             try {
@@ -86,14 +87,14 @@ export default function Hex2Dec(props: Hex2DecProps){
     return(
         <div style={ custom_style != undefined ? {...styles.caculator_box, ...custom_style} : styles.caculator_box}>
             <p>Convert {isReversed?'Decimal':'Hex'} to {isReversed?'Hex':'Decimal'} </p>
-            <input ref={ref} type="text" style={styles.input} placeholder={isReversed?'十进制':'十六进制，以 0x 开头'} />
+            <input ref={ref} type="text" style={styles.input} placeholder={isReversed? t("tutorial.widget.toolBox.hexToDecimal.inputDecimalPlaceHolder"): t("tutorial.widget.toolBox.hexToDecimal.inputHexPlaceHolder")} />
             <p>
-                <FreshButton onClick={ isReversed ? dec2hex : hex2dec } text={'转换'} />
+                <FreshButton onClick={ isReversed ? dec2hex : hex2dec } text={t("tutorial.widget.toolBox.hexToDecimal.convertBtnText")} />
                 &#160;
-                <FreshButton onClick={ reverse } text={'对调'} />
+                <FreshButton onClick={ reverse } text={t("tutorial.widget.toolBox.hexToDecimal.reverseFunctionBtnText")} />
             </p>
             <div style={styles.result}>
-               结果： {result}
+               {t("tutorial.widget.toolBox.hexToDecimal.resultText")} {result}
             </div>
         </div>
     )

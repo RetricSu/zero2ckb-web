@@ -10,6 +10,7 @@ import FreshButton from '../../../widget/fresh_button';
 import Api from '../../../../api/blockchain';
 import {notify} from '../../../widget/notify';
 import commonStyle from '../../../widget/common_style';
+import { I18nComponentsProps } from '../../../../types/i18n';
 
 const styles = {...commonStyle, ...{
     root: {
@@ -24,12 +25,13 @@ const styles = {...commonStyle, ...{
     }
 }};
 
-export type Props = {
+export interface FetchToSignMessageProps extends I18nComponentsProps {
     raw_tx: RawTransaction | undefined,
     witnesses?: HexString[],
 }
 
-export default function FetchToSignMessage(props: Props){
+export default function FetchToSignMessage(props: FetchToSignMessageProps){
+    const {t } = props;
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState('');
     const generateMessage = async () => {
@@ -47,13 +49,13 @@ export default function FetchToSignMessage(props: Props){
                 notify(result.data);
             }
         }else{
-            notify('raw_tx is undefind.')
+            notify(t("tutorial.widget.toSignMessage.txUndefinedAlertMsg"))
         }
         setIsLoading(false);
     }
     return(
         <div style={styles.root}>
-            <FreshButton isLoading={isLoading} text={'生成 message'} onClick={generateMessage} custom_style={{width:'100%', fontSize: '16px'}} />
+            <FreshButton isLoading={isLoading} text={t("tutorial.widget.toSignMessage.btnText")} onClick={generateMessage} custom_style={{width:'100%', fontSize: '16px'}} />
             <div style={styles.result}>
                 <p>{message}</p>
             </div>

@@ -3,6 +3,7 @@ import { RawTransaction, Transaction } from '../../../../types/blockchain';
 import commonStyle from '../../../widget/common_style';
 import CodePiece from '../../../widget/code';
 import FreshButton from '../../../widget/fresh_button';
+import { I18nComponentsProps } from '../../../../types/i18n';
 
 const styles = {...commonStyle, ...{
     input_wrap: {
@@ -30,13 +31,13 @@ const styles = {...commonStyle, ...{
     }
 }}
 
-export type CompleteTxWithWitnessProps = {
+export interface CompleteTxWithWitnessProps extends I18nComponentsProps {
     raw_tx: RawTransaction
     onCallBack?: (tx: Transaction) => void
 }
 
 export default function CompleteTxWithWitness(props: CompleteTxWithWitnessProps){
-    const {raw_tx, onCallBack} = props;
+    const {t, raw_tx, onCallBack} = props;
     const [tx, setTx] = useState<Transaction>();
     const ref = useRef<HTMLInputElement>(null);
 

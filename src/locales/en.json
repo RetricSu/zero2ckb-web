@@ -1,7 +1,11 @@
 {
   "tutorial": {
     "common": {
-      "takeABreak": "Take a Break",
+      "saveBtnText": "Save",
+      "formFillHereText": "Fill in the blanks here",
+      "proofText": "Proof",
+      "cellOfWallet1": "Cells in Wallet 1",
+      "fetchCellOfWallet1": "fetch",
       "tableOfContents": {
         "theoreticalKnowledgeMinimized": {
           "title": "Theoretical Knowledge Minimized",
@@ -72,10 +76,6 @@
           "p1": "To understand CKB, we must leave behind all the complex concepts and capture the very essence: it's all about cells and the transformation of cells.",
           "p2": "Cell is the basic unit of CKB, similar to a cell in the human body. Each cell constitutes the general state of the entire CKB blockchain. When we initiate a transaction on the blockchain, thus making a state change, in the end, for CKB, it is nothing more than spending some cells while creating some new ones, no matter how complicated the transaction and the state change are. This process is the same as the Bitcoin UTXO.",
           "p3": "Cells spent are dead cells; cells unspent are live cells. So, a chain keeps on spending and creating cells through transactions, like the renewal and division of cells throughout the body.",
-          "img1": {
-            "note1": "In the CKB universe, countless cells are floating around.",
-            "note2": "Cells store data that jointly form the general state of the chain."
-          },
           "p4": "Unlike UTXO, a cell can store any type of data. A cell has a field called data inside, which you can put an unformatted string. In other words, you can write whatever you want in whatever format inside  data, so long as you can interpret the string.",
           "p5": "For example, I can save a hash, a text, a date, or even a piece of binary code that can be referenced by other cells and run on-chain through the CKB virtual machine, CKB-VM.",
           "p6": "This is the so-called smart contract on CKB, as simple as that."
@@ -245,16 +245,142 @@
           "p18": "Well, that's all the information we need to know.",
           "p19": "Now, we are about to build and send our first transaction!"
         }
-      },
-      "context": {
-        "moreClass": "Stay Tuned for More Tutorials"
       }
+    },
+    "context": {
+      "takeABreak": "Take a Break",
+      "moreClass": "Stay Tuned for More Tutorials"
     },
     "widget": {
       "sendTx": {
+        "btnText": "Send Transaction",
+        "checkBlockBtnText": "Check this block to see where the transaction was packaged",
+        "txUndefinedAlertMsg": "tx is undefined. please fill the transaction form above and click SAVE button",
         "p1": "Note that, after the transaction has been successfully sent on-chain, the tx_hash returned is the same as the tx_hash generated beforehand.",
         "p2": "CKB does not lie.",
         "p3": "Now, you can use the button below to see if the transaction we just sent is actually on-chain. If it says tx_status: pending, it indicates that the transaction is still under verification. Just retry later."
+      },
+      "completeTxWithWitness": {
+        "btnText": "witnesses 加入 raw_tx"
+      },
+      "toTxHash": {
+        "btnText": "Generate tx_hash",
+        "serializedTxBeforeHash": "the serialized Transaction before hash function:",
+        "txUndefinedAlertMsg": "raw transaction is undefined. please fill the transaction form above and click SAVE button"
+      },
+      "toSignMessage": {
+        "btnText": "generate message",
+        "txUndefinedAlertMsg": "raw_tx is undefine."
+      },
+      "serializedWitnessArgs": {
+        "btnText": "serialize witnessArgs",
+        "inputPlaceHolder": "lock: witness"
+      },
+      "toSignTx": {
+        "btnText": "sign transaction",
+        "inputPlaceHolderMsg": "message",
+        "inputPlaceHolderPrivkey": "private key"
+      },
+      "txConstructor": {
+        "btnTextGen": "Generate Transaction",
+        "btnTextClear": "Clear Out"
+      },
+      "dragCellToInputBall": {
+        "title": "Drag a Cell in here"
+      },
+      "outputCreatorTotalCapacity": {
+        "totalCapText": "Total space：",
+        "minerFee": "Miner fees：",
+        "settingBtnText": "⚙️"
+      },
+      "editOutputCells": {
+        "capRuleAlertMsg": "capacity 需要小于 input 总和！tx_fee 不能为空！",
+        "addNewCellBtnText": "+ Add A New Cell",
+        "saveExitBtnText": "Save & Exit"
+      },
+      "editOutputPlainCell": {
+        "capRuleAlertMsg": "total capacity should smaller than"
+      },
+      "showChainInfo": {
+        "title": "Devnet Chain Info"
+      },
+      "toolBox": {
+        "title": "CKB-ToolBox",
+        "queryCellBtnText": "Query Cell",
+        "queryTxBtnText": "Query Tx",
+        "checkWalletBtnText": "Wallets",
+        "checkChainConfigBtnText": "Chain Config",
+        "hexToDecimalBtnText": "Hex To Decimal Tool",
+        "queryCell": {
+          "inputPlaceHolder": "lock_args..",
+          "searchResultTile": "result：",
+          "retryBtnText": "retry searching"
+        },
+        "queryTx": {
+          "inputPlaceHolder": "lock_args..",
+          "searchResultTile": "result：",
+          "retryBtnText": "retry searching"
+        },
+        "hexToDecimal": {
+          "hexNumberAlertMsg": "hex number should start with 0x",
+          "inputDecimalPlaceHolder": "Decimal Number",
+          "inputHexPlaceHolder": "Hex Number， start with 0x",
+          "convertBtnText": "convert",
+          "reverseFunctionBtnText": "reverse",
+          "resultText": "result: "
+        }
+      },
+      "wallets": {
+        "wallet": "wallet",
+        "securityAlertMsg": "For demonstration use only. Do not use these wallets in real situations or mainnet."
+      },
+      "newBlocks": {
+        "fetchBtnText": "Fetch Blocks",
+        "p1": "Each square represents a block. Shown above are the latest nine blocks.",
+        "p2": "Pay attention to the transaction information in the lower half of the blocks.",
+        "p3": "Click on any of these transactions, and you will see the details in JSON format.",
+        "p4": "You may notice that a real transaction has a different structure from what we've learned in the above theoretical part, to be precise, it looks a bit more complex.",
+        "p5": "But it's still graspable if you remember the structure: ",
+        "p6": "If you don't understand what's going on in all these fields for the moment, don't worry, we'll later break it down one by one."
+      },
+      "block": {
+        "blockText": "Block: ",
+        "hashText": "Hash: ",
+        "timeText": "Time: ",
+        "transactionCount": "Transactions, Count {{count}}"
+      },
+      "capacityOfCell": {
+        "inputPlaceHolder": "data: input Chinese Character...",
+        "capacity": "Occupancy",
+        "actualCapacity": "Actual occupancy",
+        "isCellCapacityEnough": "Capacity Availability：",
+        "cellContent": "Cell Content",
+        "fieldCapacity": "Field Occupancy",
+        "totalSpaceOccupy": "Cell's total space occupied",
+        "4FieldSumCapacity": "Sum of the 4 fields' length"
+      },
+      "cell": {
+        "capacity": "capacity"
+      },
+      "walletCells": {
+        "selectOptionLabel": "wallet",
+        "selectPlaceHolder": "Please select a wallet",
+        "selectCellsResultTitle": "Live Cells Of The Selected Wallet",
+        "selectTxsResultTitle": "Transactions Of the Selected Wallet"
+      },
+      "cellConcept": {
+        "p1": "In the CKB universe, countless cells are floating around.",
+        "p2": "Cells store data that jointly form the general state of the chain."
+      },
+      "someCodes": {
+        "outPoint": {
+          "txHashText": "Hash value of the affiliated transaction(to which transaction it belongs)",
+          "indexText": "Serial number of the affiliated transaction output(to which output it belongs)"
+        },
+        "cellCapacityRule": {
+          "totalSpaceOccupy": "Cell's total space occupied",
+          "4FieldSumCapacity": "Sum of the 4 fields' length"
+        }
       }
     },
     "class1": {
@@ -306,6 +432,7 @@
       },
       "buildATransaction": {
         "title": "Build a Transaction",
+        "formTitle": "fill in the transaction information",
         "p1": "Now, fill in the transaction information in the blanks below.",
         "p2": "Use this as an exercise to complete a transfer transaction by yourself.",
         "p3": "You may need to use some functions such as to locate the live cells corresponding to your wallet, to view the chain config info (so you can fill in cell_deps), and to convert from hex to decimal, etc., all of which can be found in the toolbox on the right side.",

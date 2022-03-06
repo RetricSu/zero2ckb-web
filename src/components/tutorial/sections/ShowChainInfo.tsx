@@ -34,14 +34,14 @@ export default function(props: I18nComponentsProps){
             </div>
             
             <div id="watch-a-chain">
-            <NewBlocks></NewBlocks>
+            <NewBlocks t={t} />
 
             <div style={styles.content}>
                 <p> {t("tutorial.common.getYourHandDirty.studyAChain.p3")}</p>
                 <p> {t("tutorial.common.getYourHandDirty.studyAChain.p4")}</p>
             </div>
 
-            <Wallets onFetchWallets={setWallets}></Wallets>
+            <Wallets t={t} onFetchWallets={setWallets}></Wallets>
 
             <div style={styles.content}>
                 <div style={styles.explain_text}>
@@ -63,7 +63,7 @@ export default function(props: I18nComponentsProps){
             </div>
 
             <div>
-                <WalletCells wallets={wallets}></WalletCells>
+                <WalletCells t={t} wallets={wallets}></WalletCells>
             </div>
 
             <div style={styles.content}>
@@ -83,7 +83,7 @@ export default function(props: I18nComponentsProps){
             <hr/>
             <div style={styles.content}>
                 <p>{t("tutorial.common.getYourHandDirty.studyAChain.p13")}</p>
-                <ChainConfig />
+                <ChainConfig t={t} />
                 <div style={styles.explain_text}>
                     <p><code style={styles.single_line_code}>prefix：ckt</code> {t("tutorial.common.getYourHandDirty.studyAChain.p15")}</p>
                     <p><code style={styles.single_line_code}>scripts</code> {t("tutorial.common.getYourHandDirty.studyAChain.p16")}</p>

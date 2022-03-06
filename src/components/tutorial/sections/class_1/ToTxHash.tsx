@@ -6,6 +6,7 @@ import {
 import FreshButton from '../../../widget/fresh_button';
 import { notify } from '../../../widget/notify';
 import CodePiece from '../../../widget/code';
+import { I18nComponentsProps } from '../../../../types/i18n';
 
 const styles = {
     root: {
@@ -20,11 +21,12 @@ const styles = {
     }
 }
 
-export type Props = {
+export interface Props extends I18nComponentsProps {
     raw_tx: RawTransaction | undefined
 }
 
 export default function ToTxHash(props: Props){
+    const {t} = props;
     const [hash, setHash] = useState('');
     const [serializeTx, setSerializeTx] = useState('');
 
@@ -40,7 +42,7 @@ export default function ToTxHash(props: Props){
                 notify(res.data);
             }
         }else{
-            notify('raw transaction is undefined. 请补充完上面的交易表格，然后点击保存按钮。');
+            notify(t("tutorial.widget.toTxHash.txUndefinedAlertMsg"));
         }
     }
 
@@ -58,17 +60,17 @@ export default function ToTxHash(props: Props){
                 notify(res.data);
             }
         }else{
-            notify('raw transaction is undefined. 请补充完上面的交易表格，然后点击保存按钮。');
+            notify(t("tutorial.widget.toTxHash.txUndefinedAlertMsg"));
         }
     }
 
     return(
         <div style={styles.root}>
             <div style={styles.result}>
-                the serialized Transaction before hash function:
+                {t("tutorial.widget.toTxHash.serializedTxBeforeHash")}
                 <CodePiece code={serializeTx || ''} custom_style={{border: '0'}} />
             </div>
-            <FreshButton text={'生成 tx_hash'} onClick={generateTxHash} custom_style={{width:'100%', fontSize: '16px'}}/>
+            <FreshButton text={t("tutorial.widget.toTxHash.btnText")} onClick={generateTxHash} custom_style={{width:'100%', fontSize: '16px'}}/>
             <div style={styles.result}>
                 <p>tx_hash: {hash}</p>
             </div>

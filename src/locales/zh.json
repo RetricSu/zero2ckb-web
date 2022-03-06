@@ -1,6 +1,11 @@
 {
   "tutorial": {
     "common": {
+      "saveBtnText": "保存",
+      "formFillHereText": "将此处补充完整",
+      "proofText": "证明",
+      "cellOfWallet1": "钱包 1 的 Cell",
+      "fetchCellOfWallet1": "刷新",
       "tableOfContents": {
         "theoreticalKnowledgeMinimized": {
           "title": "第一步：理论知识",
@@ -71,10 +76,6 @@
           "p1": "理解 CKB 的第一步，是抛开所有复杂的概念，只抓住这条链的本质：一切都是 Cell，以及 Cell 的转换而已。",
           "p2": "Cell 是 CKB 的基本单元，就像人体的细胞。一个个的 Cell 构成了整个 CKB 区块链的全局状态。 当我们在区块链上发起一笔交易改变了某个状态， 无论这笔交易多么复杂，状态改变流程多么繁琐， 最终对 CKB 来说，都是这笔交易把某些 Cell 消费掉，从而产生了一些新的 Cell 而已。 这个过程跟比特币的 UTXO 是完全一样的。",
           "p3": "被消费掉的 Cell 就是死去的 Dead Cell，未被消费的 Cell 是 live Cell。 一条链不停地经由交易去消费 Cell 和创造 Cell， 就像全身的细胞在更新换代、分裂生长。",
-          "img1": {
-            "note1": "在 CKB 的宇宙中，漂浮着无数的 Cell。",
-            "note2": "它们存储数据，共同构成了一条链的全局状态。"
-          },
           "p4": "跟 UTXO 不同的是，Cell 可以用来存储任意类型的数据。Cell 有一个字段名为 data，里面可以放入无格式的字符串。 这意味着，你往 data 上写入什么样的内容都可以，格式也是你自己定，只要你自己知道怎么解读这段字符串就行。",
           "p5": "比如，我可以往上面存一个哈希，存一段文字，也可以存一个日期， 甚至，你可以放一段二进制代码进去，而这段代码又可以被其他 Cell 引用， 经过虚拟机 CKB-VM 在链上运行。",
           "p6": "这其实就是 CKB 上所谓的智能合约，它的原理就是如此简单。"
@@ -247,7 +248,140 @@
       }
     },
     "context": {
+      "takeABreak": "课间休息",
       "moreClass": "更多课程"
+    },
+    "widget": {
+      "sendTx": {
+        "btnText": "发送交易",
+        "checkBlockBtnText": "查看打包了该交易的区块",
+        "txUndefinedAlertMsg": "tx is undefined. 请补充完上面的交易表格，然后点击保存按钮。",
+        "p1": "注意看下，交易成功上链后返回的 tx_hash，是不是和之前事先生成的那个 tx_hash 一模一样？",
+        "p2": "CKB 的确定性诚不欺我。",
+        "p3": "现在，你可以通过下面的按钮，看看刚才我们发送的交易是不是真的在链上了。如果提示 tx_status: pending , 则表明交易还在pending，稍后重试就可以了。"
+      },
+      "completeTxWithWitness": {
+        "btnText": "witnesses 加入 raw_tx"
+      },
+      "toTxHash": {
+        "btnText": "生成 tx_hash",
+        "serializedTxBeforeHash": "the serialized Transaction before hash function:",
+        "txUndefinedAlertMsg": "raw transaction is undefined. 请补充完上面的交易表格，然后点击保存按钮。"
+      },
+      "toSignMessage": {
+        "btnText": "生成 message",
+        "txUndefinedAlertMsg": "raw_tx is undefine."
+      },
+      "serializedWitnessArgs": {
+        "btnText": "序列化 witnessArgs",
+        "inputPlaceHolder": "lock: witness"
+      },
+      "toSignTx": {
+        "btnText": "签名",
+        "inputPlaceHolderMsg": "message",
+        "inputPlaceHolderPrivkey": "private key"
+      },
+      "txConstructor": {
+        "btnTextGen": "生成一笔交易",
+        "btnTextClear": "清空"
+      },
+      "dragCellToInputBall": {
+        "title": "把 Cell 拖进这里"
+      },
+      "outputCreatorTotalCapacity": {
+        "totalCapText": "总空间：",
+        "minerFee": "矿工手续费：",
+        "settingBtnText": "⚙️ 设置"
+      },
+      "editOutputCells": {
+        "capRuleAlertMsg": "capacity 需要小于 input 总和！tx_fee 不能为空！",
+        "addNewCellBtnText": "+ 加一个新 Cell",
+        "saveExitBtnText": "保存退出"
+      },
+      "editOutputPlainCell": {
+        "capRuleAlertMsg": "capacity 不能大于"
+      },
+      "showChainInfo": {
+        "title": "测试链的配置信息"
+      },
+      "toolBox": {
+        "title": "CKB-ToolBox",
+        "queryCellBtnText": "查找 Cell",
+        "queryTxBtnText": "查找交易",
+        "checkWalletBtnText": "查看钱包",
+        "checkChainConfigBtnText": "查看链配置",
+        "hexToDecimalBtnText": "16进制转换10进制",
+        "queryCell": {
+          "inputPlaceHolder": "lock_args..",
+          "searchResultTile": "搜索结果：",
+          "retryBtnText": "重试"
+        },
+        "queryTx": {
+          "inputPlaceHolder": "lock_args..",
+          "searchResultTile": "搜索结果：",
+          "retryBtnText": "重试"
+        },
+        "hexToDecimal": {
+          "hexNumberAlertMsg": "16进制数字需要以0x开头！",
+          "inputDecimalPlaceHolder": "十进制",
+          "inputHexPlaceHolder": "十六进制，以 0x 开头",
+          "convertBtnText": "转换",
+          "reverseFunctionBtnText": "对调",
+          "resultText": "结果： "
+        }
+      },
+      "wallets": {
+        "wallet": "钱包",
+        "securityAlertMsg": "仅作为演示用途，请勿在正式场合或主网下使用这些钱包 "
+      },
+      "newBlocks": {
+        "fetchBtnText": "获取最新区块",
+        "p1": "每个方块代表一个区块。上面展示的是这条链最新的9个区块。",
+        "p2": "区块中值得关注的信息，是下半部分的交易。",
+        "p3": "点击其中任意一条交易，你会看到 JSON 格式的详细信息。",
+        "p4": "你可能会发现，一笔真实的交易，跟我们之前在理论课程中学到的结构有所不同，准确地说，是变得更复杂了一些。",
+        "p5": "但它并没有逃出这个本质：",
+        "p6": "如果你暂时看不懂交易结构里所有字段的意义，不要紧，我们将留给后续逐一攻破。"
+      },
+      "block": {
+        "blockText": "区块：",
+        "hashText": "哈希：",
+        "timeText": "时间：",
+        "transactionCount": "交易： {{count}} 条"
+      },
+      "capacityOfCell": {
+        "inputPlaceHolder": "data：输入汉字..",
+        "capacity": "占用空间",
+        "actualCapacity": "实际占用空间",
+        "isCellCapacityEnough": "Cell 容量是否足够：",
+        "cellContent": "Cell 的内容：",
+        "fieldCapacity": "每个字段占用空间大小：",
+        "totalSpaceOccupy": "cell 总占用空间",
+        "4FieldSumCapacity": "4个字段的长度之和"
+      },
+      "cell": {
+        "capacity": "占用空间"
+      },
+      "walletCells": {
+        "selectOptionLabel": "钱包",
+        "selectPlaceHolder": "请选择钱包",
+        "selectCellsResultTitle": "钱包对应的 live cell",
+        "selectTxsResultTitle": "钱包对应的交易"
+      },
+      "cellConcept": {
+        "p1": "在 CKB 的宇宙中，漂浮着无数的 Cell。",
+        "p2": "它们存储数据，共同构成了一条链的全局状态。"
+      },
+      "someCodes": {
+        "outPoint": {
+          "txHashText": "所属交易的哈希值（属于哪一笔交易）",
+          "indexText": "所属交易输出的序号（属于第几个输出）"
+        },
+        "cellCapacityRule": {
+          "totalSpaceOccupy": "cell 总占用空间",
+          "4FieldSumCapacity": "4个字段的长度之和"
+        }
+      }
     },
     "class1": {
       "title": "发送一笔交易",
@@ -298,6 +432,7 @@
       },
       "buildATransaction": {
         "title": "构造交易",
+        "formTitle": "将下面的交易补充完成",
         "p1": "现在，把下面白框中的空白交易填满。",
         "p2": "把它当作一次练习，自己用手动的方式填写一笔转账交易。",
         "p3": "你可能需要用到查找钱包对应的 live Cell、查看链配置信息(用来填写 cell_deps)、16 进制与 10 进制互相转换这些功能，它们在右手边的工具箱中都可以找到。",

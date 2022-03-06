@@ -5,6 +5,7 @@ import { Cell, ChainConfig } from '../../../../types/blockchain';
 import commonStyle from '../../../widget/common_style';
 import utils from '../../../../utils/index';
 import { notify } from '../../../widget/notify';
+import { I18nComponentsProps } from '../../../../types/i18n';
 
 const styles = {...commonStyle, ...{
     root: {
@@ -67,7 +68,7 @@ export type SimpleCellJson = {
     data: string
 }
 
-export type PlainCellProps = {
+export interface PlainCellProps extends I18nComponentsProps {
     cell: SimpleCellJson
     config: ChainConfig | undefined
     total_capacity: string //10进制
@@ -75,7 +76,7 @@ export type PlainCellProps = {
 }
 
 const PlainCell = (props: PlainCellProps) => {
-    const { cell, config, get_final_cell, total_capacity } = props;
+    const { t, cell, config, get_final_cell, total_capacity } = props;
     const [isHidden, setIsHidden] = useState(false);
     const [final_cell, setFinalCell] = useState<SimpleCellJson>();
     const [isFinalCellOpen, setIsFinalCellOpen] = useState(false);
@@ -106,7 +107,7 @@ const PlainCell = (props: PlainCellProps) => {
         if(BigInt(value) < BigInt(total_capacity)){
             setCapacity(value);
         }else{
-            notify("capacity 不能大于"+BigInt(total_capacity).toString(10));
+            notify(t("tutorial.widget.editOutputPlainCell.capRuleAlertMsg")+BigInt(total_capacity).toString(10));
         }
     }
 
@@ -153,14 +154,14 @@ const PlainCell = (props: PlainCellProps) => {
     )
 }
 
-export type EditOutputCellsProps = {
+export interface EditOutputCellsProps extends I18nComponentsProps {
     capacity: string
     get_distribute_cells?: (cells: Cell[]) => void
     trigger_modal_close?: () => void
 }
 
 export default function EditOutputCells(props: EditOutputCellsProps){
-    const { capacity, get_distribute_cells, trigger_modal_close } = props;
+    const { t, capacity, get_distribute_cells, trigger_modal_close } = props;
     const [config, setConfig] = useState<ChainConfig>();
     const [new_cells, setNewCells] = useState<SimpleCellJson[]>([]);
     const [final_cells, setFinalCells] = useState<SimpleCellJson[]>([]);
@@ -190,7 +191,7 @@ export default function EditOutputCells(props: EditOutputCellsProps){
             if(sum < Number(utils.shannon2CKB(utils.hex2dec(capacity)))){
                 setFinalCells([...final_cells, cell]);
             }else{
-                notify("capacity 需要小于 input 总和！tx_fee 不能为空！");
+                notify(t("tutorial.widget.editOutputCells.capRuleAlertMsg"));
             }
         }
     }
@@ -228,14 +229,14 @@ export default function EditOutputCells(props: EditOutputCellsProps){
             <div style={styles.edit_cell_header}>
                 Total Capacity: { utils.shannon2CKB(utils.hex2dec(capacity)) } CKB 
                 <span style={styles.rigth_btn}>
-                    <button onClick={add_cell}> + 加一个新 Cell</button> <button onClick={apply}>保存退出</button>
+                    <button onClick={add_cell}> {t("tutorial.widget.editOutputCells.addNewCellBtnText")} </button> <button onClick={apply}> {t("tutorial.widget.editOutputCells.saveExitBtnText")} </button>
                 </span>
             </div>
     
             <div style={styles.op_panel}>
                 {new_cells.map((cell: SimpleCellJson) => {
                     return (
-                        <PlainCell total_capacity={utils.shannon2CKB(utils.hex2dec(capacity))} cell={cell} config={config} get_final_cell={onSaveCell}/>
+                        <PlainCell t={t} total_capacity={utils.shannon2CKB(utils.hex2dec(capacity))} cell={cell} config={config} get_final_cell={onSaveCell}/>
                     )
                 })}
             </div>

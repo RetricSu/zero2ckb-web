@@ -1,6 +1,7 @@
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import React, { useState, useEffect } from 'react';
 import Api from '../../../../api/blockchain';
+import { I18nComponentsProps } from '../../../../types/i18n';
 import CodePiece from '../../../widget/code';
 
 const styles = {
@@ -15,13 +16,13 @@ const styles = {
     }
 }
 
-export type ChainConfigProps = {
+export interface ChainConfigProps extends I18nComponentsProps {
     custom_style?: CSSProperties
 }
 
 export default function ChainConfig(props: ChainConfigProps){
 
-    const {custom_style} = props;
+    const {t, custom_style} = props;
 
     const [config, setConfig] = useState();
 
@@ -37,7 +38,7 @@ export default function ChainConfig(props: ChainConfigProps){
 
     return(
         <div style={styles.root}>
-            <h4>测试链的配置信息</h4>
+            <h4>{t("tutorial.widget.showChainInfo.title")}</h4>
             <div style={custom_style !== undefined ? {...styles.config_panel, ...custom_style} : styles.config_panel}>
                 <CodePiece custom_style={{border:'0'}} code={JSON.stringify(config, null, 2)} />
             </div>

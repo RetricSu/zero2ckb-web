@@ -6,6 +6,8 @@ import { Cell, CellDep, Input, Script } from '../../../../types/blockchain';
 import Api from '../../../../api/blockchain';
 import utils from '../../../../utils/index';
 import SingleCell from './Cell';
+import { I18nComponentsProps } from '../../../../types/i18n';
+import { t } from 'i18next';
 
 const styles = {...commonStyle, ...{
     drop_place: {
@@ -61,7 +63,7 @@ export type ChainConfig = {
     }
 }
 
-export type Props = {
+export interface Props extends I18nComponentsProps {
     get_contents?: (cells: Cell[], cell_deps: CellDep[], inputs: Input[]) => void
     onClearCall?: boolean
     makeOriginCellHidden?: boolean
@@ -204,9 +206,9 @@ export default function DragCellToInputBall(props: Props){
     return(
         <div ref={drop} style={{...styles.drop_place, border}}>
             <div style={{...styles.header, color, borderBottom}}>
-                <span style={styles.hint_text}>把 Cell 拖进这里</span>
+                <span style={styles.hint_text}>{t("tutorial.widget.dragCellToInputBall.title")}</span>
             </div>
-            {cells.map( (cell: Cell, index: number) => <SingleCell cell={cell} key_id={index} isDraggable={false} custom_style={{margin: '0'}} /> )}
+            {cells.map( (cell: Cell, index: number) => <SingleCell t={t} cell={cell} key_id={index} isDraggable={false} custom_style={{margin: '0'}} /> )}
         </div>
     )
 }

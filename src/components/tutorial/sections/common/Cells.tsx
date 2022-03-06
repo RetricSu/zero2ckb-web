@@ -6,9 +6,10 @@ import type {
 } from '../../../../types/blockchain';
 import SingleCell from './Cell';
 import FreshButton from '../../../widget/fresh_button';
+import { I18nComponentsProps } from "../../../../types/i18n";
 
 
-export type Props = {
+export interface Props extends I18nComponentsProps {
     query: QueryOption
     length?: number,
     render_dep?: any,
@@ -43,6 +44,7 @@ const styles = {
 };
 
 export default function Cells(props: Props) {
+  const {t} = props;
   const [cells, setCells] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -62,7 +64,7 @@ export default function Cells(props: Props) {
       const length = props.length || 10;
       var myCells = await api.getLiveCells(props.query, length);
       setCells(
-          myCells.map((cell: Cell, index: number) => <SingleCell cell={cell} key_id={index} /> )
+          myCells.map((cell: Cell, index: number) => <SingleCell t={t} cell={cell} key_id={index} /> )
       );
     }
     setIsLoading(false);

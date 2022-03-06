@@ -9,74 +9,73 @@ import cell_as_box_concept from '../../../resource/open-box.png';
 import lock_concept from '../../../resource/lock-box.png';
 import { I18nComponentsProps } from '../../../types/i18n';
 
-const code = {
-    /** 
-     * be careful with the following white space before each line start 
-     * which will also display on html. Meaning that it should be place excatly
-     * where it should be. 
-     * 
-     * todo:
-     *  of course this method is ugly. should improve the code wrapper later on.
-    */
-    cell_structure: `
-        Cell: {
-            capacity: HexString
-            lock: Script
-            type: Script
-            data: HexString
-        } 
-                    `,
-    outpoint_structure: `
-        OutPoint: {
-            tx_hash: 所属交易的哈希值（属于哪一笔交易）
-            index: 所属交易输出的序号（属于第几个输出）
-        }
-                        `,
-    script_structure: `
-        Script: {
-            code_hash: HexString
-            args: HexString
-            hash_type: either 'data' or 'type'
-        }
-                    `,
-    cell_space_rule: `
-        cell 总占用空间 = capacity 
-                      >= 4个字段的长度之和
-                    `,
-    tx_space_rule: `
-        capacity(input cell) > capacity(output cell)
-                    `,
-    
-    systemlock_deadlock_example: `
-        SECP256K1's lock: {
-            code_hash: 0x0000000000000000000000000000000000000000000000000000000000000000
-            args: 0x
-            hash_type..
-        }
-                    `,
-    tx_define: `
-        tx: input -> output
-                `,
-    input_output_define: `
-        input:
-            some cell...
-        ｜
-        ｜
-        ｜
-        \\/
-        output:
-            some new cell...
-                        `,
-    
-}
-
-
 /***  
  * todo: add some drawing image to better explained the datatype
  */
 export default function Preknowledge(props: I18nComponentsProps){
 
     const { t } = props; 
+
+    const code = {
+        /** 
+         * be careful with the following white space before each line start 
+         * which will also display on html. Meaning that it should be place excatly
+         * where it should be. 
+         * 
+         * todo:
+         *  of course this method is ugly. should improve the code wrapper later on.
+        */
+        cell_structure: `
+            Cell: {
+                capacity: HexString
+                lock: Script
+                type: Script
+                data: HexString
+            } 
+                        `,
+        outpoint_structure: `
+            OutPoint: {
+                tx_hash: ${t("tutorial.widget.someCodes.outPoint.txHashText")}
+                index: ${t("tutorial.widget.someCodes.outPoint.indexText")}
+            }
+                            `,
+        script_structure: `
+            Script: {
+                code_hash: HexString
+                args: HexString
+                hash_type: either 'data' or 'type'
+            }
+                        `,
+        cell_space_rule: `
+            ${t("tutorial.widget.someCodes.cellCapacityRule.totalSpaceOccupy")} = capacity 
+                          >= ${t("tutorial.widget.someCodes.cellCapacityRule.4FieldSumCapacity")}
+                        `,
+        tx_space_rule: `
+            capacity(input cell) > capacity(output cell)
+                        `,
+        
+        systemlock_deadlock_example: `
+            SECP256K1's lock: {
+                code_hash: 0x0000000000000000000000000000000000000000000000000000000000000000
+                args: 0x
+                hash_type..
+            }
+                        `,
+        tx_define: `
+            tx: input -> output
+                    `,
+        input_output_define: `
+            input:
+                some cell...
+            ｜
+            ｜
+            ｜
+            \\/
+            output:
+                some new cell...
+                            `,
+        
+    }
 
     const [code_hash, setCodeHash] = useState('');
     const [hash_type, setHashType] = useState('');
@@ -126,7 +125,7 @@ export default function Preknowledge(props: I18nComponentsProps){
                 {t("tutorial.common.theoreticalKnowledgeMinimized.unravelCKB.p3")}
             </p>
 
-            <CellConcept></CellConcept>
+            <CellConcept t={t}></CellConcept>
             
             <p>{t("tutorial.common.theoreticalKnowledgeMinimized.unravelCKB.p4")}</p>
             <p>
@@ -183,7 +182,7 @@ export default function Preknowledge(props: I18nComponentsProps){
             </p>
 
             {code_hash && hash_type &&
-                <CapacityOfCell cell={simpleCell}/>
+                <CapacityOfCell t={t} cell={simpleCell}/>
             }
 
             <h4 id="how-to-know-cell-is-yours" style={styles.main_color}>{t("tutorial.common.theoreticalKnowledgeMinimized.howToKnowCellIsYours.title")}</h4>
@@ -223,7 +222,7 @@ export default function Preknowledge(props: I18nComponentsProps){
             </p>
             <p>{t("tutorial.common.theoreticalKnowledgeMinimized.howToKnowCellIsYours.p12")}</p>
             
-            <h3 id="break1" style={styles.main_color}>{t("tutorial.common.takeABreak")}</h3>
+            <h3 id="break1" style={styles.main_color}>{t("tutorial.context.takeABreak")}</h3>
             <p>{t("tutorial.common.theoreticalKnowledgeMinimized.takeABreak2.p1")}</p>
             <ul>
                 <li>{t("tutorial.common.theoreticalKnowledgeMinimized.takeBreak1.ul1.l1")}</li>
@@ -308,7 +307,7 @@ export default function Preknowledge(props: I18nComponentsProps){
             <p>{t("tutorial.common.theoreticalKnowledgeMinimized.roleOfTypeLock.p6")}</p>
         </div>
         <div id="break2" style={styles.content}>
-            <h3 style={styles.main_color}>{t("tutorial.common.takeABreak")}</h3>
+            <h3 style={styles.main_color}>{t("tutorial.context.takeABreak")}</h3>
             <p>{t("tutorial.common.theoreticalKnowledgeMinimized.takeABreak2.p1")}</p>
             <p>{t("tutorial.common.theoreticalKnowledgeMinimized.takeABreak2.p2")}</p>
             <ul>

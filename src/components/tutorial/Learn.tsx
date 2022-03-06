@@ -36,7 +36,7 @@ function Learn() {
           <Container maxWidth="md" style={styles.page}>
             <DndProvider backend={HTML5Backend}>
               <TableOfContents t={t} />
-              <ToolBox />
+              <ToolBox t={t} />
               <Notify />
               <BeforeWeGetStarted t={t} />
               <PreKnowledge t={t} />
@@ -52,7 +52,7 @@ function Learn() {
                   </button>
                 ))}
               </div>
-              <p>{t("tutorial.common.context.moreClass")}</p>
+              <p>{t("tutorial.context.moreClass")}</p>
               <hr/>
               <Class2 />
               <Class3 />
