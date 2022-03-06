@@ -298,7 +298,7 @@ export default function Class1(props: I18nComponentsProps){
                 <h4 id="send-tx" style={styles.main_color}>{t("tutorial.class1.sendTransaction.p1")}</h4>
                 <SendTx tx={complete_tx}></SendTx>
                 <p>{t("tutorial.class1.sendTransaction.p2")}</p>
-                <p>{t("tutorial.class1.sendTransaction.p2")}</p>
+                <p>{t("tutorial.class1.sendTransaction.p3")}</p>
 
                 
             </div>
