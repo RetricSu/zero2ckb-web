@@ -7,6 +7,7 @@ import commonStyles from '../../../widget/common_style';
 import CopyText from '../../../widget/copy_text';
 import CodePiece from '../../../widget/code';
 import { Typography, Container } from "@material-ui/core";
+import { I18nComponentsProps } from '../../../../types/i18n';
 
 
 const wallet_arcii = `
@@ -116,7 +117,7 @@ export function WalletInfo(props: WalletInfoProps){
     )
 }
 
-export type Props = {
+export interface Props extends I18nComponentsProps {
     wallet_id?: number
     custom_style?: CSSProperties
     onFetchWallets?: (wallets: Wallet[]) => void
@@ -124,7 +125,7 @@ export type Props = {
 
 export default function Wallets(props: Props){
 
-    const { custom_style } = props;
+    const { t, custom_style } = props;
 
     const [wallets, setWallets] = useState([]);
 
@@ -138,7 +139,7 @@ export default function Wallets(props: Props){
         setWallets( myWallets.map((wallet:Wallet, index:number) => {
             return(
             <li key={index} style={styles.wallet_panel}>
-                <Typography style={styles.main_color}> 钱包 {index + 1} </Typography>
+                <Typography style={styles.main_color}> {t("tutorial.widget.wallets.wallet")} {index + 1} </Typography>
                 <WalletInfo wallet={wallet}></WalletInfo>
             </li>
             )
@@ -151,7 +152,7 @@ export default function Wallets(props: Props){
         <Container style={ custom_style != undefined ? {...styles.wallet_section, ...custom_style} : styles.wallet_section}>
             <div style={styles.content}>
                  <p style={styles.alert_text}> 
-                 ☠️ &#160; 仅作为演示用途，请勿在正式场合或主网下使用这些钱包 
+                 ☠️ &#160; {t("tutorial.widget.wallets.securityAlertMsg")}
                 </p>
             </div>
             <div style={styles.wallets}>

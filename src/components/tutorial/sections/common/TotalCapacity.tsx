@@ -6,6 +6,7 @@ import SingleCell from './Cell';
 import utils from '../../../../utils/index';
 import { Modal, Fade } from '@material-ui/core';
 import EditOutputCells from './EditOutputCells';
+import { I18nComponentsProps } from '../../../../types/i18n';
 
 const styles = {...commonStyle, ...{
     root: {
@@ -52,13 +53,13 @@ const styles = {...commonStyle, ...{
     }
 }};
 
-export type TotalCapacityProps = {
+export interface TotalCapacityProps extends I18nComponentsProps {
     cells: Cell[]
     get_tx_output?: (txo: TxOutput) => void
     onClearCall?: boolean
 }
 
-const caculateCellCapacity = (cells: Cell[]) => {
+const calculateCellCapacity = (cells: Cell[]) => {
     var total = BigInt(0);
     cells.map(cell=>{
         total = total + BigInt(cell.cell_output.capacity);
@@ -67,7 +68,7 @@ const caculateCellCapacity = (cells: Cell[]) => {
 }
 
 export default function TotalCapacity (props: TotalCapacityProps) {
-    const {cells, get_tx_output, onClearCall} = props;
+    const {t, cells, get_tx_output, onClearCall} = props;
     const [capacity, setCapacity] = useState('0x0');
     const [fee, setFee] = useState('0');
     const [mycells, setMycells] = useState<Cell[]>([]);
@@ -85,7 +86,7 @@ export default function TotalCapacity (props: TotalCapacityProps) {
     }
     
     const default_one_cell = async (cells: Cell[]) => {
-        let sum = await caculateCellCapacity(cells);
+        let sum = await calculateCellCapacity(cells);
         let c: Cell = {
             cell_output: {
                 capacity: sum,
@@ -110,7 +111,7 @@ export default function TotalCapacity (props: TotalCapacityProps) {
     }, [cells]);
 
     useEffect(() => {
-        setFee(caculate_fee());
+        setFee(calculate_fee());
         if(get_tx_output){
             const tx_output = caculateTxOutPut();
             get_tx_output(tx_output);
@@ -123,7 +124,7 @@ export default function TotalCapacity (props: TotalCapacityProps) {
     }, [onClearCall]);
 
     const updateCapacity = async (cells: Cell[]) => {
-        let sum = caculateCellCapacity(cells);
+        let sum = calculateCellCapacity(cells);
         await setCapacity(sum);
     }
 
@@ -145,8 +146,8 @@ export default function TotalCapacity (props: TotalCapacityProps) {
         handleModalOpen();
     }
 
-    const caculate_fee = () => {
-        let sum = caculateCellCapacity(mycells);
+    const calculate_fee = () => {
+        let sum = calculateCellCapacity(mycells);
         const fee = (BigInt(utils.hex2dec(capacity)) - BigInt(utils.hex2dec(sum))).toString(16);
         //const fee = ( BigInt(capacity.slice(2)) - BigInt(sum.slice(2)) ).toString(16);
         console.log(capacity, sum, fee);
@@ -162,17 +163,17 @@ export default function TotalCapacity (props: TotalCapacityProps) {
         <div style={styles.root}>
             <div style={styles.capacity}>
                <div style={styles.capacity_header}>
-                    <div style={{display:'inline-block'}}>总空间：</div> 
+                    <div style={{display:'inline-block'}}>{t("tutorial.widget.outputCreatorTotalCapacity.totalCapText")}</div> 
                     <div style={styles.header_number}>{ utils.shannon2CKB(utils.hex2dec(capacity)) }</div>
                     <div style={{display:'inline-block'}}>CKB | </div> 
-                    <FreshButton text="⚙️ 设置" onClick={distribute_cells} custom_style={{border:'0', padding: '2px', marginLeft: '5px', fontSize: '16px'}} />
+                    <FreshButton text={t("tutorial.widget.outputCreatorTotalCapacity.settingBtnText")} onClick={distribute_cells} custom_style={{border:'0', padding: '2px', marginLeft: '5px', fontSize: '16px'}} />
                </div>
                <div style={styles.output_cell}>
-                    { mycells.map( (cell, index) => <SingleCell cell={cell} key_id={index} custom_style={{margin: '0'}} /> )}
+                    { mycells.map( (cell, index) => <SingleCell t={t} cell={cell} key_id={index} custom_style={{margin: '0'}} /> )}
                </div>
             </div>
             <div style={styles.fee}>
-                矿工手续费：{fee} CKB  |   {isFeeOk ? '✅' : '❌'}
+                {t("tutorial.widget.outputCreatorTotalCapacity.minerFee")} {fee} CKB  |   {isFeeOk ? '✅' : '❌'}
             </div>
 
             <Modal
@@ -186,7 +187,7 @@ export default function TotalCapacity (props: TotalCapacityProps) {
                 >
                   <Fade in={isModalOpen}>
                     <div style={styles.paper}>
-                      <EditOutputCells get_distribute_cells={updateMyCells} capacity={capacity} trigger_modal_close={handleModalClose} />
+                      <EditOutputCells t={t} get_distribute_cells={updateMyCells} capacity={capacity} trigger_modal_close={handleModalClose} />
                       <div style={{clear: 'both' as const,}}></div>
                     </div>
                   </Fade>

@@ -80,7 +80,7 @@ export default function DragCellToInput(props: Props){
         try {
             prepareJsonData(item.cell);
             return { name: 'tx-input(json)', isOriginHidden: true};
-        } catch (error) {
+        } catch (error: any) {
             alert(error);
             return { name: 'tx-input(json)', isOriginHidden: false};
         }

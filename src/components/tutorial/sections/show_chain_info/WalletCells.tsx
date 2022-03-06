@@ -6,9 +6,10 @@ import type {
     Wallet
 } from '../../../../types/blockchain'
 import Select, { ActionMeta, OptionTypeBase, ValueType } from 'react-select';
+import { I18nComponentsProps } from '../../../../types/i18n';
 
 
-export type Props = {
+export interface WalletCellsProps extends I18nComponentsProps {
     wallets: Wallet[]
 }
 
@@ -33,7 +34,8 @@ const styles = {
 /**
  * todo: add balance here. 
  */
-export default function WalletCells( props: Props ){
+export default function WalletCells( props: WalletCellsProps ){
+    const {t} = props;
     const [wallets, setWallets] = useState<Wallet[]>([]);
 
     useEffect(() => {
@@ -44,7 +46,7 @@ export default function WalletCells( props: Props ){
     const options = wallets.map((w, index) => {
         return {
             value: w.lock_arg,
-            label: '钱包' + (index + 1) + ': ' + w.lock_arg
+            label: t("tutorial.widget.walletCells.selectOptionLabel") + (index + 1) + ': ' + w.lock_arg
         }
     });
 
@@ -61,21 +63,21 @@ export default function WalletCells( props: Props ){
     return(
         <div>
             <div style={styles.selection_area}>
-                <Select placeholder="请选择钱包" options={options} onChange={handlerSelectWallet} />
+                <Select placeholder={t("tutorial.widget.walletCells.selectPlaceHolder")} options={options} onChange={handlerSelectWallet} />
             </div>
             <br/>
-            <Cells query={{lock: {
+            <Cells t={t} query={{lock: {
                 code_hash: '0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8',
                 args: selectedWallet || '',
                 hash_type: 'type'
-            }}}  length={12} render_dep={selectedWallet} text={{title:'钱包对应的 live cell', btn_text:''}} custom_style={{btn_style: styles.hidden_btn}} ></Cells>
+            }}}  length={12} render_dep={selectedWallet} text={{title: t("tutorial.widget.walletCells.selectCellsResultTitle"), btn_text:''}} custom_style={{btn_style: styles.hidden_btn}} ></Cells>
 
             <div>
                 <WalletTxs query={{lock: {
                     code_hash: '0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8',
                     args: selectedWallet || '',
                     hash_type: 'type'
-                }}} render_dep={selectedWallet} text={{title:'钱包对应的交易', btn_text:''}} custom_style={{btn_style: styles.hidden_btn}} ></WalletTxs>
+                }}} render_dep={selectedWallet} text={{title: t("tutorial.widget.walletCells.selectTxsResultTitle"), btn_text:''}} custom_style={{btn_style: styles.hidden_btn}} ></WalletTxs>
             </div>
            
             

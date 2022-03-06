@@ -10,6 +10,7 @@ import Logo from '../widget/logo_svg';
 import NewLogo from '../../resource/nervos-token-logo-white.jpg';
 import Api from '../../api/blockchain';
 import type { ChainConfig as typeChainConfig } from '../../types/blockchain';
+import { I18nComponentsProps } from '../../types/i18n';
 
 const styles = {...commonStyle, ...{
     root: {
@@ -40,8 +41,8 @@ const styles = {...commonStyle, ...{
 /** 
  * todo: add clickable effect on close btn
  */
-export default function FloatingBox(){
-
+export default function FloatingBox(props: I18nComponentsProps){
+    const {t} = props;
     const [code_hash, setCodeHash] = useState('');
     const [hash_type, setHashType] = useState('');
 
@@ -105,24 +106,24 @@ export default function FloatingBox(){
             <div className="side-menu">
                 <div style={{display: isOpen ? 'block' : 'none' }}>
                     <div>
-                        <h3 style={styles.main_color}>CKB-ToolBox</h3>
+                        <h3 style={styles.main_color}>{t("tutorial.widget.toolBox.title")}</h3>
                         <hr style={styles.hr} />
                     </div>
                     <ul className="nav">
                         <li>
-                            <a onClick={openQueryCell}><span className="fa">🔎</span>&#160;  查找 Cell</a>
+                            <a onClick={openQueryCell}><span className="fa">🔎</span>&#160;  {t("tutorial.widget.toolBox.queryCellBtnText")}</a>
                         </li>
                         <li>
-                            <a onClick={openQueryTx}><span className="fa">🔎</span>&#160;  查找交易</a>
+                            <a onClick={openQueryTx}><span className="fa">🔎</span>&#160;  {t("tutorial.widget.toolBox.queryTxBtnText")}</a>
                         </li>
                         <li>
-                            <a onClick={openWallets}><span className="fa">💰</span>&#160;  查看钱包</a>
+                            <a onClick={openWallets}><span className="fa">💰</span>&#160;  {t("tutorial.widget.toolBox.checkWalletBtnText")}</a>
                         </li>
                         <li>
-                            <a onClick={openConfig}><span className="fa">⚙️</span>&#160;  查看链配置</a>
+                            <a onClick={openConfig}><span className="fa">⚙️</span>&#160;  {t("tutorial.widget.toolBox.checkChainConfigBtnText")}</a>
                         </li>
                         <li>
-                            <a onClick={openCaculator}><span className="fa">📱</span>&#160;  16进制转换10进制</a>
+                            <a onClick={openCaculator}><span className="fa">📱</span>&#160;  {t("tutorial.widget.toolBox.hexToDecimalBtnText")}</a>
                         </li>
                     </ul>
                 </div>
@@ -130,19 +131,19 @@ export default function FloatingBox(){
                     <button style={{...styles.close_btn, ...{display: !isOpen ? 'block' : 'none' }}} onClick={hanlderClose}>❌</button>
                     <div style={{marginTop: '30px'}}>
                         <div style={{display: isQueryCellOpen ? 'block' : 'none' }}>
-                            <QueryCell code_hash={code_hash} hash_type={hash_type == 'type' ? 'type' : 'data'} />
+                            <QueryCell t={t} code_hash={code_hash} hash_type={hash_type == 'type' ? 'type' : 'data'} />
                         </div>
                         <div style={{display: isQueryTxOpen ? 'block' : 'none' }}>
-                            <QueryTx />
+                            <QueryTx t={t}/>
                         </div>
                         <div style={{display: isWalletsOpen ? 'block' : 'none' }}>
-                            <Wallets custom_style={{border: '0'}} />
+                            <Wallets t={t} custom_style={{border: '0'}} />
                         </div>
                         <div style={{display: isConfigOpen ? 'block' : 'none' }}>
-                            <ChainConfig custom_style={{border:'0'}}/>
+                            <ChainConfig t={t} custom_style={{border:'0'}}/>
                         </div>
                         <div style={{display: isCaculatorOpen ? 'block' : 'none' }}>
-                            <Hex2Decimal custom_style={{border:'0'}} />
+                            <Hex2Decimal t={t} custom_style={{border:'0'}} />
                         </div>
                     </div>
                 </div>

@@ -10,6 +10,7 @@ import type {
 import BlockBox from '../common/Block';
 import Firework from '../../../widget/fireworks/firework';
 import PopFirework from '../../../widget/fireworks/animate';
+import { I18nComponentsProps } from '../../../../types/i18n';
 
 const styles = {...commonStyle, ...{
     root: {
@@ -32,18 +33,19 @@ const styles = {...commonStyle, ...{
     }
 }}
 
-export type Props = {
+export interface SendTxProps extends I18nComponentsProps {
     tx: Transaction | undefined
 }
 
-export default function SendTx(props: Props){
+export default function SendTx(props: SendTxProps){
+    const {t, tx} = props;
     const [tx_hash, setTxHash] = useState('');
     const [block, setBlock] = useState<Block>();
     
     const sendTx = async () => {
         const api = new Api();
-        if(props.tx){
-            const res = await api.sendTx(props.tx);
+        if(tx){
+            const res = await api.sendTx(tx);
             if(res.status == 'ok'){
                 setTxHash(res.data);
                 PopFirework();
@@ -52,7 +54,7 @@ export default function SendTx(props: Props){
                 notify(res.data);
             }
         }else{
-            notify('tx is undefined. 请补充完上面的交易表格，然后点击保存按钮。');
+            notify(t("tutorial.widget.sendTx.txUndefinedAlertMsg"));
         }
     }
 
@@ -75,21 +77,21 @@ export default function SendTx(props: Props){
 
     return(
         <div style={styles.root}>
-            <FreshButton text={'发送交易'} onClick={sendTx} custom_style={{width:'100%', fontSize: '16px'}}></FreshButton>
+            <FreshButton text={t("tutorial.widget.sendTx.btnText")} onClick={sendTx} custom_style={{width:'100%', fontSize: '16px'}}></FreshButton>
             <div style={styles.result}>
                 <p>tx_hash: {tx_hash} </p>
             </div>
             <div style={styles.explain_text}>
-                <p>注意看下，交易成功上链后返回的 tx_hash，是不是和之前事先生成的那个 tx_hash 一模一样？</p>
-                <p>CKB 的确定性诚不欺我。</p>
-                <p>现在，你可以通过下面的按钮，看看刚才我们发送的交易是不是真的在链上了。如果提示 <span style={styles.single_line_code}>tx_status: pending</span> , 则表明交易还在pending，稍后重试就可以了。</p>
+                <p>{t("tutorial.widget.sendTx.p1")}</p>
+                <p>{t("tutorial.widget.sendTx.p2")}</p>
+                <p>{t("tutorial.widget.sendTx.p3")}</p>
             </div>
             
-            <FreshButton text={'查看打包了该交易的区块'} onClick={fetchBlock} custom_style={{width:'100%', fontSize: '16px'}}></FreshButton>
+            <FreshButton text={t("tutorial.widget.sendTx.checkBlockBtnText")} onClick={fetchBlock} custom_style={{width:'100%', fontSize: '16px'}}></FreshButton>
             <div style={styles.block_panel}>
                 <p>
                     { block &&
-                        <BlockBox block={block} custom_style={{float: 'none', margin:'0 auto'}} />
+                        <BlockBox t={t} block={block} custom_style={{float: 'none', margin:'0 auto'}} />
                     }
                 </p>
             </div>

@@ -3,6 +3,7 @@ import FreshButton from '../../../widget/fresh_button';
 import Api from '../../../../api/blockchain';
 import { notify } from '../../../widget/notify';
 import commonStyle from '../../../widget/common_style';
+import { I18nComponentsProps } from '../../../../types/i18n';
 
 const styles = {...commonStyle, ...{
     input_wrap: {
@@ -30,8 +31,8 @@ const styles = {...commonStyle, ...{
     }
 }}
 
-export default function Signer(){
-
+export default function Signer(props: I18nComponentsProps){
+    const {t} = props;
     const [isLoading, setIsLoading] = useState(false);
     const [signature, setSignature] = useState('');
     const msg_ref = useRef<HTMLInputElement>(null);
@@ -53,12 +54,12 @@ export default function Signer(){
     return(
         <div style={styles.root}>
             <span style={styles.input_wrap}>
-                <input style={styles.input} ref={msg_ref} placeholder={'message'} type="text"/>
+                <input style={styles.input} ref={msg_ref} placeholder={t("tutorial.widget.toSignTx.inputPlaceHolderMsg")} type="text"/>
             </span>
             <span style={styles.input_wrap}>
-                <input style={styles.input} ref={key_ref} placeholder={'private key'} type="text"/>
+                <input style={styles.input} ref={key_ref} placeholder={t("tutorial.widget.toSignTx.inputPlaceHolderPrivkey")} type="text"/>
             </span>
-            <FreshButton isLoading={isLoading} onClick={sign_message} text={'签名'} custom_style={{width:'100%', fontSize: '16px'}} ></FreshButton>
+            <FreshButton isLoading={isLoading} onClick={sign_message} text={t("tutorial.widget.toSignTx.btnText")} custom_style={{width:'100%', fontSize: '16px'}} ></FreshButton>
             <div style={styles.result}>
                 <p>{signature} </p>
             </div>

@@ -1,6 +1,7 @@
 import { Divider } from '@material-ui/core';
 import React, { useRef, useState } from 'react';
 import { QueryOption } from '../../../types/blockchain';
+import { I18nComponentsProps } from '../../../types/i18n';
 import Txs from '../../tutorial/sections/show_chain_info/WalletTransaction';
 import commonStyle from '../../widget/common_style';
 
@@ -18,13 +19,13 @@ const styles = {...commonStyle, ...{
     }
 }};
 
-export type QueryTxProps = {
+export interface QueryTxProps extends I18nComponentsProps {
     code_hash?: string
     hash_type?: 'type' | 'data'
 }
 
 export default function QueryTx(props: QueryTxProps){
-    const {code_hash, hash_type} = props;
+    const {t, code_hash, hash_type} = props;
 
     const ref = useRef<HTMLInputElement>(null);
     const [query, setQuery] = useState<QueryOption>();
@@ -43,14 +44,14 @@ export default function QueryTx(props: QueryTxProps){
         <div>
             <div>
                 <div className="form" style={styles.search_bar}>
-                    <input style={styles.input} ref={ref} type="text" placeholder="lock_args.." />
+                    <input style={styles.input} ref={ref} type="text" placeholder={t("tutorial.widget.toolBox.queryTx.inputPlaceHolder")} />
                     <button onClick={startQuery}> 🔍 </button>
                 </div>
             </div>
             <hr/>
             <div>
                 { query && 
-                    <Txs query={query} render_dep={query} text={{title:'搜索结果：', btn_text: '重试'}} custom_style={{layout_style:{border: '0'}}}  />
+                    <Txs query={query} render_dep={query} text={{title: t("tutorial.widget.toolBox.queryTx.searchResultTile"), btn_text: t("tutorial.widget.toolBox.queryTx.retryBtnText")}} custom_style={{layout_style:{border: '0'}}}  />
                 }
             </div>
         </div>

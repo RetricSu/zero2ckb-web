@@ -2,22 +2,23 @@ import React, { useState, useEffect } from 'react';
 import type {
     Block
 } from '../../../../types/blockchain';
+import { I18nComponentsProps } from '../../../../types/i18n';
 import common_style from '../../../widget/common_style';
 import BlockBox from './Block';
 
-export type Props = {
+export interface BlocksProps extends I18nComponentsProps {
     blocks: Block[]
 }
 
-function Blocks(props: Props){
-
+function Blocks(props: BlocksProps){
+    const {t} = props;
     const [blocks, setBlocks] = useState(props.blocks);
 
     useEffect( () => {
         setBlocks(props.blocks);
     }, [props.blocks]);
     
-    const blocks_box = blocks.map( (block: Block) => <BlockBox block={block} /> );
+    const blocks_box = blocks.map( (block: Block) => <BlockBox t={t} block={block} /> );
 
     return(
         <div style={common_style.clear_path}>

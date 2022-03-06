@@ -5,6 +5,7 @@ import { Modal, Backdrop, Fade } from '@material-ui/core';
 import CodePiece from '../../../widget/code';
 import { useDrag, DragSourceMonitor } from 'react-dnd';
 import {ItemTypes} from './ItemTypes';
+import { I18nComponentsProps } from '../../../../types/i18n';
 
 const styles = {...commonStyle, ...{
         cell_panel: {
@@ -37,7 +38,7 @@ const styles = {...commonStyle, ...{
     }
 }
 
-export type SingleCellProps = {
+export interface SingleCellProps extends I18nComponentsProps {
     cell: Cell
     key_id?: string | number
     custom_style?: CSSProperties
@@ -45,7 +46,7 @@ export type SingleCellProps = {
 }
 
 export default function SingleCell (props: SingleCellProps){
-    const { cell, key_id, isDraggable } = props;
+    const { t, cell, key_id, isDraggable } = props;
     const [isHidden, setIsHidden] = useState(false);
     const [isHover, setIsHover] = useState(false);
     const hovering = () => {setIsHover(true);}
@@ -84,7 +85,7 @@ export default function SingleCell (props: SingleCellProps){
         <li key={ key_id === undefined ? cell.block_hash : key_id} style={{...{...styles.cell_panel, opacity, display}, ...props.custom_style}} onMouseEnter={hovering} onMouseLeave={unhover} onClick={handleOpen}>          
             <div style={ isHover ? {...styles.ball, ...styles.ball_hover} : styles.ball } ref={ isDraggable !== undefined ? isDraggable ? drag : null : drag}>
                 <div style={styles.cell_content}>
-                    capacity <br/><br/>
+                    {t("tutorial.widget.cell.capacity")} <br/><br/>
                     {cell.cell_output.capacity}
                 </div>
             </div>

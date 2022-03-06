@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { QueryOption } from '../../../types/blockchain';
+import { I18nComponentsProps } from '../../../types/i18n';
 import Cells from '../../tutorial/sections/common/Cells';
 import commonStyle from '../../widget/common_style';
 
@@ -17,13 +18,13 @@ const styles = {...commonStyle, ...{
     }
 }};
 
-export type QueryCellProps = {
+export interface QueryCellProps extends I18nComponentsProps {
     code_hash?: string
     hash_type?: 'type' | 'data'
 }
 
 export default function QueryCell(props: QueryCellProps){
-    const {code_hash, hash_type} = props;
+    const {t, code_hash, hash_type} = props;
 
     const ref = useRef<HTMLInputElement>(null);
     const [query, setQuery] = useState<QueryOption>();
@@ -42,14 +43,14 @@ export default function QueryCell(props: QueryCellProps){
         <div>
             <div>
                 <div className="form" style={styles.search_bar}>
-                    <input style={styles.input} ref={ref} type="text" placeholder="lock_args.." />
+                    <input style={styles.input} ref={ref} type="text" placeholder={t("tutorial.widget.toolBox.queryCell.inputPlaceHolder")} />
                     <button onClick={startQuery}> 🔍 </button>
                 </div>
             </div>
             <hr/>
             <div>
                 { query && 
-                    <Cells query={query} render_dep={query} text={{title:'搜索结果：', btn_text: '重试'}} custom_style={{layout_style:{border: '0'}}}  />
+                    <Cells t={t} query={query} render_dep={query} text={{title: t("tutorial.widget.toolBox.queryCell.searchResultTile"), btn_text: t("tutorial.widget.toolBox.queryCell.retryBtnText")}} custom_style={{layout_style:{border: '0'}}}  />
                 }
             </div>
         </div>

@@ -7,8 +7,9 @@ import type {
     Transaction
 } from '../../../../types/blockchain';
 import ShowTxInfo from './Tx';
+import { I18nComponentsProps } from '../../../../types/i18n';
 
-export type BlockProps = {
+export interface BlockProps extends I18nComponentsProps {
     block: Block
     custom_style?: CSSProperties
 } 
@@ -65,7 +66,7 @@ const styles = {
 }
 
 export default function BlockBox(props: BlockProps) {
-
+    const {t} = props;
     const [isHover, setIsHover] = useState(false);
 
     const hovering = () => {
@@ -89,12 +90,12 @@ export default function BlockBox(props: BlockProps) {
         <div>
             <Container style={custom_style ? {...box_style, ...custom_style} : box_style} key={block.header.hash} onMouseEnter={hovering} onMouseLeave={unhover}>
                 <div style={styles.box_header}>
-                    <div style={styles.box_header_title}> 区块：#{ Utils.hex2dec( block.header.number )} </div>
-                    <p style={styles.box_header_sub_title}>哈希：{block.header.hash.slice(0,12)}.. </p>
-                    <p style={styles.box_header_sub_title}>时间：{Utils.convertTimestamp( BigInt(block.header.timestamp).toString(10) )} </p>
+                    <div style={styles.box_header_title}> {t("tutorial.widget.block.blockText")} #{ Utils.hex2dec( block.header.number )} </div>
+                    <p style={styles.box_header_sub_title}>{t("tutorial.widget.block.hashText")} {block.header.hash.slice(0,12)}.. </p>
+                    <p style={styles.box_header_sub_title}>{t("tutorial.widget.block.timeText")} {Utils.convertTimestamp( BigInt(block.header.timestamp).toString(10) )} </p>
                 </div>
                 <hr/>
-                <p style={styles.box_header_sub_title}>交易：{block.transactions.length} 条</p>
+                <p style={styles.box_header_sub_title}>{t("tutorial.widget.block.transactionCount", {count: block.transactions.length})}</p>
                 <div style={styles.box_content}>
                     <ul style={styles.ul}>
                         { show_tx_list(block.transactions) }

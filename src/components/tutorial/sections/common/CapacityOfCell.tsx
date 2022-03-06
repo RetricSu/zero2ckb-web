@@ -6,6 +6,7 @@ import Api from '../../../../api/blockchain';
 import {notify} from '../../../widget/notify';
 import utils from '../../../../utils/index';
 import { Modal, Fade } from '@material-ui/core';
+import { I18nComponentsProps } from '../../../../types/i18n';
 
 const styles = {...commonStyle, ...{
         root: {
@@ -56,15 +57,15 @@ const styles = {...commonStyle, ...{
     }
 }
 
-export type CapacityOfCellProps = {
+export interface CapacityOfCellProps extends I18nComponentsProps {
     cell: Cell
     custom_style?: CSSProperties
 }
 
-// todo: make input only accept chinese word or caculate the english text as well.
+// todo: make input only accept chinese word or calculate the english text as well.
 
 export default function CapacityOfCell (props: CapacityOfCellProps){
-    const { cell } = props;
+    const { t, cell } = props;
     const [myCell, setMyCell] = useState<Cell>(cell);
     const [totalbyteLength, setTotalByteLength] = useState('61');
 
@@ -133,9 +134,9 @@ export default function CapacityOfCell (props: CapacityOfCellProps){
     // }, [myCell]);
 
     const isCapacityEnouge = BigInt(utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))) > BigInt(totalbyteLength) ? 
-        `capacity: ${myCell.cell_output.capacity} = ${utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))} > 实际占用空间：${totalbyteLength}, ✅`
+        `capacity: ${myCell.cell_output.capacity} = ${utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))} > ${t("tutorial.widget.capacityOfCell.actualCapacity")}：${totalbyteLength}, ✅`
         :  
-        `capacity: ${myCell.cell_output.capacity} = ${utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))} < 实际占用空间：${totalbyteLength}, ❌`;
+        `capacity: ${myCell.cell_output.capacity} = ${utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))} < ${t("tutorial.widget.capacityOfCell.actualCapacity")}：${totalbyteLength}, ❌`;
 
     const ballStatusStyle = BigInt(utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))) > BigInt(totalbyteLength) ? 
         {}
@@ -150,12 +151,12 @@ export default function CapacityOfCell (props: CapacityOfCellProps){
     return(
         <div key={cell.cell_output.lock.args} style={styles.root}>
             <div style={styles.input_wrap}>
-                <input onChange={(e)=>{handleInputChange(e.currentTarget.value)}} placeholder="data：输入汉字.." type="text" style={styles.input}/>
+                <input onChange={(e)=>{handleInputChange(e.currentTarget.value)}} placeholder={t("tutorial.widget.capacityOfCell.inputPlaceHolder")} type="text" style={styles.input}/>
             </div>
             <div style={{...styles.cell_panel, ...props.custom_style}} onMouseEnter={hovering} onMouseLeave={unhover} onClick={handleOpen}>          
                 <div style={ isHover ? {...styles.ball, ...styles.ball_hover, ...ballStatusStyle} : {...styles.ball, ...ballStatusStyle} } >
                     <div style={styles.cell_content}>
-                        占用空间 <br/><br/>
+                        {t("tutorial.widget.capacityOfCell.capacity")} <br/><br/>
                         {totalbyteLength} Bytes <br/><br/>
                         <hr style={hrStatusStyle} />
                         {myCell.data}
@@ -163,7 +164,7 @@ export default function CapacityOfCell (props: CapacityOfCellProps){
                 </div>
             </div>
             <div style={styles.space_result}>
-                Cell 容量是否足够：
+                {t("tutorial.widget.capacityOfCell.isCellCapacityEnough")}
                 <CodePiece code={ isCapacityEnouge } custom_style={{padding: '5px', border:'1px solid gray'}}/>
             </div>
 
@@ -178,9 +179,9 @@ export default function CapacityOfCell (props: CapacityOfCellProps){
                 >
                   <Fade in={open}>
                     <div style={styles.paper}>
-                      Cell 的内容：
+                      {t("tutorial.widget.capacityOfCell.cellContent")}：
                       <CodePiece code={ JSON.stringify(myCell, null, 2) } custom_style={{padding: '5px', border:'1px solid gray'}}/>
-                      每个字段占用空间大小：
+                      {t("tutorial.widget.capacityOfCell.4FieldSumCapacity")}：
                       <CodePiece code={JSON.stringify({...{total: totalbyteLength + ' Bytes'}, ...getCellPropertyByteLength()}, null, 2)} custom_style={{padding: '5px', border:'1px solid gray'}}/>
                       <button onClick={handleClose}>close</button>
                     </div>

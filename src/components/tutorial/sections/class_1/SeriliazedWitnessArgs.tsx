@@ -3,6 +3,7 @@ import { notify } from '../../../widget/notify';
 import Api from '../../../../api/blockchain';
 import commonStyle from '../../../widget/common_style';
 import FreshButton from '../../../widget/fresh_button';
+import { I18nComponentsProps } from '../../../../types/i18n';
 
 const styles = {...commonStyle, ...{
     input_wrap: {
@@ -30,16 +31,17 @@ const styles = {...commonStyle, ...{
     }
 }}
 
-export default function SeriliazedWitnessArgs(){
+export default function SerializedWitnessArgs(props: I18nComponentsProps){
+    const {t} = props;
     const [witness, setWitness] = useState('');
     const lock_ref = useRef<HTMLInputElement>(null);
 
-    const seriliazed_witness = async () => {
+    const serialized_witness = async () => {
         const witnessArgs = {
             lock: lock_ref.current?.value
         };
         const api = new Api();
-        const res = await api.getSeriliazedWitness(witnessArgs);
+        const res = await api.getSerializedWitness(witnessArgs);
         if(res.status === 'ok'){
             setWitness(res.data);
         }
@@ -51,9 +53,9 @@ export default function SeriliazedWitnessArgs(){
     return(
         <div style={styles.root}>
             <span style={styles.input_wrap}>
-                <input style={styles.input} ref={lock_ref} placeholder={'lock: witness'} type="text"/>
+                <input style={styles.input} ref={lock_ref} placeholder={t("tutorial.widget.serializedWitnessArgs.inputPlaceHolder")} type="text"/>
             </span>
-            <FreshButton onClick={seriliazed_witness} text={'序列化 witnessArgs'} custom_style={{width:'100%', fontSize: '16px'}} ></FreshButton>
+            <FreshButton onClick={serialized_witness} text={t("tutorial.widget.serializedWitnessArgs.btnText")} custom_style={{width:'100%', fontSize: '16px'}} ></FreshButton>
             <div style={styles.result}>
                 <p>{witness} </p>
             </div>
