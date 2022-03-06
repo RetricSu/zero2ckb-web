@@ -6,6 +6,8 @@
       "proofText": "Proof",
       "cellOfWallet1": "Cells in Wallet 1",
       "fetchCellOfWallet1": "fetch",
+      "decimalInputPlaceHolder": "decimal number，unit：CKB",
+      "hexInputPlaceHolder": "hex number，start with 0x",
       "tableOfContents": {
         "theoreticalKnowledgeMinimized": {
           "title": "Theoretical Knowledge Minimized",
@@ -249,7 +251,8 @@
     },
     "context": {
       "takeABreak": "Take a Break",
-      "moreClass": "Stay Tuned for More Tutorials"
+      "moreClass": "Stay Tuned for More Tutorials",
+      "toBeContinue": "Stay Tuned"
     },
     "widget": {
       "sendTx": {
@@ -470,6 +473,15 @@
         "p2": "Congratulations on completing the first section of this tutorial!",
         "p3": "We will then learn how to send a multi-signature transfer transaction."
       }
+    },
+    "class2": {
+      "title": "Send A Multi-sig Transaction"
+    },
+    "class3": {
+      "title": "Deploy a Smart Contract"
+    },
+    "class4": {
+      "title": "Deploy a Upgradable Smart Contract"
     }
   }
 }

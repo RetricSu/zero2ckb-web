@@ -42,9 +42,9 @@ function Learn() {
               <br/><br/>
               <p>{t("tutorial.context.moreClass")}</p>
               <hr/>
-              <Class2 />
-              <Class3 />
-              <Class4 />
+              <Class2 t={t} />
+              <Class3 t={t} />
+              <Class4 t={t} />
             </DndProvider>
           </Container>
         </Grid>

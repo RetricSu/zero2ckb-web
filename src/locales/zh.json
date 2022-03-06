@@ -6,6 +6,8 @@
       "proofText": "证明",
       "cellOfWallet1": "钱包 1 的 Cell",
       "fetchCellOfWallet1": "刷新",
+      "decimalInputPlaceHolder": "10 进制，单位：CKB",
+      "hexInputPlaceHolder": "16 进制，以 0x 开头",
       "tableOfContents": {
         "theoreticalKnowledgeMinimized": {
           "title": "第一步：理论知识",
@@ -249,7 +251,8 @@
     },
     "context": {
       "takeABreak": "课间休息",
-      "moreClass": "更多课程"
+      "moreClass": "更多课程",
+      "toBeContinue": "敬请期待。"
     },
     "widget": {
       "sendTx": {
@@ -470,6 +473,15 @@
         "p2": "最后恭喜你，成功完成了第一小节的内容～",
         "p3": "接下来，我们将会学习如何发送一笔多签的转账交易。"
       }
+    },
+    "class2": {
+      "title": "发送多签交易"
+    },
+    "class3": {
+      "title": "部署一个合约"
+    },
+    "class4": {
+      "title": "部署一个可升级的合约"
     }
   }
 }

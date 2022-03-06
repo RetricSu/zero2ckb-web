@@ -120,7 +120,7 @@ const PlainCell = (props: PlainCellProps) => {
             <div style={{...styles.edit_cell, display}}>
                 <div style={styles.edit_cell_label}>capacity: </div>
                 <span style={styles.input_wrap}>
-                    <input onChange={(e)=>{handleCapacityChange(e.currentTarget.value)}} max={Number(total_capacity)} style={styles.input} type="number" placeholder="10 进制，单位：CKB" />
+                    <input onChange={(e)=>{handleCapacityChange(e.currentTarget.value)}} max={Number(total_capacity)} style={styles.input} type="number" placeholder={t("tutorial.common.decimalInputPlaceHolder")} />
                 </span>
                 
                 <div style={styles.edit_cell_label}>lock-args: </div>
@@ -128,7 +128,7 @@ const PlainCell = (props: PlainCellProps) => {
                     <input style={styles.input} value={'code_hash: '+config?.SCRIPTS.SECP256K1_BLAKE160.CODE_HASH} disabled/>
                 </span>
                 <span style={styles.input_wrap}>
-                    <input onChange={(e)=>{setArgs(e.currentTarget.value)}} style={styles.input} type="text" placeholder="16 进制，以 0x 开头" />
+                    <input onChange={(e)=>{setArgs(e.currentTarget.value)}} style={styles.input} type="text" placeholder={t("tutorial.common.hexInputPlaceHolder")} />
                 </span>
                 <span style={{...styles.input_wrap, ...hideDisableInput}}>
                     <input style={styles.input} value={'hash_type: ' + config?.SCRIPTS.SECP256K1_BLAKE160.HASH_TYPE} disabled />
@@ -141,7 +141,7 @@ const PlainCell = (props: PlainCellProps) => {
                 </span>
                 
                 <p>
-                    <button style={styles.edit_cell_save_btn} onClick={save_cell}>确定</button>
+                    <button style={styles.edit_cell_save_btn} onClick={save_cell}>{t("tutorial.common.saveBtnText")}</button>
                 </p>
             </div>
             <div style={{...styles.final_cell, ...{display: isFinalCellOpen ? 'inline-block':'none'}}}>
