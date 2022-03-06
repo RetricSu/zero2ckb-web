@@ -46,7 +46,7 @@ export default function I18nSwitcher(props: I18nSwitcherProps) {
           {langs[lng].nativeName}
         </button>
       ))}
-      <hr />
+      <hr style={{width: "80%"}} />
     </div>
   );
 }
