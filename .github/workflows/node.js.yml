@@ -26,8 +26,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
-        CI: false
     - run: yarn install
     - run: yarn run build
+      env:
+        CI: false
     - run: yarn run fmt
     - run: git diff --exit-code
