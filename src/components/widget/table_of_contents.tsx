@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
 import './table_of_contents.css';
 import { I18nComponentsProps } from '../../types/i18n';
+import I18nSwitcher from './i18nSwitcher';
 
+export interface TableOfContentsProps extends I18nComponentsProps {
+    i18n: any;
+}
 
-export default function TableOfContents(props: I18nComponentsProps){
-    const { t } = props;
+export default function TableOfContents(props: TableOfContentsProps){
+    const { t, i18n } = props;
 
     const observe = () => {
         window.addEventListener('DOMContentLoaded', () => {
@@ -34,6 +38,7 @@ export default function TableOfContents(props: I18nComponentsProps){
 
     return(
         <div className="main-nav-container">
+            <I18nSwitcher i18n={i18n} />
             <nav className="section-nav">
 		        <ol>
 		        	<li><a href="#before-we-get-started">Before We Get Started</a></li>

@@ -22,11 +22,6 @@ import { useTranslation } from 'react-i18next';
 function Learn() {
   const { t, i18n } = useTranslation();
 
-  const lngs: any = {
-    en: { nativeName: 'English' },
-    zh: { nativeName: 'Chinese' }
-  };
-
   return (
     <Grid container spacing={1}>
         <Grid item xs={12}>
@@ -35,7 +30,7 @@ function Learn() {
         <Grid item xs={12}>
           <Container maxWidth="md" style={styles.page}>
             <DndProvider backend={HTML5Backend}>
-              <TableOfContents t={t} />
+              <TableOfContents t={t} i18n={i18n} />
               <ToolBox t={t} />
               <Notify />
               <BeforeWeGetStarted t={t} />
@@ -45,13 +40,6 @@ function Learn() {
               <br/><br/>
               <br/><br/>
               <br/><br/>
-              <div>
-                {Object.keys(lngs).map((lng) => (
-                  <button key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>
-                    {lngs[lng].nativeName}
-                  </button>
-                ))}
-              </div>
               <p>{t("tutorial.context.moreClass")}</p>
               <hr/>
               <Class2 />

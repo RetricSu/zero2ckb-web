@@ -29,7 +29,7 @@ const styles = {
 }
 
 const AlertMessager = (props: AlertMessagerProps) => {
-    const { msg, display } = props;
+    const { msg, display: _display } = props;
 
     const [open, setOpen] = useState(true);
     
@@ -37,14 +37,14 @@ const AlertMessager = (props: AlertMessagerProps) => {
         setOpen(false);
     }
 
-    const diplay = open && display ? {
+    const display = open && _display ? {
         display: 'block'
     } : {
         display: 'none'
     }    
 
     return(
-        <div style={{...diplay, ...styles.root}}>
+        <div style={{...display, ...styles.root}}>
             {msg}
             <span style={styles.close_btn} onClick={close}> ok </span>
         </div>
