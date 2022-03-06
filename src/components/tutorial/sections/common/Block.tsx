@@ -73,7 +73,7 @@ export default function BlockBox(props: BlockProps) {
         setIsHover(true);
     };
 
-    const unhover = () => {
+    const unHover = () => {
         setIsHover(false);
     };
 
@@ -88,7 +88,7 @@ export default function BlockBox(props: BlockProps) {
 
     return(
         <div>
-            <Container style={custom_style ? {...box_style, ...custom_style} : box_style} key={block.header.hash} onMouseEnter={hovering} onMouseLeave={unhover}>
+            <Container style={custom_style ? {...box_style, ...custom_style} : box_style} key={block.header.hash} onMouseEnter={hovering} onMouseLeave={unHover}>
                 <div style={styles.box_header}>
                     <div style={styles.box_header_title}> {t("tutorial.widget.block.blockText")} #{ Utils.hex2dec( block.header.number )} </div>
                     <p style={styles.box_header_sub_title}>{t("tutorial.widget.block.hashText")} {block.header.hash.slice(0,12)}.. </p>

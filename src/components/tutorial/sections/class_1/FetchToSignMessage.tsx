@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import {
     HexString,
-    WitnessArgs,
     RawTransaction,
-    Cell,
     Message
 } from '../../../../types/blockchain';
 import FreshButton from '../../../widget/fresh_button';

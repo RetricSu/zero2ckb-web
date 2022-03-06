@@ -44,13 +44,13 @@ export default function CompleteTxWithWitness(props: CompleteTxWithWitnessProps)
     const onCompleteTx = () => {
         var rtx = eval('`' + JSON.stringify(raw_tx).substring(1, JSON.stringify(raw_tx).length-1) + '`');
         rtx = JSON.parse(JSON.stringify(rtx));
-        const mytx = {...rtx, ...{
+        const myTx = {...rtx, ...{
             witnesses: [ref.current?.value]
         }}
-        setTx(mytx);
+        setTx(myTx);
 
-        if(onCallBack && mytx)
-            onCallBack(mytx);
+        if(onCallBack && myTx)
+            onCallBack(myTx);
     }
 
     return(

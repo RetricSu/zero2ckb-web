@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import type {
     Transaction,
-    TransactionWithStatus
 } from '../../../../types/blockchain';
 import { Modal, Backdrop, Fade } from '@material-ui/core';
 import CodePiece from '../../../widget/code';

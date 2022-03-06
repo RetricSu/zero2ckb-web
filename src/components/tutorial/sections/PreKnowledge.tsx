@@ -19,7 +19,7 @@ export default function Preknowledge(props: I18nComponentsProps){
     const code = {
         /** 
          * be careful with the following white space before each line start 
-         * which will also display on html. Meaning that it should be place excatly
+         * which will also display on html. Meaning that it should be place exactly
          * where it should be. 
          * 
          * todo:

@@ -79,25 +79,3 @@ export default function WalletTransaction(props: Props){
     )
 }
 
-
-/**   
- * 
- * {
-[1]     transaction: {
-[1]       cell_deps: [],
-[1]       hash: '0xac10b54d29cb66c0484faf1e6b1eb1cea4a481c21f1758e82ed6040db1cacfac',
-[1]       header_deps: [],
-[1]       inputs: [Array],
-[1]       outputs: [Array],
-[1]       outputs_data: [Array],
-[1]       version: '0x0',
-[1]       witnesses: [Array]
-[1]     },
-[1]     tx_status: {
-[1]       block_hash: '0x21822a9bc055a6223f45c3311a5802b837e7b441f0e9497d0758d8b29a8e8d9e',
-[1]       status: 'committed'
-[1]     }
-[1]   },
- * 
- * 
- */

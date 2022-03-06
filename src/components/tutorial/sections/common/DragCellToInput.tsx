@@ -3,7 +3,6 @@ import { useDrop } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 import commonStyle from '../../../widget/common_style';
 import { Cell, CellDep, Input, Script } from '../../../../types/blockchain';
-import CodePeice from '../../../widget/code';
 import Api from '../../../../api/blockchain';
 import utils from '../../../../utils/index';
 
@@ -114,7 +113,7 @@ export default function DragCellToInput(props: Props){
     const getCellDepByScript = (script: Script): CellDep | string => {
         const scripts = config?.SCRIPTS;
         const secp160 = scripts?.SECP256K1_BLAKE160;
-        const secp160mult = scripts?.SECP256K1_BLAKE160_MULTISIG;
+        const secp160Multi = scripts?.SECP256K1_BLAKE160_MULTISIG;
         const dao = scripts?.DAO;
 
         switch (script.code_hash) {
@@ -130,14 +129,14 @@ export default function DragCellToInput(props: Props){
                 }
                 break;
             
-            case secp160mult?.CODE_HASH:
-                if(script.hash_type === secp160mult?.HASH_TYPE){
+            case secp160Multi?.CODE_HASH:
+                if(script.hash_type === secp160Multi?.HASH_TYPE){
                     return {
                         out_point: {
-                            tx_hash: secp160mult.TX_HASH,
-                            index: secp160mult.INDEX
+                            tx_hash: secp160Multi.TX_HASH,
+                            index: secp160Multi.INDEX
                         },
-                        dep_type: secp160mult.DEP_TYPE
+                        dep_type: secp160Multi.DEP_TYPE
                     }
                 }
                 break;
@@ -180,27 +179,3 @@ export default function DragCellToInput(props: Props){
         </div>
     )
 }
-
-
-/***   
-{
-  "cell_deps": [
-    {
-        "dep_type": "dep_group",
-        "out_point": {
-          "index": "0x0",
-          "tx_hash": "0xace5ea83c478bb866edf122ff862085789158f5cbff155b7bb5f13058555b708"
-        }
-    }
-  ],
-  "inputs": [
-    {
-      "previous_output": {
-        "index": "0xffffffff",
-        "tx_hash": "0x0000000000000000000000000000000000000000000000000000000000000000"
-      },
-      "since": "0x11"
-    }
-  ],
-}
- */

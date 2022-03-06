@@ -67,7 +67,7 @@ export interface CapacityOfCellProps extends I18nComponentsProps {
 export default function CapacityOfCell (props: CapacityOfCellProps){
     const { t, cell } = props;
     const [myCell, setMyCell] = useState<Cell>(cell);
-    const [totalbyteLength, setTotalByteLength] = useState('61');
+    const [totalByteLength, setTotalByteLength] = useState('61');
 
     const [open, setOpen] = useState(false);
 
@@ -81,25 +81,14 @@ export default function CapacityOfCell (props: CapacityOfCellProps){
 
     const [isHover, setIsHover] = useState(false);
     const hovering = () => {setIsHover(true);}
-    const unhover = () => {setIsHover(false);}
+    const unHover = () => {setIsHover(false);}
     
     const handleInputChange = (text: string) => {
         const data = '0x' + toHex(text);
         setMyCell({...myCell, ...{data: data}});
 
-        const datalength = getByteLengthOfHexString(data);
-        setTotalByteLength((61+datalength).toString());
-    }
-
-    const getByteLengthOfCell = async () => {
-        const api = new Api();
-        const result = await api.getMinimalCellCapacity(myCell);
-        if(result.status === 'ok'){
-            setTotalByteLength(utils.shannon2CKB(result.data));
-        }else{
-            notify(result.data);
-        }
-           
+        const dataLength = getByteLengthOfHexString(data);
+        setTotalByteLength((61+dataLength).toString());
     }
 
     const getByteLengthOfHexString = (str: string) => {
@@ -129,21 +118,17 @@ export default function CapacityOfCell (props: CapacityOfCellProps){
         return result;
     }
 
-    // useEffect(()=>{
-    //     getByteLengthOfCell();
-    // }, [myCell]);
-
-    const isCapacityEnouge = BigInt(utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))) > BigInt(totalbyteLength) ? 
-        `capacity: ${myCell.cell_output.capacity} = ${utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))} > ${t("tutorial.widget.capacityOfCell.actualCapacity")}：${totalbyteLength}, ✅`
+    const isCapacityEnouge = BigInt(utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))) > BigInt(totalByteLength) ? 
+        `capacity: ${myCell.cell_output.capacity} = ${utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))} > ${t("tutorial.widget.capacityOfCell.actualCapacity")}：${totalByteLength}, ✅`
         :  
-        `capacity: ${myCell.cell_output.capacity} = ${utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))} < ${t("tutorial.widget.capacityOfCell.actualCapacity")}：${totalbyteLength}, ❌`;
+        `capacity: ${myCell.cell_output.capacity} = ${utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))} < ${t("tutorial.widget.capacityOfCell.actualCapacity")}：${totalByteLength}, ❌`;
 
-    const ballStatusStyle = BigInt(utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))) > BigInt(totalbyteLength) ? 
+    const ballStatusStyle = BigInt(utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))) > BigInt(totalByteLength) ? 
         {}
         :
         {border: '1px solid red'};
 
-    const hrStatusStyle = BigInt(utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))) > BigInt(totalbyteLength) ? 
+    const hrStatusStyle = BigInt(utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))) > BigInt(totalByteLength) ? 
         styles.hr
         :
         {...styles.hr, ...{ borderTop: '1px solid red'}};
@@ -153,11 +138,11 @@ export default function CapacityOfCell (props: CapacityOfCellProps){
             <div style={styles.input_wrap}>
                 <input onChange={(e)=>{handleInputChange(e.currentTarget.value)}} placeholder={t("tutorial.widget.capacityOfCell.inputPlaceHolder")} type="text" style={styles.input}/>
             </div>
-            <div style={{...styles.cell_panel, ...props.custom_style}} onMouseEnter={hovering} onMouseLeave={unhover} onClick={handleOpen}>          
+            <div style={{...styles.cell_panel, ...props.custom_style}} onMouseEnter={hovering} onMouseLeave={unHover} onClick={handleOpen}>          
                 <div style={ isHover ? {...styles.ball, ...styles.ball_hover, ...ballStatusStyle} : {...styles.ball, ...ballStatusStyle} } >
                     <div style={styles.cell_content}>
                         {t("tutorial.widget.capacityOfCell.capacity")} <br/><br/>
-                        {totalbyteLength} Bytes <br/><br/>
+                        {totalByteLength} Bytes <br/><br/>
                         <hr style={hrStatusStyle} />
                         {myCell.data}
                     </div>
@@ -182,7 +167,7 @@ export default function CapacityOfCell (props: CapacityOfCellProps){
                       {t("tutorial.widget.capacityOfCell.cellContent")}：
                       <CodePiece code={ JSON.stringify(myCell, null, 2) } custom_style={{padding: '5px', border:'1px solid gray'}}/>
                       {t("tutorial.widget.capacityOfCell.4FieldSumCapacity")}：
-                      <CodePiece code={JSON.stringify({...{total: totalbyteLength + ' Bytes'}, ...getCellPropertyByteLength()}, null, 2)} custom_style={{padding: '5px', border:'1px solid gray'}}/>
+                      <CodePiece code={JSON.stringify({...{total: totalByteLength + ' Bytes'}, ...getCellPropertyByteLength()}, null, 2)} custom_style={{padding: '5px', border:'1px solid gray'}}/>
                       <button onClick={handleClose}>close</button>
                     </div>
                   </Fade>

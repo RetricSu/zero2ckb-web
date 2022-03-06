@@ -1,4 +1,3 @@
-import { TextField } from '@material-ui/core';
 import React, { useEffect, useRef, useState } from 'react';
 import Api from '../../../../api/blockchain';
 import { Cell, ChainConfig } from '../../../../types/blockchain';
@@ -45,7 +44,7 @@ const styles = {...commonStyle, ...{
     final_cell_content: {
         margin: '30% auto',
     },
-    rigth_btn: {
+    right_btn: {
         float: 'right' as const
     },
     edit_cell_save_btn: {
@@ -71,7 +70,7 @@ export type SimpleCellJson = {
 export interface PlainCellProps extends I18nComponentsProps {
     cell: SimpleCellJson
     config: ChainConfig | undefined
-    total_capacity: string //10进制
+    total_capacity: string // decimal
     get_final_cell?: (final_cell: SimpleCellJson | undefined) => void;
 }
 
@@ -228,7 +227,7 @@ export default function EditOutputCells(props: EditOutputCellsProps){
         <div style={styles.root}>
             <div style={styles.edit_cell_header}>
                 Total Capacity: { utils.shannon2CKB(utils.hex2dec(capacity)) } CKB 
-                <span style={styles.rigth_btn}>
+                <span style={styles.right_btn}>
                     <button onClick={add_cell}> {t("tutorial.widget.editOutputCells.addNewCellBtnText")} </button> <button onClick={apply}> {t("tutorial.widget.editOutputCells.saveExitBtnText")} </button>
                 </span>
             </div>

@@ -71,7 +71,7 @@ export default function TotalCapacity (props: TotalCapacityProps) {
     const {t, cells, get_tx_output, onClearCall} = props;
     const [capacity, setCapacity] = useState('0x0');
     const [fee, setFee] = useState('0');
-    const [mycells, setMycells] = useState<Cell[]>([]);
+    const [myCells, setMyCells] = useState<Cell[]>([]);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleModalOpen = () => {
@@ -82,7 +82,7 @@ export default function TotalCapacity (props: TotalCapacityProps) {
     };
 
     const updateMyCells = (cells: Cell[]) => {
-        setMycells(cells);
+        setMyCells(cells);
     }
     
     const default_one_cell = async (cells: Cell[]) => {
@@ -98,7 +98,7 @@ export default function TotalCapacity (props: TotalCapacityProps) {
             },
             data: '0x'
         }
-        setMycells([c]);
+        setMyCells([c]);
     }
     
     useEffect(()=>{
@@ -113,14 +113,14 @@ export default function TotalCapacity (props: TotalCapacityProps) {
     useEffect(() => {
         setFee(calculate_fee());
         if(get_tx_output){
-            const tx_output = caculateTxOutPut();
+            const tx_output = calculateTxOutPut();
             get_tx_output(tx_output);
         }
-    }, [mycells]);
+    }, [myCells]);
 
     useEffect(() => {
         if(onClearCall)
-            setMycells([]);
+            setMyCells([]);
     }, [onClearCall]);
 
     const updateCapacity = async (cells: Cell[]) => {
@@ -128,14 +128,14 @@ export default function TotalCapacity (props: TotalCapacityProps) {
         await setCapacity(sum);
     }
 
-    const caculateTxOutPut = (): TxOutput => {
-        const outputs = mycells.map(cell=>{
+    const calculateTxOutPut = (): TxOutput => {
+        const outputs = myCells.map(cell=>{
             return {
                 capacity: cell.cell_output.capacity,
                 lock: cell.cell_output.lock
             }
         });
-        const output_datas = mycells.map(cell=>cell.data);
+        const output_datas = myCells.map(cell=>cell.data);
         return {
             outputs: outputs,
             outputs_data: output_datas
@@ -147,14 +147,10 @@ export default function TotalCapacity (props: TotalCapacityProps) {
     }
 
     const calculate_fee = () => {
-        let sum = calculateCellCapacity(mycells);
+        let sum = calculateCellCapacity(myCells);
         const fee = (BigInt(utils.hex2dec(capacity)) - BigInt(utils.hex2dec(sum))).toString(16);
-        //const fee = ( BigInt(capacity.slice(2)) - BigInt(sum.slice(2)) ).toString(16);
         console.log(capacity, sum, fee);
         return utils.shannon2CKB( utils.hex2dec('0x' +  fee ) );
-        // 200988,3542,3722 
-        // 20000,0000,0000
-        // 18098835423722
     }
 
     const isFeeOk = BigInt(fee) > BigInt('0') ? true : false;
@@ -169,7 +165,7 @@ export default function TotalCapacity (props: TotalCapacityProps) {
                     <FreshButton text={t("tutorial.widget.outputCreatorTotalCapacity.settingBtnText")} onClick={distribute_cells} custom_style={{border:'0', padding: '2px', marginLeft: '5px', fontSize: '16px'}} />
                </div>
                <div style={styles.output_cell}>
-                    { mycells.map( (cell, index) => <SingleCell t={t} cell={cell} key_id={index} custom_style={{margin: '0'}} /> )}
+                    { myCells.map( (cell, index) => <SingleCell t={t} cell={cell} key_id={index} custom_style={{margin: '0'}} /> )}
                </div>
             </div>
             <div style={styles.fee}>

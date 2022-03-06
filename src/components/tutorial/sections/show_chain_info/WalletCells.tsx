@@ -86,11 +86,3 @@ export default function WalletCells( props: WalletCellsProps ){
 }
 
 
-/**    
- * 
- * 
- * 
- *          <div>
-                <Balance lock_args={selectedWallet || ''} render_dep={selectedWallet} text={{title:'钱包余额', btn_text:''}} custom_style={{btn_style: styles.hidden_btn}} />
-            </div>
-*/

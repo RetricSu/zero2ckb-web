@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Wallets from './common/Wallets';
-import WalletTxs from './show_chain_info/WalletTransaction';
 import ChainConfig from './show_chain_info/ChainConfig';
 import WalletCells from './show_chain_info/WalletCells';
 import NewBlocks from './show_chain_info/new_blocks';

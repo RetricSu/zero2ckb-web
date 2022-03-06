@@ -7,7 +7,6 @@ import FreshButton from '../../../widget/fresh_button';
 import CodePiece from '../../../widget/code';
 import { Cell, Input, CellDep, RawTransaction, TxOutput } from '../../../../types/blockchain';
 import NeonText from '../../../widget/neon_text';
-import CopyText from '../../../widget/copy_text';
 import { I18nComponentsProps } from '../../../../types/i18n';
 
 const styles = {...commonStyle, ...{

@@ -1,7 +1,7 @@
 import React, { CSSProperties, useState } from 'react';
 import { Cell } from '../../../../types/blockchain';
 import commonStyle from '../../../widget/common_style';
-import { Modal, Backdrop, Fade } from '@material-ui/core';
+import { Modal, Fade } from '@material-ui/core';
 import CodePiece from '../../../widget/code';
 import { useDrag, DragSourceMonitor } from 'react-dnd';
 import {ItemTypes} from './ItemTypes';
@@ -50,7 +50,7 @@ export default function SingleCell (props: SingleCellProps){
     const [isHidden, setIsHidden] = useState(false);
     const [isHover, setIsHover] = useState(false);
     const hovering = () => {setIsHover(true);}
-    const unhover = () => {setIsHover(false);}
+    const unHover = () => {setIsHover(false);}
 
     const [open, setOpen] = useState(false);
 
@@ -63,7 +63,7 @@ export default function SingleCell (props: SingleCellProps){
     };
 
     /*** 
-     * make cell dragable
+     * make cell draggable
     */
     const [{ isDragging }, drag] = useDrag({
       item: {cell, type: ItemTypes.CELL},
@@ -82,7 +82,7 @@ export default function SingleCell (props: SingleCellProps){
     const display = isHidden ? 'none' : 'inline-block';
 
     return(
-        <li key={ key_id === undefined ? cell.block_hash : key_id} style={{...{...styles.cell_panel, opacity, display}, ...props.custom_style}} onMouseEnter={hovering} onMouseLeave={unhover} onClick={handleOpen}>          
+        <li key={ key_id === undefined ? cell.block_hash : key_id} style={{...{...styles.cell_panel, opacity, display}, ...props.custom_style}} onMouseEnter={hovering} onMouseLeave={unHover} onClick={handleOpen}>          
             <div style={ isHover ? {...styles.ball, ...styles.ball_hover} : styles.ball } ref={ isDraggable !== undefined ? isDraggable ? drag : null : drag}>
                 <div style={styles.cell_content}>
                     {t("tutorial.widget.cell.capacity")} <br/><br/>

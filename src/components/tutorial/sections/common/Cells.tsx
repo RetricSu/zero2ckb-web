@@ -59,7 +59,6 @@ export default function Cells(props: Props) {
   async function queryCells() {
     setIsLoading(true);
     if(props.query.lock || props.query.type){
-      //console.log(props.query);
       const api = new Api();
       const length = props.length || 10;
       var myCells = await api.getLiveCells(props.query, length);

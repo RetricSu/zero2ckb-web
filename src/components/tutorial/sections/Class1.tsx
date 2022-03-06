@@ -7,10 +7,10 @@ import ToSignMessage from './class_1/FetchToSignMessage';
 import ToTxHash from './class_1/ToTxHash';
 import Signer from './class_1/Signer';
 import SendTx from './class_1/SendTx';
-import SerializedWitnessArgs from './class_1/SeriliazedWitnessArgs';
+import SerializedWitnessArgs from './class_1/SerializedWitnessArgs';
 import TxConstructor from './common/TxConstructor';
 import DragCellToInputJson from './common/DragCellToInputJson';
-import { ValidateTransaction, ValidateRawTransaction } from '../../../utils/validator';
+import { ValidateTransaction } from '../../../utils/validator';
 
 import type {
   Transaction,
@@ -21,7 +21,6 @@ import type {
 } from '../../../types/blockchain'
 import Cells from './common/Cells';
 import Api from '../../../api/blockchain';
-import CompleteTxWithWitness from './class_1/CompleteTxWithWitness';
 import { I18nComponentsProps } from '../../../types/i18n';
 
 export default function Class1(props: I18nComponentsProps){
@@ -66,68 +65,18 @@ export default function Class1(props: I18nComponentsProps){
       witnesses: ["0x"]
 }`;
 
-    const prepareDefaultWitnessFromRawTx = () => {
-        const witnesses = [];
-        if(raw_tx?.inputs){
-          for(let i=0;i<raw_tx?.inputs.length;i++){
-            witnesses.push({
-              lock: ''
-            });
-          } 
-        }
-        return witnesses;
-    }
-
-    /*
-    const raw_tx_template = `{
-        version: "0x0",
-        cell_deps: [
-          {
-            out_point: {
-              tx_hash:
-                "...",
-              index: "...",
-            },
-            dep_type: "dep_group",
-          },
-        ],
-        header_deps: [],
-        inputs: [
-          {
-            since: "0x0",
-            previous_output: {
-              tx_hash:
-                "...",
-              index: "...",
-            },
-          },
-        ],
-        outputs: [
-          {
-            capacity: "...",
-            lock: {
-              code_hash:
-                "...",
-              hash_type: "...",
-              args: "...",
-            },
-          },
-        ],
-        outputs_data: ["0x"]
-}`
-    */
     const onRawTxSubmit = (content: string) => {
       try {
         const raw_tx_content: RawTransaction = JSON.parse(JSON.stringify(eval("(" + content + ")")));
         try {
           ValidateTransaction(raw_tx_content);
           setRawTx(raw_tx_content);
-          notify('raw_tx 已成功保存！', 'success');
+          notify(t("tutorial.common.txSaveSuccessAlertMsg"), 'success');
         } catch (error: any) {
           notify(error.message);
         }
       } catch (error: any) {
-        notify('非法字符：'+ error.message);
+        notify(t("tutorial.common.illegalTokenAlertMsg")+ error.message);
       }
     }
 
@@ -137,16 +86,16 @@ export default function Class1(props: I18nComponentsProps){
           try {
             ValidateTransaction(tx_content);
             setCompleteTx(tx_content);
-            notify('tx 已成功保存！', 'success');
+            notify(t("tutorial.common.txSaveSuccessAlertMsg"), 'success');
           } catch (error: any) {
             notify(error.message);
           }
         } catch (error: any) {
-          notify('非法字符：'+ error.message);
+          notify(t("tutorial.common.illegalTokenAlertMsg")+ error.message);
         }
     }
 
-    const fetchChainMinInfor = async () => {
+    const fetchChainMinInfo = async () => {
         const api = new Api();
         const myWallets: Wallet[] = await api.getWallets();
         const cc: ChainConfig = await api.getChainConfig();
@@ -159,7 +108,7 @@ export default function Class1(props: I18nComponentsProps){
     }
 
     useEffect(()=>{
-      fetchChainMinInfor();
+      fetchChainMinInfo();
     }, []);
 
     return(
@@ -299,8 +248,6 @@ export default function Class1(props: I18nComponentsProps){
                 <SendTx t={t} tx={complete_tx}></SendTx>
                 <p>{t("tutorial.class1.sendTransaction.p2")}</p>
                 <p>{t("tutorial.class1.sendTransaction.p3")}</p>
-
-                
             </div>
         </div>
     )
