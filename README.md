@@ -21,3 +21,7 @@ change the `src/config/constant.json` server url if needed.
 yarn && yarn build
 PORT=<your client running port> yarn deploy
 ```
+
+## prebuild images
+
+the repo's [github packages](https://github.com/RetricSu/zero2ckb-web/pkgs/container/zero2ckb-web-prebuilds) will deploy prebuild image. the entire project is copy into `/zero2ck-web` folder in the image, with `node_module` pre-installed and react UI client pre-build.
