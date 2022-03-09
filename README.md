@@ -19,5 +19,5 @@ change the `src/config/constant.json` server url if needed.
 
 ```sh
 yarn && yarn build
-yarn deploy
+PORT=<your client running port> yarn deploy
 ```
