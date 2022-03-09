@@ -18,8 +18,8 @@
           "howToTellThatYouOwnACell": "How to tell that you own a cell?",
           "takeABreak": "Take a Break",
           "whereToFindTheHiddenCode": "Where to find the hidden code?",
-          "whatIfTheCodeIsLost": "What If The Code Is Lost?",
-          "whatIsATransaction": "What is A Transaction?",
+          "whatIfTheCodeIsLost": "What if the code is lost?",
+          "whatIsATransaction": "What is a transaction?",
           "roleOfTheTypeLock": "Role of the type lock"
         },
         "getYourHandsDirty": {
@@ -110,7 +110,7 @@
           "p17": "The most important rule to keep in mind about the cell is that the sum of the total space occupied by the four fields above must be less than or equal to the capacity value.",
           "p18": "In other words",
           "p19": "To better understand, let's look at an example.",
-          "p20": "In this small experiment, type in a Chinese character as the cell data to see the real-time changes in the length of the cell. Click on the cell to reveal the exact contents and the actual length occupied by each field.",
+          "p20": "In this small experiment, type in something as the cell data to see the real-time changes in the length of the cell. Click on the cell to reveal the exact contents and the actual length occupied by each field.",
           "p21": "We assume that the capacity of the cell is 0x1dcd65000, which is 80 bytes in size. If the change in data causes the actual capacity to grow beyond the value of capacity, the cell will be considered invalid."
         },
         "howToKnowCellIsYours": {
