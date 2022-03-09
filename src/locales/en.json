@@ -355,7 +355,7 @@
         "transactionCount": "Transactions, Count {{count}}"
       },
       "capacityOfCell": {
-        "inputPlaceHolder": "data: input Chinese Character...",
+        "inputPlaceHolder": "data: input here",
         "capacity": "Occupancy",
         "actualCapacity": "Actual occupancy",
         "isCellCapacityEnough": "Capacity Availability：",
