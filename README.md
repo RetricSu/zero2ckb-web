@@ -12,3 +12,12 @@ the onboarding guide contains with 4 courses, at the end of this tutorial, you w
 - [ ] deploy a upgradable contract
 
 the website now is under heavy developing and considered to be not finished yet. if you got any question or any suggestion, you can just open a issue or even an PR in this repo.
+
+## How to run
+
+change the `src/config/constant.json` server url if needed.
+
+```sh
+yarn && yarn build
+yarn deploy
+```
