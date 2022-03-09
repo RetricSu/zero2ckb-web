@@ -128,7 +128,7 @@ class Api {
   }
 
   async getSerializedWitness(witnessArgs: WitnessArgs) {
-    let res = await axios.get(`${this.base_url}/get_seriliazed_witness`, {
+    let res = await axios.get(`${this.base_url}/get_serialized_witness`, {
       params: {
         witnessArgs: witnessArgs,
       },
