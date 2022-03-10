@@ -52,31 +52,29 @@
         }
       },
       "beforeWeGetStarted": {
-        "p1": "Congratulations on opening this page! This means you will learn everything about CKB ahead of the rest if you are a beginner.",
-        "p2": "This tutorial is your first contact with CKB, either for developing a DAPP on CKB or simply understanding the basics out of curiosity. Follow this guide to get your first hands-on CKB experience.",
+        "p1": "Welcome to this page! From here, you will learn CKB ahead of everyone else.",
+        "p2": "In this tutorial, you will learn the basics of CKB, so that you can develop an application on CKB or simply understand them for curiosity's sake. Follow this guide to get your first hands-on experience with CKB.",
         "p3": "This tutorial is a complete walk-through that allows you to accomplish the following tasks by yourself:",
         "ul1": {
-          "l1": "Build and send the simplest transfer transaction",
-          "l2": "Develop and send the simplest multi-signature transaction",
-          "l3": "Develop and deploy the simplest smart contract",
-          "l4": "Develop and deploy a scalable smart contract"
+          "l1": "Build and send the simplest transfer transaction.",
+          "l2": "Develop and send the simplest multi-signature transaction.",
+          "l3": "Develop and deploy the simplest smart contract.",
+          "l4": "Develop and deploy a scalable smart contract."
         },
-        "p4": "The greatest thing is, to figure this all out, there is:",
+        "p4": "On this page you can interact directly with the cloud-based test chain in a manual, remote manner. All you need to have is the patience for reading further down and the curiosity for CKB.",
+        "p5": "To figure it all out, there is:",
         "ul2": {
           "l1": "No need for any local downloads",
           "l2": "No need to run any software",
           "l3": "No need even to write one single line of code!"
-        },
-        "p5": "Everything can be done on this page interactively with the cloud-based test chain in a purely manual, remote way.",
-        "p6": "All you need to have is the patience for reading further down and the curiosity for CKB. :D",
-        "p7": "No more talk then. Let's start this fascinating adventure!"
+        }
       },
       "theoreticalKnowledgeMinimized": {
         "title": "Step 1 Theoretical Knowledge Minimized",
         "q1": "There are no Bitcoins in the world, only UTXOs.",
         "q2": "There are no CKBs in the world, only cells.",
         "unravelCKB": {
-          "title": "Unravel CKB",
+          "title": "What is CKB?",
           "p1": "To understand CKB, we must leave behind all the complex concepts and capture the very essence: it's all about cells and the transformation of cells.",
           "p2": "Cell is the basic unit of CKB, similar to a cell in the human body. Each cell constitutes the general state of the entire CKB blockchain. When we initiate a transaction on the blockchain, thus making a state change, in the end, for CKB, it is nothing more than spending some cells while creating some new ones, no matter how complicated the transaction and the state change are. This process is the same as the Bitcoin UTXO.",
           "p3": "Cells spent are dead cells; cells unspent are live cells. So, a chain keeps on spending and creating cells through transactions, like the renewal and division of cells throughout the body.",
@@ -85,7 +83,7 @@
           "p6": "This is the so-called smart contract on CKB, as simple as that."
         },
         "howToOwnACell": {
-          "title": "How to own a cell?",
+          "title": "How to Own a Cell?",
           "p1": "Cells are obtained by consensus on the chain, thus the storage space becomes precious, and owning a cell inevitably incurs costs.",
           "p2": "This leads us to the function of CKB's native tokens.",
           "p3": "Imagine a cell as a small box that can carry objects. The box itself is created by tokens. A box's size varies by how many tokens you have.",
@@ -114,7 +112,7 @@
           "p21": "We assume that the capacity of the cell is 0x1dcd65000, which is 80 bytes in size. If the change in data causes the actual capacity to grow beyond the value of capacity, the cell will be considered invalid."
         },
         "howToKnowCellIsYours": {
-          "title": "How to tell that you own a cell?",
+          "title": "How to Tell that You Own a Cell?",
           "p1": "Since you can only possess a cell by owning a native token, how do we know that you own a particular cell?",
           "p2": "Remember the lock and type we mentioned above?",
           "p3": "If the cell is a box, lock and type are the two locks on the box.",
@@ -144,7 +142,7 @@
           "p2": "It seems that we've got a pretty good grasp of how CKB works. Great! Trust me, you've got most of it figured out. Now, let's get into a bit more detail."
         },
         "whereIsTheActualCode": {
-          "title": "Where is the code actually located?",
+          "title": "Where is the Code Actually Located?",
           "p1": "We have learned that the lock and type fields of the cell are used to lock the box and to guarantee its ownership and control.",
           "p2": "Lock is a script structure that looks like this:",
           "p3": "You may notice that the code_hash is not the actual code but a hash of the code, equivalent to an index of the code. This index allows us to retrieve the code. So, where is the code anyway?",
@@ -159,7 +157,7 @@
           "p12": "But at this point, another question may come to your mind."
         },
         "whatIfCodeIsLost": {
-          "title": "What if the lock code is lost?",
+          "title": "What if the Lock Code is Lost?",
           "p1": "The code of lock is kept in another cell. What if someone destroys that cell? When this cell is spent, the dep cell becomes dead, and the code of lock will be gone. Does this mean that the cell that uses this lock can no longer unlock it?",
           "p2": "Theoretically, this is true. Technically, the cell that contains the code of the lock should last as long as the chain does, and no one can access this cell. So, if you look it up, you can see that the dep cells that all the built-in lock scripts of CKB have been built on are inherently inaccessible by anyone. Because we have set the value 0x0000... in the lock field of each dep cell (i.e. the lock of the cell itself where to put the lock code), which means that no one will ever be able to unlock these cells again, and the code will always be there:",
           "p3": "We can still unlock our own cell if the dep cell was destroyed, because you can just redeploy the same lock code to a new cell and then bring in the new cell as a dep cell so that you can retrieve the lock code. Because the code remains identical, the hash of the code stays the same, and the value of code_hash also remains the same. This is the additional flexibility of CKB.",
@@ -291,7 +289,7 @@
         "btnTextClear": "Clear Out"
       },
       "dragCellToInputBall": {
-        "title": "Drag a Cell in here"
+        "title": "Drag a Cell in Here"
       },
       "outputCreatorTotalCapacity": {
         "totalCapText": "Total space：",
@@ -457,7 +455,7 @@
         "p7": "Signature is a tedious process. More technical details can be found here: "
       },
       "generateMessage": {
-        "title": "Generate  Message",
+        "title": "Generate Message",
         "p1": "To complete the signature, let's generate a message which will be signed for this transaction."
       },
       "completeSining": {
