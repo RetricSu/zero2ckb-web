@@ -13,18 +13,18 @@
       "tableOfContents": {
         "theoreticalKnowledgeMinimized": {
           "title": "Theoretical Knowledge Minimized",
-          "unravelCKB": "Unravel CKB",
-          "howToOwnACell": "How to own a cell",
+          "unravelCKB": "What is CKB?",
+          "howToOwnACell": "How to own a cell?",
           "howToTellThatYouOwnACell": "How to tell that you own a cell?",
-          "takeABreak": "Take a Break",
-          "whereToFindTheHiddenCode": "Where to find the hidden code?",
-          "whatIfTheCodeIsLost": "What if the code is lost?",
+          "takeABreak": "Summary",
+          "whereToFindTheHiddenCode": "Where is the code actually located?",
+          "whatIfTheCodeIsLost": "What if the lock code is lost?",
           "whatIsATransaction": "What is a transaction?",
           "roleOfTheTypeLock": "Role of the type lock"
         },
         "getYourHandsDirty": {
           "title": "Get Your Hands Dirty",
-          "studyAChain": "Study a Chain",
+          "studyAChain": "Study the Chain",
           "sendATransaction": {
             "title": "Send a Transaction",
             "transactionInput": "Transaction Input",
@@ -33,10 +33,10 @@
             "buildATransaction": {
               "title": "Build a Transaction",
               "fillInTheTransaction": "Fill in the Transaction",
-              "generateHash": "Generate Hash",
-              "generateMessage": "Generate Message",
+              "generateHash": "Generate the Transaction Hash",
+              "generateMessage": "Generate the Message",
               "completeTheSignature": "Complete the Signature",
-              "putTheSignatureBackToTransaction": "Put the Signature Back to Transaction",
+              "putTheSignatureBackToTransaction": "Put the Signature Back to the Transaction",
               "sendTheTransaction": "Send the Transaction"
             }
           },
@@ -83,7 +83,7 @@
           "p6": "This is the so-called smart contract on CKB, as simple as that."
         },
         "howToOwnACell": {
-          "title": "How to Own a Cell?",
+          "title": "How to own a cell?",
           "p1": "Cells are obtained by consensus on the chain, thus the storage space becomes precious, and owning a cell inevitably incurs costs.",
           "p2": "This leads us to the function of CKB's native tokens.",
           "p3": "Imagine a cell as a small box that can carry objects. The box itself is created by tokens. A box's size varies by how many tokens you have.",
@@ -112,7 +112,7 @@
           "p21": "We assume that the capacity of the cell is 0x1dcd65000, which is 80 bytes in size. If the change in data causes the actual capacity to grow beyond the value of capacity, the cell will be considered invalid."
         },
         "howToKnowCellIsYours": {
-          "title": "How to Tell that You Own a Cell?",
+          "title": "How to tell that you own a cell?",
           "p1": "Since you can only possess a cell by owning a native token, how do we know that you own a particular cell?",
           "p2": "Remember the lock and type we mentioned above?",
           "p3": "If the cell is a box, lock and type are the two locks on the box.",
@@ -142,7 +142,7 @@
           "p2": "It seems that we've got a pretty good grasp of how CKB works. Great! Trust me, you've got most of it figured out. Now, let's get into a bit more detail."
         },
         "whereIsTheActualCode": {
-          "title": "Where is the Code Actually Located?",
+          "title": "Where is the code actually located?",
           "p1": "We have learned that the lock and type fields of the cell are used to lock the box and to guarantee its ownership and control.",
           "p2": "Lock is a script structure that looks like this:",
           "p3": "You may notice that the code_hash is not the actual code but a hash of the code, equivalent to an index of the code. This index allows us to retrieve the code. So, where is the code anyway?",
@@ -157,7 +157,7 @@
           "p12": "But at this point, another question may come to your mind."
         },
         "whatIfCodeIsLost": {
-          "title": "What if the Lock Code is Lost?",
+          "title": "What if the lock code is lost?",
           "p1": "The code of lock is kept in another cell. What if someone destroys that cell? When this cell is spent, the dep cell becomes dead, and the code of lock will be gone. Does this mean that the cell that uses this lock can no longer unlock it?",
           "p2": "Theoretically, this is true. Technically, the cell that contains the code of the lock should last as long as the chain does, and no one can access this cell. So, if you look it up, you can see that the dep cells that all the built-in lock scripts of CKB have been built on are inherently inaccessible by anyone. Because we have set the value 0x0000... in the lock field of each dep cell (i.e. the lock of the cell itself where to put the lock code), which means that no one will ever be able to unlock these cells again, and the code will always be there:",
           "p3": "We can still unlock our own cell if the dep cell was destroyed, because you can just redeploy the same lock code to a new cell and then bring in the new cell as a dep cell so that you can retrieve the lock code. Because the code remains identical, the hash of the code stays the same, and the value of code_hash also remains the same. This is the additional flexibility of CKB.",
@@ -175,7 +175,7 @@
           "p15": "This index structure is called OutPoint, which allows you to find a particular cell."
         },
         "roleOfTypeLock": {
-          "title": "Role of the Type Lock",
+          "title": "Role of the type lock",
           "p1": "As cells are transformed from inputs to outputs in a transaction, certain user-defined rules can guide the transformation process.",
           "p2": "For example, I want a cell to produce only one new cell at a time in a transaction, I can make such a rule into a lock on the box.",
           "p3": "Another example, I would like a cell to never show the word “carrot” in its data field during a transaction, I could create a lock with such a rule, which would be added as a type lock to the box.",
@@ -215,7 +215,7 @@
         "title": "Step 2. Get Your Hands Dirty",
         "p1": "Better understand the previous theory by getting some hands-on experience of CKB blockchain.",
         "studyAChain": {
-          "title": "Study a Chain",
+          "title": "Study the Chain",
           "p1": "We have been running a test chain over the cloud and have pre-generated some account addresses for this tutorial.",
           "p2": "Click on the buttons below and check out the latest blocks.",
           "p3": "We have prepared three wallets.",
@@ -250,13 +250,13 @@
       }
     },
     "context": {
-      "takeABreak": "Take a Break",
+      "takeABreak": "Summary",
       "moreClass": "Stay Tuned for More Tutorials",
       "toBeContinue": "Stay Tuned"
     },
     "widget": {
       "sendTx": {
-        "btnText": "Send Transaction",
+        "btnText": "Send the Transaction",
         "checkBlockBtnText": "Check this block to see where the transaction was packaged",
         "txUndefinedAlertMsg": "tx is undefined. please fill the transaction form above and click SAVE button",
         "p1": "Note that, after the transaction has been successfully sent on-chain, the tx_hash returned is the same as the tx_hash generated beforehand.",
@@ -264,28 +264,28 @@
         "p3": "Now, you can use the button below to see if the transaction we just sent is actually on-chain. If it says tx_status: pending, it indicates that the transaction is still under verification. Just retry later."
       },
       "completeTxWithWitness": {
-        "btnText": "witnesses 加入 raw_tx"
+        "btnText": "Witnesses added to raw_tx"
       },
       "toTxHash": {
-        "btnText": "Generate tx_hash",
-        "serializedTxBeforeHash": "the serialized Transaction before hash function:",
+        "btnText": "Generate the tx_hash",
+        "serializedTxBeforeHash": "the serialized transaction before hash function:",
         "txUndefinedAlertMsg": "raw transaction is undefined. please fill the transaction form above and click SAVE button"
       },
       "toSignMessage": {
-        "btnText": "generate message",
+        "btnText": "Generate the Message",
         "txUndefinedAlertMsg": "raw_tx is undefine."
       },
       "serializedWitnessArgs": {
-        "btnText": "serialize witnessArgs",
+        "btnText": "Serialize witnessArgs",
         "inputPlaceHolder": "lock: witness"
       },
       "toSignTx": {
-        "btnText": "sign transaction",
+        "btnText": "Sign the Transaction",
         "inputPlaceHolderMsg": "message",
         "inputPlaceHolderPrivkey": "private key"
       },
       "txConstructor": {
-        "btnTextGen": "Generate Transaction",
+        "btnTextGen": "Generate the Transaction",
         "btnTextClear": "Clear Out"
       },
       "dragCellToInputBall": {
@@ -428,14 +428,14 @@
         "p9": "A complete transaction also includes version and header_deps. The former suggests the version—currently set as 0x0, while the latter is left blank for now."
       },
       "signTheTransaction": {
-        "title": "Sign a Transaction",
+        "title": "Sign the Transaction",
         "p1": "Once a transaction has been assembled, a private key needs to be assigned to sign the transaction. The private key indicates that we are truly the owner of the cells and entitled to operate on them.",
         "p2": "The signature will then be put into a new field called witnesses, which serves as proof of the transaction.",
         "p3": "Now you have a complete understanding of how a transaction works. Let's move forward to the step of sending transactions."
       },
       "buildATransaction": {
         "title": "Build a Transaction",
-        "formTitle": "fill in the transaction information",
+        "formTitle": "Fill in the transaction information",
         "p1": "Now, fill in the transaction information in the blanks below.",
         "p2": "Use this as an exercise to complete a transfer transaction by yourself.",
         "p3": "You may need to use some functions such as to locate the live cells corresponding to your wallet, to view the chain config info (so you can fill in cell_deps), and to convert from hex to decimal, etc., all of which can be found in the toolbox on the right side.",
@@ -445,9 +445,9 @@
         "p7": "We can now generate a unique hash for the transaction, which is to say, the tx_hash can be generated beforehand."
       },
       "generateTxHash": {
-        "title": "Generate Transaction Hash",
+        "title": "Generate the Transaction Hash",
         "p1": "Click the button below to generate the hash of the transaction.",
-        "p2": "While the transaction can generate tx_hash beforehand, so far it is still a raw_tx. raw_tx differs from tx in that tx puts the signature of the transaction in the witnesses field.",
+        "p2": "While the tx_hash can be generated for the transaction beforehand, so far it is still a raw_tx. raw_tx differs from tx in that tx puts the signature of the transaction in the witnesses field.",
         "p3": "In fact, you can put any arguments or proofs you need in witnesses. Also, being an array, witness can include multiple proofs. Since we are now talking about the built-in transfer transaction, the mutual agreement is to put the following structure in the first position of each set of witnesses:",
         "p4": "This structure is called WitnessArgs. Different locks retrieve each signature required from the different fields of WitnessArgs.",
         "p5": "The lock field is the signature that needs to be verified for the lock that the input will use. In our case, this is the signature required by the SECP256K1_BLAKE160 algorithm to be verified.",
@@ -455,7 +455,7 @@
         "p7": "Signature is a tedious process. More technical details can be found here: "
       },
       "generateMessage": {
-        "title": "Generate Message",
+        "title": "Generate the Message",
         "p1": "To complete the signature, let's generate a message which will be signed for this transaction."
       },
       "completeSining": {
