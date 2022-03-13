@@ -10,7 +10,7 @@ import type {
   Cell,
 } from "../types/blockchain";
 
-axios.defaults.withCredentials = true;
+//axios.defaults.withCredentials = true;
 
 class Api {
   base_url: string;
