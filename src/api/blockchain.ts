@@ -53,7 +53,11 @@ class Api {
 
   async getWallets() {
     let res = await axios.get(`${this.base_url}/wallets`);
-    return res.data;
+    const response = res.data;
+    if (response.status !== "ok") {
+      throw new Error(response.error);
+    }
+    return response.data;
   }
 
   async getBalance(lock_args: HexString) {
@@ -77,7 +81,12 @@ class Api {
 
   async getChainConfig() {
     let res = await axios.get(`${this.base_url}/chain_config`);
-    return res.data;
+    const response = res.data;
+    if (response.status !== "ok") {
+      throw new Error(response.error);
+    }
+
+    return response.data;
   }
 
   async getSignature(message: string, private_key: string) {
