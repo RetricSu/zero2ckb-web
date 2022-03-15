@@ -13,30 +13,30 @@
       "tableOfContents": {
         "theoreticalKnowledgeMinimized": {
           "title": "Theoretical Knowledge Minimized",
-          "unravelCKB": "Unravel CKB",
-          "howToOwnACell": "How to own a cell",
+          "unravelCKB": "What is CKB?",
+          "howToOwnACell": "How to own a cell?",
           "howToTellThatYouOwnACell": "How to tell that you own a cell?",
-          "takeABreak": "Take a Break",
-          "whereToFindTheHiddenCode": "Where to find the hidden code?",
-          "whatIfTheCodeIsLost": "What if the code is lost?",
+          "takeABreak": "Summary",
+          "whereToFindTheHiddenCode": "Where is the code actually located?",
+          "whatIfTheCodeIsLost": "What if the lock code is lost?",
           "whatIsATransaction": "What is a transaction?",
           "roleOfTheTypeLock": "Role of the type lock"
         },
         "getYourHandsDirty": {
-          "title": "Get Your Hands Dirty",
+          "title": "Practice",
           "studyAChain": "Study a Chain",
           "sendATransaction": {
             "title": "Send a Transaction",
             "transactionInput": "Transaction Input",
             "transactionOutput": "Transaction Output",
-            "signTheTransaction": "Sign the Transaction",
+            "signTheTransaction": "Sign a Transaction",
             "buildATransaction": {
               "title": "Build a Transaction",
               "fillInTheTransaction": "Fill in the Transaction",
-              "generateHash": "Generate Hash",
-              "generateMessage": "Generate Message",
+              "generateHash": "Generate the Transaction Hash",
+              "generateMessage": "Generate the Message",
               "completeTheSignature": "Complete the Signature",
-              "putTheSignatureBackToTransaction": "Put the Signature Back to Transaction",
+              "putTheSignatureBackToTransaction": "Put the Signature Back to the Transaction",
               "sendTheTransaction": "Send the Transaction"
             }
           },
@@ -52,79 +52,79 @@
         }
       },
       "beforeWeGetStarted": {
-        "p1": "Congratulations on opening this page! This means you will learn everything about CKB ahead of the rest if you are a beginner.",
-        "p2": "This tutorial is your first contact with CKB, either for developing a DAPP on CKB or simply understanding the basics out of curiosity. Follow this guide to get your first hands-on CKB experience.",
+        "p1": "Welcome to this page! From here, you will learn CKB ahead of everyone else.",
+        "p2": "In this tutorial, you will learn the basics of CKB, so that you can develop an application on CKB or simply understand them for curiosity's sake.",
         "p3": "This tutorial is a complete walk-through that allows you to accomplish the following tasks by yourself:",
         "ul1": {
-          "l1": "Build and send the simplest transfer transaction",
-          "l2": "Develop and send the simplest multi-signature transaction",
-          "l3": "Develop and deploy the simplest smart contract",
-          "l4": "Develop and deploy a scalable smart contract"
+          "l1": "Build and send the simplest transfer transaction.",
+          "l2": "Build and send the simplest multi-signature transaction.",
+          "l3": "Build and deploy the simplest smart contract.",
+          "l4": "Build and deploy an upgradable smart contract."
         },
-        "p4": "The greatest thing is, to figure this all out, there is:",
+        "p4": "To figure it all out, there is:",
         "ul2": {
-          "l1": "No need for any local downloads",
-          "l2": "No need to run any software",
-          "l3": "No need even to write one single line of code!"
+          "l1": "no need for any local downloads.",
+          "l2": "no need to run any software.",
+          "l3": "no need even to write one single line of code!"
         },
-        "p5": "Everything can be done on this page interactively with the cloud-based test chain in a purely manual, remote way.",
-        "p6": "All you need to have is the patience for reading further down and the curiosity for CKB. :D",
-        "p7": "No more talk then. Let's start this fascinating adventure!"
+        "p5": "On this page you can interact directly with the cloud-based test chain in a manual, remote manner.",
+        "p6": "All you need to have is the patience for reading further down and the curiosity for CKB.",
+        "p7": "Let's begin this fascinating adventure!"
       },
       "theoreticalKnowledgeMinimized": {
         "title": "Step 1 Theoretical Knowledge Minimized",
         "q1": "There are no Bitcoins in the world, only UTXOs.",
         "q2": "There are no CKBs in the world, only cells.",
         "unravelCKB": {
-          "title": "Unravel CKB",
+          "title": "What is CKB?",
           "p1": "To understand CKB, we must leave behind all the complex concepts and capture the very essence: it's all about cells and the transformation of cells.",
           "p2": "Cell is the basic unit of CKB, similar to a cell in the human body. Each cell constitutes the general state of the entire CKB blockchain. When we initiate a transaction on the blockchain, thus making a state change, in the end, for CKB, it is nothing more than spending some cells while creating some new ones, no matter how complicated the transaction and the state change are. This process is the same as the Bitcoin UTXO.",
-          "p3": "Cells spent are dead cells; cells unspent are live cells. So, a chain keeps on spending and creating cells through transactions, like the renewal and division of cells throughout the body.",
-          "p4": "Unlike UTXO, a cell can store any type of data. A cell has a field called data inside, which you can put an unformatted string. In other words, you can write whatever you want in whatever format inside  data, so long as you can interpret the string.",
-          "p5": "For example, I can save a hash, a text, a date, or even a piece of binary code that can be referenced by other cells and run on-chain through the CKB virtual machine, CKB-VM.",
-          "p6": "This is the so-called smart contract on CKB, as simple as that."
+          "p3": "Unspent cells are live cells; spent cells are dead cells. So, a CKB chain keeps on spending and creating cells through transactions, like the renewal and division of cells throughout the body.",
+          "p4": "Unlike UTXO, a cell can store any type of data. Each cell has a field called data, where you can put an unformatted string. The string can be in whatever format you want, as long as you can interpret it.",
+          "p5": "For example, the string can be a hash, a text, a date, or even a piece of binary code that can be referenced by other cells and run on-chain through the CKB virtual machine, CKB-VM.",
+          "p6": "As simple as that, this is the so-called smart contract on CKB."
         },
         "howToOwnACell": {
           "title": "How to own a cell?",
-          "p1": "Cells are obtained by consensus on the chain, thus the storage space becomes precious, and owning a cell inevitably incurs costs.",
+          "p1": "Cells are obtained by the verification of the global consensus on the chain. Owning cells entails costs, since their storage space is limited.",
           "p2": "This leads us to the function of CKB's native tokens.",
-          "p3": "Imagine a cell as a small box that can carry objects. The box itself is created by tokens. A box's size varies by how many tokens you have.",
-          "p4": "A box can also be subdivided into multiple boxes. Simply make sure that the boxes’ total space is equal to the quantity of tokens you hold.",
-          "p6": "Based on the system settings, 1 CKB is equal to 1 byte of space.",
-          "p7": "If you have 100 CKBs, for example, you will have 100 bytes of on-chain space, then you can create a box with 100 bytes space. You can divide the 100 bytes into as many boxes as you like. It's up to you.",
-          "p8": "Once the box (cell) has space, it can contain data. Data size must be smaller than the box, because the box has other components which also occupy some space.",
-          "p9": "For instance, one Chinese character accounts for 2 bytes (GBK encoding). If you have 100 CKBs, you can probably save less than 50 Chinese characters to this cell.",
-          "p10": "In the case of <Dream of the Red Chamber>, this novel is about 780,000 words in total, so you will need approximately 1.56 million native CKB tokens to upload the entire chunk on-chain.",
+          "p3": "Imagine a cell as a small box that can carry objects. The box itself is created by tokens. A box's size is determined by how many tokens you have.",
+          "p4": "A box (cell) can also be divided into multiple boxes, as long as the total space of the boxes is equal to the number of tokens you have.",
+          "p6": "In Nervos CKB, 1 CKB is equal to 1 byte of storage space.",
+          "p7": "For example, if you have 100 CKBs, you will have 100 bytes of on-chain space, so you can create a box with 100 bytes of space. You can divide that 100 bytes into as many boxes as you like.",
+          "p8": "The box can store data. The data size must be smaller than the space of the box, because the box includes other components which also occupy some space.",
+          "p9": "For instance, one Chinese character accounts for 2 bytes (GBK encoding). If you have 100 CKBs in a cell, you can probably save less than 50 Chinese characters in it.",
+          "p10": "In the case of Dream of the Red Chamber, this novel is approximately 780,000 words in total, so if you want to upload the whole chunk on-chain, you'll need approximately 1.56 million native CKB tokens.",
           "p11": "As you can see, on-chain storage is a precious asset.",
-          "p12": "CKB is designed to store on-chain consensus, so as to encourage everyone to upload data that is truly valuable and necessary to go through consensus. Such data is comparable to a common knowledge base owned by the entire human race.",
-          "p13": "This is how the CKB got its name (Common knowledge base).",
+          "p12": "CKB stores consensus data on-chain, enabling everyone to upload data valuable and necessary to consensus. It is comparable to a knowledge base owned by all of humanity.",
+          "p13": "This is how CKB got its name (Common Knowledge Base).",
           "p14": "The entire cell data structure looks like this:",
-          "p15": "These four fields have the following meanings:",
+          "p15": "The four fields are defined as follows:",
           "ul1": {
             "l1": "capacity: the space size of the cell, i.e. the number of native tokens represented by this cell, usually expressed in hexadecimal.",
             "l2": "lock: a script, which is essentially the equivalent of a lock. We'll show you more details later.",
-            "l3": "type: a script, same as the lock but for a different purpose. More on this later.",
-            "l4": "data: an unformatted string where any type of data can be stored"
+            "l3": "type: a script, same as the lock but for a different purpose.",
+            "l4": "data: an unformatted string where any type of data can be stored."
           },
           "p16": "More detailed descriptions of data structures can be found here: ",
-          "p17": "The most important rule to keep in mind about the cell is that the sum of the total space occupied by the four fields above must be less than or equal to the capacity value.",
-          "p18": "In other words",
-          "p19": "To better understand, let's look at an example.",
-          "p20": "In this small experiment, type in something as the cell data to see the real-time changes in the length of the cell. Click on the cell to reveal the exact contents and the actual length occupied by each field.",
-          "p21": "We assume that the capacity of the cell is 0x1dcd65000, which is 80 bytes in size. If the change in data causes the actual capacity to grow beyond the value of capacity, the cell will be considered invalid."
+          "p17": "Note：A cell's total size for all four fields above must be less than or equal to the capacity of the cell.",
+          "p18": "As shown below",
+          "p19": "To better understand, let's look at the following example.",
+          "p20": "Type in something as the cell data to see the real-time changes in the length of the cell. Click on the cell to view the cell content and the actual length of each field.",
+          "p21": "The capacity of the cell is set as 0x1dcd65000, which is 80 bytes in size. If the change in data causes the actual occupancy to grow beyond the value of capacity, the cell will be considered invalid."
         },
         "howToKnowCellIsYours": {
           "title": "How to tell that you own a cell?",
-          "p1": "Since you can only possess a cell by owning a native token, how do we know that you own a particular cell?",
-          "p2": "Remember the lock and type we mentioned above?",
-          "p3": "If the cell is a box, lock and type are the two locks on the box.",
-          "p4": "The lock lock is set by default, and the type lock is optional.",
-          "p5": "In essence, this lock is a piece of code and parameters. When we try to consume a cell, the lock will automatically run and enter the parameters and proof we submit (such as the signature) to determine if the lock can be lifted. Once unlocked, it proves that we own and control the cell.",
-          "p6": "Lock is a script structure that looks like this: ",
+          "p1": "The only way you can possess cells is by owning native tokens, so how do we know which one you own?",
+          "p2": "Do you remember the lock and type scripts we mentioned above?",
+          "p3": "If the cell is a box, the lock and type scripts are the two locks on the box.",
+          "p4": "The lock script is the default lock, and the type script is an optional lock.",
+          "p5": "In essence, the scripts are a piece of code and parameters. When we try to consume a cell, the scripts will automatically run and enter the parameters and proof we submit (such as the signature) to determine if the locks of the cell can be unlocked. Once unlocked, it proves that we own and control the cell.",
+          "p6": "The script structure looks like this: ",
           "p7": "In these three fields, hash_type is reserved for later, the other two are:",
           "ul1": {
             "l1": "the hash of a certain piece of code",
-            "l2": "the arguments that will be transferred to the code."
+            "l2": "the arguments that will be transferred to the code"
           },
           "p8": "More data structure details can be found here: ",
           "p9": "The code_hash and args jointly constitute a full lock: we locate the code to be executed by using the code_hash field and then send the argument args to this code. The code will then be executed by the CKB virtual machine CKB-VM (Additional args may be read during the process, such as the proof attached to the transaction). If executed successfully, a “0” will be returned indicating that the lock can be opened successfully; if not, other values will be returned indicating that the unlocking failed.",
@@ -150,7 +150,7 @@
           "p3": "You may notice that the code_hash is not the actual code but a hash of the code, equivalent to an index of the code. This index allows us to retrieve the code. So, where is the code anyway?",
           "p4": "The answer is simple: code is in another cell!",
           "p5": "We know that the data field of the cell can contain arbitrary data, so we can put the real code in the data field of another cell and implement this cell as a dependency to a transaction. This dependency cell is called “dep cell”.",
-          "p6": "When unlocking a cell, we simply import the dep cell, and the CKB will match the hash of the data in the dep cell with code_hash to find the corresponding code.",
+          "p6": "When unlocking a cell, we simply import the dep cell, and CKB will match the hash of the data in the dep cell with code_hash to find the corresponding code.",
           "p7": "So why not just put in the real code, but use this indexing approach?",
           "p8": "One of the major advantages of this design is that if everyone needs the same type of lock, the lock code will be identical, the code_hash value will be identical, too. Then it is just a matter of introducing the same dep cell rather than deploying the same code all over again for each case.",
           "p9": "Here's a real example.",
@@ -164,33 +164,33 @@
           "p2": "Theoretically, this is true. Technically, the cell that contains the code of the lock should last as long as the chain does, and no one can access this cell. So, if you look it up, you can see that the dep cells that all the built-in lock scripts of CKB have been built on are inherently inaccessible by anyone. Because we have set the value 0x0000... in the lock field of each dep cell (i.e. the lock of the cell itself where to put the lock code), which means that no one will ever be able to unlock these cells again, and the code will always be there:",
           "p3": "We can still unlock our own cell if the dep cell was destroyed, because you can just redeploy the same lock code to a new cell and then bring in the new cell as a dep cell so that you can retrieve the lock code. Because the code remains identical, the hash of the code stays the same, and the value of code_hash also remains the same. This is the additional flexibility of CKB.",
           "p4": "These examples of locks that we've talked about are the locks in the lock field of the cell.",
-          "p5": "Apart from the default lock lock, a cell also has an optional lock—type lock. These two locks are fundamentally the same, but they are given different names because of their different uses.",
-          "p6": "The lock lock is usually used to protect the ownership of the box, while the type lock is used to ensure that the cell follows certain data transformation rules during the transaction. ",
-          "p7": "To understand this, we must start by understanding what a transaction in the CKB is all about.",
-          "p8": "The transaction is to destroy some cells and create some more.",
-          "p9": "The essence of a transaction in the CKB, excluding the less important details, is as follows：",
+          "p5": "In addition to the default lock, lock script, a cell can also have an optional lock, type script. These two locks are fundamentally the same, but they are given different names because of their different uses.",
+          "p6": "The lock script is usually used to protect the ownership of the box, while the type script is used to ensure that the cell follows certain data transformation rules during the transaction. ",
+          "p7": "To understand this, we must start by understanding what a transaction in CKB is all about.",
+          "p8": "Constructing a transaction is to destroy some cells and create some more.",
+          "p9": "The essence of a transaction in CKB, excluding the less important details, is as follows：",
           "p10": "Where the essence of input and output is still about some cells：",
-          "p11": "The cells in the input must all be live cells. The input cells will be spent and become dead cells after a transaction. The newly created output cells will become new live cells.",
+          "p11": "The cells in the input must all be live cells. The input cells will be spent and become dead cells after a transaction is committed. The newly created output cells will become new live cells.",
           "p12": "The most important rule you need to remember about CKB transactions is that all output cells, i.e. the newly created boxes, must take up less space than input cells.",
-          "p13": "Why? Because the difference, or the extra space, between input and output is the fee that the miner earns. Miners would nenver work for nothing, of course.",
+          "p13": "It's because the extra space between input and output is the fee that the miner earns. Miners are motivated by transaction fees.",
           "p14": "In practice, we do not put the full cell in the input for storage optimization purposes; instead, we just put the cell's index and use the index to find the cell used as input. ",
           "p15": "This index structure is called OutPoint, which allows you to find a particular cell."
         },
         "roleOfTypeLock": {
-          "title": "Role of the Type Lock",
+          "title": "Role of the type script",
           "p1": "As cells are transformed from inputs to outputs in a transaction, certain user-defined rules can guide the transformation process.",
           "p2": "For example, I want a cell to produce only one new cell at a time in a transaction, I can make such a rule into a lock on the box.",
           "p3": "Another example, I would like a cell to never show the word “carrot” in its data field during a transaction, I could create a lock with such a rule, which would be added as a type lock to the box.",
-          "p4": "This is the distinction between type lock and lock lock. The former protects the ownership of the box and the latter secures the data transformation rules. The lock lock is the gatekeeper, while the type lock is the guardian. ",
-          "p5": "This variance in use comes down to the difference in the design of the two locks in terms of their operating mechanism which can be specified as follows:",
+          "p4": "This is the distinction between the type script and the lock script. The former protects the ownership of the box and the latter secures the data transformation rules. The lock lock is the gatekeeper, while the type lock is the guardian. ",
+          "p5": "This variance in use comes down to the difference in the design of the two locks in terms of their execution mechanism which can be specified as follows:",
           "ul1": {
-            "l1": "Lock lock: In a transaction, the lock locks of all inputs will be executed once.",
-            "l2": "Type lock: In a transaction, the type locks of all inputs and outputs will be executed once."
+            "l1": "Lock script: In a transaction, the lock scripts of all inputs will be executed once.",
+            "l2": "Type script: In a transaction, the type scripts of all inputs and outputs will be executed once."
           },
-          "p6": "Because the execution mechanism varies, so does the usage derived. Of course, you can have your own thoughts on this, but essentially these usages are simply the recommended official usage. You are free to disregard them."
+          "p6": "Due to the variations in execution mechanisms, derived usage also varies. You are free to have your own opinions on this, but essentially these are the recommended official usages."
         },
         "takeABreak2": {
-          "p1": "Congratulations! You have equipped with the necessary knowledge for this tutorial!",
+          "p1": "Congratulations! Now you are prepared for the tutorial!",
           "p2": "Let's review all the concepts we have learned:",
           "ul1": {
             "l1": "CKB is essentially a chain of cells which are being created and destroyed over and over again.",
@@ -200,28 +200,28 @@
             "l5": "To protect your cell, you must put a lock on the cell that only your key can unlock.",
             "l6": "The lock is essentially a piece of runnable code and some arguments. Through entering args and some signatures or proofs provided by the user, the code runs to check if the lock can be opened.",
             "l7": "The return value of 0 means that the lock was unlocked successfully, while any other value means the unlock attempt failed.",
-            "l8": "Cell locates the code for the lock by the code_hash, these codes are saved in the data field of the dep cell.",
-            "l9": "Each cell can carry two locks, one is called lock lock (default) and the other, type lock (optional).",
-            "l10": "In one transaction, the lock locks of all inputs will be executed once.",
-            "l11": "In one transaction, the type locks of both inputs and outputs will be executed once.",
-            "l12": "The differences in the operational mechanism result in different uses for the two locks.",
-            "l13": "The lock lock is often used to protect the ownership of the box.",
-            "l14": "The type lock is usually used to ensure that the box's data conversion rules are followed.",
-            "l15": "A transaction is fundamentally about destroying some cells and creating some new ones."
+            "l8": "Using the code_hash of the cell, the lock's code can be retrieved. This code is stored in the data field of a dep cell.",
+            "l9": "Each cell can carry two locks, one is called lock script (default) and the other, type script (optional).",
+            "l10": "In one transaction, the lock scripts of all inputs will be executed once.",
+            "l11": "In one transaction, the type scripts of both inputs and outputs will be executed once.",
+            "l12": "The differences in the execution mechanism result in different uses for the two locks.",
+            "l13": "Lock scripts are often used to protect the ownership of the box.",
+            "l14": "Type scripts are usually used to ensure that the box's data conversion rules are followed.",
+            "l15": "Constructing a transaction is fundamentally about destroying some cells and creating some new ones."
           },
           "p3": "That's right, with the above theoretical knowledge, you're ready to hit the road.",
-          "p4": "Up next, we'll have a hands-on experience with CKB!"
+          "p4": "Afterward, we'll have a hands-on experience with CKB!"
         }
       },
       "getYourHandDirty": {
-        "title": "Step 2. Get Your Hands Dirty",
+        "title": "Step 2. Practice",
         "p1": "Better understand the previous theory by getting some hands-on experience of CKB blockchain.",
         "studyAChain": {
           "title": "Study a Chain",
-          "p1": "We have been running a test chain over the cloud and have pre-generated some account addresses for this tutorial.",
+          "p1": "We are running a test chain over the cloud and have pre-generated account addresses for this tutorial.",
           "p2": "Click on the buttons below and check out the latest blocks.",
-          "p3": "We have prepared three wallets.",
-          "p4": "Try hovering over the wallets to open them.",
+          "p3": "The following are three wallets.",
+          "p4": "By hovering over the wallets you can open them.",
           "p5": "Each wallet carries four messages, meant as follows:",
           "ul1": {
             "l1": "mainnet: indicates the mainnet address of the wallet",
@@ -229,114 +229,114 @@
             "l3": "lock_arg: indicates the first 20 bits of the wallet's corresponding public key hash. Think of it simply as a fingerprint of the public key.",
             "l4": "private_key: the private key of the wallet. You should not expose it as what I did."
           },
-          "p6": "In this tutorial, these three wallets will be used to send transactions, deploy contracts and some other purposes.",
-          "p7": "Now, you can select any of these wallets to review the associated cell and transactions by clicking on the button below.",
-          "p8": "Click on any cells or transactions to see the details in JSON format.",
-          "p9": "By saying how many CKBs (native tokens) a wallet has, we refer to the sum of the capacity of all the live cells that the wallet can unlock, i. e. the total on-chain storage the wallet occupies.",
-          "p10": "Now, Wallet 1 serves as the default miner address on this test chain. ",
-          "p11": "In other words, Wallet 1 will continuously receive rewards generated by mining. As a result, Wallet 1 has the most live cells, while Wallets 2 and 3 have very few, if any, live cells.",
+          "p6": "In this tutorial, these wallets will be used for sending transactions, deploying contracts, and other purposes.",
+          "p7": "To view the associated cells and transactions, select any of the wallets listed below.",
+          "p8": "Click on any cell or transaction to view the details in JSON format.",
+          "p9": "The amount of the CKBs (native tokens) a wallet has represents the capacity of all the live cells that the wallet can unlock, i. e. the total on-chain storage space the wallet occupies.",
+          "p10": "Now, wallet 1 serves as the default miner address on this test chain.",
+          "p11": "In other words, wallet 1 will continuously receive rewards generated by mining. As a result, wallet 1 has the most live cells, while wallets 2 and 3 have very few or no live cells.",
           "p12": "Currently, there is only one miner on the test chain.",
-          "p13": "At last, we also need to know the configuration information of this test chain.",
+          "p13": "It is also important to know the configuration information of this test chain.",
           "p14": "The details are as follows:",
           "p15": "indicates that this chain is the test chain rather than the mainnet.",
           "p16": "represent the built-in smart contracts, i.e. some of the system's built-in locks that type and lock can use.",
-          "p17": "Each CKB chain will pre-deploy several built-in smart contracts in the genesis block. Here it displays the details of three system contracts. They are:",
+          "p17": "Several built-in smart contracts will be pre-deployed in each CKB chain's genesis block. The following are three of the built-in smart contracts.",
           "ul2": {
-            "l1": "SECP256K1_BLAKE160: the system's default contract for the lock lock of the cell, used to protect the ownership of the cell",
-            "l2": "SECP256K1_BLAKE160_MULTISIG: the multi-signature version of SECP256K1_BLAKE160",
+            "l1": "SECP256K1_BLAKE160: the system's default smart contract for the lock script of cells, used to protect the ownership of the cells.",
+            "l2": "SECP256K1_BLAKE160_MULTISIG: the multi-signature version of SECP256K1_BLAKE160.",
             "l3": "DAO: NervosDAO contract. Feel free to ignore it if you don't understand."
           },
           "p18": "Well, that's all the information we need to know.",
-          "p19": "Now, we are about to build and send our first transaction!"
+          "p19": "Now we'll build our first transaction and send it!"
         }
       }
     },
     "context": {
-      "takeABreak": "Take a Break",
+      "takeABreak": "Summary",
       "moreClass": "Stay Tuned for More Tutorials",
       "toBeContinue": "Stay Tuned"
     },
     "widget": {
       "sendTx": {
-        "btnText": "Send Transaction",
-        "checkBlockBtnText": "Check this block to see where the transaction was packaged",
-        "txUndefinedAlertMsg": "tx is undefined. please fill the transaction form above and click SAVE button",
-        "p1": "Note that, after the transaction has been successfully sent on-chain, the tx_hash returned is the same as the tx_hash generated beforehand.",
-        "p2": "CKB does not lie.",
-        "p3": "Now, you can use the button below to see if the transaction we just sent is actually on-chain. If it says tx_status: pending, it indicates that the transaction is still under verification. Just retry later."
+        "btnText": "Send the Transaction",
+        "checkBlockBtnText": "Check the block where the transaction was packaged",
+        "txUndefinedAlertMsg": "tx is undefined. Fill out the transaction form above and click SAVE.",
+        "p1": "Note that, after the transaction has been successfully sent on-chain, the tx_hash returned is the same as the one generated beforehand.",
+        "p2": "This is the certainty of CKB.",
+        "p3": "You can now check if the transaction we just sent is actually on-chain using the button below. If tx_status is pending, it indicates that the transaction is still under verification. Just retry later."
       },
       "completeTxWithWitness": {
-        "btnText": "witnesses 加入 raw_tx"
+        "btnText": "Witnesses added to raw_tx"
       },
       "toTxHash": {
-        "btnText": "Generate tx_hash",
-        "serializedTxBeforeHash": "the serialized Transaction before hash function:",
+        "btnText": "Generate the tx_hash",
+        "serializedTxBeforeHash": "The serialized transaction before executing the hash function:",
         "txUndefinedAlertMsg": "raw transaction is undefined. please fill the transaction form above and click SAVE button"
       },
       "toSignMessage": {
-        "btnText": "generate message",
+        "btnText": "Generate the Message",
         "txUndefinedAlertMsg": "raw_tx is undefine."
       },
       "serializedWitnessArgs": {
-        "btnText": "serialize witnessArgs",
+        "btnText": "Serialize witnessArgs",
         "inputPlaceHolder": "lock: witness"
       },
       "toSignTx": {
-        "btnText": "sign transaction",
+        "btnText": "Sign the Transaction",
         "inputPlaceHolderMsg": "message",
         "inputPlaceHolderPrivkey": "private key"
       },
       "txConstructor": {
-        "btnTextGen": "Generate Transaction",
+        "btnTextGen": "Generate the Transaction",
         "btnTextClear": "Clear Out"
       },
       "dragCellToInputBall": {
-        "title": "Drag a Cell in here"
+        "title": "Drag a Cell in Here"
       },
       "outputCreatorTotalCapacity": {
         "totalCapText": "Total space：",
         "minerFee": "Miner fees：",
-        "settingBtnText": "⚙️"
+        "settingBtnText": "⚙️ Settings"
       },
       "editOutputCells": {
-        "capRuleAlertMsg": "capacity 需要小于 input 总和！tx_fee 不能为空！",
+        "capRuleAlertMsg": "The capacity must be less than the sum of the input. tx_fee cannot be null！",
         "addNewCellBtnText": "+ Add A New Cell",
         "saveExitBtnText": "Save & Exit"
       },
       "editOutputPlainCell": {
-        "capRuleAlertMsg": "total capacity should smaller than"
+        "capRuleAlertMsg": "The total capacity must be less than "
       },
       "showChainInfo": {
-        "title": "Devnet Chain Info"
+        "title": "Test Chain Info"
       },
       "toolBox": {
         "title": "CKB-ToolBox",
-        "queryCellBtnText": "Query Cell",
-        "queryTxBtnText": "Query Tx",
+        "queryCellBtnText": "Query Cells",
+        "queryTxBtnText": "Query Txs",
         "checkWalletBtnText": "Wallets",
         "checkChainConfigBtnText": "Chain Config",
         "hexToDecimalBtnText": "Hex To Decimal Tool",
         "queryCell": {
           "inputPlaceHolder": "lock_args..",
-          "searchResultTile": "result：",
-          "retryBtnText": "retry searching"
+          "searchResultTile": "Result：",
+          "retryBtnText": "Retry searching"
         },
         "queryTx": {
           "inputPlaceHolder": "lock_args..",
-          "searchResultTile": "result：",
-          "retryBtnText": "retry searching"
+          "searchResultTile": "Result：",
+          "retryBtnText": "Retry searching"
         },
         "hexToDecimal": {
-          "hexNumberAlertMsg": "hex number should start with 0x",
+          "hexNumberAlertMsg": "Hex number must start with 0x",
           "inputDecimalPlaceHolder": "Decimal Number",
-          "inputHexPlaceHolder": "Hex Number， start with 0x",
-          "convertBtnText": "convert",
+          "inputHexPlaceHolder": "Hex Number, start with 0x",
+          "convertBtnText": "Convert",
           "reverseFunctionBtnText": "reverse",
-          "resultText": "result: "
+          "resultText": "Result: "
         }
       },
       "wallets": {
-        "wallet": "wallet",
+        "wallet": "Wallet",
         "securityAlertMsg": "For demonstration use only. Do not use these wallets in real situations or mainnet."
       },
       "newBlocks": {
@@ -370,8 +370,8 @@
       "walletCells": {
         "selectOptionLabel": "wallet",
         "selectPlaceHolder": "Please select a wallet",
-        "selectCellsResultTitle": "Live Cells Of The Selected Wallet",
-        "selectTxsResultTitle": "Transactions Of the Selected Wallet"
+        "selectCellsResultTitle": "Live Cells of The Selected Wallet",
+        "selectTxsResultTitle": "Transactions of the Selected Wallet"
       },
       "cellConcept": {
         "p1": "In the CKB universe, countless cells are floating around.",
@@ -393,91 +393,91 @@
       "p1": "In this section, we will have a hands-on lesson on how to complete a basic transfer transaction.",
       "p2": "A quick refresher before we start:",
       "p3": "A CKB transaction is nothing more than spending some existing live cells and creating some new ones.",
-      "p4": "Because CKB is designed as “off-chain computing, on-chain verifying”, we can complete a transfer operation by collaging transactions manually.",
+      "p4": "Because CKB is designed as “off-chain computing, on-chain verifying”, we can complete a transfer operation by constructing transactions manually.",
       "p5": "As long as we draw up the content of the transaction in advance (i.e., which cells will be spent and which new cells will be created), then we sign the transaction with the corresponding private key. Once the transaction is submitted to the chain, as long as it passes the verification and is signed in a validated manner, this transaction is completed and will be packaged.",
-      "p6": "What does such a manual collage of transactions mean?",
-      "p7": "Actually, we compose the layer 2 in a network system like CKB.",
-      "p8": "Imagine you have a friend now living isolated in the Amazon jungle, with nothing but an offline computer next to him. ",
-      "p9": "One afternoon, he returned home from a hunting trip and suddenly remembered that he owed you some money. So he turned on the computer and attempted to transfer 10,000 CKBs to you to settle his debt.",
-      "p10": "Despite the lack of internet access, he wrote down the transaction details on a piece of paper, then entered his private key into the computer, calculated the corresponding signature for the transfer, and attached his signature.",
-      "p11": "Half a month later, when a courier visited, he asked to send this paper to China by mail. Another half a month later, the letter finally reached you.",
-      "p12": "You read the letter. The message did specify the transaction of 10,000 CKB cells to you. So you decided to submit the transaction to the CKB mainnet.",
-      "p13": "The mainnet validated the attached signature, the transaction was completed, leaving you with 10,000 more CKBs in your account. The debt was cleared.",
-      "p14": "Despite the low throughput—only 1 transaction/month, you and your Amazon jungle buddy have thus created a layer2 network that contains 2 nodes.",
-      "p15": "CKB now has a variety of tools to help you auto-build transactions, transfer and deploy contracts, etc. However, we'll stick to this old-school approach to implement a regular transfer transaction.",
-      "p16": "This is intended to give you a deeper insight into how the CKB cells work by using manually assembled transactions.",
-      "p17": "We will use JSON format to do this.",
+      "p6": "What does such a manual construction of a transaction mean?",
+      "p7": "In the CKB system, we compose the layer 2 network.",
+      "p8": "Imagine you have a friend who lives in an Amazon jungle isolated from everything but an offline computer.",
+      "p9": "When he returned from hunting one afternoon, he remembered he owed you some money. So he turned on the computer and attempted to transfer 10,000 CKBs to you to settle his debt.",
+      "p10": "Although he was unable to access the internet, he wrote down the transaction details on paper, entered his private key into the computer, calculated the appropriate signature, and attached his signature.",
+      "p11": "When a courier visited half a month later, he asked to send the paper to China by mail. That letter finally reached you half a month after it was sent.",
+      "p12": "The message on the mail did specify the transaction of 10,000 CKBs to you. Then you decided to submit the transaction to the CKB mainnet.",
+      "p13": "After the mainnet validated the attached signature, the transaction was complete and you now have 10,000 more CKBs in your account. The debt was settled.",
+      "p14": "Despite low throughput, only 1 transaction per month, you and your Amazon jungle buddy have created a layer2 network containing 2 nodes.",
+      "p15": "CKB offers tools for automatically building transactions, transferring contracts, etc. Nevertheless, we will continue with this old-school method to implement a regular transfer transaction.",
+      "p16": "By using manually assembled transactions, you will gain a deeper understanding of how CKB cells work.",
+      "p17": "We will use the JSON format to do this.",
       "transactionInput": {
         "title": "Transaction Input",
-        "p1": "Below are the 4 live cells from Wallet 1. Drag the cells directly into the box underneath. See what the automatically generated input looks like.",
-        "p2": "You probably noticed that the cell in input appears in the form of previous_output, which is imported as an “out_point” composed of tx_hash and index—comparable to an index, or a pointer to the cell—by which we can locate the cell to be spent.",
-        "p3": "The  since field in the input is about to control the time. Don't bother with it for now.",
-        "p4": "Other than inputs, there is another field called cell_deps that a transaction needs to depend on. It also appears as an index result of the outpoint.",
-        "p5": "What transactions need  dep_cell?",
-        "p6": "For instance, in a regular transfer transaction, the lock lock requires a fixed encryption algorithm, SECP256K1_BLAKE160, a built-in smart contract. The code of this encryption algorithm is kept in a cell and needs to be referenced in cell_deps, so that CKB-VM knows where to import the code for calculation.",
-        "p7": "We can easily find the arguments we need to send in cell_deps by checking the configuration information demonstrated in the test chain above."
+        "p1": "The following are the 4 live cells from wallet 1. Simply drag the cells into the box below and you will see the automatically generated inputs.",
+        "p2": "The cell in inputs appears in previous_output which is imported as an outpoint composed of tx_hash and index, akin to an index, or a pointer to the cell, by which we can locate the cell to be spent.",
+        "p3": "The since field in the inputs controls the time. Don't worry about it for now.",
+        "p4": "Besides inputs, there is a field called cell_deps that indicates the dependency cells a transaction needs to rely on. This field appears as an index result in out_point.",
+        "p5": "What are dependency cells?",
+        "p6": "In a regular transfer transaction, the lock script requires a fixed encryption algorithm, SECP256K1_BLAKE160, a built-in smart contract. The encryption algorithm code is kept in a cell and must be referenced in cell_deps, so that CKB-VM knows where to import it for calculation.",
+        "p7": "The arguments in cell_deps can easily be found by checking the configuration information demonstrated in the test chain above."
       },
       "transactionOutput": {
         "title": "Transaction Output",
-        "p1": "Next, let's use another tool to see how the output is generated and how the complete transaction looks like.",
-        "p2": "Again, drag the cell from Wallet 1 to *INPUT*. ",
+        "p1": "The next step is to use another tool to see how the output is generated and how the entire transaction looks.",
+        "p2": "Again, drag the cell from wallet 1 to INPUT. ",
         "p3": "A new cell of an identical size will be automatically generated in OUTPUT.",
-        "p4": "Click the *Setting* button in *OUTPUT* to reassign the newly generated cells, including specifying how many cells to generate, setting the size and the unlock address of each cell, and so on.",
-        "p5": "The output must take up less capacity than the input, and the gap is the fee to reward miners.",
-        "p6": "After setting it up, click the *Generate Transaction* button to see the JSON of the transaction.",
-        "p7": "You may have noticed that the outputs of the transaction have written out all the information about the newly generated cell, including capacity size, lock lock, etc.",
-        "p8": "However, the data is not specified in the cell in the output; the data is located in the outputs_data field, which corresponds to the cells in the outputs accordingly. Again, this is designed for performance optimization.",
-        "p9": "A complete transaction also includes version and header_deps. The former suggests the version—currently set as 0x0, while the latter is left blank for now."
+        "p4": "Click the Settings button in OUTPUT to reassign the newly generated cells. This includes specifying how many cells to generate, the size and the unlock address of each cell, and so on.",
+        "p5": "The output must have less capacity than the input, and the gap is the fee to reward miners.",
+        "p6": "To view the transaction JSON, click Generate Transaction once you've set it up.",
+        "p7": "The outputs of the transaction have all the information about the newly generated cell, including its capacity, lock script, etc.",
+        "p8": "Cells in the outputs do not specify data information; the data is located in the outputs_data field, which corresponds to the cells in the outputs accordingly. Again, this is designed for performance optimization.",
+        "p9": "Complete transactions also contain fields such as version and header_deps. The version field indicates the version, which is currently set to 0x0, while the header_deps field is null."
       },
       "signTheTransaction": {
         "title": "Sign a Transaction",
-        "p1": "Once a transaction has been assembled, a private key needs to be assigned to sign the transaction. The private key indicates that we are truly the owner of the cells and entitled to operate on them.",
-        "p2": "The signature will then be put into a new field called witnesses, which serves as proof of the transaction.",
-        "p3": "Now you have a complete understanding of how a transaction works. Let's move forward to the step of sending transactions."
+        "p1": "Once a transaction has been assembled, it must be signed by the corresponding private key. The private key indicates that the cells belong to you and you can operate on them.",
+        "p2": "Afterward, the signature will be put into a new field called witnesses, which serves as proof of the transaction.",
+        "p3": "It is now clear how a transaction works. Let's move on to constructing a transfer transaction manually."
       },
       "buildATransaction": {
         "title": "Build a Transaction",
-        "formTitle": "fill in the transaction information",
-        "p1": "Now, fill in the transaction information in the blanks below.",
-        "p2": "Use this as an exercise to complete a transfer transaction by yourself.",
-        "p3": "You may need to use some functions such as to locate the live cells corresponding to your wallet, to view the chain config info (so you can fill in cell_deps), and to convert from hex to decimal, etc., all of which can be found in the toolbox on the right side.",
-        "p4": "Click the Nervos icon to open the box. 👉",
-        "p5": "Click on the *Save* button after filling it out.",
-        "p6": "Well, you have filled in all the transactions manually.",
-        "p7": "We can now generate a unique hash for the transaction, which is to say, the tx_hash can be generated beforehand."
+        "formTitle": "Fill in the transaction information",
+        "p1": "Fill in the transaction information in the transaction template below.",
+        "p2": "This is an exercise to practice completing a transfer transaction on your own.",
+        "p3": "You can use the toolbox on the right side to find the live cells associated with your wallet, to view chain configuration information (so you can fill in cell_deps) and to convert hex to decimal, etc.",
+        "p4": "To open the toolbox, click on the Nervos icon. 👉",
+        "p5": "After filling it out, click the Save button.",
+        "p6": "You have filled in all the transaction information manually.",
+        "p7": "Consequently, we are now able to generate a unique hash for the transaction, i.e., we can generate the tx_hash beforehand."
       },
       "generateTxHash": {
-        "title": "Generate Transaction Hash",
-        "p1": "Click the button below to generate the hash of the transaction.",
-        "p2": "While the transaction can generate tx_hash beforehand, so far it is still a raw_tx. raw_tx differs from tx in that tx puts the signature of the transaction in the witnesses field.",
-        "p3": "In fact, you can put any arguments or proofs you need in witnesses. Also, being an array, witness can include multiple proofs. Since we are now talking about the built-in transfer transaction, the mutual agreement is to put the following structure in the first position of each set of witnesses:",
-        "p4": "This structure is called WitnessArgs. Different locks retrieve each signature required from the different fields of WitnessArgs.",
-        "p5": "The lock field is the signature that needs to be verified for the lock that the input will use. In our case, this is the signature required by the SECP256K1_BLAKE160 algorithm to be verified.",
-        "p6": "The input_type and output_type fields are the signatures required for the type locks in input and output. But feel free to ignore them for now.",
-        "p7": "Signature is a tedious process. More technical details can be found here: "
+        "title": "Generate the Transaction Hash",
+        "p1": "To generate the transaction hash, click the button below.",
+        "p2": "The transaction used to generate the tx_hash is still a raw transaction. The witnesses fileld needs to be filled in with the signature of the transaction for the raw transaction to become a complete transaction structure.",
+        "p3": "You can put any arguments or proofs you need in the witnesses field. As an array, the witnesses field can include multiple proofs. Because we are now building a built-in transfer transaction, the following structure must be placed in the first position of each set of witnesses:",
+        "p4": "This structure is called WitnessArgs. Different locks retrieve the required signature from different fields within WitnessArgs. The lock field contains the signature to be verified by the locks of input cells.",
+        "p5": "In our case, this is the signature required by the SECP256K1_BLAKE160 algorithm for verification.",
+        "p6": "The input_type and output_type fields contain the signatures to be verified by the type locks in inputs and outputs. Feel free to ignore them for now.",
+        "p7": "The process of signing is tedious. Here is more information: "
       },
       "generateMessage": {
-        "title": "Generate  Message",
-        "p1": "To complete the signature, let's generate a message which will be signed for this transaction."
+        "title": "Generate the Message",
+        "p1": "To sign the transaction, we must generate a message."
       },
       "completeSining": {
-        "title": "Complete the Signature",
-        "p1": "With the message and the private key of our wallet, we can calculate the signature."
+        "title": "Sign the Transaction",
+        "p1": "Using the message and the private key of our wallet, we can calculate the signature."
       },
       "putBackSignature": {
-        "title": "Put the Signature Back to Transaction",
-        "p1": "Fill in the following input box with the generated signature. Click on the button to serialize in the form of witnessArgs :",
-        "p2": "Now it's time to finalize the original transaction by putting the serialized signature into the witnesses field."
+        "title": "Put the Signature Back into the Transaction",
+        "p1": "Enter the generated signature in the following box and click on the button to serialize witnessArgs:",
+        "p2": "It is now time to finalize the raw transaction by adding the serialized signature to the witnesses field."
       },
       "sendTransaction": {
         "title": "Send the Transaction",
-        "p1": "Finally, the last step. Now we send the transaction back on-chain.",
-        "p2": "Congratulations on completing the first section of this tutorial!",
-        "p3": "We will then learn how to send a multi-signature transfer transaction."
+        "p1": "The final step is to send the transaction back on-chain.",
+        "p2": "Congratulations on completing the first section of the tutorial!",
+        "p3": "Next, we will learn how to send a multi-signature transfer transaction."
       }
     },
     "class2": {
-      "title": "Send A Multi-sig Transaction"
+      "title": "Send a Multi-sig Transaction"
     },
     "class3": {
       "title": "Deploy a Smart Contract"
