@@ -6,8 +6,8 @@
       "proofText": "Proof",
       "cellOfWallet1": "Cells in Wallet 1",
       "fetchCellOfWallet1": "fetch",
-      "decimalInputPlaceHolder": "decimal number，unit：CKB",
-      "hexInputPlaceHolder": "hex number，start with 0x",
+      "decimalInputPlaceHolder": "decimal number, unit: CKB",
+      "hexInputPlaceHolder": "hex number, start with 0x",
       "txSaveSuccessAlertMsg": "tx save successfully!",
       "illegalTokenAlertMsg": "illegal token：",
       "tableOfContents": {
