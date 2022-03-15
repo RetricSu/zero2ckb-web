@@ -296,7 +296,7 @@
       "outputCreatorTotalCapacity": {
         "totalCapText": "Total space：",
         "minerFee": "Miner fees：",
-        "settingBtnText": "⚙️ Settings"
+        "settingBtnText": "⚙️"
       },
       "editOutputCells": {
         "capRuleAlertMsg": "The capacity must be less than the sum of the input. tx_fee cannot be null！",
@@ -422,7 +422,7 @@
         "p1": "The next step is to use another tool to see how the output is generated and how the entire transaction looks.",
         "p2": "Again, drag the cell from wallet 1 to INPUT. ",
         "p3": "A new cell of an identical size will be automatically generated in OUTPUT.",
-        "p4": "Click the Settings button in OUTPUT to reassign the newly generated cells. This includes specifying how many cells to generate, the size and the unlock address of each cell, and so on.",
+        "p4": "Click the ⚙ button in OUTPUT to reassign the newly generated cells. This includes specifying how many cells to generate, the size and the unlock address of each cell, and so on.",
         "p5": "The output must have less capacity than the input, and the gap is the fee to reward miners.",
         "p6": "To view the transaction JSON, click Generate Transaction once you've set it up.",
         "p7": "The outputs of the transaction have all the information about the newly generated cell, including its capacity, lock script, etc.",
