@@ -46,9 +46,13 @@ export default function Signer(props: I18nComponentsProps) {
     const msg = msg_ref.current?.value || "";
     const key = key_ref.current?.value || "";
     const api = new Api();
-    const sig = await api.getSignature(msg, key);
-    if (sig.status === "ok") setSignature(sig.data);
-    else notify(sig.data);
+
+    try {
+      const sig = await api.getSignature(msg, key);
+      setSignature(sig);
+    } catch (error: any) {
+      notify(error.message);
+    }
 
     setIsLoading(false);
   };

@@ -45,12 +45,12 @@ export default function SendTx(props: SendTxProps) {
   const sendTx = async () => {
     const api = new Api();
     if (tx) {
-      const res = await api.sendTx(tx);
-      if (res.status == "ok") {
-        setTxHash(res.data);
+      try {
+        const txHash = await api.sendTx(tx);
+        setTxHash(txHash);
         PopFirework();
-      } else {
-        notify(res.data);
+      } catch (error: any) {
+        notify(error.message);
       }
     } else {
       notify(t("tutorial.widget.sendTx.txUndefinedAlertMsg"));
@@ -64,12 +64,11 @@ export default function SendTx(props: SendTxProps) {
     }
 
     const api = new Api();
-    const res2 = await api.getBlockByTxHash(tx_hash);
-    console.log(res2);
-    if (res2.status === "ok") {
-      setBlock(res2.data);
-    } else {
-      notify(res2.data);
+    try {
+      const block = await api.getBlockByTxHash(tx_hash);
+      setBlock(block);
+    } catch (error: any) {
+      notify(error.message);
     }
   };
 

@@ -43,5 +43,13 @@ export default function Txs(props: TxsProps) {
       }
     }
   );
-  return <ul style={styles.panel}>{mytxs}</ul>;
+  return (
+    <ul style={styles.panel}>
+      {mytxs.length > 0 ? (
+        mytxs
+      ) : (
+        <p style={{ color: "gray" }}>No Transactions Found</p>
+      )}
+    </ul>
+  );
 }

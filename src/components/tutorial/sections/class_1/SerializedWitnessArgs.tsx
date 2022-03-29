@@ -44,11 +44,11 @@ export default function SerializedWitnessArgs(props: I18nComponentsProps) {
       lock: lock_ref.current?.value,
     };
     const api = new Api();
-    const res = await api.getSerializedWitness(witnessArgs);
-    if (res.status === "ok") {
-      setWitness(res.data);
-    } else {
-      notify(res.data);
+    try {
+      const res = await api.getSerializedWitness(witnessArgs);
+      setWitness(res);
+    } catch (error: any) {
+      notify(error.message);
     }
   };
 

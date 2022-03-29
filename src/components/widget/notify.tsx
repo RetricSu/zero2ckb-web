@@ -1,23 +1,29 @@
 import React, { useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import commomStyle from "../widget/common_style";
+import commonStyle from "../widget/common_style";
 
 const styles = {
-  ...commomStyle,
+  ...commonStyle,
   ...{
     panel: {
-      maxWidth: "700px",
+      minWidth: "40%",
+      maxWidth: "100%",
+      maxHeight: "100%",
     },
     toast: {
+      width: "100%",
+      height: "100%",
       padding: "10px",
+      textAlign: "left" as const,
+      overflow: "auto",
     },
   },
 };
 
 export default function NotifyPlace() {
   return (
-    <div>
+    <div style={styles.panel}>
       <ToastContainer style={styles.panel} toastStyle={styles.toast} />
     </div>
   );

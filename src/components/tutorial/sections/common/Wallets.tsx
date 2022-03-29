@@ -168,7 +168,7 @@ export interface Props extends I18nComponentsProps {
 export default function Wallets(props: Props) {
   const { t, custom_style } = props;
 
-  const [wallets, setWallets] = useState([]);
+  const [wallets, setWallets] = useState<any>([]);
 
   useEffect(() => {
     fetchWallets();
