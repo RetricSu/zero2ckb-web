@@ -31,13 +31,11 @@ export default function NewBlocks(props: I18nComponentsProps) {
   const fetchNewBlocks = async () => {
     setIsLoading(true);
     const api = new Api();
-    const res = await api.getNewBlocks(9);
-    if (res.status === "ok") {
-      const blocks = res.data;
-      console.log(blocks);
+    try {
+      const blocks = await api.getNewBlocks(9);
       setBlocks(blocks);
-    } else {
-      notify(JSON.stringify(res));
+    } catch (error: any) {
+      notify(JSON.stringify(error.message));
     }
     setIsLoading(false);
   };

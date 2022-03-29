@@ -31,12 +31,12 @@ export default function ToTxHash(props: Props) {
   const generateSerializeTx = async () => {
     const api = new Api();
     if (props.raw_tx) {
-      const res = await api.generateSerializeTx(props.raw_tx);
-      console.log(res);
-      if (res.status == "ok") {
-        setSerializeTx(res.data);
-      } else {
-        notify(res.data);
+      try {
+        const res = await api.generateSerializeTx(props.raw_tx);
+        console.log(res);
+        setSerializeTx(res);
+      } catch (error: any) {
+        notify(error.message);
       }
     } else {
       notify(t("tutorial.widget.toTxHash.txUndefinedAlertMsg"));
@@ -48,12 +48,12 @@ export default function ToTxHash(props: Props) {
 
     const api = new Api();
     if (props.raw_tx) {
-      const res = await api.generateTxHash(props.raw_tx);
-      console.log(res);
-      if (res.status == "ok") {
-        setHash(res.data);
-      } else {
-        notify(res.data);
+      try {
+        const res = await api.generateTxHash(props.raw_tx);
+        console.log(res);
+        setHash(res);
+      } catch (error: any) {
+        notify(error.message);
       }
     } else {
       notify(t("tutorial.widget.toTxHash.txUndefinedAlertMsg"));

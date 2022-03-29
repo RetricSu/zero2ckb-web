@@ -1,6 +1,6 @@
 import React, { useState, useEffect, CSSProperties } from "react";
 import Api from "../../../../api/blockchain";
-import { QueryOption } from "../../../../types/blockchain";
+import { QueryOption, Transaction } from "../../../../types/blockchain";
 import FreshButton from "../../../widget/fresh_button";
 import commonStyles from "../../../widget/common_style";
 import Txs from "../common/Txs";
@@ -43,20 +43,19 @@ export type Props = {
 };
 
 export default function WalletTransaction(props: Props) {
-  const [txs, setTxs] = useState([]);
+  const [txs, setTxs] = useState<Transaction[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   async function fetchTransactions() {
     setIsLoading(true);
     const api = new Api();
     const length = props.length || 10;
-    var result = await api.getTransactions(props.query, length);
-    if (result.status == "ok") {
-      const txs = result.data;
+    try {
+      const txs = await api.getTransactions(props.query, length);
       setTxs(txs);
       setIsLoading(false);
-    } else {
-      notify(JSON.stringify(result.data));
+    } catch (error: any) {
+      notify(JSON.stringify(error.message));
       setIsLoading(false);
     }
   }

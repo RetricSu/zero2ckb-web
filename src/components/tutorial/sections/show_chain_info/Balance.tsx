@@ -40,7 +40,7 @@ export type BalanceProps = {
 };
 
 export default function Balance(props: BalanceProps) {
-  const [balance, setBalance] = useState();
+  const [balance, setBalance] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(false);
 
   async function fetchBalance() {

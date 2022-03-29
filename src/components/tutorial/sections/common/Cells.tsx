@@ -59,7 +59,7 @@ export default function Cells(props: Props) {
       setCells(
         myCells.map((cell: Cell, index: number) => (
           <SingleCell t={t} cell={cell} key_id={index} />
-        ))
+        )) as any
       );
     }
     setIsLoading(false);

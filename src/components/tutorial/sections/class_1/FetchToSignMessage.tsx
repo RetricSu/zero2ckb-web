@@ -34,25 +34,25 @@ export interface FetchToSignMessageProps extends I18nComponentsProps {
 export default function FetchToSignMessage(props: FetchToSignMessageProps) {
   const { t } = props;
   const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState<any>("");
   const generateMessage = async () => {
     setIsLoading(true);
     //const raw_tx = JSON.parse(JSON.stringify(eval("(" + props.raw_tx + ")")));
     //console.log(raw_tx);
     if (props.raw_tx) {
       const api = new Api();
-      const result = await api.getToSignMessage(
-        props.raw_tx,
-        props.witnesses
-          ? props.witnesses
-          : Array(props.raw_tx.inputs?.length).fill("0x")
-      );
-      console.log(result, typeof result);
-      if (result.status === "ok") {
-        const msgs = result.data.map((m: Message) => <li>{m.message}</li>);
+      try {
+        const result = await api.getToSignMessage(
+          props.raw_tx,
+          props.witnesses
+            ? props.witnesses
+            : Array(props.raw_tx.inputs?.length).fill("0x")
+        );
+        console.log(result, typeof result);
+        const msgs = result.map((m: Message) => <li>{m.message}</li>);
         setMessage(msgs);
-      } else {
-        notify(result.data);
+      } catch (error: any) {
+        notify(error.message);
       }
     } else {
       notify(t("tutorial.widget.toSignMessage.txUndefinedAlertMsg"));

@@ -1,6 +1,7 @@
 import { CSSProperties } from "@material-ui/core/styles/withStyles";
 import React, { useState, useEffect } from "react";
 import Api from "../../../../api/blockchain";
+import { ChainConfig as TypeChainConfig } from "../../../../types/blockchain";
 import { I18nComponentsProps } from "../../../../types/i18n";
 import CodePiece from "../../../widget/code";
 
@@ -23,7 +24,7 @@ export interface ChainConfigProps extends I18nComponentsProps {
 export default function ChainConfig(props: ChainConfigProps) {
   const { t, custom_style } = props;
 
-  const [config, setConfig] = useState();
+  const [config, setConfig] = useState<TypeChainConfig>();
 
   useEffect(() => {
     fetchChainConfig();

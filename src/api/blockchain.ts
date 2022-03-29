@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { Method } from "axios";
 import config from "../config/constant.json";
 import utils from "../utils/index";
 import type {
@@ -8,9 +8,30 @@ import type {
   WitnessArgs,
   HexString,
   Cell,
+  Block,
+  Wallet,
+  HexNumber,
+  ChainConfig,
+  Hash,
+  Message,
 } from "../types/blockchain";
 
 //axios.defaults.withCredentials = true;
+
+export enum ApiRequestResponseStatus {
+  ok = "ok",
+  failed = "failed",
+}
+export interface ApiRequestResponse {
+  status: ApiRequestResponseStatus;
+  data?: any;
+  error?: Error;
+}
+
+export enum ApiRequestType {
+  get,
+  post,
+}
 
 class Api {
   base_url: string;
@@ -22,136 +43,118 @@ class Api {
         : config.production_server_url;
   }
 
-  async getNewBlocks(limit = 10) {
-    let res = await axios.get(`${this.base_url}/get_new_blocks`, {
-      params: {
-        limit: limit,
-      },
-    });
-    return res.data;
-  }
+  private async httpRequest(
+    target: string,
+    params: any = {},
+    type: ApiRequestType = ApiRequestType.get
+  ): Promise<any> {
+    const callRequest = async (method: Method) => {
+      const url = `${this.base_url}/${target}`;
+      const res = await axios({ url, method, params });
+      const response = res.data as ApiRequestResponse;
+      if (response.status === ApiRequestResponseStatus.failed) {
+        throw response.error;
+      }
 
-  async getBlockByTxHash(tx_hash: HexString) {
-    console.log("tx hash:", tx_hash);
-    let res = await axios.get(`${this.base_url}/get_block_by_tx_hash`, {
-      params: {
-        tx_hash: tx_hash,
-      },
-    });
-    return res.data;
-  }
+      return response.data;
+    };
 
-  async getLiveCells(query: QueryOption, limit: number = 10) {
-    let res = await axios.get(`${this.base_url}/get_live_cells`, {
-      params: {
-        query: query,
-        limit: limit,
-      },
-    });
-    return res.data;
-  }
+    switch (type) {
+      case ApiRequestType.get:
+        return await callRequest("GET");
 
-  async getWallets() {
-    let res = await axios.get(`${this.base_url}/wallets`);
-    const response = res.data;
-    if (response.status !== "ok") {
-      throw new Error(response.error);
+      case ApiRequestType.post:
+        return await callRequest("POST");
+
+      default:
+        throw new Error(`unknown ApiRequestType, expect: {get, post}`);
     }
-    return response.data;
   }
 
-  async getBalance(lock_args: HexString) {
-    let res = await axios.get(`${this.base_url}/get_balance`, {
-      params: {
-        lock_args: lock_args,
-      },
+  async getNewBlocks(limit = 10): Promise<Block[]> {
+    return await this.httpRequest("get_new_blocks", { limit });
+  }
+
+  async getBlockByTxHash(tx_hash: HexString): Promise<Block> {
+    return await this.httpRequest("get_block_by_tx_hash", { tx_hash });
+  }
+
+  async getLiveCells(query: QueryOption, limit: number = 10): Promise<Cell[]> {
+    return await this.httpRequest("get_live_cells", {
+      query,
+      limit,
     });
-    return res.data;
   }
 
-  async getTransactions(query: QueryOption, limit: number = 10) {
-    let res = await axios.get(`${this.base_url}/get_txs`, {
-      params: {
-        query: query,
-        limit: limit,
-      },
+  async getWallets(): Promise<Wallet[]> {
+    return await this.httpRequest("wallets");
+  }
+
+  async getBalance(lock_args: HexString): Promise<HexNumber> {
+    return await this.httpRequest("get_balance", {
+      lock_args,
     });
-    return res.data;
   }
 
-  async getChainConfig() {
-    let res = await axios.get(`${this.base_url}/chain_config`);
-    const response = res.data;
-    if (response.status !== "ok") {
-      throw new Error(response.error);
-    }
-
-    return response.data;
-  }
-
-  async getSignature(message: string, private_key: string) {
-    let res = await axios.get(`${this.base_url}/get_signature`, {
-      params: {
-        message: message,
-        private_key: private_key,
-      },
+  async getTransactions(
+    query: QueryOption,
+    limit: number = 10
+  ): Promise<Transaction[]> {
+    return await this.httpRequest("get_txs", {
+      query,
+      limit,
     });
-    return res.data;
   }
 
-  async getToSignMessage(raw_tx: RawTransaction, witnessArgs: WitnessArgs[]) {
-    let res = await axios.get(`${this.base_url}/get_sign_message`, {
-      params: {
-        raw_tx: raw_tx,
-        witnessArgs: JSON.stringify(witnessArgs),
-      },
-    });
-    return res.data;
+  async getChainConfig(): Promise<ChainConfig> {
+    return await this.httpRequest("chain_config");
   }
 
-  async generateTxHash(raw_tx: RawTransaction) {
-    let res = await axios.get(`${this.base_url}/get_tx_hash`, {
-      params: {
-        raw_tx: raw_tx,
-      },
+  async getSignature(message: string, private_key: string): Promise<HexString> {
+    return await this.httpRequest("get_signature", {
+      message,
+      private_key,
     });
-    return res.data;
   }
 
-  async generateSerializeTx(raw_tx: RawTransaction) {
-    let res = await axios.get(`${this.base_url}/get_serialize_tx`, {
-      params: {
-        raw_tx: raw_tx,
-      },
+  async getToSignMessage(
+    raw_tx: RawTransaction,
+    witnessArgs: WitnessArgs[]
+  ): Promise<Message[]> {
+    return await this.httpRequest("get_sign_message", {
+      raw_tx,
+      witnessArgs: JSON.stringify(witnessArgs),
     });
-    return res.data;
   }
 
-  async sendTx(tx: Transaction) {
-    let res = await axios.get(`${this.base_url}/send_tx`, {
-      params: {
-        tx: tx,
-      },
+  async generateTxHash(raw_tx: RawTransaction): Promise<Hash> {
+    return await this.httpRequest("get_tx_hash", {
+      raw_tx,
     });
-    return res.data;
   }
 
-  async getSerializedWitness(witnessArgs: WitnessArgs) {
-    let res = await axios.get(`${this.base_url}/get_serialized_witness`, {
-      params: {
-        witnessArgs: witnessArgs,
-      },
+  async generateSerializeTx(raw_tx: RawTransaction): Promise<HexString> {
+    return await this.httpRequest("get_serialize_tx", {
+      raw_tx,
     });
-    return res.data;
   }
 
-  async getMinimalCellCapacity(cell: Cell) {
-    let res = await axios.get(`${this.base_url}/get_minimal_cell_capacity`, {
-      params: {
-        cell: cell,
-      },
+  async sendTx(tx: Transaction): Promise<Hash> {
+    return await this.httpRequest("send_tx", {
+      tx,
     });
-    return res.data;
+  }
+
+  async getSerializedWitness(witnessArgs: WitnessArgs): Promise<HexString> {
+    return await this.httpRequest("get_serialized_witness", {
+      witnessArgs,
+    });
+  }
+
+  async getMinimalCellCapacity(cell: Cell): Promise<HexNumber> {
+    return await this.httpRequest("get_minimal_cell_capacity", {
+      cell,
+    });
   }
 }
 
