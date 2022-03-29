@@ -16,7 +16,7 @@ const styles = {
       height: "100%",
       padding: "10px",
       textAlign: "left" as const,
-      overflow: "auto"
+      overflow: "auto",
     },
   },
 };

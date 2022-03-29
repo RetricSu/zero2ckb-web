@@ -80,7 +80,13 @@ export default function Cells(props: Props) {
         onClick={queryCells}
         text={props.text?.btn_text || ""}
       ></FreshButton>
-      <ul>{cells}</ul>
+      <ul>
+        {cells.length > 0 ? (
+          cells
+        ) : (
+          <p style={{ color: "gray" }}>No Cell Found</p>
+        )}
+      </ul>
       <p style={{ clear: "both" }} />
     </div>
   );
