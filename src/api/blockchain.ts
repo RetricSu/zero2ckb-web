@@ -25,7 +25,7 @@ export enum ApiRequestResponseStatus {
 export interface ApiRequestResponse {
   status: ApiRequestResponseStatus;
   data?: any;
-  error?: Error;
+  error?: string;
 }
 
 export enum ApiRequestType {
@@ -53,7 +53,7 @@ class Api {
       const res = await axios({ url, method, params });
       const response = res.data as ApiRequestResponse;
       if (response.status === ApiRequestResponseStatus.failed) {
-        throw response.error;
+        throw new Error("[ApiRequestError]: " + response.error);
       }
 
       return response.data;
