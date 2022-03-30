@@ -7,6 +7,7 @@ const styles = {
     fontSize: "14px",
     color: "white",
     textAlign: "center" as const,
+    marginTop: "30px",
   },
 };
 
