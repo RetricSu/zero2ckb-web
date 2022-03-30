@@ -29,7 +29,7 @@ export function funcParamsCheck(
   validators: any[] = [],
   errCallBack?: any
 ): any {
-  return async function (params: any[] = []): Promise<any> {
+  return async function (...params: any): Promise<any> {
     // validate params
     try {
       if (params.length < requiredParamsCount) {
@@ -54,7 +54,8 @@ export function funcParamsCheck(
     }
 
     // pass validator, execute the method
-    return await method(params);
+    console.log(params);
+    return await method.apply(null, params);
   };
 }
 
@@ -129,6 +130,14 @@ export const validators = {
     return verifyAddress(params[index], index);
   },
 
+  ckbPrivateKey(params: any[], index: number): any {
+    return verifyCkbPrivateKey(params[index], index);
+  },
+
+  ckbToSignMessage(params: any[], index: number): any {
+    return verifyCkbToSignMessage(params[index], index);
+  },
+
   /**
    * bool validator to check if type is boolean
    * @param {any[]} params parameters of method
@@ -159,11 +168,6 @@ export const validators = {
   },
 
   decimalNumberString(params: any[], index: number): any {
-    console.log(
-      typeof params[index] !== "string",
-      params[index].startsWith("0x"),
-      isNaN(params[index])
-    );
     if (typeof params[index] !== "string") {
       return invalidParamsError(index, `argument is not string`);
     }
@@ -201,6 +205,34 @@ function verifyAddress(address: any, index: number): any {
     return invalidParamsError(
       index,
       `address must be a 20 bytes-length hex string`
+    );
+  }
+
+  return undefined;
+}
+
+function verifyCkbPrivateKey(pk: any, index: number): any {
+  if (typeof pk !== "string") {
+    return invalidParamsError(index, `argument must be a hex string`);
+  }
+  if (!validateCkbPrivateKey(pk)) {
+    return invalidParamsError(
+      index,
+      `privateKey must be a 32 bytes-length hex string`
+    );
+  }
+
+  return undefined;
+}
+
+function verifyCkbToSignMessage(msg: any, index: number): any {
+  if (typeof msg !== "string") {
+    return invalidParamsError(index, `argument must be a hex string`);
+  }
+  if (!validateCkbToSignMessage(msg)) {
+    return invalidParamsError(
+      index,
+      `message must be a 32 bytes-length hex string`
     );
   }
 
@@ -265,6 +297,14 @@ function verifyHexString(hexString: any, index: number): any {
 
 function validateAddress(address: string): boolean {
   return /^0x[0-9a-fA-F]+$/.test(address) && address.length === 42;
+}
+
+function validateCkbPrivateKey(key: string): boolean {
+  return /^0x[0-9a-fA-F]+$/.test(key) && key.length === 66;
+}
+
+function validateCkbToSignMessage(key: string): boolean {
+  return /^0x[0-9a-fA-F]+$/.test(key) && key.length === 66;
 }
 
 function invalidParamsError(index: number, message: string) {

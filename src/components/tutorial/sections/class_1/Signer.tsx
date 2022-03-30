@@ -4,6 +4,7 @@ import Api from "../../../../api/blockchain";
 import { notify } from "../../../widget/notify";
 import commonStyle from "../../../widget/common_style";
 import { I18nComponentsProps } from "../../../../types/i18n";
+import { validateParams, validators } from "../../../../utils/validator";
 
 const styles = {
   ...commonStyle,
@@ -48,6 +49,10 @@ export default function Signer(props: I18nComponentsProps) {
     const api = new Api();
 
     try {
+      validateParams(
+        [msg, key],
+        [validators.ckbToSignMessage, validators.ckbPrivateKey]
+      );
       const sig = await api.getSignature(msg, key);
       setSignature(sig);
     } catch (error: any) {
