@@ -369,7 +369,7 @@
       },
       "walletCells": {
         "selectOptionLabel": "钱包",
-        "selectPlaceHolder": "请选择钱包",
+        "selectPlaceHolder": "请点击并选择一个钱包",
         "selectCellsResultTitle": "钱包对应的 live cell",
         "selectTxsResultTitle": "钱包对应的交易"
       },
