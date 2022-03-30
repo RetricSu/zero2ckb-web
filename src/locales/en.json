@@ -369,7 +369,7 @@
       },
       "walletCells": {
         "selectOptionLabel": "wallet",
-        "selectPlaceHolder": "Please select a wallet",
+        "selectPlaceHolder": "Please click and select a wallet",
         "selectCellsResultTitle": "Live Cells of The Selected Wallet",
         "selectTxsResultTitle": "Transactions of the Selected Wallet"
       },
