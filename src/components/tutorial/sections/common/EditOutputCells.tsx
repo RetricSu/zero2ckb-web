@@ -10,6 +10,7 @@ import {
   validateParams,
   validators,
 } from "../../../../utils/validator";
+import { errNotifyCallBack } from "./callBacks";
 
 const styles = {
   ...commonStyle,
@@ -79,10 +80,6 @@ export interface PlainCellProps extends I18nComponentsProps {
   total_capacity: string; // decimal
   get_final_cell?: (final_cell: SimpleCellJson | undefined) => void;
 }
-
-const errNotifyCallBack = (err: any) => {
-  notify(err.message);
-};
 
 const PlainCell = (props: PlainCellProps) => {
   const { t, cell, config, get_final_cell, total_capacity } = props;

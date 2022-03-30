@@ -159,21 +159,29 @@ export const validators = {
   },
 
   decimalNumberString(params: any[], index: number): any {
+    console.log(
+      typeof params[index] !== "string",
+      params[index].startsWith("0x"),
+      isNaN(params[index])
+    );
     if (typeof params[index] !== "string") {
       return invalidParamsError(index, `argument is not string`);
     }
-
     if (params[index].startsWith("0x")) {
       return invalidParamsError(index, `argument start with 0x is not decimal`);
     }
-    if (typeof +params[index] !== "number") {
+    if (isNaN(params[index])) {
       return invalidParamsError(index, `argument is not number`);
     }
     return undefined;
   },
 
   decimalPositiveNumberString(params: any[], index: number): any {
-    validators.decimalNumberString(params, index);
+    const err = validators.decimalNumberString(params, index);
+    if (err) {
+      return err;
+    }
+
     if (params[index].includes("-")) {
       return invalidParamsError(index, `illegal token - in Positive Number!`);
     }

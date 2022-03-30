@@ -2,6 +2,8 @@ import { Divider } from "@material-ui/core";
 import React, { useRef, useState } from "react";
 import { QueryOption } from "../../../types/blockchain";
 import { I18nComponentsProps } from "../../../types/i18n";
+import { validateParams, validators } from "../../../utils/validator";
+import { errNotifyCallBack } from "../../tutorial/sections/common/callBacks";
 import Txs from "../../tutorial/sections/show_chain_info/WalletTransaction";
 import commonStyle from "../../widget/common_style";
 
@@ -33,12 +35,14 @@ export default function QueryTx(props: QueryTxProps) {
   const [query, setQuery] = useState<QueryOption>();
 
   const startQuery = () => {
+    const args = ref.current?.value;
+    validateParams([args], [validators.hexString], errNotifyCallBack);
     setQuery({
       lock: {
         code_hash:
           code_hash ||
           "0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8",
-        args: ref.current?.value || "",
+        args: args!,
         hash_type: hash_type || "type",
       },
     });

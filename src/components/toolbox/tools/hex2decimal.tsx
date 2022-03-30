@@ -9,6 +9,8 @@ import common_style from "../../widget/common_style";
 import { CSSProperties } from "@material-ui/core/styles/withStyles";
 import { notify } from "../../widget/notify";
 import { I18nComponentsProps } from "../../../types/i18n";
+import { validateParams, validators } from "../../../utils/validator";
+import { errNotifyCallBack } from "../../tutorial/sections/common/callBacks";
 
 const styles = {
   caculator_box: {
@@ -55,11 +57,8 @@ export default function Hex2Dec(props: Hex2DecProps) {
   const hex2dec = () => {
     if (ref.current) {
       const hex_data = ref.current.value;
-      if (hex_data.slice(0, 2) !== "0x") {
-        notify(t("tutorial.widget.toolBox.hexToDecimal.hexNumberAlertMsg"));
-        return;
-      }
       try {
+        validateParams([hex_data], [validators.hexString]);
         setResult("" + BigInt(hex_data).toString(10));
       } catch (error: any) {
         notify(error.message);
@@ -73,6 +72,7 @@ export default function Hex2Dec(props: Hex2DecProps) {
     if (ref.current) {
       const dec_data = ref.current.value;
       try {
+        validateParams([dec_data], [validators.decimalPositiveNumberString]);
         setResult("0x" + BigInt(dec_data).toString(16));
       } catch (error: any) {
         notify(error.message);
