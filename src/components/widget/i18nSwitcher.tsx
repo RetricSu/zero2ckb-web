@@ -1,4 +1,5 @@
 import React from "react";
+import commonStyle from "./common_style";
 
 const styles = {
   root: {
@@ -40,6 +41,10 @@ export default function I18nSwitcher(props: I18nSwitcherProps) {
           key={lng}
           style={{
             fontWeight: i18n.resolvedLanguage === lng ? "bold" : "normal",
+            backgroundColor:
+              i18n.resolvedLanguage === lng
+                ? commonStyle.main_color.color
+                : "white",
           }}
           type="submit"
           onClick={() => i18n.changeLanguage(lng)}
