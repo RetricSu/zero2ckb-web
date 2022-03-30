@@ -26,7 +26,7 @@ const styles = {
       overflowY: "hidden" as const,
     },
     header_number: {
-      width: "30%",
+      width: "17%",
       overflowX: "scroll" as const,
       display: "inline-block" as const,
       verticalAlign: "text-bottom" as const,

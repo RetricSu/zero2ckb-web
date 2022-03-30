@@ -28,10 +28,12 @@ const styles = {
       textAlign: "center" as const,
     },
     covert_label: {
-      minHeight: "200px",
       textAlign: "center" as const,
       fontSize: "50px",
-      marginTop: "60px",
+      display: "flex",
+      verticalAlign: "middle",
+      justifyContent: "center",
+      alignItems: "center",
     },
     json_result: {
       width: "100%",
@@ -108,7 +110,7 @@ export default function TxConstructor(props: I18nComponentsProps) {
     <div style={styles.root}>
       <div style={{ textAlign: "center" }}> </div>
       <Grid container spacing={1}>
-        <Grid item xs={5}>
+        <Grid item xs={12} md={12} lg={5}>
           <div style={styles.input_box}>
             <div style={styles.subtitle}>
               <NeonText
@@ -124,10 +126,10 @@ export default function TxConstructor(props: I18nComponentsProps) {
             />
           </div>
         </Grid>
-        <Grid item xs={2} style={styles.covert_label}>
-          <h4> </h4>➪
+        <Grid item xs={12} md={12} lg={1} style={styles.covert_label}>
+          <span>➪</span>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={12} md={12} lg={6}>
           <div style={styles.output_box}>
             <div style={styles.subtitle}>
               <NeonText
