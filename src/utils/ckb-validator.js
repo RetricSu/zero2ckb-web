@@ -40,20 +40,20 @@ function assertObjectWithKeys(
   }
 }
 
-function assertHexString(debugPath, string) {
+export function assertHexString(debugPath, string) {
   if (!/^0x([0-9a-fA-F][0-9a-fA-F])*$/.test(string)) {
     throw new Error(`${debugPath} must be a hex string!`);
   }
 }
 
-function assertHash(debugPath, hash) {
+export function assertHash(debugPath, hash) {
   assertHexString(debugPath, hash);
   if (hash.length != 66) {
     throw new Error(`${debugPath} must be a hex string of 66 bytes long!`);
   }
 }
 
-function assertInteger(debugPath, i) {
+export function assertInteger(debugPath, i) {
   if (i === "0x0") {
     return;
   }

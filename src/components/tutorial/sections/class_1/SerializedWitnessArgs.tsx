@@ -4,6 +4,7 @@ import Api from "../../../../api/blockchain";
 import commonStyle from "../../../widget/common_style";
 import FreshButton from "../../../widget/fresh_button";
 import { I18nComponentsProps } from "../../../../types/i18n";
+import { validateParams, validators } from "../../../../utils/validator";
 
 const styles = {
   ...commonStyle,
@@ -40,11 +41,13 @@ export default function SerializedWitnessArgs(props: I18nComponentsProps) {
   const lock_ref = useRef<HTMLInputElement>(null);
 
   const serialized_witness = async () => {
-    const witnessArgs = {
-      lock: lock_ref.current?.value,
-    };
     const api = new Api();
     try {
+      const lockWitValue = lock_ref.current?.value;
+      validateParams([lockWitValue], [validators.hexString]);
+      const witnessArgs = {
+        lock: lock_ref.current?.value,
+      };
       const res = await api.getSerializedWitness(witnessArgs);
       setWitness(res);
     } catch (error: any) {
