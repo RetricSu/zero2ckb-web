@@ -124,19 +124,23 @@ export default function CapacityOfCell(props: CapacityOfCellProps) {
     return result;
   }
 
-  const isCapacityEnouge =
+  const isCapacityEnough =
     BigInt(utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))) >
     BigInt(totalByteLength)
-      ? `capacity: ${myCell.cell_output.capacity} = ${utils.shannon2CKB(
+      ? `capacity: ${
+          myCell.cell_output.capacity
+        }(shannon) = ${utils.shannon2CKB(
           utils.hex2dec(myCell.cell_output.capacity)
-        )} > ${t(
+        )}(CKB) > ${t(
           "tutorial.widget.capacityOfCell.actualCapacity"
-        )}：${totalByteLength}, ✅`
-      : `capacity: ${myCell.cell_output.capacity} = ${utils.shannon2CKB(
+        )}：${totalByteLength}(CKB), ✅`
+      : `capacity: ${
+          myCell.cell_output.capacity
+        }(shannon) = ${utils.shannon2CKB(
           utils.hex2dec(myCell.cell_output.capacity)
-        )} < ${t(
+        )}(CKB) < ${t(
           "tutorial.widget.capacityOfCell.actualCapacity"
-        )}：${totalByteLength}, ❌`;
+        )}：${totalByteLength}(CKB), ❌`;
 
   const ballStatusStyle =
     BigInt(utils.shannon2CKB(utils.hex2dec(myCell.cell_output.capacity))) >
@@ -188,7 +192,7 @@ export default function CapacityOfCell(props: CapacityOfCellProps) {
       <div style={styles.space_result}>
         {t("tutorial.widget.capacityOfCell.isCellCapacityEnough")}
         <CodePiece
-          code={isCapacityEnouge}
+          code={isCapacityEnough}
           custom_style={{ padding: "5px", border: "1px solid gray" }}
         />
       </div>
