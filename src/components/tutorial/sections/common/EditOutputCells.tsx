@@ -1,10 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import Api from "../../../../api/blockchain";
-import { Cell, ChainConfig } from "../../../../types/blockchain";
+import { Cell, ChainConfig, HexString } from "../../../../types/blockchain";
 import commonStyle from "../../../widget/common_style";
 import utils from "../../../../utils/index";
 import { notify } from "../../../widget/notify";
 import { I18nComponentsProps } from "../../../../types/i18n";
+import {
+  funcParamsCheck,
+  validateParams,
+  validators,
+} from "../../../../utils/validator";
 
 const styles = {
   ...commonStyle,
@@ -68,13 +73,16 @@ export type SimpleCellJson = {
   lock_args: string;
   data: string;
 };
-
 export interface PlainCellProps extends I18nComponentsProps {
   cell: SimpleCellJson;
   config: ChainConfig | undefined;
   total_capacity: string; // decimal
   get_final_cell?: (final_cell: SimpleCellJson | undefined) => void;
 }
+
+const errNotifyCallBack = (err: any) => {
+  notify(err.message);
+};
 
 const PlainCell = (props: PlainCellProps) => {
   const { t, cell, config, get_final_cell, total_capacity } = props;
@@ -86,7 +94,13 @@ const PlainCell = (props: PlainCellProps) => {
   const [args, setArgs] = useState(cell.lock_args);
   const [data, setData] = useState(cell.data);
 
-  const save_cell = () => {
+  let save_cell = () => {
+    validateParams(
+      [capacity, args],
+      [validators.decimalPositiveNumberString, validators.hexString],
+      errNotifyCallBack
+    );
+
     setFinalCell({
       capacity: capacity,
       lock_args: args,
@@ -104,16 +118,31 @@ const PlainCell = (props: PlainCellProps) => {
     }
   };
 
-  const handleCapacityChange = (value: string) => {
-    if (BigInt(value) < BigInt(total_capacity)) {
-      setCapacity(value);
-    } else {
-      notify(
+  let handleCapacityChange = (value: string) => {
+    if (BigInt(value) >= BigInt(total_capacity)) {
+      return notify(
         t("tutorial.widget.editOutputPlainCell.capRuleAlertMsg") +
           BigInt(total_capacity).toString(10)
       );
     }
+    setCapacity(value);
   };
+  handleCapacityChange = funcParamsCheck(
+    handleCapacityChange.bind(this),
+    1,
+    [validators.decimalPositiveNumberString],
+    errNotifyCallBack
+  );
+
+  let handleArgsChange = (value: HexString) => {
+    setArgs(value);
+  };
+  handleArgsChange = funcParamsCheck(
+    handleArgsChange.bind(this),
+    1,
+    [validators.hexString],
+    errNotifyCallBack
+  );
 
   const display = isHidden ? "none" : "inline-block";
 
@@ -125,7 +154,7 @@ const PlainCell = (props: PlainCellProps) => {
         <div style={styles.edit_cell_label}>capacity: </div>
         <span style={styles.input_wrap}>
           <input
-            onChange={(e) => {
+            onBlur={(e) => {
               handleCapacityChange(e.currentTarget.value);
             }}
             max={Number(total_capacity)}
@@ -145,8 +174,8 @@ const PlainCell = (props: PlainCellProps) => {
         </span>
         <span style={styles.input_wrap}>
           <input
-            onChange={(e) => {
-              setArgs(e.currentTarget.value);
+            onBlur={(e) => {
+              handleArgsChange(e.currentTarget.value);
             }}
             style={styles.input}
             type="text"

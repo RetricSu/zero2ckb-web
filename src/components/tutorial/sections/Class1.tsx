@@ -10,7 +10,7 @@ import SendTx from "./class_1/SendTx";
 import SerializedWitnessArgs from "./class_1/SerializedWitnessArgs";
 import TxConstructor from "./common/TxConstructor";
 import DragCellToInputJson from "./common/DragCellToInputJson";
-import { ValidateTransaction } from "../../../utils/validator";
+import { ValidateTransaction } from "../../../utils/ckb-validator";
 
 import type {
   Transaction,
