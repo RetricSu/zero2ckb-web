@@ -19,42 +19,55 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 import { useTranslation } from "react-i18next";
 
+import { FeedBack } from "../widget/feedback/feedback";
+
 function Learn() {
   const { t, i18n } = useTranslation();
 
   return (
-    <Grid container spacing={1}>
-      <Grid item xs={12}>
-        <AlertMessager
-          msg="Note: the chain used in this tutorial will be reset at every monday mid-night 1 am."
-          display={true}
-        />
+    <div>
+      <Notify />
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={12}>
+          <AlertMessager
+            msg="Note: the chain used in this tutorial will be reset at every monday mid-night 1 am."
+            display={true}
+          />
+        </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <Container maxWidth="md" style={styles.page}>
-          <DndProvider backend={HTML5Backend}>
+      <DndProvider backend={HTML5Backend}>
+        <Grid container spacing={1} alignItems="stretch">
+          <Grid item xs={12} md={3}>
             <TableOfContents t={t} i18n={i18n} />
-            <ToolBox t={t} />
-            <Notify />
-            <BeforeWeGetStarted t={t} />
-            <PreKnowledge t={t} />
-            <ShowChainInfo t={t} />
-            <Class1 t={t} />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <p>{t("tutorial.context.moreClass")}</p>
-            <hr />
-            <Class2 t={t} />
-            <Class3 t={t} />
-            <Class4 t={t} />
-          </DndProvider>
-        </Container>
-      </Grid>
-    </Grid>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Container maxWidth="md" style={styles.page}>
+              <BeforeWeGetStarted t={t} />
+              <PreKnowledge t={t} />
+              <ShowChainInfo t={t} />
+              <Class1 t={t} />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <p>{t("tutorial.context.moreClass")}</p>
+              <hr />
+              <Class2 t={t} />
+              <Class3 t={t} />
+              <Class4 t={t} />
+            </Container>
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <div style={styles.page}>
+              <FeedBack />
+              <ToolBox t={t} />
+            </div>
+          </Grid>
+        </Grid>
+      </DndProvider>
+    </div>
   );
 }
 

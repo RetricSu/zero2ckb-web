@@ -1,7 +1,7 @@
 const styles = {
   page: {
     maxWidth: "700px",
-    margin: "atuo",
+    margin: "auto",
     textAlign: "center" as const,
   },
   content: {

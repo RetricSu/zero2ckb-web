@@ -9,16 +9,12 @@ export type AlertMessagerProps = {
 
 const styles = {
   root: {
-    position: "absolute" as const,
-    top: "0",
-    height: "20px",
     width: "100%",
     fontSize: "14px",
     color: "white",
     background: "gray",
     textAlign: "center" as const,
     padding: "5px",
-    marginBottom: "10px",
   },
   close_btn: {
     cursor: "pointer",
