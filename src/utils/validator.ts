@@ -180,17 +180,20 @@ export const validators = {
     return undefined;
   },
 
-  decimalPositiveNumberString(params: any[], index: number): any {
+  decimalPositiveIntegerString(params: any[], index: number): any {
     const err = validators.decimalNumberString(params, index);
     if (err) {
       return err;
     }
 
     if (params[index].includes("-")) {
-      return invalidParamsError(index, `illegal token - in Positive Number!`);
+      return invalidParamsError(index, `illegal token - in Positive Integer!`);
+    }
+    if (params[index].includes(".")) {
+      return invalidParamsError(index, `illegal token . in Positive Integer!`);
     }
     if (+params[index] <= 0) {
-      return invalidParamsError(index, `argument is not positive number(<=0)`);
+      return invalidParamsError(index, `argument is not positive Integer(<=0)`);
     }
     return undefined;
   },

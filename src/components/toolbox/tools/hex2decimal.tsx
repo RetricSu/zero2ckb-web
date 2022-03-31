@@ -72,7 +72,7 @@ export default function Hex2Dec(props: Hex2DecProps) {
     if (ref.current) {
       const dec_data = ref.current.value;
       try {
-        validateParams([dec_data], [validators.decimalPositiveNumberString]);
+        validateParams([dec_data], [validators.decimalPositiveIntegerString]);
         setResult("0x" + BigInt(dec_data).toString(16));
       } catch (error: any) {
         notify(error.message);
