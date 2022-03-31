@@ -6,8 +6,8 @@
       "proofText": "Proof",
       "cellOfWallet1": "Cells in Wallet 1",
       "fetchCellOfWallet1": "fetch",
-      "decimalInputPlaceHolder": "decimal number, unit: CKB",
-      "hexInputPlaceHolder": "hex number, start with 0x",
+      "decimalInputPlaceHolder": "decimal integer, unit: CKB",
+      "hexInputPlaceHolder": "hex string, start with 0x",
       "txSaveSuccessAlertMsg": "tx save successfully!",
       "illegalTokenAlertMsg": "illegal token：",
       "tableOfContents": {
@@ -101,7 +101,7 @@
           "p14": "The entire cell data structure looks like this:",
           "p15": "The four fields are defined as follows:",
           "ul1": {
-            "l1": "capacity: the space size of the cell, i.e. the number of native tokens represented by this cell, usually expressed in hexadecimal. The basic unit for capacity is shannon, 1 CKB equals 10**8 shannon.",
+            "l1": "capacity: the space size of the cell, i.e. the integer number of native tokens represented by this cell, usually expressed in hexadecimal. The basic unit for capacity is shannon, 1 CKB equals 10**8 shannon.",
             "l2": "lock: a script, which is essentially the equivalent of a lock. We'll show you more details later.",
             "l3": "type: a script, same as the lock but for a different purpose.",
             "l4": "data: an unformatted string where any type of data can be stored."

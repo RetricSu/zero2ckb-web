@@ -94,7 +94,7 @@ const PlainCell = (props: PlainCellProps) => {
   let save_cell = () => {
     validateParams(
       [capacity, args],
-      [validators.decimalPositiveNumberString, validators.hexString],
+      [validators.decimalPositiveIntegerString, validators.hexString],
       errNotifyCallBack
     );
 
@@ -127,7 +127,7 @@ const PlainCell = (props: PlainCellProps) => {
   handleCapacityChange = funcParamsCheck(
     handleCapacityChange.bind(this),
     1,
-    [validators.decimalPositiveNumberString],
+    [validators.decimalPositiveIntegerString],
     errNotifyCallBack
   );
 

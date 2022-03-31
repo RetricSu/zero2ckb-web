@@ -6,7 +6,7 @@
       "proofText": "证明",
       "cellOfWallet1": "钱包 1 的 Cell",
       "fetchCellOfWallet1": "刷新",
-      "decimalInputPlaceHolder": "10 进制，单位：CKB",
+      "decimalInputPlaceHolder": "10 进制整数，单位：CKB",
       "hexInputPlaceHolder": "16 进制，以 0x 开头",
       "txSaveSuccessAlertMsg": "tx 已成功保存！",
       "illegalTokenAlertMsg": "非法字符：",
@@ -101,7 +101,7 @@
           "p14": "完整的 Cell 数据结构长这样：",
           "p15": "四个字段具体含义如下：",
           "ul1": {
-            "l1": "capacity：表示 Cell 的空间大小，同时也是这个 Cell 代表的原生代币的数量，我们通常会选择用 16 进制来表示, 最小单位为 shannon，1 CKB = 10**8 shannon",
+            "l1": "capacity：表示 Cell 的空间大小，同时也是这个 Cell 代表的原生代币的数量，是一个整数，我们通常会选择用 16 进制来表示, 最小单位为 shannon，1 CKB = 10**8 shannon",
             "l2": "lock：是一个脚本，本质相当于是一把锁，下文将详解",
             "l3": "type: 是一个脚本，和 lock 一样，只是锁的用途不同，下文将详解",
             "l4": "data: 是一个无格式字符串，可以在这里存放任何类型的数据"
