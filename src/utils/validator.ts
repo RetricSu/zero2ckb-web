@@ -288,6 +288,13 @@ function verifyHexString(hexString: any, index: number): any {
     return invalidParamsError(index, `invalid hex string 0x`);
   }
 
+  if (hexString.length % 2 !== 0) {
+    return invalidParamsError(
+      index,
+      `Hex input string must have an even length`
+    );
+  }
+
   if (!validateHexString(hexString)) {
     return invalidParamsError(index, `invalid hex string`);
   }
