@@ -18,7 +18,7 @@ const styles = {
     root: {
       position: "fixed" as const,
       right: "0px",
-      top: "20%",
+      top: "35%",
     },
     hr: {
       backgroundColor: commonStyle.main_color.color,

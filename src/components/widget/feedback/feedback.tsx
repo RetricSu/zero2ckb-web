@@ -1,4 +1,3 @@
-import { Typography } from "@material-ui/core";
 import React from "react";
 import GitHubButton from "react-github-btn";
 
@@ -41,7 +40,12 @@ export const FeedBack = () => {
       </label>
       <div>Help us BUIDL zero2ckb, together!</div>
       <br />
-      <p style={{ color: "antiquewhite" }}>contact: retric@cryptape.com</p>
+      <p style={{ color: "antiquewhite" }}>
+        Join{" "}
+        <a target="_blank" href="https://discord.gg/4PfPBzRZcp">
+          The Zero2ckb DAO
+        </a>{" "}
+      </p>
     </div>
   );
 };
