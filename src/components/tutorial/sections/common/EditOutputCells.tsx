@@ -87,11 +87,18 @@ const PlainCell = (props: PlainCellProps) => {
   const [final_cell, setFinalCell] = useState<SimpleCellJson>();
   const [isFinalCellOpen, setIsFinalCellOpen] = useState(false);
 
-  const [capacity, setCapacity] = useState(cell.capacity);
-  const [args, setArgs] = useState(cell.lock_args);
+  const [capacity, setCapacity] = useState<string | undefined>();
+  const [args, setArgs] = useState<HexString | undefined>();
   const [data, setData] = useState(cell.data);
 
   let save_cell = () => {
+    if (capacity == undefined || capacity === "") {
+      return notify(`capacity is required`);
+    }
+    if (args == undefined || args === "") {
+      return notify(`args is required`);
+    }
+
     validateParams(
       [capacity, args],
       [validators.decimalPositiveIntegerString, validators.hexString],
@@ -99,8 +106,8 @@ const PlainCell = (props: PlainCellProps) => {
     );
 
     setFinalCell({
-      capacity: capacity,
-      lock_args: args,
+      capacity: capacity!,
+      lock_args: args!,
       data: data,
     });
     setIsHidden(true);
@@ -108,14 +115,24 @@ const PlainCell = (props: PlainCellProps) => {
 
     if (get_final_cell) {
       get_final_cell({
-        capacity: capacity,
-        lock_args: args,
+        capacity: capacity!,
+        lock_args: args!,
         data: data,
       });
     }
   };
 
   let handleCapacityChange = (value: string) => {
+    if (value == undefined || value === "") {
+      return setCapacity(undefined);
+    }
+
+    validateParams(
+      [value],
+      [validators.decimalPositiveIntegerString],
+      errNotifyCallBack
+    );
+
     if (BigInt(value) >= BigInt(total_capacity)) {
       return notify(
         t("tutorial.widget.editOutputPlainCell.capRuleAlertMsg") +
@@ -124,22 +141,15 @@ const PlainCell = (props: PlainCellProps) => {
     }
     setCapacity(value);
   };
-  handleCapacityChange = funcParamsCheck(
-    handleCapacityChange.bind(this),
-    1,
-    [validators.decimalPositiveIntegerString],
-    errNotifyCallBack
-  );
 
   let handleArgsChange = (value: HexString) => {
+    if (value == undefined || value === "") {
+      return setArgs(undefined);
+    }
+
+    validateParams([value], [validators.hexString], errNotifyCallBack);
     setArgs(value);
   };
-  handleArgsChange = funcParamsCheck(
-    handleArgsChange.bind(this),
-    1,
-    [validators.hexString],
-    errNotifyCallBack
-  );
 
   const display = isHidden ? "none" : "inline-block";
 
