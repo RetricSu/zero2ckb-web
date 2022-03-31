@@ -60,8 +60,8 @@ export default function Preknowledge(props: I18nComponentsProps) {
     systemlock_deadlock_example: `
             SECP256K1's lock: {
                 code_hash: 0x0000000000000000000000000000000000000000000000000000000000000000
+                hash_type: data
                 args: 0x
-                hash_type..
             }
                         `,
     tx_define: `
