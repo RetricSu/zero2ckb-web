@@ -58,7 +58,7 @@ export default function Hex2Dec(props: Hex2DecProps) {
     if (ref.current) {
       const hex_data = ref.current.value;
       try {
-        validateParams([hex_data], [validators.hexString]);
+        validateParams([hex_data], [validators.hexNumber]);
         setResult("" + BigInt(hex_data).toString(10));
       } catch (error: any) {
         notify(error.message);
