@@ -18,9 +18,8 @@ const styles = {
   modal: {
     maxWidth: "700px",
     overflowY: "scroll" as const,
-    padding: "20px",
     height: "90%",
-    display: "flex",
+    display: "block",
     alignItems: "center",
     justifyContent: "center",
     margin: "2em auto",
@@ -30,7 +29,6 @@ const styles = {
     border: "2px solid #000",
     boxShadow: "10px",
     padding: "10px",
-    width: "100%",
     outline: "none",
   },
 };
