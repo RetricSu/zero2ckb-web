@@ -1,0 +1,489 @@
+{
+  "tutorial": {
+    "common": {
+      "saveBtnText": "Guardar",
+      "formFillHereText": "Rellena los huecos aquí",
+      "proofText": "Prueba",
+      "cellOfWallet1": "Células en la Wallet 1",
+      "fetchCellOfWallet1": "buscar",
+      "decimalInputPlaceHolder": "entero decimal, unidad: CKB",
+      "hexInputPlaceHolder": "cadena hexadecimal, comienza con 0x",
+      "txSaveSuccessAlertMsg": "¡Guardado de tx con éxito!",
+      "illegalTokenAlertMsg": "token no permitido：",
+      "tableOfContents": {
+        "theoreticalKnowledgeMinimized": {
+          "title": "Conocimiento teórico minimizado",
+          "unravelCKB": "¿Qué es CKB?",
+          "howToOwnACell": "¿Cómo ser dueño de una Célula?",
+          "howToTellThatYouOwnACell": "¿Cómo saber que eres dueño de un celular?",
+          "takeABreak": "Resumen",
+          "whereToFindTheHiddenCode": "¿Dónde se encuentra realmente el código?",
+          "whatIfTheCodeIsLost": "¿Y si se pierde el código de bloqueo?",
+          "whatIsATransaction": "¿Qué es una transacción?",
+          "roleOfTheTypeLock": "Rol del tipo de bloqueo"
+        },
+        "getYourHandsDirty": {
+          "title": "Práctica",
+          "studyAChain": "Estudiar una Cadena",
+          "sendATransaction": {
+            "title": "Enviar una Transacción",
+            "transactionInput": "Entrada de transacción",
+            "transactionOutput": "Salida de transacción",
+            "signTheTransaction": "Firmar una Transacción",
+            "buildATransaction": {
+              "title": "Construir una Transacción",
+              "fillInTheTransaction": "Rellenar la Transacción",
+              "generateHash": "Generar Hash de Transacción",
+              "generateMessage": "Generar el Mensaje",
+              "completeTheSignature": "Completar la Firma",
+              "putTheSignatureBackToTransaction": "Vuelva a colocar la firma en la transacción",
+              "sendTheTransaction": "Enviar la Transacción"
+            }
+          },
+          "sendAMultiSigTransaction": {
+            "title": "Enviar una Transacción Multi-sig"
+          },
+          "deployASmartContract": {
+            "title": "Desplegar un Smart Contract"
+          },
+          "deployAUpgradableSmartContract": {
+            "title": "Desplegar un Smart Contract actualizable"
+          }
+        }
+      },
+      "beforeWeGetStarted": {
+        "p1": "¡Bienvenido a esta página! A partir de aquí, aprenderá CKB antes que los demás.",
+        "p2": "En este tutorial, aprenderá los conceptos básicos de CKB, para que pueda desarrollar una aplicación en CKB o simplemente comprenderlos por curiosidad.",
+        "p3": "Este tutorial es un recorrido completo que le permite realizar las siguientes tareas usted mismo:",
+        "ul1": {
+          "l1": "Cree y envíe la transacción de transferencia más simple.",
+          "l2": "Cree y envíe la transacción de firmas múltiples más simple.",
+          "l3": "Cree e implemente el contrato inteligente más simple.",
+          "l4": "Cree e implemente un contrato inteligente actualizable."
+        },
+        "p4": "Para entenderlo todo...:",
+        "ul2": {
+          "l1": "No son necesarias descargas locales",
+          "l2": "no es necesario ejecutar ningún software.",
+          "l3": "¡Ni siquiera es necesario escribir una sola línea de código!"
+        },
+        "p5": "En esta página puede interactuar directamente con la cadena de pruebas basada en la nube de forma manual y remota.",
+        "p6": "Todo lo que necesita tener es la paciencia para leer más abajo y la curiosidad por CKB.",
+        "p7": "¡Comencemos esta fascinante aventura!"
+      },
+      "theoreticalKnowledgeMinimized": {
+        "title": "Paso 1 Conocimiento teórico minimizado",
+        "q1": "No hay Bitcoins en el mundo, solo UTXO.",
+        "q2": "No hay CKB en el mundo, solo células.",
+        "unravelCKB": {
+          "title": "¿Qué es CKB?",
+          "p1": "Para entender CKB, debemos dejar atrás todos los conceptos complejos y capturar la esencia misma: se trata de células y la transformación de las células.",
+          "p2": "Cell es la unidad básica de CKB, similar a una célula en el cuerpo humano. Cada celda constituye el estado general de toda la cadena de bloques CKB. Cuando iniciamos una transacción en la cadena de bloques, haciendo así un cambio de estado, al final, para CKB, no es más que gastar algunas celdas mientras creamos algunas nuevas, sin importar cuán complicada sea la transacción y el cambio de estado. Este proceso es el mismo que el UTXO de Bitcoin.",
+          "p3": "Las células no gastadas son células vivas; las células gastadas son células muertas. Entonces, una cadena CKB continúa gastando y creando células a través de transacciones, como la renovación y división de células en todo el cuerpo.",
+          "p4": "A diferencia de UTXO, una celda puede almacenar cualquier tipo de datos. Cada celda tiene un campo llamado datos, donde puedes poner una cadena sin formato. La cadena puede tener el formato que desee, siempre que pueda interpretarla.",
+          "p5": "Por ejemplo, la cadena puede ser un hash, un texto, una fecha o incluso un fragmento de código binario al que otras celdas pueden hacer referencia y ejecutarse en cadena a través de la máquina virtual CKB, CKB-VM.",
+          "p6": "Así de simple, este es el llamado contrato inteligente en CKB."
+        },
+        "howToOwnACell": {
+          "title": "¿Cómo ser dueño de una celda?",
+          "p1": "Las células se obtienen mediante la verificación del consenso global sobre la cadena. Poseer celdas conlleva costos, ya que su espacio de almacenamiento es limitado.",
+          "p2": "Esto nos lleva a la función de los tokens nativos de CKB.",
+          "p3": "Imagine una celda como una pequeña caja que puede transportar objetos. La caja en sí es creada por tokens. El tamaño de una caja está determinado por la cantidad de tokens que tienes.",
+          "p4": "Una caja (celda) también se puede dividir en varias cajas, siempre que el espacio total de las cajas sea igual al número de fichas que tienes.",
+          "p6": "En Nervos CKB, 1 CKB es igual a 1 byte de espacio de almacenamiento.",
+          "p7": "Por ejemplo, si tiene 100 CKB, tendrá 100 bytes de espacio en cadena, por lo que puede crear una caja con 100 bytes de espacio. Puede dividir esos 100 bytes en tantos cuadros como desee.",
+          "p8": "La caja puede almacenar datos. El tamaño de los datos debe ser más pequeño que el espacio de la caja, porque la caja incluye otros componentes que también ocupan algo de espacio.",
+          "p9": "Por ejemplo, un carácter chino representa 2 bytes (codificación GBK). Si tiene 100 CKB en una celda, probablemente pueda guardar menos de 50 caracteres chinos en ella.",
+          "p10": "Por ejemplo, en la novela Sueño en el Pabellón Rojo encontramos aproximadamente 780 000 caracteres en total, por lo que si desea cargar todo el fragmento en la cadena, necesitará aproximadamente 1,56 millones de tokens CKB nativos.",
+          "p11": "Como puede ver, el almacenamiento on-chain es un activo valioso.",
+          "p12": "CKB almacena datos de consenso on-chain, lo que permite que todos carguen datos valiosos y necesarios para el consenso. Es comparable a una base de conocimiento propiedad de toda la humanidad.",
+          "p13": "Así es como CKB obtuvo su nombre (Common Knowledge Base).",
+          "p14": "Toda la estructura de datos de la celda se ve así:",
+          "p15": "Los cuatro campos se definen de la siguiente manera:",
+          "ul1": {
+            "l1": "capacidad: el tamaño del espacio de la celda, es decir, el número entero de tokens nativos representados por esta celda, generalmente expresado en hexadecimal. La unidad básica de capacidad es el shannon, 1 CKB equivale a 10**8 shannon.",
+            "l2": "bloqueo: un script, que es esencialmente el equivalente de un bloqueo. Más adelante te mostraremos más detalles.",
+            "l3": "tipo: un script, igual que el bloqueo pero para un propósito diferente.",
+            "l4": "datos: una cadena sin formato donde se puede almacenar cualquier tipo de datos."
+          },
+          "p16": "Se pueden encontrar descripciones más detalladas de las estructuras de datos aquí:",
+          "p17": "Nota：El tamaño total de una celda para los cuatro campos anteriores debe ser menor o igual a la capacidad de la celda.",
+          "p18": "Como se muestra abajo",
+          "p19": "Para entenderlo mejor, veamos el siguiente ejemplo.",
+          "p20": "Escribe algo como datos de la celda para ver los cambios en tiempo real en la longitud de la celda. Haga clic en la celda para ver el contenido de la celda y la longitud real de cada campo.",
+          "p21": "La capacidad de la celda se establece en 0x1dcd65000, que tiene un tamaño de 80 bytes. Si el cambio en los datos hace que la ocupación real crezca más allá del valor de la capacidad, la celda se considerará inválida."
+        },
+        "howToKnowCellIsYours": {
+          "title": "¿Cómo saber que eres dueño de un celular?",
+          "p1": "La única forma en que puede poseer celdas es poseer tokens nativos, entonces, ¿cómo sabemos cuál poseemos?",
+          "p2": "¿Recuerdas los scripts de bloqueo y escritura que mencionamos anteriormente?",
+          "p3": "Si la celda es un cuadro, los guiones de bloqueo y escritura son los dos bloqueos del cuadro.",
+          "p4": "El script de bloqueo es el bloqueo predeterminado y el script de tipo es un bloqueo opcional.",
+          "p5": "En esencia, los scripts son una pieza de código y parámetros. Cuando intentamos consumir una celda, los scripts se ejecutarán automáticamente e ingresarán los parámetros y la prueba que enviamos (como la firma) para determinar si se pueden desbloquear los bloqueos de la celda. Una vez desbloqueado, prueba que poseemos y controlamos la celda.",
+          "p6": "La estructura del script se ve así:",
+          "p7": "En estos tres campos, hash_type está reservado para más adelante, los otros dos son:",
+          "ul1": {
+            "l1": "el hash de cierta pieza de código",
+            "l2": "los argumentos que serán transferidos al código"
+          },
+          "p8": "Más detalles de la estructura de datos se pueden encontrar aquí: ",
+          "p9": "Code_hash y args juntos constituyen un bloqueo completo: localizamos el código a ejecutar utilizando el campo code_hash y luego enviamos el argumento args a este código. Luego, el código será ejecutado por la máquina virtual CKB CKB-VM (se pueden leer argumentos adicionales durante el proceso, como la prueba adjunta a la transacción). Si se ejecuta con éxito, se devolverá un "0" que indica que la cerradura se puede abrir con éxito; si no, se devolverán otros valores indicando que el desbloqueo falló.",
+          "p10": "Con este principio, CKB identifica al propietario de una celda, es decir, quién puede abrir la cerradura adjunta a la celda. El mismo principio se aplica a Bitcoin.",
+          "p11": "Podríamos introducir un algoritmo de cifrado asimétrico a través de code_hash y colocar nuestra propia clave pública en los argumentos como argumento. Cuando necesitamos gastar la celda, para iniciar una transacción, podemos usar la clave privada para firmar la transacción para que el algoritmo criptográfico pueda ingresar la clave pública y la firma para determinar si la clave privada correspondiente inició la transacción, identificando así si era el verdadero dueño de la celda.",
+          "p12": "Si, por otro lado, crea una celda con un bloqueo que cualquiera pueda desbloquear, es decir, que cualquiera pudiese gastar la celda, ¡significaria tirar su dinero! Esto es peligroso. Los bloqueos son vitales para la célula."
+        },
+        "takeBreak1": {
+          "p1": "Bueno, has logrado leer hasta aquí, recapitulemos lo que hemos aprendido hasta ahora:",
+          "ul1": {
+            "l1": "CKB es esencialmente una cadena de células que se crean y destruyen constantemente.",
+            "l2": "Una celda es una caja que se puede usar para almacenar todo tipo de datos.",
+            "l3": "Para poseer una celda, necesitas tokens. La cantidad de tokens es igual al tamaño de la celda. 1 CKB = 1 Byte.",
+            "l4": "El tamaño de la celda completa no puede exceder el valor del campo de capacidad.",
+            "l5": "Para proteger tu celda, debes poner un bloqueo en la celda que solo tú puedas abrir."
+          },
+          "p2": "Parece que tenemos una idea bastante buena de cómo funciona CKB. ¡Excelente! Confía en mí, tienes la mayor parte resuelta. Ahora, entremos un poco más en detalle."
+        },
+        "whereIsTheActualCode": {
+          "title": "¿Dónde se encuentra realmente el código?",
+          "p1": "Hemos aprendido que los campos lock y type de la celda se utilizan para bloquear la caja y garantizar su propiedad y control.",
+          "p2": "Lock es una estructura de script que se ve así:",
+          "p3": "Puede notar que code_hash no es el código real sino un hash del código, equivalente a un índice del código. Este índice nos permite recuperar el código. Entonces, ¿dónde está el código de todos modos?",
+          "p4": "La respuesta es simple: ¡el código está en otra celda!",
+          "p5": "Sabemos que el campo de datos de la celda puede contener datos arbitrarios, por lo que podemos poner el código real en el campo de datos de otra celda e implementar esta celda como una dependencia de una transacción. Esta celda de dependencia se llama celda dep.”,
+          "p6": "Al desbloquear una celda, simplemente importamos la celda dep, y CKB comparará el hash de los datos en la celda dep con code_hash para encontrar el código correspondiente.",
+          "p7": "Entonces, ¿por qué no simplemente poner el código real, sino usar este enfoque de indexación?",
+          "p8": "Una de las principales ventajas de este diseño es que si todos necesitan el mismo tipo de bloqueo, el código de bloqueo será idéntico, el valor de code_hash también será idéntico. Entonces solo es cuestión de introducir el mismo celda dep en lugar de implementar el mismo código de nuevo para cada caso.",
+          "p9": "Este es un ejemplo real.",
+          "p10": "CKB tiene un importante contrato inteligente incorporado llamado SECP256K1_BLAKE160. Es el bloqueo predeterminado que utiliza cada celda en el campo de bloqueo en las transacciones de transferencia regulares. Este bloqueo significa que el algoritmo de cifrado SECP256K1 protege la propiedad de cada celda.",
+          "p11": "Para lograr esto, CKB creó varias celdas en el bloque de génesis y luego colocó el código específico del algoritmo de cifrado SECP256K1 en el campo de datos de estas celdas. Durante la transacción, estas celdas se introducen como celdas dep. Luego complete code_hash con el hash del campo de datos de la celda dep mientras coloca nuestro hash de clave pública en el campo args, para que el bloqueo pueda determinar si la firma adjunta a una transacción de transferencia es auténtica y válida.",
+          "p12": "Pero en este momento, es posible que te surja otra pregunta".
+        },
+        "whatIfCodeIsLost": {
+          "title": "¿Qué sucede si se pierde el código de bloqueo?",
+          "p1": "El código de bloqueo se guarda en otra celda. ¿Qué pasa si alguien destruye esa celda? Cuando se gasta esta celda, la celda dep se vuelve muerta y el código de bloqueo desaparecerá. ¿Significa esto que la celda que usa este candado ya no puede desbloquearlo?",
+          "p2": "Teóricamente, esto es cierto. Técnicamente, la celda que contiene el código de la cerradura debería durar tanto como la cadena, y nadie puede acceder a esta celda. Entonces, si miras hacia arriba, puedes ver que las celdas de dep en las que se han creado todos los scripts de bloqueo integrados de CKB son intrínsecamente inaccesibles para cualquier persona. Porque hemos establecido el valor 0x0000... en el campo de bloqueo de cada celda de dep (es decir, el bloqueo de la celda en sí) dónde colocar el código de bloqueo), lo que significa que nadie podrá volver a desbloquear estas celdas y el código siempre estará allí:",
+          "p3": "Aún podemos desbloquear nuestra propia celda si la celda de partida fue destruida, porque puedes simplemente volver a implementar el mismo código de bloqueo en una celda nueva y luego traer la nueva celda como una celda de partida para que puedas recuperar el bloqueo código. Debido a que el código sigue siendo idéntico, el hash del código sigue siendo el mismo y el valor de code_hash también sigue siendo el mismo. Esta es la flexibilidad adicional de CKB.",
+          "p4": "Estos ejemplos de bloqueos de los que hemos hablado son los bloqueos en el campo de bloqueo de la celda.",
+          "p5": "Además del bloqueo predeterminado, secuencia de comandos de bloqueo, una celda también puede tener un bloqueo opcional, secuencia de comandos. Estos dos bloqueos son fundamentalmente iguales, pero reciben nombres diferentes debido a sus diferentes usos.",
+          "p6": "La secuencia de comandos de bloqueo generalmente se usa para proteger la propiedad de la casilla, mientras que la secuencia de comandos de tipo se usa para garantizar que la celda siga ciertas reglas de transformación de datos durante la transacción."
+          "p7": "Para entender esto, debemos comenzar por comprender de qué se trata una transacción en CKB.",
+          "p8": "Construir una transacción es destruir algunas celdas y crear algunas más.",
+          "p9": "La esencia de una transacción en CKB, excluyendo los detalles menos importantes, es la siguiente:",
+          "p10": "Donde la esencia de la entrada y la salida todavía se trata de algunas celdas:",
+          "p11": "Todas las celdas de la entrada deben ser celdas vivas. Las celdas de entrada se gastarán y se convertirán en celdas muertas después de que se confirme una transacción. Las celdas de salida recién creadas se convertirán en nuevas celdas vivas.",
+          "p12": "La regla más importante que debes recordar acerca de las transacciones CKB es que todas las celdas de salida, es decir, las casillas recién creadas, deben ocupar menos espacio que las celdas de entrada.",
+          "p13": "Es porque el espacio adicional entre la entrada y la salida es la tarifa que gana el minero. Los mineros están motivados por las tarifas de transacción".,
+          "p14": "En la práctica, no colocamos la celda completa en la entrada con fines de optimización del almacenamiento; en su lugar, solo colocamos el índice de la celda y usamos el índice para encontrar la celda utilizada como entrada".,
+          "p15": "Esta estructura de índice se llama OutPoint, que le permite encontrar una celda en particular".
+        },
+        "roleOfTypeLock": {
+          "title": "Rol del tipo de script",
+          "p1": "A medida que las celdas se transforman de entradas a salidas en una transacción, ciertas reglas definidas por el usuario pueden guiar el proceso de transformación.",
+           "p2": "Por ejemplo, quiero que una celda produzca solo una nueva celda a la vez en una transacción, puedo convertir esa regla en un candado en la caja".,
+           "p3": "Otro ejemplo, me gustaría que una celda nunca muestre la palabra 'zanahoria' en su campo de datos durante una transacción, podría crear un bloqueo con esa regla, que se agregaría como un bloqueo de tipo a la casilla .",
+           "p4": "Esta es la distinción entre el script de tipo y el script de bloqueo. El primero protege la propiedad de la caja y el segundo asegura las reglas de transformación de datos. El bloqueo de bloqueo es el guardián, mientras que el bloqueo de tipo es el guardián. ",
+           "p5": "Esta variación en el uso se debe a la diferencia en el diseño de las dos cerraduras en cuanto a su mecanismo de ejecución, que se puede especificar de la siguiente manera:",
+          "ul1": {
+            "l1": "Script de bloqueo: en una transacción, los scripts de bloqueo de todas las entradas se ejecutarán una vez.",
+            "l2": "Script de tipo: en una transacción, los scripts de tipo de todas las entradas y salidas se ejecutarán una vez."
+          },
+          "p6": "Debido a las variaciones en los mecanismos de ejecución, el uso derivado también varía. Eres libre de tener tus propias opiniones sobre esto, pero esencialmente estos son los usos oficiales recomendados."
+        },
+        "takeABreak2": {
+          "p1": "¡Felicidades! ¡Ahora estás preparado para el tutorial!",
+          "p2": "Repasemos todos los conceptos que hemos aprendido:",
+          "ul1": {
+           "l1": "CKB es esencialmente una cadena de celdas que se crean y destruyen una y otra vez.",
+            "l2": "Una celda es un cuadro que se puede usar para almacenar cualquier tipo de datos.",
+            "l3": "Para poseer una celda, necesitas tokens. La cantidad de tokens es igual al tamaño de la celda. 1 CKB = 1 Byte.",
+            "l4": "El tamaño de la celda completa no puede exceder el valor del campo de capacidad.",
+            "l5": "Para proteger tu celda, debes poner un candado en la celda que solo tu llave puede desbloquear.",
+            "l6": "El candado es esencialmente un fragmento de código ejecutable y algunos argumentos. Mediante la introducción de argumentos y algunas firmas o pruebas proporcionadas por el usuario, el código se ejecuta para comprobar si se puede abrir el candado.",
+            "l7": "El valor devuelto de 0 significa que el bloqueo se desbloqueó con éxito, mientras que cualquier otro valor significa que el intento de desbloqueo falló".,
+            "l8": "Usando el code_hash de la celda, se puede recuperar el código de la cerradura. Este código se almacena en el campo de datos de una celda dep.",
+            "l9": "Cada celda puede llevar dos candados, uno se llama lock script (por defecto) y el otro, type script (opcional).",
+            "l10": "En una transacción, los scripts de bloqueo de todas las entradas se ejecutarán una vez.",
+            "l11": "En una transacción, los scripts de tipo de entradas y salidas se ejecutarán una vez.",
+            "l12": "Las diferencias en el mecanismo de ejecución dan como resultado diferentes usos para los dos bloqueos.",
+            "l13": "Las secuencias de comandos de bloqueo se usan a menudo para proteger la propiedad de la caja.",
+            "l14": "Los scripts de tipo se usan generalmente para garantizar que se sigan las reglas de conversión de datos del cuadro".,
+            "l15": "Construir una transacción consiste fundamentalmente en destruir algunas celdas y crear otras nuevas".
+          },
+          "p3": "Así es, con el conocimiento teórico anterior, estás listo para empezar a darle caña.",
+          "p4": "¡Después, tendremos una experiencia práctica con CKB!"
+        }
+      },
+      "getYourHandDirty": {
+        "title": "Paso 2. Práctica",
+        "p1": "La mejor forma de entender todo lo anterior es ir adquiriendo experiencia práctica con la cadena de bloques CKB.",
+        "studyAChain": {
+          "title": "Estudiar una Cadena",
+          "p1": "Estamos ejecutando una cadena de pruebas en la nube y tenemos direcciones de cuentas generadas previamente para este tutorial.",
+          "p2": "Haz clic en los botones de abajo y echa un vistazo a los últimos bloques.",
+          "p3": "Las siguientes son tres carteras.",
+          "p4": "Al pasar el cursor sobre las billeteras puedes abrirlas.",
+          "p5": "Cada billetera lleva cuatro mensajes que significan lo siguiente:",
+          "ul1": {
+            "l1": "mainnet: indica la dirección de red principal de la billetera",
+            "l2": "testnet: indica la dirección de testnet de la billetera. En este tutorial, solo usamos las direcciones de testnet",
+            "l3": "lock_arg: indica los primeros 20 bits del hash de clave pública correspondiente de la billetera. Piensa en ello simplemente como una huella digital de la clave pública.",
+            "l4": "private_key: la clave privada de la billetera. No deberías exponerlo como yo hice."
+          },
+          "p6": "En este tutorial, estas billeteras se utilizarán para enviar transacciones, implementar contratos y otros fines.",
+          "p7": "Para ver las celdas y transacciones asociadas, selecciona cualquiera de las carteras que se enumeran a continuación.",
+          "p8": "Haz clic en cualquier celda o transacción para ver los detalles en formato JSON.",
+          "p9": "La cantidad de CKB (tokens nativos) que tiene una billetera representa la capacidad de todas las celdas activas que la billetera puede desbloquear, es decir, el espacio total de almacenamiento en cadena que ocupa la billetera.",
+          "p10": "Ahora, la billetera 1 sirve como dirección de minero predeterminada en esta cadena de prueba.",
+          "p11": "En otras palabras, la billetera 1 recibirá continuamente recompensas generadas por la minería. Como resultado, la billetera 1 tiene la mayor cantidad de celdas vivas, mientras que las billeteras 2 y 3 tienen muy pocas o ninguna.",
+          "p12": "Actualmente, solo hay un minero en la cadena de prueba.",
+          "p13": "También es importante conocer la información de configuración de esta cadena de prueba.",
+          "p14": "Los detalles son los siguientes:",
+          "p15": "indica que esta cadena es la cadena de prueba en lugar de la red principal.",
+          "p16": "representa los contratos inteligentes integrados, es decir, algunos de los bloqueos integrados del sistema que pueden usar el tipo y el bloqueo.",
+          "p17": "Varios contratos inteligentes integrados se implementarán previamente en cada bloque de génesis de la cadena CKB. Los siguientes son tres de los contratos inteligentes integrados.",
+          "ul2": {
+            "l1": "SECP256K1_BLAKE160: el contrato inteligente predeterminado del sistema para el script de bloqueo de las celdas, que se utiliza para proteger la propiedad de las celdas.",
+            "l2": "SECP256K1_BLAKE160_MULTISIG: la versión multi-signature de SECP256K1_BLAKE160.",
+            "l3": "DAO: Contrato de NervosDAO. Puedes ignorarlo si no lo entiendes."
+          },
+          "p18": "Bien, esa es toda la información que necesitamos saber.",
+          "p19": "¡Ahora crearemos nuestra primera transacción y la enviaremos!"
+        }
+      }
+    },
+    "context": {
+      "takeABreak": "Resumen",
+      "moreClass": "Estén atentos para más tutoriales",
+      "toBeContinue": "Estén atentos"
+    },
+    "widget": {
+      "sendTx": {
+        "btnText": "Enviar la Transacción",
+        "checkBlockBtnText": "Verifique el bloque donde se empaquetó la transacción",
+        "txUndefinedAlertMsg": "tx no está definido. Complete el formulario de transacción anterior y haga clic en GUARDAR (SAVE).",
+         "p1": "Tenga en cuenta que, después de que la transacción se haya enviado con éxito en la cadena, el tx_hash devuelto es el mismo que se generó anteriormente.",
+         "p2": "Esta es la certeza de CKB.",
+         "p3": "Ahora puede verificar si la transacción que acabamos de enviar está realmente en cadena usando el botón a continuación. Si tx_status está pendiente, indica que la transacción aún está bajo verificación. Vuelva a intentarlo más tarde".
+      },
+      "completeTxWithWitness": {
+        "btnText": "Testigos agregados a raw_tx"
+      },
+      "toTxHash": {
+        "btnText": "Generar tx_hash",
+        "serializedTxBeforeHash": "La transacción serializada antes de ejecutar la función hash:",
+        "txUndefinedAlertMsg": "la transacción sin procesar no está definida. por favor complete el formulario de transacción de arriba y haga clic en el botón GUARDAR (SAVE)"
+      },
+      "toSignMessage": {
+        "btnText": "Generar Mensaje",
+        "txUndefinedAlertMsg": "raw_tx no definido."
+      },
+      "serializedWitnessArgs": {
+        "btnText": "Serializar witnessArgs",
+        "inputPlaceHolder": "bloquear: testigo"
+      },
+      "toSignTx": {
+        "btnText": "Firmar la Transacción",
+        "inputPlaceHolderMsg": "mensaje",
+        "inputPlaceHolderPrivkey": "clave privada"
+      },
+      "txConstructor": {
+        "btnTextGen": "Generar la Transacción",
+        "btnTextClear": "Limpiar"
+      },
+      "dragCellToInputBall": {
+        "title": "Arrastra una celda aquí"
+      },
+      "outputCreatorTotalCapacity": {
+        "totalCapText": "Espacio total：",
+        "minerFee": "Tarifas (fees) de mineros：",
+        "settingBtnText": "⚙️ Ajustes"
+      },
+      "editOutputCells": {
+        "capRuleAlertMsg": "La capacidad debe ser menor que la suma de la entrada. tx_fee no puede ser nulo！",
+        "addNewCellBtnText": "+ Añadir una nueva celda",
+        "saveExitBtnText": "Guardar y Salir"
+      },
+      "editOutputPlainCell": {
+        "capRuleAlertMsg": "La capacidad total debe ser menor que "
+      },
+      "showChainInfo": {
+        "title": "Información de la cadena de pruebas"
+      },
+      "toolBox": {
+        "title": "CKB-ToolBox",
+        "queryCellBtnText": "Query Cells",
+        "queryTxBtnText": "Query Txs",
+        "checkWalletBtnText": "Wallets",
+        "checkChainConfigBtnText": "Configuración de la cadena",
+        "hexToDecimalBtnText": "Herramienta - Hexadecimal a Decimal",
+        "queryCell": {
+          "inputPlaceHolder": "lock_args..",
+          "searchResultTile": "Resultado：",
+          "retryBtnText": "Reintentar búsqueda"
+        },
+        "queryTx": {
+          "inputPlaceHolder": "lock_args..",
+          "searchResultTile": "Resultado：",
+          "retryBtnText": "Reintentar búsqueda"
+        },
+        "hexToDecimal": {
+          "hexNumberAlertMsg": "El número hexadecimal debe empezar por 0x",
+          "inputDecimalPlaceHolder": "Número Decimal",
+          "inputHexPlaceHolder": "Número Hexadecimal, empieza por 0x",
+          "convertBtnText": "Convertir",
+          "reverseFunctionBtnText": "revertir",
+          "resultText": "Resultado: "
+        }
+      },
+      "wallets": {
+        "wallet": "Wallet",
+        "securityAlertMsg": "Solo para uso de demostración. No use estas wallets en situaciones reales o mainnet."
+      },
+      "newBlocks": {
+        "fetchBtnText": "Obtener bloques",
+         "p1": "Cada cuadrado representa un bloque. Arriba se muestran los últimos nueve bloques.",
+         "p2": "Presta atención a la información de la transacción en la mitad inferior de los bloques.",
+         "p3": "Haz clic en cualquiera de estas transacciones y verás los detalles en formato JSON.",
+         "p4": "Puedes notar que una transacción real tiene una estructura diferente a lo que aprendimos en la parte teórica anterior, para ser precisos, parece un poco más complejo".,
+         "p5": "Pero aún es comprensible si recuerdas la estructura: ",
+         "p6": "Si no entiendes lo que está pasando en todos estos campos por el momento, no te preocupes, luego lo desglosaremos uno por uno."
+      },
+      "block": {
+        "blockText": "Bloquear: ",
+        "hashText": "Hash: ",
+        "timeText": "Tiempo: ",
+        "transactionCount": "Transacciones, Cuenta {{count}}"
+      },
+      "capacityOfCell": {
+        "inputPlaceHolder": "Datos: introducir aquí",
+        "capacity": "Ocupación",
+        "actualCapacity": "Ocupación Actual",
+        "isCellCapacityEnough": "Disponibilidad de Capacidad:",
+        "cellContent": "Contenido de la Celda",
+        "fieldCapacity": "Ocupación del Campo",
+        "totalSpaceOccupy": "Espacio total de la celda ocupado",
+        "4FieldSumCapacity": "Suma de la longitud de los 4 campos"
+      },
+      "cell": {
+        "capacity": "capacidad"
+      },
+      "walletCells": {
+        "selectOptionLabel": "wallet",
+        "selectPlaceHolder": "Por favor, haz clic y selecciona una wallet",
+        "selectCellsResultTitle": "Celdas vivas de la Wallet Seleccionada",
+        "selectTxsResultTitle": "Transacciones de la Wallet Seleccionada"
+      },
+      "cellConcept": {
+        "p1": "En el universo de CKB, encontramos flotando incontables celdas",
+        "p2": "Las celdas almacenan datos que en conjunto forman el estado general de la cadena."
+      },
+      "someCodes": {
+        "outPoint": {
+          "txHashText": "Valor hash de la transacción afiliada (a qué transacción pertenece)",
+          "indexText": "Número de serie de la salida de la transacción afiliada (a qué salida pertenece)"
+        },
+        "cellCapacityRule": {
+          "totalSpaceOccupy": "Espacio total ocupado de la celda",
+          "4FieldSumCapacity": "Suma de la longitud de los 4 campos"
+        }
+      }
+    },
+    "class1": {
+      "title": "Enviar una Transacción",
+      "p1": "En esta sección, tendremos una lección práctica sobre cómo completar una transacción de transferencia básica.",
+      "p2": "Un repaso rápido antes de comenzar:",
+      "p3": "Una transacción CKB no es más que gastar algunas celdas vivas existentes y crear otras nuevas.",
+      "p4": "Debido a que CKB está diseñado como 'computación fuera de la cadena, verificación en la cadena', podemos completar una operación de transferencia construyendo transacciones manualmente.",
+      "p5": "Siempre que elaboremos el contenido de la transacción por adelantado (es decir, qué celdas se gastarán y qué celdas nuevas se crearán), firmaremos la transacción con la clave privada correspondiente. Una vez que la transacción se enviado a la cadena, siempre que pase la verificación y esté firmado de manera validada, esta transacción se completa y se empaquetará.",
+      "p6": "¿Qué significa tal construcción manual de una transacción?",
+      "p7": "En el sistema CKB, componemos la red de capa 2.",
+      "p8": "Imagina que tienes un amigo que vive en la selva amazónica aislado de todo menos de una computadora sin conexión.",
+      "p9": "Cuando regresó de cazar una tarde, recordó que te debía algo de dinero. Así que encendió la computadora e intentó transferirte 10,000 CKB para saldar su deuda.",
+      "p10": "Aunque no pudo acceder a Internet, anotó los detalles de la transacción en papel, ingresó su clave privada en la computadora, calculó la firma adecuada y adjuntó su firma.",
+      "p11": "Cuando un mensajero visitó medio mes después, pidió enviar el documento a China por correo. Esa carta finalmente te llegó medio mes después de ser enviada.",
+      "p12": "El mensaje en el correo le especificó la transacción de 10,000 CKB. Luego decidió enviar la transacción a la red principal de CKB.",
+      "p13": "Después de que la red principal validara la firma adjunta, la transacción se completó y ahora tienes 10 000 CKB más en tu cuenta. La deuda se liquidó.",
+      "p14": "A pesar del bajo rendimiento, solo 1 transacción por mes, usted y su amigo de la selva amazónica han creado una red de capa 2 que contiene 2 nodos.",
+      "p15": "CKB ofrece herramientas para generar transacciones automáticamente, transferir contratos, etc. Sin embargo, continuaremos con este método de la vieja escuela para implementar una transacción de transferencia regular.",
+      "p16": "Al usar transacciones ensambladas manualmente, obtendrás una comprensión más profunda de cómo funcionan las celdas CKB.",
+      "p17": "Usaremos el formato JSON para hacer esto.",
+      "transactionInput": {
+        "title": "Introducir Transacción",
+        "p1": "Las siguientes son las 4 celdas activas de la wallet 1. Simplemente arrastra las celdas al cuadro de abajo y verás las entradas generadas automáticamente.",
+        "p2": "La celda en las entradas aparece en anterior_salida que se importa como un punto de salida compuesto por tx_hash e índice, similar a un índice o un puntero a la celda, mediante el cual podemos ubicar la celda que se gastará.",
+        "p3": "El campo desde en las entradas controla el tiempo. No te preocupes por eso por ahora.",
+        "p4": "Además de las entradas, hay un campo llamado cell_deps que indica las celdas de dependencia en las que debe confiar una transacción. Este campo aparece como un resultado de índice en out_point.",
+        "p5": "¿Qué son las celdas de dependencia?",
+        "p6": "En una transacción de transferencia regular, la secuencia de comandos de bloqueo requiere un algoritmo de cifrado fijo, SECP256K1_BLAKE160, un contrato inteligente integrado. El código del algoritmo de cifrado se guarda en una celda y debe referenciarse en cell_deps, de modo que CKB-VM sabe dónde importarlo para el cálculo.",
+        "p7": "Los argumentos en cell_deps se pueden encontrar fácilmente revisando la información de configuración que se muestra en la cadena de pruebas anterior."
+      },
+      "transactionOutput": {
+        "title": "Salida de transacción",
+        "p1": "El siguiente paso es usar otra herramienta para ver cómo se genera la salida y cómo se ve toda la transacción.",
+        "p2": "Nuevamente, arrastra la celda de la wallet 1 a INPUT.",
+        "p3": "Se generará automáticamente una nueva celda de tamaño idéntico en OUTPUT.",
+        "p4": "Haz clic en el botón ⚙ Configuración en OUTPUT para reasignar las celdas recién generadas. Esto incluye especificar cuántas celdas generar, el tamaño y la dirección de desbloqueo de cada celda, etc.",
+        "p5": "La salida debe tener menos capacidad que la entrada, y la brecha es la tarifa para recompensar a los mineros.",
+        "p6": "Para ver la transacción JSON, haz clic en Generar transacción una vez que la hayas configurado.",
+        "p7": "Las salidas de la transacción tienen toda la información sobre la celda recién generada, incluida su capacidad, script de bloqueo, etc.",
+        "p8": "Las celdas en las salidas no especifican información de datos; los datos se encuentran en el campo outputs_data, que corresponde a las celdas en las salidas en consecuencia. De nuevo, esto está diseñado para la optimización del rendimiento.",
+        "p9": "Las transacciones completas también contienen campos como versión y header_deps. El campo de versión indica la versión, que actualmente está establecida en 0x0, mientras que el campo header_deps es nulo."
+      },
+      "signTheTransaction": {
+        "title": "Firma una Transacción",
+        "p1": "Una vez ensamblada una transacción, debe ser firmada por la clave privada correspondiente. La clave privada indica que las celdas te pertenecen y puedes operar sobre ellas.",
+         "p2": "Después, la firma se pondrá en un nuevo campo llamado testigos, que sirve como prueba de la transacción.",
+         "p3": "Ahora está claro cómo funciona una transacción. Pasemos a construir una transacción de transferencia manualmente".
+      },
+      "buildATransaction": {
+        "title": "Crear una Transacción",
+        "formTitle": "Rellena la información de la Transacción",
+        "p1": "Rellena la información de la transacción en la siguiente plantilla de transacción.",
+        "p2": "Esto es un ejercicio para completar una transferencia de práctica por ti mismo.",
+        "p3": "Puede usar la caja de herramientas en el lado derecho para encontrar las celdas activas asociadas con su billetera, para ver la información de configuración de la cadena (para que pueda completar cell_deps) y para convertir hexadecimal a decimal, etc.",
+        "p4": "Para abrir la caja de herramientas, haga clic en el icono de Nervos. 👉",
+        "p5": "Tras rellenarlo, haz clic en el botón Guardar (Save).",
+        "p6": "Has rellenado toda la información de la transacción manualmente.",
+        "p7": "En consecuencia, ahora podemos generar un hash único para la transacción, es decir, podemos generar el tx_hash de antemano."
+      },
+      "generateTxHash": {
+        "title": "Generar el Hash de la Transacción",
+        "p1": "Para generar el hash de la transacción, haz clic en el botón de abajo.",
+        "p2": "La transacción utilizada para generar el tx_hash sigue siendo una transacción sin procesar. El archivo de testigos debe completarse con la firma de la transacción para que la transacción sin procesar se convierta en una estructura de transacción completa.",
+        "p3": "Puedes poner cualquier argumento o prueba que necesites en el campo de testigos. Como una matriz, el campo de testigos puede incluir múltiples pruebas. Debido a que ahora estamos creando una transacción de transferencia integrada, la siguiente estructura debe colocarse en la primera posición de cada grupo de testigos:",
+        "p4": "Esta estructura se llama WitnessArgs. Diferentes bloqueos recuperan la firma requerida de diferentes campos dentro de WitnessArgs. El campo de bloqueo contiene la firma que será verificada por los bloqueos de las celdas de entrada.",
+        "p5": "En nuestro caso, esta es la firma requerida por el algoritmo SECP256K1_BLAKE160 para la verificación.",
+        "p6": "Los campos input_type y output_type contienen las firmas que deben verificar los bloqueos de tipo en entradas y salidas. Puedes ignorarlos por ahora.",
+        "p7": "El proceso de firma es tedioso. Aquí hay más información: "
+      },
+      "generateMessage": {
+        "title": "Generar el Mensaje",
+        "p1": "Para firmar la transacción debemos generar el mensaje."
+      },
+      "completeSining": {
+        "title": "Firmar la Transacción",
+        "p1": "Usando el mensaje y la clave privada de nuestra billetera, podemos calcular la firma."
+      },
+      "putBackSignature": {
+        "title": "Vuelve a Poner la Firma en la Transacción",
+        "p1": "Ingrese la firma generada en el siguiente cuadro y haga clic en el botón para serializar WitnessArgs:",
+        "p2": "Ahora es el momento de finalizar la transacción sin procesar agregando la firma serializada al campo de testigos".
+      },
+      "sendTransaction": {
+        "title": "Enviar la Transacción",
+        "p1": "El último paso es enviar la transacción de vuelta a la cadena.",
+        "p2": "¡Felicitaciones por completar la primera sección del tutorial!",
+        "p3": "A continuación, aprenderemos cómo enviar una transacción de transferencia de múltiples firmas (Multi-sig)."
+      }
+    },
+    "class2": {
+      "title": "Enviar una Transacción Multi-Sig"
+    },
+    "class3": {
+      "title": "Desplegar un Smart Contract"
+    },
+    "class4": {
+      "title": "Desplegar un Smart Contract actualizable"
+    }
+  }
+}
