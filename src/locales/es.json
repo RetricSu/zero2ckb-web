@@ -127,7 +127,7 @@
             "l2": "los argumentos que serán transferidos al código"
           },
           "p8": "Más detalles de la estructura de datos se pueden encontrar aquí: ",
-          "p9": "Code_hash y args juntos constituyen un bloqueo completo: localizamos el código a ejecutar utilizando el campo code_hash y luego enviamos el argumento args a este código. Luego, el código será ejecutado por la máquina virtual CKB CKB-VM (se pueden leer argumentos adicionales durante el proceso, como la prueba adjunta a la transacción). Si se ejecuta con éxito, se devolverá un "0" que indica que la cerradura se puede abrir con éxito; si no, se devolverán otros valores indicando que el desbloqueo falló.",
+          "p9": "Code_hash y args juntos constituyen un bloqueo completo: localizamos el código a ejecutar utilizando el campo code_hash y luego enviamos el argumento args a este código. Luego, el código será ejecutado por la máquina virtual CKB CKB-VM (se pueden leer argumentos adicionales durante el proceso, como la prueba adjunta a la transacción). Si se ejecuta con éxito, se devolverá un ‘0’ que indica que la cerradura se puede abrir con éxito; si no, se devolverán otros valores indicando que el desbloqueo falló.",
           "p10": "Con este principio, CKB identifica al propietario de una celda, es decir, quién puede abrir la cerradura adjunta a la celda. El mismo principio se aplica a Bitcoin.",
           "p11": "Podríamos introducir un algoritmo de cifrado asimétrico a través de code_hash y colocar nuestra propia clave pública en los argumentos como argumento. Cuando necesitamos gastar la celda, para iniciar una transacción, podemos usar la clave privada para firmar la transacción para que el algoritmo criptográfico pueda ingresar la clave pública y la firma para determinar si la clave privada correspondiente inició la transacción, identificando así si era el verdadero dueño de la celda.",
           "p12": "Si, por otro lado, crea una celda con un bloqueo que cualquiera pueda desbloquear, es decir, que cualquiera pudiese gastar la celda, ¡significaria tirar su dinero! Esto es peligroso. Los bloqueos son vitales para la célula."
@@ -149,14 +149,14 @@
           "p2": "Lock es una estructura de script que se ve así:",
           "p3": "Puede notar que code_hash no es el código real sino un hash del código, equivalente a un índice del código. Este índice nos permite recuperar el código. Entonces, ¿dónde está el código de todos modos?",
           "p4": "La respuesta es simple: ¡el código está en otra celda!",
-          "p5": "Sabemos que el campo de datos de la celda puede contener datos arbitrarios, por lo que podemos poner el código real en el campo de datos de otra celda e implementar esta celda como una dependencia de una transacción. Esta celda de dependencia se llama celda dep.”,
+          "p5": "Sabemos que el campo de datos de la celda puede contener datos arbitrarios, por lo que podemos poner el código real en el campo de datos de otra celda e implementar esta celda como una dependencia de una transacción. Esta celda de dependencia se llama celda dep.",
           "p6": "Al desbloquear una celda, simplemente importamos la celda dep, y CKB comparará el hash de los datos en la celda dep con code_hash para encontrar el código correspondiente.",
           "p7": "Entonces, ¿por qué no simplemente poner el código real, sino usar este enfoque de indexación?",
           "p8": "Una de las principales ventajas de este diseño es que si todos necesitan el mismo tipo de bloqueo, el código de bloqueo será idéntico, el valor de code_hash también será idéntico. Entonces solo es cuestión de introducir el mismo celda dep en lugar de implementar el mismo código de nuevo para cada caso.",
           "p9": "Este es un ejemplo real.",
           "p10": "CKB tiene un importante contrato inteligente incorporado llamado SECP256K1_BLAKE160. Es el bloqueo predeterminado que utiliza cada celda en el campo de bloqueo en las transacciones de transferencia regulares. Este bloqueo significa que el algoritmo de cifrado SECP256K1 protege la propiedad de cada celda.",
           "p11": "Para lograr esto, CKB creó varias celdas en el bloque de génesis y luego colocó el código específico del algoritmo de cifrado SECP256K1 en el campo de datos de estas celdas. Durante la transacción, estas celdas se introducen como celdas dep. Luego complete code_hash con el hash del campo de datos de la celda dep mientras coloca nuestro hash de clave pública en el campo args, para que el bloqueo pueda determinar si la firma adjunta a una transacción de transferencia es auténtica y válida.",
-          "p12": "Pero en este momento, es posible que te surja otra pregunta".
+          "p12": "Pero en este momento, es posible que te surja otra pregunta"
         },
         "whatIfCodeIsLost": {
           "title": "¿Qué sucede si se pierde el código de bloqueo?",
@@ -165,24 +165,24 @@
           "p3": "Aún podemos desbloquear nuestra propia celda si la celda de partida fue destruida, porque puedes simplemente volver a implementar el mismo código de bloqueo en una celda nueva y luego traer la nueva celda como una celda de partida para que puedas recuperar el bloqueo código. Debido a que el código sigue siendo idéntico, el hash del código sigue siendo el mismo y el valor de code_hash también sigue siendo el mismo. Esta es la flexibilidad adicional de CKB.",
           "p4": "Estos ejemplos de bloqueos de los que hemos hablado son los bloqueos en el campo de bloqueo de la celda.",
           "p5": "Además del bloqueo predeterminado, secuencia de comandos de bloqueo, una celda también puede tener un bloqueo opcional, secuencia de comandos. Estos dos bloqueos son fundamentalmente iguales, pero reciben nombres diferentes debido a sus diferentes usos.",
-          "p6": "La secuencia de comandos de bloqueo generalmente se usa para proteger la propiedad de la casilla, mientras que la secuencia de comandos de tipo se usa para garantizar que la celda siga ciertas reglas de transformación de datos durante la transacción."
+          "p6": "La secuencia de comandos de bloqueo generalmente se usa para proteger la propiedad de la casilla, mientras que la secuencia de comandos de tipo se usa para garantizar que la celda siga ciertas reglas de transformación de datos durante la transacción.",
           "p7": "Para entender esto, debemos comenzar por comprender de qué se trata una transacción en CKB.",
           "p8": "Construir una transacción es destruir algunas celdas y crear algunas más.",
           "p9": "La esencia de una transacción en CKB, excluyendo los detalles menos importantes, es la siguiente:",
           "p10": "Donde la esencia de la entrada y la salida todavía se trata de algunas celdas:",
           "p11": "Todas las celdas de la entrada deben ser celdas vivas. Las celdas de entrada se gastarán y se convertirán en celdas muertas después de que se confirme una transacción. Las celdas de salida recién creadas se convertirán en nuevas celdas vivas.",
           "p12": "La regla más importante que debes recordar acerca de las transacciones CKB es que todas las celdas de salida, es decir, las casillas recién creadas, deben ocupar menos espacio que las celdas de entrada.",
-          "p13": "Es porque el espacio adicional entre la entrada y la salida es la tarifa que gana el minero. Los mineros están motivados por las tarifas de transacción".,
-          "p14": "En la práctica, no colocamos la celda completa en la entrada con fines de optimización del almacenamiento; en su lugar, solo colocamos el índice de la celda y usamos el índice para encontrar la celda utilizada como entrada".,
-          "p15": "Esta estructura de índice se llama OutPoint, que le permite encontrar una celda en particular".
+          "p13": "Es porque el espacio adicional entre la entrada y la salida es la tarifa que gana el minero. Los mineros están motivados por las tarifas de transacción",
+          "p14": "En la práctica, no colocamos la celda completa en la entrada con fines de optimización del almacenamiento; en su lugar, solo colocamos el índice de la celda y usamos el índice para encontrar la celda utilizada como entrada",
+          "p15": "Esta estructura de índice se llama OutPoint, que le permite encontrar una celda en particular"
         },
         "roleOfTypeLock": {
           "title": "Rol del tipo de script",
           "p1": "A medida que las celdas se transforman de entradas a salidas en una transacción, ciertas reglas definidas por el usuario pueden guiar el proceso de transformación.",
-           "p2": "Por ejemplo, quiero que una celda produzca solo una nueva celda a la vez en una transacción, puedo convertir esa regla en un candado en la caja".,
-           "p3": "Otro ejemplo, me gustaría que una celda nunca muestre la palabra 'zanahoria' en su campo de datos durante una transacción, podría crear un bloqueo con esa regla, que se agregaría como un bloqueo de tipo a la casilla .",
-           "p4": "Esta es la distinción entre el script de tipo y el script de bloqueo. El primero protege la propiedad de la caja y el segundo asegura las reglas de transformación de datos. El bloqueo de bloqueo es el guardián, mientras que el bloqueo de tipo es el guardián. ",
-           "p5": "Esta variación en el uso se debe a la diferencia en el diseño de las dos cerraduras en cuanto a su mecanismo de ejecución, que se puede especificar de la siguiente manera:",
+          "p2": "Por ejemplo, quiero que una celda produzca solo una nueva celda a la vez en una transacción, puedo convertir esa regla en un candado en la caja",
+          "p3": "Otro ejemplo, me gustaría que una celda nunca muestre la palabra 'zanahoria' en su campo de datos durante una transacción, podría crear un bloqueo con esa regla, que se agregaría como un bloqueo de tipo a la casilla .",
+          "p4": "Esta es la distinción entre el script de tipo y el script de bloqueo. El primero protege la propiedad de la caja y el segundo asegura las reglas de transformación de datos. El bloqueo de bloqueo es el guardián, mientras que el bloqueo de tipo es el guardián. ",
+          "p5": "Esta variación en el uso se debe a la diferencia en el diseño de las dos cerraduras en cuanto a su mecanismo de ejecución, que se puede especificar de la siguiente manera:",
           "ul1": {
             "l1": "Script de bloqueo: en una transacción, los scripts de bloqueo de todas las entradas se ejecutarán una vez.",
             "l2": "Script de tipo: en una transacción, los scripts de tipo de todas las entradas y salidas se ejecutarán una vez."
@@ -193,21 +193,21 @@
           "p1": "¡Felicidades! ¡Ahora estás preparado para el tutorial!",
           "p2": "Repasemos todos los conceptos que hemos aprendido:",
           "ul1": {
-           "l1": "CKB es esencialmente una cadena de celdas que se crean y destruyen una y otra vez.",
+            "l1": "CKB es esencialmente una cadena de celdas que se crean y destruyen una y otra vez.",
             "l2": "Una celda es un cuadro que se puede usar para almacenar cualquier tipo de datos.",
             "l3": "Para poseer una celda, necesitas tokens. La cantidad de tokens es igual al tamaño de la celda. 1 CKB = 1 Byte.",
             "l4": "El tamaño de la celda completa no puede exceder el valor del campo de capacidad.",
             "l5": "Para proteger tu celda, debes poner un candado en la celda que solo tu llave puede desbloquear.",
             "l6": "El candado es esencialmente un fragmento de código ejecutable y algunos argumentos. Mediante la introducción de argumentos y algunas firmas o pruebas proporcionadas por el usuario, el código se ejecuta para comprobar si se puede abrir el candado.",
-            "l7": "El valor devuelto de 0 significa que el bloqueo se desbloqueó con éxito, mientras que cualquier otro valor significa que el intento de desbloqueo falló".,
+            "l7": "El valor devuelto de 0 significa que el bloqueo se desbloqueó con éxito, mientras que cualquier otro valor significa que el intento de desbloqueo falló",
             "l8": "Usando el code_hash de la celda, se puede recuperar el código de la cerradura. Este código se almacena en el campo de datos de una celda dep.",
             "l9": "Cada celda puede llevar dos candados, uno se llama lock script (por defecto) y el otro, type script (opcional).",
             "l10": "En una transacción, los scripts de bloqueo de todas las entradas se ejecutarán una vez.",
             "l11": "En una transacción, los scripts de tipo de entradas y salidas se ejecutarán una vez.",
             "l12": "Las diferencias en el mecanismo de ejecución dan como resultado diferentes usos para los dos bloqueos.",
             "l13": "Las secuencias de comandos de bloqueo se usan a menudo para proteger la propiedad de la caja.",
-            "l14": "Los scripts de tipo se usan generalmente para garantizar que se sigan las reglas de conversión de datos del cuadro".,
-            "l15": "Construir una transacción consiste fundamentalmente en destruir algunas celdas y crear otras nuevas".
+            "l14": "Los scripts de tipo se usan generalmente para garantizar que se sigan las reglas de conversión de datos del cuadro",
+            "l15": "Construir una transacción consiste fundamentalmente en destruir algunas celdas y crear otras nuevas"
           },
           "p3": "Así es, con el conocimiento teórico anterior, estás listo para empezar a darle caña.",
           "p4": "¡Después, tendremos una experiencia práctica con CKB!"
@@ -261,9 +261,9 @@
         "btnText": "Enviar la Transacción",
         "checkBlockBtnText": "Verifique el bloque donde se empaquetó la transacción",
         "txUndefinedAlertMsg": "tx no está definido. Complete el formulario de transacción anterior y haga clic en GUARDAR (SAVE).",
-         "p1": "Tenga en cuenta que, después de que la transacción se haya enviado con éxito en la cadena, el tx_hash devuelto es el mismo que se generó anteriormente.",
-         "p2": "Esta es la certeza de CKB.",
-         "p3": "Ahora puede verificar si la transacción que acabamos de enviar está realmente en cadena usando el botón a continuación. Si tx_status está pendiente, indica que la transacción aún está bajo verificación. Vuelva a intentarlo más tarde".
+        "p1": "Tenga en cuenta que, después de que la transacción se haya enviado con éxito en la cadena, el tx_hash devuelto es el mismo que se generó anteriormente.",
+        "p2": "Esta es la certeza de CKB.",
+        "p3": "Ahora puede verificar si la transacción que acabamos de enviar está realmente en cadena usando el botón a continuación. Si tx_status está pendiente, indica que la transacción aún está bajo verificación. Vuelva a intentarlo más tarde"
       },
       "completeTxWithWitness": {
         "btnText": "Testigos agregados a raw_tx"
@@ -341,12 +341,12 @@
       },
       "newBlocks": {
         "fetchBtnText": "Obtener bloques",
-         "p1": "Cada cuadrado representa un bloque. Arriba se muestran los últimos nueve bloques.",
-         "p2": "Presta atención a la información de la transacción en la mitad inferior de los bloques.",
-         "p3": "Haz clic en cualquiera de estas transacciones y verás los detalles en formato JSON.",
-         "p4": "Puedes notar que una transacción real tiene una estructura diferente a lo que aprendimos en la parte teórica anterior, para ser precisos, parece un poco más complejo".,
-         "p5": "Pero aún es comprensible si recuerdas la estructura: ",
-         "p6": "Si no entiendes lo que está pasando en todos estos campos por el momento, no te preocupes, luego lo desglosaremos uno por uno."
+        "p1": "Cada cuadrado representa un bloque. Arriba se muestran los últimos nueve bloques.",
+        "p2": "Presta atención a la información de la transacción en la mitad inferior de los bloques.",
+        "p3": "Haz clic en cualquiera de estas transacciones y verás los detalles en formato JSON.",
+        "p4": "Puedes notar que una transacción real tiene una estructura diferente a lo que aprendimos en la parte teórica anterior, para ser precisos, parece un poco más complejo",
+        "p5": "Pero aún es comprensible si recuerdas la estructura: ",
+        "p6": "Si no entiendes lo que está pasando en todos estos campos por el momento, no te preocupes, luego lo desglosaremos uno por uno."
       },
       "block": {
         "blockText": "Bloquear: ",
@@ -432,8 +432,8 @@
       "signTheTransaction": {
         "title": "Firma una Transacción",
         "p1": "Una vez ensamblada una transacción, debe ser firmada por la clave privada correspondiente. La clave privada indica que las celdas te pertenecen y puedes operar sobre ellas.",
-         "p2": "Después, la firma se pondrá en un nuevo campo llamado testigos, que sirve como prueba de la transacción.",
-         "p3": "Ahora está claro cómo funciona una transacción. Pasemos a construir una transacción de transferencia manualmente".
+        "p2": "Después, la firma se pondrá en un nuevo campo llamado testigos, que sirve como prueba de la transacción.",
+        "p3": "Ahora está claro cómo funciona una transacción. Pasemos a construir una transacción de transferencia manualmente"
       },
       "buildATransaction": {
         "title": "Crear una Transacción",
@@ -467,7 +467,7 @@
       "putBackSignature": {
         "title": "Vuelve a Poner la Firma en la Transacción",
         "p1": "Ingrese la firma generada en el siguiente cuadro y haga clic en el botón para serializar WitnessArgs:",
-        "p2": "Ahora es el momento de finalizar la transacción sin procesar agregando la firma serializada al campo de testigos".
+        "p2": "Ahora es el momento de finalizar la transacción sin procesar agregando la firma serializada al campo de testigos"
       },
       "sendTransaction": {
         "title": "Enviar la Transacción",
