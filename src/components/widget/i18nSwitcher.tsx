@@ -36,7 +36,7 @@ export default function I18nSwitcher(props: I18nSwitcherProps) {
 
   return (
     <div style={styles.root}>
-      Choose Languages:{" "}
+      Lang:{" "}
       {Object.keys(langs).map((lng) => (
         <button
           key={lng}
