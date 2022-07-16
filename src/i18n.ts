@@ -14,7 +14,7 @@ const resources = {
   },
   es: {
     translation: esTrans,
-     },
+  },
 };
 
 i18n
