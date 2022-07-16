@@ -3,6 +3,7 @@ import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import enTrans from "./locales/en.json";
 import zhTrans from "./locales/zh.json";
+import esTrans from "./locales/es.json";
 
 const resources = {
   en: {
@@ -10,6 +11,9 @@ const resources = {
   },
   zh: {
     translation: zhTrans,
+  },
+  es: {
+    translation: esTrans,
   },
 };
 

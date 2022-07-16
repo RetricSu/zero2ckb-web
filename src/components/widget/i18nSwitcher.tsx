@@ -23,7 +23,7 @@ export interface Languages {
   };
 }
 
-export type LangToken = "en" | "zh" | string;
+export type LangToken = "en" | "zh" | "es" | string;
 
 export default function I18nSwitcher(props: I18nSwitcherProps) {
   const { i18n, langs: _langs } = props;
@@ -31,6 +31,7 @@ export default function I18nSwitcher(props: I18nSwitcherProps) {
   const langs: Languages = _langs || {
     en: { nativeName: "English" },
     zh: { nativeName: "Chinese" },
+    es: { nativeName: "Español" },
   };
 
   return (

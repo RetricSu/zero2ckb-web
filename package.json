@@ -36,7 +36,7 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "fmt": "prettier --write tsconfig.json server.js src/**/*.{ts,tsx,js,jsx,css,json} package.json",
+    "fmt": "prettier --write tsconfig.json server.js src/*.{ts,tsx,css} src/**/*.{ts,tsx,js,jsx,css,json} package.json",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
