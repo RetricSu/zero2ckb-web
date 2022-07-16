@@ -4,12 +4,12 @@ html {
 }
 
 .main-nav-container {
-  position: fixed;
+  position: relative;
   text-align: left;
   margin: 0 auto;
   float: left;
   left: 0;
-  max-width: 30%;
+  max-width: 100%;
   margin-bottom: 2em;
 }
 

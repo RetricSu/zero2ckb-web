@@ -3,6 +3,12 @@ import "./table_of_contents.css";
 import { I18nComponentsProps } from "../../types/i18n";
 import I18nSwitcher from "./i18nSwitcher";
 
+const styles = {
+  ul: {
+    paddingInlineStart: "20px",
+  },
+};
+
 export interface TableOfContentsProps extends I18nComponentsProps {
   i18n: any;
 }
@@ -52,7 +58,7 @@ export default function TableOfContents(props: TableOfContentsProps) {
                 "tutorial.common.tableOfContents.theoreticalKnowledgeMinimized.title"
               )}
             </a>
-            <ul>
+            <ul style={styles.ul}>
               <li>
                 <a href="#ckb-concept">
                   {t(
@@ -122,7 +128,7 @@ export default function TableOfContents(props: TableOfContentsProps) {
             <a href="#hands-on">
               {t("tutorial.common.tableOfContents.getYourHandsDirty.title")}
             </a>
-            <ul>
+            <ul style={styles.ul}>
               <li>
                 <a href="#watch-a-chain">
                   {t(
@@ -136,7 +142,7 @@ export default function TableOfContents(props: TableOfContentsProps) {
                     "tutorial.common.tableOfContents.getYourHandsDirty.sendATransaction.title"
                   )}
                 </a>
-                <ul>
+                <ul style={styles.ul}>
                   <li>
                     <a href="#tx-input">
                       {t(
@@ -165,7 +171,7 @@ export default function TableOfContents(props: TableOfContentsProps) {
                       )}
                     </a>
                   </li>
-                  <ul>
+                  <ul style={styles.ul}>
                     <li>
                       <a href="#fill-the-tx-form">
                         {t(
