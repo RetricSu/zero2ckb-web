@@ -1,25 +1,22 @@
-import React from "react";
+import { FeedBack } from "../widget/feedback/feedback";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { useTranslation } from "react-i18next";
+import { Container, Grid } from "@material-ui/core";
+
 import Notify from "../widget/notify";
-import BeforeWeGetStarted from "./sections/BeforeWeGetStarted";
-import PreKnowledge from "./sections/PreKnowledge";
-import ShowChainInfo from "./sections/ShowChainInfo";
 import Class1 from "./sections/Class1";
 import Class2 from "./sections/Class2";
 import Class3 from "./sections/Class3";
 import Class4 from "./sections/Class4";
-import TableOfContents from "../widget/table_of_contents";
 import ToolBox from "../toolbox/FloatingBox";
+import PreKnowledge from "./sections/PreKnowledge";
+import ShowChainInfo from "./sections/ShowChainInfo";
 import AlertMessager from "../widget/alert_messager";
+import TableOfContents from "../widget/table_of_contents";
+import BeforeWeGetStarted from "./sections/BeforeWeGetStarted";
 
-import { Container, Grid } from "@material-ui/core";
 import styles from "../widget/common_style";
-
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-
-import { useTranslation } from "react-i18next";
-
-import { FeedBack } from "../widget/feedback/feedback";
 
 function Learn() {
   const { t, i18n } = useTranslation();
