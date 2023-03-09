@@ -22,9 +22,11 @@ function Learn() {
   const { t, i18n } = useTranslation();
 
   return (
-    <div style={{
-      overflowX: "hidden"
-    }}>
+    <div
+      style={{
+        overflowX: "hidden",
+      }}
+    >
       <Notify />
       <Grid container spacing={2}>
         <Grid item xs={12} md={12}>

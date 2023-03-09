@@ -22,6 +22,13 @@ yarn && yarn build
 PORT=<your client running port> yarn deploy
 ```
 
+## How to publish
+1. Fork repositories
+2. Change the code
+3. Run `yarn fmt`
+4. Push code
+5. Create pull request
+
 ## prebuild images
 
 the repo's [github packages](https://github.com/RetricSu/zero2ckb-web/pkgs/container/zero2ckb-web-prebuilds) will deploy prebuild image. the entire project is copy into `/zero2ck-web` folder in the image, with `node_module` pre-installed and react UI client pre-build.
